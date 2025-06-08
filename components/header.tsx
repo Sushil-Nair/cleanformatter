@@ -42,7 +42,7 @@ export function Header() {
         </div>
         <nav className="hidden md:flex items-center gap-6">
           <Link
-            href="#features"
+            href="/#features"
             className="text-sm font-medium hover:text-primary transition-colors"
           >
             Features
@@ -68,13 +68,13 @@ export function Header() {
           </SheetTrigger>
           <SheetContent side="right" className="w-[240px] sm:w-[300px]">
             <nav className="flex flex-col gap-4 mt-8">
-              <Link
+              {/* <Link
                 href="/tools"
                 className="text-sm font-medium hover:text-primary"
                 onClick={handleLinkClick}
               >
                 Tools
-              </Link>
+              </Link> */}
               <Link
                 href="/#features"
                 className="text-sm font-medium hover:text-primary"
