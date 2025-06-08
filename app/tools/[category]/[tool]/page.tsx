@@ -5,7 +5,7 @@ import { ToolsPage } from "@/components/tools/tools-page";
 import { toolCategories } from "@/lib/tool-categories";
 import { Footer } from "@/components/sections/footer";
 
-interface PageProps {
+interface ToolPageProps {
   params: {
     category: string;
     tool: string;
@@ -23,7 +23,12 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({
   params,
-}: Awaited<PageProps>): Promise<Metadata> {
+}: {
+  params: {
+    category: string;
+    tool: string;
+  };
+}): Promise<Metadata> {
   const category = toolCategories.find(
     (cat) =>
       cat.name.toLowerCase().replace(/[^a-z0-9]+/g, "-") === params.category
@@ -64,7 +69,14 @@ export async function generateMetadata({
   };
 }
 
-export default function Page({ params }: Awaited<PageProps>) {
+export default function Page({
+  params,
+}: {
+  params: {
+    category: string;
+    tool: string;
+  };
+}) {
   // If either category or tool is missing, redirect to the main tools page
   if (!params.category || !params.tool) {
     redirect("/tools");
