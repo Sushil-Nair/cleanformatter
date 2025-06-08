@@ -4,12 +4,6 @@ import { Header } from "@/components/header";
 import { ToolsPage } from "@/components/tools/tools-page";
 import { toolCategories } from "@/lib/tool-categories";
 
-interface ToolsPageProps {
-  params: {
-    category: string;
-  };
-}
-
 export async function generateStaticParams() {
   return toolCategories.map((category) => ({
     category: category.name.toLowerCase().replace(/[^a-z0-9]+/g, "-"),

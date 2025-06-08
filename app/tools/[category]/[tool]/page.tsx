@@ -5,13 +5,6 @@ import { ToolsPage } from "@/components/tools/tools-page";
 import { toolCategories } from "@/lib/tool-categories";
 import { Footer } from "@/components/sections/footer";
 
-interface ToolPageProps {
-  params: {
-    category: string;
-    tool: string;
-  };
-}
-
 export async function generateStaticParams() {
   return toolCategories.flatMap((category) =>
     category.tools.map((tool) => ({
