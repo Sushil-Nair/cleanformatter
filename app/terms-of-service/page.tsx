@@ -20,8 +20,8 @@ export default function TermsOfServicePage() {
                 </h1>
               </div>
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                Please read these terms carefully before using Case Master
-                Pro&apos;s text processing tools.
+                Please read these terms carefully before using Clean
+                Formatter&apos;s text processing tools.
               </p>
               <p className="text-sm text-muted-foreground">
                 Last updated:{" "}
@@ -45,7 +45,7 @@ export default function TermsOfServicePage() {
                       Terms at a Glance
                     </h2>
                     <p className="text-muted-foreground">
-                      Case Master Pro provides free, client-side text processing
+                      Clean Formatter provides free, client-side text processing
                       tools. By using our service, you agree to use it
                       responsibly and understand that all processing happens
                       locally in your browser. We provide the service &quot;as
@@ -67,7 +67,7 @@ export default function TermsOfServicePage() {
                 <Card>
                   <CardContent className="p-6 space-y-4">
                     <p className="text-muted-foreground">
-                      By accessing and using Case Master Pro (&quot;the
+                      By accessing and using Clean Formatter (&quot;the
                       Service&quot;), you accept and agree to be bound by the
                       terms and provision of this agreement. If you do not agree
                       to abide by the above, please do not use this service.
@@ -95,7 +95,7 @@ export default function TermsOfServicePage() {
                         What We Provide
                       </h3>
                       <p className="text-muted-foreground">
-                        Case Master Pro is a collection of free, web-based text
+                        Clean Formatter is a collection of free, web-based text
                         processing tools including case converters, formatters,
                         encoders/decoders, and text analysis utilities. All
                         processing is performed client-side in your browser.
@@ -198,7 +198,7 @@ export default function TermsOfServicePage() {
                       <h3 className="text-lg font-semibold mb-2">Our Rights</h3>
                       <p className="text-muted-foreground">
                         The Service, including its design, functionality, code,
-                        and content, is owned by Case Master Pro and is
+                        and content, is owned by Clean Formatter and is
                         protected by copyright, trademark, and other
                         intellectual property laws.
                       </p>
@@ -288,7 +288,7 @@ export default function TermsOfServicePage() {
                         No Liability
                       </h3>
                       <p className="text-muted-foreground">
-                        To the maximum extent permitted by law, Case Master Pro
+                        To the maximum extent permitted by law, Clean Formatter
                         shall not be liable for any indirect, incidental,
                         special, consequential, or punitive damages, including
                         but not limited to loss of profits, data, or use,

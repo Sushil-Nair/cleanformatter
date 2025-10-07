@@ -1,23 +1,29 @@
-import { 
-  Code2, 
-  FileText, 
-  TextSelect, 
-  FileCode, 
-  Binary, 
-  KeyRound, 
-  Shuffle 
-} from "lucide-react"
-import { ToolFunction } from "@/types/tools"
+import {
+  Code2,
+  TextSelect,
+  FileCode,
+  Binary,
+  KeyRound,
+  Shuffle,
+  Palette,
+} from "lucide-react";
+import { ToolFunction } from "@/types/tools";
 
 const caseFunctions: ToolFunction[] = [
   { name: "UPPERCASE", description: "Convert text to uppercase" },
   { name: "lowercase", description: "Convert text to lowercase" },
-  { name: "Sentence case", description: "Capitalize first letter of each sentence" },
+  {
+    name: "Sentence case",
+    description: "Capitalize first letter of each sentence",
+  },
   { name: "Title Case", description: "Capitalize first letter of each word" },
   { name: "camelCase", description: "Convert to camelCase" },
   { name: "PascalCase", description: "Convert to PascalCase" },
   { name: "snake_case", description: "Convert to snake_case" },
-  { name: "SCREAMING_SNAKE_CASE", description: "Convert to SCREAMING_SNAKE_CASE" },
+  {
+    name: "SCREAMING_SNAKE_CASE",
+    description: "Convert to SCREAMING_SNAKE_CASE",
+  },
   { name: "kebab-case", description: "Convert to kebab-case" },
   { name: "dot.case", description: "Convert to dot.case" },
   { name: "path/case", description: "Convert to path/case" },
@@ -27,8 +33,8 @@ const caseFunctions: ToolFunction[] = [
   { name: "Remove Duplicate Lines", description: "Remove duplicate lines" },
   { name: "Remove Empty Lines", description: "Remove empty lines" },
   { name: "Sort Lines (A-Z)", description: "Sort lines alphabetically" },
-  { name: "Sort Lines (Z-A)", description: "Sort lines in reverse" }
-]
+  { name: "Sort Lines (Z-A)", description: "Sort lines in reverse" },
+];
 
 export const toolCategories = [
   {
@@ -36,28 +42,48 @@ export const toolCategories = [
     description: "Essential text editing and manipulation tools",
     icon: <TextSelect className="h-8 w-8" />,
     tools: [
-      {
-        name: "Find & Replace",
-        description: "Search and replace text patterns",
-        popularTools: ["Simple Replace", "Regex Replace", "Batch Replace"]
-      },
+      // {
+      //   name: "Find & Replace",
+      //   description: "Search and replace text patterns",
+      //   popularTools: ["Simple Replace", "Regex Replace", "Batch Replace"]
+      // },
       {
         name: "Case Converter",
-        description: "Convert text between different cases",
-        popularTools: ["UPPERCASE", "lowercase", "Title Case"],
-        functions: caseFunctions
+        description:
+          "From UPPERCASE to camelCase to kebab-case — convert text instantly. Built for writers & devs. No sign-up, no drama.",
+        popularTools: [
+          "UPPERCASE",
+          "lowercase",
+          "Sentence case",
+          "Title Case",
+          "camelCase",
+          "PascalCase",
+          "snake_case",
+          "SCREAMING_SNAKE_CASE",
+          "kebab-case",
+          "dot.case",
+          "path/case",
+          "tOGGLE cASE",
+          "RaNdOm CaSe",
+          "Trim Whitespace",
+          "Remove Duplicate Lines",
+          "Remove Empty Lines",
+          "Sort Lines (A-Z)",
+          "Sort Lines (Z-A)",
+        ],
+        functions: caseFunctions,
       },
       {
         name: "Text Counter",
         description: "Count characters, words, and lines",
-        popularTools: ["Word Count", "Character Count", "Line Count"]
+        popularTools: ["Word Count", "Character Count", "Line Count"],
       },
       {
         name: "Text Diff",
         description: "Compare two texts and find differences",
-        popularTools: ["Side by Side", "Inline Diff", "Word Diff"]
-      }
-    ]
+        popularTools: ["Side by Side", "Inline Diff", "Word Diff"],
+      },
+    ],
   },
   {
     name: "Clean & Format",
@@ -67,19 +93,19 @@ export const toolCategories = [
       {
         name: "Remove Formatting",
         description: "Strip HTML and formatting",
-        popularTools: ["Strip HTML", "Strip Markdown", "Plain Text"]
+        popularTools: ["Strip HTML", "Strip Markdown", "Plain Text"],
       },
       {
         name: "Fix Spacing",
         description: "Fix inconsistent spacing and indentation",
-        popularTools: ["Fix Whitespace", "Fix Indentation", "Remove Tabs"]
+        popularTools: ["Fix Whitespace", "Fix Indentation", "Remove Tabs"],
       },
       {
         name: "Text Wrapper",
         description: "Wrap text to specific width",
-        popularTools: ["Word Wrap", "Character Wrap", "Smart Wrap"]
-      }
-    ]
+        popularTools: ["Word Wrap", "Character Wrap", "Smart Wrap"],
+      },
+    ],
   },
   {
     name: "Code Format",
@@ -89,9 +115,9 @@ export const toolCategories = [
       {
         name: "Code Formatter",
         description: "Format code in various languages",
-        popularTools: ["JavaScript", "HTML", "CSS", "JSON"]
-      }
-    ]
+        popularTools: ["JavaScript", "HTML", "CSS", "JSON"],
+      },
+    ],
   },
   {
     name: "Unicode",
@@ -101,19 +127,19 @@ export const toolCategories = [
       {
         name: "Unicode Converter",
         description: "Convert text to and from Unicode",
-        popularTools: ["Code Points", "UTF-8", "UTF-16", "UTF-32"]
+        popularTools: ["Code Points", "UTF-8", "UTF-16", "UTF-32"],
       },
       {
         name: "Character Finder",
         description: "Find and insert special characters",
-        popularTools: ["Symbols", "Emojis", "Math Symbols"]
+        popularTools: ["Symbols", "Emojis", "Math Symbols"],
       },
       {
         name: "Text Analysis",
         description: "Analyze Unicode text properties",
-        popularTools: ["Character Info", "Encoding Info", "Script Info"]
-      }
-    ]
+        popularTools: ["Character Info", "Encoding Info", "Script Info"],
+      },
+    ],
   },
   {
     name: "Encode & Decode",
@@ -123,19 +149,19 @@ export const toolCategories = [
       {
         name: "Base64",
         description: "Encode/decode Base64",
-        popularTools: ["Standard Base64", "URL-safe Base64", "File Upload"]
+        popularTools: ["Standard Base64", "URL-safe Base64", "File Upload"],
       },
       {
         name: "URL Encoding",
         description: "Encode/decode URLs",
-        popularTools: ["URI Encoding", "Component Encoding", "Bulk Processing"]
+        popularTools: ["URI Encoding", "Component Encoding", "Bulk Processing"],
       },
       {
         name: "HTML Entities",
         description: "Convert HTML entities",
-        popularTools: ["Named Entities", "Numeric Entities", "Hex Entities"]
-      }
-    ]
+        popularTools: ["Named Entities", "Numeric Entities", "Hex Entities"],
+      },
+    ],
   },
   {
     name: "Random Generator",
@@ -145,18 +171,30 @@ export const toolCategories = [
       {
         name: "Text Generator",
         description: "Generate random text",
-        popularTools: ["Lorem Ipsum", "Words", "Sentences"]
+        popularTools: ["Lorem Ipsum", "Words", "Sentences"],
       },
       {
         name: "Password Generator",
         description: "Generate secure passwords",
-        popularTools: ["Strong", "Memorable", "PIN"]
+        popularTools: ["Strong", "Memorable", "PIN"],
       },
       {
         name: "UUID Generator",
         description: "Generate UUIDs/GUIDs",
-        popularTools: ["v4", "v5", "Custom"]
-      }
-    ]
-  }
-]
+        popularTools: ["v4", "v5", "Custom"],
+      },
+    ],
+  },
+  {
+    name: "Font Generator",
+    description: "Create stylish text for your social media posts.",
+    icon: <Palette className="h-8 w-8" />,
+    tools: [
+      {
+        name: "Font Generators",
+        description: "Create stylish text for your social media posts.",
+        popularTools: ["Facebook", "Instagram", "Twitter"],
+      },
+    ],
+  },
+];

@@ -20,8 +20,8 @@ export default function PrivacyPolicyPage() {
                 </h1>
               </div>
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                Your privacy is important to us. This policy explains how Case
-                Master Pro handles your data.
+                Your privacy is important to us. This policy explains how Clean
+                Formatter handles your data.
               </p>
               <p className="text-sm text-muted-foreground">
                 Last updated:{" "}
@@ -45,7 +45,7 @@ export default function PrivacyPolicyPage() {
                       Privacy at a Glance
                     </h2>
                     <p className="text-muted-foreground">
-                      Case Master Pro is a client-side text processing tool.
+                      Clean Formatter is a client-side text processing tool.
                       Your text data is processed locally in your browser and is
                       never sent to our servers. We don&apos;t collect, store,
                       or share your personal text content.

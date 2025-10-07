@@ -1,28 +1,28 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { Card, CardContent } from "@/components/ui/card"
-import { Textarea } from "@/components/ui/textarea"
-import { Button } from "@/components/ui/button"
-import { Switch } from "@/components/ui/switch"
-import { Label } from "@/components/ui/label"
-import { useToast } from "@/hooks/use-toast"
-import { AboutSection } from "@/components/tools/about-section"
-import { formatters } from "@/lib/utils/formatters"
-import { Copy, Download, RotateCcw } from "lucide-react"
+import * as React from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
+import { useToast } from "@/hooks/use-toast";
+import { AboutSection } from "@/components/tools/about-section";
+import { formatters } from "@/lib/utils/formatters";
+import { Copy, Download, RotateCcw } from "lucide-react";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
+} from "@/components/ui/select";
 
 const aboutContent = (
   <div className="space-y-6">
     <p>
-      Transform your code with our <strong>Code Formatter Tool</strong>. 
-      Format and beautify code in multiple languages with customizable options.
+      Transform your code with our <strong>Code Formatter Tool</strong>. Format
+      and beautify code in multiple languages with customizable options.
     </p>
 
     <hr />
@@ -32,21 +32,40 @@ const aboutContent = (
       <div>
         <h4 className="font-semibold">🔧 Supported Languages</h4>
         <ul className="list-disc pl-6 space-y-2">
-          <li><strong>Python:</strong> Format using Black code formatter</li>
-          <li><strong>JavaScript/TypeScript:</strong> Format modern JS/TS code</li>
-          <li><strong>HTML:</strong> Clean and organize HTML markup</li>
-          <li><strong>CSS:</strong> Format stylesheets with proper indentation</li>
-          <li><strong>JSON:</strong> Pretty print and validate JSON data</li>
+          <li>
+            <strong>Python:</strong> Format using Black code formatter
+          </li>
+          <li>
+            <strong>JavaScript/TypeScript:</strong> Format modern JS/TS code
+          </li>
+          <li>
+            <strong>HTML:</strong> Clean and organize HTML markup
+          </li>
+          <li>
+            <strong>CSS:</strong> Format stylesheets with proper indentation
+          </li>
+          <li>
+            <strong>JSON:</strong> Pretty print and validate JSON data
+          </li>
         </ul>
       </div>
 
       <div>
         <h4 className="font-semibold">⚡ Key Features</h4>
         <ul className="list-disc pl-6 space-y-2">
-          <li><strong>Real-time Formatting:</strong> See changes as you type</li>
-          <li><strong>Minify Mode:</strong> Switch between formatted and minified output</li>
-          <li><strong>Syntax Validation:</strong> Catch errors in JSON</li>
-          <li><strong>Copy & Download:</strong> Save formatted code</li>
+          <li>
+            <strong>Real-time Formatting:</strong> See changes as you type
+          </li>
+          <li>
+            <strong>Minify Mode:</strong> Switch between formatted and minified
+            output
+          </li>
+          <li>
+            <strong>Syntax Validation:</strong> Catch errors in JSON
+          </li>
+          <li>
+            <strong>Copy & Download:</strong> Save formatted code
+          </li>
         </ul>
       </div>
     </div>
@@ -66,102 +85,107 @@ const aboutContent = (
       </div>
     </div>
   </div>
-)
+);
 
 export function CodeFormatterTool() {
-  const [inputCode, setInputCode] = React.useState("")
-  const [outputCode, setOutputCode] = React.useState("")
-  const [language, setLanguage] = React.useState("javascript")
-  const [minifyMode, setMinifyMode] = React.useState(false)
-  const [isFormatting, setIsFormatting] = React.useState(false)
-  const { toast } = useToast()
+  const [inputCode, setInputCode] = React.useState("");
+  const [outputCode, setOutputCode] = React.useState("");
+  const [language, setLanguage] = React.useState("javascript");
+  const [minifyMode, setMinifyMode] = React.useState(false);
+  const [isFormatting, setIsFormatting] = React.useState(false);
+  const { toast } = useToast();
 
-  const formatCode = React.useCallback(async (code: string, lang: string, minify: boolean) => {
-    if (!code) {
-      setOutputCode("")
-      return
-    }
-
-    try {
-      setIsFormatting(true)
-      const formatter = formatters[lang]
-      
-      if (minify) {
-        if (!formatter.minify) {
-          toast({
-            title: "Not Supported",
-            description: "Minification is not supported for this language",
-            variant: "destructive",
-          })
-          return
-        }
-        const result = formatter.minify(code)
-        setOutputCode(result)
-      } else {
-        const result = await formatter.format(code, { indent: 2 })
-        setOutputCode(result)
+  const formatCode = React.useCallback(
+    async (code: string, lang: string, minify: boolean) => {
+      if (!code) {
+        setOutputCode("");
+        return;
       }
-    } catch (error) {
-      toast({
-        title: "Format Error",
-        description: error instanceof Error ? error.message : "Failed to format code",
-        variant: "destructive",
-      })
-    } finally {
-      setIsFormatting(false)
-    }
-  }, [toast])
+
+      try {
+        setIsFormatting(true);
+        const formatter = formatters[lang];
+
+        if (minify) {
+          if (!formatter.minify) {
+            toast({
+              title: "Not Supported",
+              description: "Minification is not supported for this language",
+              variant: "destructive",
+            });
+            return;
+          }
+          const result = formatter.minify(code);
+          setOutputCode(result);
+        } else {
+          const result = await formatter.format(code, { indent: 2 });
+          setOutputCode(result);
+        }
+      } catch (error) {
+        toast({
+          title: "Format Error",
+          description:
+            error instanceof Error ? error.message : "Failed to format code",
+          variant: "destructive",
+        });
+      } finally {
+        setIsFormatting(false);
+      }
+    },
+    [toast]
+  );
 
   React.useEffect(() => {
-    formatCode(inputCode, language, minifyMode)
-  }, [inputCode, language, minifyMode, formatCode])
+    formatCode(inputCode, language, minifyMode);
+  }, [inputCode, language, minifyMode, formatCode]);
 
   const handleCopy = async () => {
-    if (!outputCode) return
-    
+    if (!outputCode) return;
+
     try {
-      await navigator.clipboard.writeText(outputCode)
+      await navigator.clipboard.writeText(outputCode);
       toast({
         title: "Copied to clipboard",
         description: "Code has been copied to your clipboard",
         duration: 2000,
-      })
+      });
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       toast({
         title: "Failed to copy",
         description: "Please try again or copy manually",
         variant: "destructive",
         duration: 3000,
-      })
+      });
     }
-  }
+  };
 
   const handleDownload = () => {
-    if (!outputCode) return
+    if (!outputCode) return;
 
-    const blob = new Blob([outputCode], { type: 'text/plain' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = `formatted-code.${language}`
-    document.body.appendChild(a)
-    a.click()
-    document.body.removeChild(a)
-    URL.revokeObjectURL(url)
+    const blob = new Blob([outputCode], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${language}-formatted-code.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
 
     toast({
       title: "Downloaded successfully",
       description: "Your code has been downloaded",
       duration: 2000,
-    })
-  }
+    });
+  };
 
   const handleReset = () => {
-    setInputCode("")
-    setOutputCode("")
-    setLanguage("javascript")
-    setMinifyMode(false)
-  }
+    setInputCode("");
+    setOutputCode("");
+    setLanguage("javascript");
+    setMinifyMode(false);
+  };
 
   return (
     <div className="container max-w-6xl mx-auto px-4 py-8">
@@ -175,7 +199,10 @@ export function CodeFormatterTool() {
 
         <Card>
           <CardContent className="p-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div
+              id="toolArea"
+              className="grid grid-cols-1 lg:grid-cols-2 gap-6"
+            >
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <Select value={language} onValueChange={setLanguage}>
@@ -208,7 +235,7 @@ export function CodeFormatterTool() {
                       id="minify-mode"
                       checked={minifyMode}
                       onCheckedChange={setMinifyMode}
-                      disabled={language === 'python'}
+                      disabled={language === "python"}
                     />
                     <Label htmlFor="minify-mode">Minify Mode</Label>
                   </div>
@@ -252,11 +279,8 @@ export function CodeFormatterTool() {
           </CardContent>
         </Card>
 
-        <AboutSection
-          title="About Code Formatter"
-          content={aboutContent}
-        />
+        <AboutSection title="About Code Formatter" content={aboutContent} />
       </div>
     </div>
-  )
+  );
 }

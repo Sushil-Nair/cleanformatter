@@ -1,38 +1,39 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { Card, CardContent } from "@/components/ui/card"
-import { Textarea } from "@/components/ui/textarea"
-import { Button } from "@/components/ui/button"
-import { Switch } from "@/components/ui/switch"
-import { Label } from "@/components/ui/label"
-import { Slider } from "@/components/ui/slider"
-import { AboutSection } from "@/components/tools/about-section"
-import { useToast } from "@/hooks/use-toast"
-import { TextStatsDisplay } from "@/components/tools/text-stats"
-import { TextStats } from "@/types/tools"
-import { Copy, Download, RotateCcw } from "lucide-react"
+import * as React from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
+import { Slider } from "@/components/ui/slider";
+import { AboutSection } from "@/components/tools/about-section";
+import { useToast } from "@/hooks/use-toast";
+import { TextStatsDisplay } from "@/components/tools/text-stats";
+import { TextStats } from "@/types/tools";
+import { Copy, Download, RotateCcw } from "lucide-react";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import { wrapText } from "@/lib/utils/text-wrapper"
+} from "@/components/ui/select";
+import { wrapText } from "@/lib/utils/text-wrapper";
 
 interface WrapOptions {
-  mode: 'word' | 'char' | 'smart' | 'code'
-  width: number
-  hyphenate: boolean
-  preserveLines: boolean
+  mode: "word" | "char" | "smart" | "code";
+  width: number;
+  hyphenate: boolean;
+  preserveLines: boolean;
 }
 
 const aboutContent = (
   <div className="space-y-6">
     <p>
-      Format and structure your text with precision using our <strong>Text Wrapper Tool</strong>. 
-      Control line length, preserve formatting, and ensure readability across different platforms.
+      Format and structure your text with precision using our{" "}
+      <strong>Text Wrapper Tool</strong>. Control line length, preserve
+      formatting, and ensure readability across different platforms.
     </p>
 
     <hr />
@@ -42,20 +43,39 @@ const aboutContent = (
       <div>
         <h4 className="font-semibold">🔧 Wrapping Modes</h4>
         <ul className="list-disc pl-6 space-y-2">
-          <li><strong>Word Wrap:</strong> Break lines at word boundaries</li>
-          <li><strong>Character Wrap:</strong> Split at exact character positions</li>
-          <li><strong>Smart Wrap:</strong> Intelligent wrapping with line length optimization</li>
-          <li><strong>Code Wrap:</strong> Format code with proper indentation</li>
+          <li>
+            <strong>Word Wrap:</strong> Break lines at word boundaries
+          </li>
+          <li>
+            <strong>Character Wrap:</strong> Split at exact character positions
+          </li>
+          <li>
+            <strong>Smart Wrap:</strong> Intelligent wrapping with line length
+            optimization
+          </li>
+          <li>
+            <strong>Code Wrap:</strong> Format code with proper indentation
+          </li>
         </ul>
       </div>
 
       <div>
         <h4 className="font-semibold">⚡ Advanced Options</h4>
         <ul className="list-disc pl-6 space-y-2">
-          <li><strong>Width Control:</strong> Set exact line length (20-200 characters)</li>
-          <li><strong>Hyphenation:</strong> Smart word breaks for better readability</li>
-          <li><strong>Line Preservation:</strong> Keep existing line breaks</li>
-          <li><strong>Real-time Preview:</strong> See changes as you type</li>
+          <li>
+            <strong>Width Control:</strong> Set exact line length (20-200
+            characters)
+          </li>
+          <li>
+            <strong>Hyphenation:</strong> Smart word breaks for better
+            readability
+          </li>
+          <li>
+            <strong>Line Preservation:</strong> Keep existing line breaks
+          </li>
+          <li>
+            <strong>Real-time Preview:</strong> See changes as you type
+          </li>
         </ul>
       </div>
     </div>
@@ -99,124 +119,128 @@ const aboutContent = (
       </div>
     </div>
   </div>
-)
+);
 
 export function TextWrapperTool() {
-  const [inputText, setInputText] = React.useState("")
-  const [outputText, setOutputText] = React.useState("")
+  const [inputText, setInputText] = React.useState("");
+  const [outputText, setOutputText] = React.useState("");
   const [wrapOptions, setWrapOptions] = React.useState<WrapOptions>({
-    mode: 'word',
+    mode: "word",
     width: 80,
     hyphenate: false,
-    preserveLines: true
-  })
+    preserveLines: true,
+  });
   const [textStatsInput, setTextStatsInput] = React.useState<TextStats>({
     words: 0,
     sentences: 0,
     characters: 0,
-    paragraphs: 0
-  })
+    paragraphs: 0,
+  });
   const [textStatsOutput, setTextStatsOutput] = React.useState<TextStats>({
     words: 0,
     sentences: 0,
     characters: 0,
-    paragraphs: 0
-  })
-  const { toast } = useToast()
+    paragraphs: 0,
+  });
+  const { toast } = useToast();
 
   const calculateStats = (text: string): TextStats => {
-    const words = text.trim().split(/\s+/).filter(Boolean).length
-    const sentences = text.split(/[.!?]+/).filter(Boolean).length
-    const characters = text.length
-    const paragraphs = text.split(/\n\s*\n/).filter(Boolean).length
+    const words = text.trim().split(/\s+/).filter(Boolean).length;
+    const sentences = text.split(/[.!?]+/).filter(Boolean).length;
+    const characters = text.length;
+    const paragraphs = text.split(/\n\s*\n/).filter(Boolean).length;
 
     return {
       words,
       sentences,
       characters,
-      paragraphs
-    }
-  }
+      paragraphs,
+    };
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const newText = e.target.value
-    setInputText(newText)
-    setTextStatsInput(calculateStats(newText))
-    processText(newText, wrapOptions)
-  }
+    const newText = e.target.value;
+    setInputText(newText);
+    setTextStatsInput(calculateStats(newText));
+    processText(newText, wrapOptions);
+  };
 
-  const processText = React.useCallback((text: string, options: WrapOptions) => {
-    const processedText = wrapText(text, options)
-    setOutputText(processedText)
-    setTextStatsOutput(calculateStats(processedText))
-  }, [])
+  const processText = React.useCallback(
+    (text: string, options: WrapOptions) => {
+      const processedText = wrapText(text, options);
+      setOutputText(processedText);
+      setTextStatsOutput(calculateStats(processedText));
+    },
+    []
+  );
 
   React.useEffect(() => {
-    processText(inputText, wrapOptions)
-  }, [inputText, wrapOptions, processText])
+    processText(inputText, wrapOptions);
+  }, [inputText, wrapOptions, processText]);
 
   const handleCopy = async () => {
-    if (!outputText) return
-    
+    if (!outputText) return;
+
     try {
-      await navigator.clipboard.writeText(outputText)
+      await navigator.clipboard.writeText(outputText);
       toast({
         title: "Copied to clipboard",
         description: "Text has been copied to your clipboard",
         duration: 2000,
-      })
+      });
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       toast({
         title: "Failed to copy",
         description: "Please try again or copy manually",
         variant: "destructive",
         duration: 3000,
-      })
+      });
     }
-  }
+  };
 
   const handleDownload = () => {
-    if (!outputText) return
+    if (!outputText) return;
 
-    const blob = new Blob([outputText], { type: 'text/plain' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = 'wrapped-text.txt'
-    document.body.appendChild(a)
-    a.click()
-    document.body.removeChild(a)
-    URL.revokeObjectURL(url)
+    const blob = new Blob([outputText], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "wrapped-text.txt";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
 
     toast({
       title: "Downloaded successfully",
       description: "Your text has been downloaded",
       duration: 2000,
-    })
-  }
+    });
+  };
 
   const handleReset = () => {
-    setInputText("")
-    setOutputText("")
+    setInputText("");
+    setOutputText("");
     setWrapOptions({
-      mode: 'word',
+      mode: "word",
       width: 80,
       hyphenate: false,
-      preserveLines: true
-    })
+      preserveLines: true,
+    });
     setTextStatsInput({
       words: 0,
       sentences: 0,
       characters: 0,
-      paragraphs: 0
-    })
+      paragraphs: 0,
+    });
     setTextStatsOutput({
       words: 0,
       sentences: 0,
       characters: 0,
-      paragraphs: 0
-    })
-  }
+      paragraphs: 0,
+    });
+  };
 
   return (
     <div className="container max-w-6xl mx-auto px-4 py-8">
@@ -230,7 +254,10 @@ export function TextWrapperTool() {
 
         <Card>
           <CardContent className="p-6">
-            <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+            <div
+              id="toolArea"
+              className="grid grid-cols-1 lg:grid-cols-5 gap-6"
+            >
               <div className="lg:col-span-2 space-y-4">
                 <Textarea
                   placeholder="Enter text here..."
@@ -247,8 +274,8 @@ export function TextWrapperTool() {
                     <Label>Wrap Mode</Label>
                     <Select
                       value={wrapOptions.mode}
-                      onValueChange={(value: WrapOptions['mode']) => 
-                        setWrapOptions(prev => ({ ...prev, mode: value }))
+                      onValueChange={(value: WrapOptions["mode"]) =>
+                        setWrapOptions((prev) => ({ ...prev, mode: value }))
                       }
                     >
                       <SelectTrigger>
@@ -272,8 +299,8 @@ export function TextWrapperTool() {
                       min={20}
                       max={200}
                       step={5}
-                      onValueChange={([value]) => 
-                        setWrapOptions(prev => ({ ...prev, width: value }))
+                      onValueChange={([value]) =>
+                        setWrapOptions((prev) => ({ ...prev, width: value }))
                       }
                     />
                   </div>
@@ -284,7 +311,10 @@ export function TextWrapperTool() {
                         id="hyphenate"
                         checked={wrapOptions.hyphenate}
                         onCheckedChange={(checked) =>
-                          setWrapOptions(prev => ({ ...prev, hyphenate: checked }))
+                          setWrapOptions((prev) => ({
+                            ...prev,
+                            hyphenate: checked,
+                          }))
                         }
                       />
                       <Label htmlFor="hyphenate">Enable Hyphenation</Label>
@@ -294,10 +324,15 @@ export function TextWrapperTool() {
                         id="preserve-lines"
                         checked={wrapOptions.preserveLines}
                         onCheckedChange={(checked) =>
-                          setWrapOptions(prev => ({ ...prev, preserveLines: checked }))
+                          setWrapOptions((prev) => ({
+                            ...prev,
+                            preserveLines: checked,
+                          }))
                         }
                       />
-                      <Label htmlFor="preserve-lines">Preserve Line Breaks</Label>
+                      <Label htmlFor="preserve-lines">
+                        Preserve Line Breaks
+                      </Label>
                     </div>
                   </div>
                 </div>
@@ -321,10 +356,7 @@ export function TextWrapperTool() {
                       <Download className="h-4 w-4" />
                     </Button>
                   </div>
-                  <Button
-                    variant="outline"
-                    onClick={handleReset}
-                  >
+                  <Button variant="outline" onClick={handleReset}>
                     <RotateCcw className="h-4 w-4 mr-2" />
                     Reset
                   </Button>
@@ -342,11 +374,8 @@ export function TextWrapperTool() {
           </CardContent>
         </Card>
 
-        <AboutSection
-          title="About Text Wrapper"
-          content={aboutContent}
-        />
+        <AboutSection title="About Text Wrapper" content={aboutContent} />
       </div>
     </div>
-  )
+  );
 }

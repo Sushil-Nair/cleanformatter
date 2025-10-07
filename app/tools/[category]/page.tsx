@@ -22,13 +22,13 @@ export async function generateMetadata({
 
   if (!category) {
     return {
-      title: "Category Not Found - Case Master Pro",
+      title: "Category Not Found - Clean Formatter",
       description: "The requested category could not be found.",
     };
   }
 
   return {
-    title: `${category.name} - Text Tools & Utilities | Case Master Pro`,
+    title: `${category.name} - Text Tools & Utilities | Clean Formatter`,
     description: `${category.description}. Collection of free online tools for text manipulation and formatting.`,
     keywords: [
       category.name.toLowerCase(),

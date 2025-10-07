@@ -3,42 +3,41 @@ import Link from "next/link";
 
 export function Footer() {
   return (
-    <footer className="border-t py-6 md:py-0">
+    <footer className="border-t py-6 md:py-0 mt-16">
       <div className="container px-4 md:px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 py-6">
           <div className="col-span-1 md:col-span-2 space-y-4">
             <Link href="/" className="flex items-center space-x-2">
-              <span className="text-lg font-bold">Case Master Pro</span>
+              <span className="text-lg font-bold">Clean Formatter</span>
             </Link>
             <p className="text-sm text-muted-foreground">
-              A fast, free, and distraction-free case converter for your writing
-              flow. Transform your text instantly with our powerful and
-              intuitive tool.
+              Effortless text and code transformation with powerful case
+              converters, formatters, and random generators.
             </p>
           </div>
           <div className="space-y-4">
             <h3 className="text-sm font-medium">Links</h3>
             <nav className="flex flex-col space-y-2 text-sm">
               <Link
-                href="#"
+                href="/"
                 className="text-muted-foreground hover:text-foreground"
               >
                 Home
               </Link>
               <Link
-                href="#features"
+                href="/#features"
                 className="text-muted-foreground hover:text-foreground"
               >
                 Features
               </Link>
               <Link
-                href="#about"
+                href="/#about"
                 className="text-muted-foreground hover:text-foreground"
               >
                 About
               </Link>
               <Link
-                href="#"
+                href="/contact"
                 className="text-muted-foreground hover:text-foreground"
               >
                 Contact
@@ -46,7 +45,7 @@ export function Footer() {
             </nav>
           </div>
           <div className="space-y-4">
-            <h3 className="text-sm font-medium">Other Tools</h3>
+            {/* <h3 className="text-sm font-medium">Other Tools</h3> */}
             <nav className="flex flex-col space-y-2 text-sm">
               <Link
                 href="/privacy-policy"
@@ -60,12 +59,12 @@ export function Footer() {
               >
                 Terms of Service
               </Link>
-              <Link
+              {/* <Link
                 href="#"
                 className="text-muted-foreground hover:text-foreground"
               >
-                Case Master Pro API
-              </Link>
+                Clean Formatter API
+              </Link> */}
               <div className="pt-2">
                 <ThemeToggle />
               </div>
@@ -74,7 +73,7 @@ export function Footer() {
         </div>
         <div className="border-t pt-6 pb-4 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} Case Master Pro. All rights reserved.
+            © {new Date().getFullYear()} Clean Formatter. All rights reserved.
           </p>
           <div className="flex items-center space-x-4">
             {/* <Link

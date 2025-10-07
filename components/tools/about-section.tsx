@@ -1,17 +1,17 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { Card, CardContent } from "@/components/ui/card"
-import { ScrollArea } from "@/components/ui/scroll-area"
+import * as React from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface AboutSectionProps {
-  title: string
-  content: React.ReactNode
+  title: string;
+  content: React.ReactNode;
 }
 
 export function AboutSection({ title, content }: AboutSectionProps) {
   return (
-    <Card className="mt-8">
+    <Card id="aboutSection" className="mt-8">
       <CardContent className="p-6">
         <div className="space-y-4">
           <h2 className="text-2xl font-bold tracking-tight">{title}</h2>
@@ -23,5 +23,5 @@ export function AboutSection({ title, content }: AboutSectionProps) {
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }

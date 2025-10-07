@@ -4,6 +4,7 @@ import { Header } from "@/components/header";
 import { ToolsPage } from "@/components/tools/tools-page";
 import { toolCategories } from "@/lib/tool-categories";
 import { Footer } from "@/components/sections/footer";
+import AdUnit from "@/components/ad-unit";
 
 export async function generateStaticParams() {
   return toolCategories.flatMap((category) =>
@@ -22,24 +23,25 @@ export async function generateMetadata({
     tool: string;
   };
 }): Promise<Metadata> {
+  const { category: categoryParam, tool: toolParam } = await params;
   const category = toolCategories.find(
     (cat) =>
-      cat.name.toLowerCase().replace(/[^a-z0-9]+/g, "-") === params.category
+      cat.name.toLowerCase().replace(/[^a-z0-9]+/g, "-") === categoryParam
   );
 
   const tool = category?.tools.find(
-    (t) => t.name.toLowerCase().replace(/[^a-z0-9]+/g, "-") === params.tool
+    (t) => t.name.toLowerCase().replace(/[^a-z0-9]+/g, "-") === toolParam
   );
 
   if (!category || !tool) {
     return {
-      title: "Tool Not Found - Case Master Pro",
+      title: "Tool Not Found - Clean Formatter",
       description: "The requested tool could not be found.",
     };
   }
 
   return {
-    title: `${tool.name} - Free Online Text Tool | Case Master Pro`,
+    title: `${tool.name} - Free Online Text Tool | Clean Formatter`,
     description: `${tool.description}. Free online tool for text manipulation and formatting. No registration required.`,
     keywords: [
       tool.name.toLowerCase(),
@@ -62,7 +64,7 @@ export async function generateMetadata({
   };
 }
 
-export default function Page({
+export default async function Page({
   params,
 }: {
   params: {
@@ -70,38 +72,49 @@ export default function Page({
     tool: string;
   };
 }) {
-  // If either category or tool is missing, redirect to the main tools page
-  if (!params.category || !params.tool) {
+  const { category: categoryParam, tool: toolParam } = await params;
+  if (!categoryParam || !toolParam) {
     redirect("/tools");
   }
 
-  const category = toolCategories.find(
+  const categories = toolCategories.find(
     (cat) =>
-      cat.name.toLowerCase().replace(/[^a-z0-9]+/g, "-") === params.category
+      cat.name.toLowerCase().replace(/[^a-z0-9]+/g, "-") === categoryParam
   );
 
-  if (!category) {
+  if (!categories) {
     notFound();
   }
 
-  const tool = category.tools.find(
-    (t) => t.name.toLowerCase().replace(/[^a-z0-9]+/g, "-") === params.tool
+  const tools = categories.tools.find(
+    (t) => t.name.toLowerCase().replace(/[^a-z0-9]+/g, "-") === toolParam
   );
 
-  if (!tool) {
+  if (!tools) {
     notFound();
   }
 
   const toolCategory = {
-    ...category,
-    tools: [tool],
+    ...categories,
+    tools: [tools],
   };
 
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <main className="flex-1 pt-16">
-        <ToolsPage category={toolCategory} />
+      <main className="flex-1 pt-32">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+          <div className="lg:col-span-3">
+            <ToolsPage category={toolCategory} />
+          </div>
+          <div className="lg:col-span-1">
+            <AdUnit
+              slot="sidebar"
+              format="vertical"
+              className="sticky top-40"
+            />
+          </div>
+        </div>
       </main>
       <Footer />
     </div>
