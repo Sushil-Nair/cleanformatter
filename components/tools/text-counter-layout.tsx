@@ -6,6 +6,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { TextStatsDisplay } from "@/components/tools/text-stats";
 import { AboutSection } from "@/components/tools/about-section";
 import { TextStats } from "@/types/tools";
+import AdUnit from "../ad-unit";
+import { MidSectionAd } from "../sections/ad-midsection";
 
 interface TextCounterLayoutProps {
   title: string;
@@ -183,6 +185,7 @@ export function TextCounterLayout({
           {description && (
             <p className="text-muted-foreground mt-2">{description}</p>
           )}
+          <AdUnit slot="tool-header" format="horizontal" />
         </div>
 
         <Card>
@@ -197,6 +200,7 @@ export function TextCounterLayout({
               <TextStatsDisplay stats={textStats} />
             </div>
           </CardContent>
+          <MidSectionAd />
         </Card>
 
         <AboutSection

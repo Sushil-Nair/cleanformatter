@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 export function Header() {
   const [isScrolled, setIsScrolled] = React.useState(false);
@@ -37,6 +38,20 @@ export function Header() {
       <div className="container flex h-16 items-center justify-between px-4 md:px-6">
         <div className="flex items-center gap-2">
           <Link href="/" className="flex items-center gap-2">
+            <Image
+              src="/logo-light.png"
+              alt="logo"
+              width={40}
+              height={40}
+              className="flex dark:hidden"
+            />
+            <Image
+              src="/logo-dark.png"
+              alt="logo"
+              width={40}
+              height={40}
+              className="dark:flex hidden"
+            />
             <span className="text-xl font-semibold">Clean Formatter</span>
           </Link>
         </div>

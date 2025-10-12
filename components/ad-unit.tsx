@@ -90,7 +90,7 @@ export default function AdUnit({
         return {
           style: { width: "250px", height: "250px" },
           dataAdFormat: "square",
-          dataFullWidthResponsive: "false",
+          dataFullWidthResponsive: "true",
         };
       case "in-article":
         return {
@@ -125,7 +125,7 @@ export default function AdUnit({
 
   return (
     <div
-      className={`relative flex justify-center items-center ${className} bg-gray-500`}
+      className={`relative flex justify-center items-center ${className} bg-accent`}
     >
       {closeable && (
         <button
@@ -133,7 +133,7 @@ export default function AdUnit({
           className="absolute top-0 right-0 z-10 p-1 bg-gray-200 hover:bg-gray-300 rounded-full transition-colors"
           aria-label="Close advertisement"
         >
-          <X className="w-4 h-4 text-gray-700" />
+          <X className="w-4 h-4 text-muted-foreground" />
         </button>
       )}
       <ins

@@ -20,6 +20,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { wrapText } from "@/lib/utils/text-wrapper";
+import AdUnit from "../ad-unit";
+import { MidSectionAd } from "../sections/ad-midsection";
 
 interface WrapOptions {
   mode: "word" | "char" | "smart" | "code";
@@ -250,6 +252,7 @@ export function TextWrapperTool() {
           <p className="text-muted-foreground mt-2">
             Format text with precise line wrapping and advanced options.
           </p>
+          <AdUnit slot="tool-header" format="horizontal" />
         </div>
 
         <Card>
@@ -372,6 +375,7 @@ export function TextWrapperTool() {
               </div>
             </div>
           </CardContent>
+          <MidSectionAd />
         </Card>
 
         <AboutSection title="About Text Wrapper" content={aboutContent} />

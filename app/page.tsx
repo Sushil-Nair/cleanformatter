@@ -1,3 +1,4 @@
+import AdUnit from "@/components/ad-unit";
 import { Header } from "@/components/header";
 import { AboutSection } from "@/components/sections/about";
 import { CtaSection } from "@/components/sections/cta";
@@ -13,10 +14,17 @@ export default function Home() {
       <ToolSearch toolCategories={toolCategories} />
       <main className="flex-1 mx-auto">
         <HeroSection />
+        <AdUnit slot="home-header" format="horizontal" />
         <FeaturesSection />
         <AboutSection />
         <CtaSection />
       </main>
+      <AdUnit
+        slot="footer-ad"
+        format="horizontal"
+        closeable
+        className="sticky bottom-0"
+      />
       <Footer />
     </div>
   );

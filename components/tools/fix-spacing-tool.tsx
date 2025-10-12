@@ -12,6 +12,8 @@ import { TextStatsDisplay } from "@/components/tools/text-stats";
 import { TextStats } from "@/types/tools";
 import { Copy, Download, RotateCcw } from "lucide-react";
 import { fixSpacing } from "@/lib/utils/spacing";
+import AdUnit from "../ad-unit";
+import { MidSectionAd } from "../sections/ad-midsection";
 
 interface SpacingOptions {
   removeExtraWhitespace: boolean;
@@ -235,6 +237,7 @@ export function FixSpacingTool() {
           <p className="text-muted-foreground mt-2">
             Clean up and normalize text spacing, indentation, and line endings.
           </p>
+          <AdUnit slot="tool-header" format="horizontal" />
         </div>
 
         <Card>
@@ -356,6 +359,7 @@ export function FixSpacingTool() {
               </div>
             </div>
           </CardContent>
+          <MidSectionAd />
         </Card>
 
         <AboutSection title="About Fix Spacing Tool" content={aboutContent} />

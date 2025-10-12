@@ -16,6 +16,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import AdUnit from "../ad-unit";
+import { MidSectionAd } from "../sections/ad-midsection";
 
 interface CaseConverterToolProps {
   title: string;
@@ -382,6 +384,7 @@ export function CaseConverterTool({
           {description && (
             <p className="text-muted-foreground mt-2">{description}</p>
           )}
+          <AdUnit slot="tool-header" format="horizontal" />
         </div>
 
         <Card>
@@ -446,6 +449,7 @@ export function CaseConverterTool({
               </div>
             </div>
           </CardContent>
+          <MidSectionAd />
         </Card>
 
         <AboutSection

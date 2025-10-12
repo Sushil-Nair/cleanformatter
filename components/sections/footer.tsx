@@ -1,4 +1,5 @@
 import { ThemeToggle } from "@/components/theme-toggle";
+import Image from "next/image";
 import Link from "next/link";
 
 export function Footer() {
@@ -8,6 +9,20 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 py-6">
           <div className="col-span-1 md:col-span-2 space-y-4">
             <Link href="/" className="flex items-center space-x-2">
+              <Image
+                src="/logo-light.png"
+                alt="logo"
+                width={40}
+                height={40}
+                className="flex dark:hidden"
+              />
+              <Image
+                src="/logo-dark.png"
+                alt="logo"
+                width={40}
+                height={40}
+                className="dark:flex hidden"
+              />
               <span className="text-lg font-bold">Clean Formatter</span>
             </Link>
             <p className="text-sm text-muted-foreground">
@@ -58,6 +73,18 @@ export function Footer() {
                 className="text-muted-foreground hover:text-foreground"
               >
                 Terms of Service
+              </Link>
+              <Link
+                href="/faq"
+                className="text-muted-foreground hover:text-foreground"
+              >
+                FAQ
+              </Link>
+              <Link
+                href="/blog"
+                className="text-muted-foreground hover:text-foreground"
+              >
+                Blog
               </Link>
               {/* <Link
                 href="#"

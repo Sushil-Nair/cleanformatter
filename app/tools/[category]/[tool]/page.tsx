@@ -5,6 +5,8 @@ import { ToolsPage } from "@/components/tools/tools-page";
 import { toolCategories } from "@/lib/tool-categories";
 import { Footer } from "@/components/sections/footer";
 import AdUnit from "@/components/ad-unit";
+import ToolSearch from "@/components/toolSearch";
+import { FAQSectionCompact } from "@/components/sections/FAQSection";
 
 export async function generateStaticParams() {
   return toolCategories.flatMap((category) =>
@@ -41,24 +43,30 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${tool.name} - Free Online Text Tool | Clean Formatter`,
-    description: `${tool.description}. Free online tool for text manipulation and formatting. No registration required.`,
+    title: `${tool.name} - Free Online Text & Code Tools | Clean Formatter`,
+    description: `${tool.description}. Boost productivity with fast online tools for text conversion, code formatting, word counting, and more.`,
     keywords: [
       tool.name.toLowerCase(),
-      "text tool",
-      "online tool",
-      "free tool",
+      `${tool.name.toLowerCase()} tools`,
+      `${tool.name.toLowerCase()} online`,
+      "text tools",
+      "online tools",
+      "free tools",
+      "developer tools",
+      "content creator tools",
+      "productivity tools",
+      "developer utilities",
       ...tool.popularTools,
       category.name.toLowerCase(),
     ].filter(Boolean),
     openGraph: {
-      title: `${tool.name} - Free Online Text Tool`,
+      title: `${tool.name} - Free Online Text & Code Tools`,
       description: tool.description,
       type: "website",
     },
     twitter: {
       card: "summary_large_image",
-      title: `${tool.name} - Free Online Text Tool`,
+      title: `${tool.name} - Free Online Text & Code Tools`,
       description: tool.description,
     },
   };
@@ -94,6 +102,10 @@ export default async function Page({
     notFound();
   }
 
+  const toolFAQ = toolCategories
+    .flatMap((cat) => cat.tools)
+    .find((t) => t.name.toLowerCase().replace(/\s+/g, "-") === toolParam);
+
   const toolCategory = {
     ...categories,
     tools: [tools],
@@ -102,20 +114,46 @@ export default async function Page({
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
+      <ToolSearch toolCategories={toolCategories} />
       <main className="flex-1 pt-32">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           <div className="lg:col-span-3">
             <ToolsPage category={toolCategory} />
+            {toolFAQ && (
+              <FAQSectionCompact
+                faqs={toolFAQ.faq}
+                className="container max-w-6xl mx-auto px-4 py-8"
+              />
+            )}
+            {toolFAQ && (
+              <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                  __html: JSON.stringify({
+                    "@context": "https://schema.org",
+                    "@type": "FAQPage",
+                    mainEntity: toolFAQ.faq.map((item) => ({
+                      "@type": "Question",
+                      name: item.question,
+                      acceptedAnswer: {
+                        "@type": "Answer",
+                        text: item.answer,
+                      },
+                    })),
+                  }),
+                }}
+              />
+            )}
           </div>
-          <div className="lg:col-span-1">
-            <AdUnit
-              slot="sidebar"
-              format="vertical"
-              className="sticky top-40"
-            />
-          </div>
+          <AdUnit slot="sidebar" format="vertical" className="sticky" />
         </div>
       </main>
+      <AdUnit
+        slot="tool-footer"
+        format="horizontal"
+        className="sticky bottom-0 "
+        closeable
+      />
       <Footer />
     </div>
   );

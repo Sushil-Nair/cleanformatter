@@ -18,6 +18,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import AdUnit from "../ad-unit";
+import { MidSectionAd } from "../sections/ad-midsection";
 
 const aboutContent = (
   <div className="space-y-6">
@@ -251,6 +253,7 @@ export function TextAnalysisTool() {
           <p className="text-muted-foreground mt-2">
             Analyze text properties, scripts, and Unicode characteristics
           </p>
+          <AdUnit slot="tool-header" format="horizontal" />
         </div>
 
         <Card>
@@ -383,6 +386,7 @@ export function TextAnalysisTool() {
               </div>
             </div>
           </CardContent>
+          <MidSectionAd />
         </Card>
 
         <AboutSection title="About Text Analysis" content={aboutContent} />

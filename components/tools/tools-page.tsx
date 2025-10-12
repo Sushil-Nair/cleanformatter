@@ -8,7 +8,7 @@ import { ToolCategory } from "@/types/tools";
 import { ToolLayout } from "@/components/tool-layout";
 import { TextCounterLayout } from "@/components/tools/text-counter-layout";
 import { TextDiffLayout } from "@/components/tools/text-diff-layout";
-import { FindReplaceLayout } from "@/components/tools/find-replace-layout";
+// import { FindReplaceLayout } from "@/components/tools/find-replace-layout";
 import { CaseConverterTool } from "@/components/tools/case-converter-tool";
 import { FormattingTool } from "@/components/tools/formatting-tool";
 import { FixSpacingTool } from "@/components/tools/fix-spacing-tool";

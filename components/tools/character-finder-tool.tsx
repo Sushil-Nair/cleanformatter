@@ -18,6 +18,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import AdUnit from "../ad-unit";
+import { MidSectionAd } from "../sections/ad-midsection";
 
 const aboutContent = (
   <div className="space-y-6">
@@ -171,6 +173,7 @@ export function CharacterFinderTool() {
           <p className="text-muted-foreground mt-2">
             Find and analyze Unicode characters and their properties
           </p>
+          <AdUnit slot="tool-header" format="horizontal" />
         </div>
 
         <Card>
@@ -327,6 +330,7 @@ export function CharacterFinderTool() {
               )}
             </div>
           </CardContent>
+          <MidSectionAd />
         </Card>
 
         <AboutSection title="About Character Finder" content={aboutContent} />

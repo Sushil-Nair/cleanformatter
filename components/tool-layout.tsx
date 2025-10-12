@@ -1,45 +1,46 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Textarea } from "@/components/ui/textarea"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { TextStatsDisplay } from "@/components/tools/text-stats"
-import { AboutSection } from "@/components/tools/about-section"
-import { useToast } from "@/hooks/use-toast"
-import { TextStats } from "@/types/tools"
-import { 
+import * as React from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { TextStatsDisplay } from "@/components/tools/text-stats";
+import { AboutSection } from "@/components/tools/about-section";
+import { useToast } from "@/hooks/use-toast";
+import { TextStats } from "@/types/tools";
+import {
   ArrowDownUp,
   Copy,
   Download,
   History,
-  Share2, 
+  Share2,
   Wand2,
-  X
-} from "lucide-react"
+  X,
+} from "lucide-react";
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet"
+} from "@/components/ui/sheet";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
+} from "@/components/ui/select";
+import AdUnit from "./ad-unit";
 
 interface ToolLayoutProps {
-  title: string
-  description?: string
-  functions: { name: string; description: string }[]
-  onProcess: (text: string, functionName: string) => string
-  aboutContent?: React.ReactNode
+  title: string;
+  description?: string;
+  functions: { name: string; description: string }[];
+  onProcess: (text: string, functionName: string) => string;
+  aboutContent?: React.ReactNode;
 }
 
 export function ToolLayout({
@@ -47,161 +48,168 @@ export function ToolLayout({
   description,
   functions,
   onProcess,
-  aboutContent
+  aboutContent,
 }: ToolLayoutProps) {
-  const [inputText, setInputText] = React.useState("")
-  const [outputText, setOutputText] = React.useState("")
-  const [selectedFunction, setSelectedFunction] = React.useState(functions[0]?.name || "")
-  const [realtimePreview, setRealtimePreview] = React.useState(true)
-  const [history, setHistory] = React.useState<{ input: string; output: string; function: string }[]>([])
+  const [inputText, setInputText] = React.useState("");
+  const [outputText, setOutputText] = React.useState("");
+  const [selectedFunction, setSelectedFunction] = React.useState(
+    functions[0]?.name || ""
+  );
+  const [realtimePreview, setRealtimePreview] = React.useState(true);
+  const [history, setHistory] = React.useState<
+    { input: string; output: string; function: string }[]
+  >([]);
   const [textStats, setTextStats] = React.useState<TextStats>({
     words: 0,
     sentences: 0,
     characters: 0,
-    paragraphs: 0
-  })
-  const { toast } = useToast()
+    paragraphs: 0,
+  });
+  const { toast } = useToast();
 
   const calculateStats = (text: string) => {
-    const words = text.trim().split(/\s+/).filter(Boolean).length
-    const sentences = text.split(/[.!?]+/).filter(Boolean).length
-    const characters = text.length
-    const paragraphs = text.split(/\n\s*\n/).filter(Boolean).length
+    const words = text.trim().split(/\s+/).filter(Boolean).length;
+    const sentences = text.split(/[.!?]+/).filter(Boolean).length;
+    const characters = text.length;
+    const paragraphs = text.split(/\n\s*\n/).filter(Boolean).length;
 
     setTextStats({
       words,
       sentences,
       characters,
-      paragraphs
-    })
-  }
+      paragraphs,
+    });
+  };
 
   const processText = React.useCallback(() => {
-    if (!inputText || !selectedFunction) return
+    if (!inputText || !selectedFunction) return;
 
-    const result = onProcess(inputText, selectedFunction)
-    setOutputText(result)
+    const result = onProcess(inputText, selectedFunction);
+    setOutputText(result);
 
     // Add to history
-    setHistory(prev => [{
-      input: inputText,
-      output: result,
-      function: selectedFunction
-    }, ...prev.slice(0, 9)])
-  }, [inputText, selectedFunction, onProcess])
+    setHistory((prev) => [
+      {
+        input: inputText,
+        output: result,
+        function: selectedFunction,
+      },
+      ...prev.slice(0, 9),
+    ]);
+  }, [inputText, selectedFunction, onProcess]);
 
   React.useEffect(() => {
     if (realtimePreview) {
-      processText()
+      processText();
     }
-  }, [inputText, selectedFunction, realtimePreview, processText])
+  }, [inputText, selectedFunction, realtimePreview, processText]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const newText = e.target.value
-    setInputText(newText)
-    calculateStats(newText)
-  }
+    const newText = e.target.value;
+    setInputText(newText);
+    calculateStats(newText);
+  };
 
   const handleCopy = async () => {
-    if (!outputText) return
-    
+    if (!outputText) return;
+
     try {
-      await navigator.clipboard.writeText(outputText)
+      await navigator.clipboard.writeText(outputText);
       toast({
         title: "Copied to clipboard",
         description: "Text has been copied to your clipboard",
         duration: 2000,
-      })
+      });
     } catch (error) {
       toast({
         title: "Failed to copy",
         description: "Please try again or copy manually",
         variant: "destructive",
         duration: 3000,
-      })
+      });
     }
-  }
+  };
 
   const handleDownload = () => {
-    if (!outputText) return
+    if (!outputText) return;
 
-    const blob = new Blob([outputText], { type: 'text/plain' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = `${title.toLowerCase().replace(/\s+/g, '-')}-output.txt`
-    document.body.appendChild(a)
-    a.click()
-    document.body.removeChild(a)
-    URL.revokeObjectURL(url)
+    const blob = new Blob([outputText], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${title.toLowerCase().replace(/\s+/g, "-")}-output.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
 
     toast({
       title: "Downloaded successfully",
       description: "Your text has been downloaded",
       duration: 2000,
-    })
-  }
+    });
+  };
 
   const handleShare = async () => {
-    if (!outputText) return
+    if (!outputText) return;
 
     try {
       await navigator.share({
         title: title,
         text: outputText,
-      })
-      
+      });
+
       toast({
         title: "Shared successfully",
         description: "Your text has been shared",
         duration: 2000,
-      })
+      });
     } catch (error) {
-      if (error instanceof Error && error.name !== 'AbortError') {
+      if (error instanceof Error && error.name !== "AbortError") {
         toast({
           title: "Couldn't share",
           description: "Your browser might not support sharing",
           variant: "destructive",
           duration: 3000,
-        })
+        });
       }
     }
-  }
+  };
 
   const detectFormat = () => {
-    if (!inputText) return
+    if (!inputText) return;
 
     try {
       // Try parsing as JSON
-      JSON.parse(inputText)
-      setSelectedFunction("JSON")
-      return
+      JSON.parse(inputText);
+      setSelectedFunction("JSON");
+      return;
     } catch {}
 
     // Check for XML-like content
     if (/<[^>]+>/.test(inputText)) {
-      setSelectedFunction("XML")
-      return
+      setSelectedFunction("XML");
+      return;
     }
 
     // Check for URL-encoded content
     if (/%[0-9A-Fa-f]{2}/.test(inputText)) {
-      setSelectedFunction("URL Decode")
-      return
+      setSelectedFunction("URL Decode");
+      return;
     }
 
     // Check for Base64
     if (/^[A-Za-z0-9+/=]+$/.test(inputText)) {
-      setSelectedFunction("Base64 Decode")
-      return
+      setSelectedFunction("Base64 Decode");
+      return;
     }
 
     toast({
       title: "Format detection",
       description: "Could not detect a specific format",
       duration: 2000,
-    })
-  }
+    });
+  };
 
   return (
     <div className="container max-w-6xl mx-auto px-4 py-8">
@@ -213,7 +221,7 @@ export function ToolLayout({
               <p className="text-muted-foreground mt-2">{description}</p>
             )}
           </div>
-          
+
           <div className="flex items-center gap-2">
             <Sheet>
               <SheetTrigger asChild>
@@ -228,27 +236,37 @@ export function ToolLayout({
                 <ScrollArea className="h-[calc(100vh-8rem)] mt-4">
                   <div className="space-y-4">
                     {history.map((item, index) => (
-                      <Card key={index} className="cursor-pointer hover:bg-accent" onClick={() => {
-                        setInputText(item.input)
-                        setSelectedFunction(item.function)
-                        calculateStats(item.input)
-                      }}>
+                      <Card
+                        key={index}
+                        className="cursor-pointer hover:bg-accent"
+                        onClick={() => {
+                          setInputText(item.input);
+                          setSelectedFunction(item.function);
+                          calculateStats(item.input);
+                        }}
+                      >
                         <CardContent className="p-4 space-y-2">
                           <div className="flex items-center justify-between">
-                            <span className="text-sm font-medium">{item.function}</span>
-                            <Button 
-                              variant="ghost" 
+                            <span className="text-sm font-medium">
+                              {item.function}
+                            </span>
+                            <Button
+                              variant="ghost"
                               size="icon"
                               className="h-6 w-6"
                               onClick={(e) => {
-                                e.stopPropagation()
-                                setHistory(prev => prev.filter((_, i) => i !== index))
+                                e.stopPropagation();
+                                setHistory((prev) =>
+                                  prev.filter((_, i) => i !== index)
+                                );
                               }}
                             >
                               <X className="h-4 w-4" />
                             </Button>
                           </div>
-                          <p className="text-xs text-muted-foreground line-clamp-2">{item.input}</p>
+                          <p className="text-xs text-muted-foreground line-clamp-2">
+                            {item.input}
+                          </p>
                         </CardContent>
                       </Card>
                     ))}
@@ -263,13 +281,17 @@ export function ToolLayout({
             </Sheet>
           </div>
         </div>
-        
+
         <Card>
           <CardContent className="p-6">
+            <AdUnit slot="tool-header" format="horizontal" />
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <Select value={selectedFunction} onValueChange={setSelectedFunction}>
+                  <Select
+                    value={selectedFunction}
+                    onValueChange={setSelectedFunction}
+                  >
                     <SelectTrigger className="w-[200px]">
                       <SelectValue placeholder="Select function" />
                     </SelectTrigger>
@@ -281,7 +303,7 @@ export function ToolLayout({
                       ))}
                     </SelectContent>
                   </Select>
-                  
+
                   <Button
                     variant="ghost"
                     size="icon"
@@ -375,12 +397,9 @@ export function ToolLayout({
         </Card>
 
         {aboutContent && (
-          <AboutSection
-            title="About Case Converter"
-            content={aboutContent}
-          />
+          <AboutSection title="About Case Converter" content={aboutContent} />
         )}
       </div>
     </div>
-  )
+  );
 }

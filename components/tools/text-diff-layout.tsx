@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { diffChars, diffWords, diffLines } from "diff";
 import { AboutSection } from "@/components/tools/about-section";
+import AdUnit from "../ad-unit";
+import { MidSectionAd } from "../sections/ad-midsection";
 
 interface TextDiffLayoutProps {
   title: string;
@@ -220,6 +222,7 @@ export function TextDiffLayout({ title, description }: TextDiffLayoutProps) {
           {description && (
             <p className="text-muted-foreground mt-2">{description}</p>
           )}
+          <AdUnit slot="tool-header" format="horizontal" />
         </div>
 
         <Card>
@@ -324,6 +327,7 @@ export function TextDiffLayout({ title, description }: TextDiffLayoutProps) {
               </div>
             </div>
           </CardContent>
+          <MidSectionAd />
         </Card>
 
         <AboutSection title="About Text Diff" content={textDiffAboutContent} />

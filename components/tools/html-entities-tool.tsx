@@ -23,6 +23,8 @@ import {
   decodeHTMLEntities,
   HTMLEntitiesOptions,
 } from "@/lib/utils/html-entities";
+import AdUnit from "../ad-unit";
+import { MidSectionAd } from "../sections/ad-midsection";
 
 const aboutContent = (
   <div className="space-y-6">
@@ -236,6 +238,7 @@ export function HTMLEntitiesTool() {
           <p className="text-muted-foreground mt-2">
             Convert text to and from HTML entities with various encoding options
           </p>
+          <AdUnit slot="tool-header" format="horizontal" />
         </div>
 
         <Card>
@@ -376,6 +379,7 @@ export function HTMLEntitiesTool() {
               </div>
             </div>
           </CardContent>
+          <MidSectionAd />
         </Card>
 
         <AboutSection

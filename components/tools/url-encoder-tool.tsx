@@ -19,6 +19,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { encodeURL, decodeURL, URLEncoderOptions } from "@/lib/utils/url";
+import AdUnit from "../ad-unit";
+import { MidSectionAd } from "../sections/ad-midsection";
 
 const aboutContent = (
   <div className="space-y-6">
@@ -231,6 +233,7 @@ export function URLEncoderTool() {
           <p className="text-muted-foreground mt-2">
             Convert URLs and query parameters with proper encoding
           </p>
+          <AdUnit slot="tool-header" format="horizontal" />
         </div>
 
         <Card>
@@ -363,6 +366,7 @@ export function URLEncoderTool() {
               </div>
             </div>
           </CardContent>
+          <MidSectionAd />
         </Card>
 
         <AboutSection

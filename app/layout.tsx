@@ -4,27 +4,30 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
-  title:
-    "Online Text & Code Tools - Case Converter, Formatter, Counters | Clean Formatter",
+  title: "Online Text & Code Tools - Case Converter, Formatter, Counters",
   description:
-    "Access a suite of fast and intuitive online tools for case conversion (camelCase, snake_case, kebab-case, etc.), code formatting, word count, diff check, and more. Boost your productivity with easy copy, download, and SEO-optimized utilities suitable for writers, developers, and content creators.",
+    "Boost productivity with fast online tools for text conversion, code formatting, word counting, and more — built for developers and content creators.",
   keywords: [
     "online text tools",
     "case converter",
     "code formatter",
     "word counter",
-    "character counter",
-    "camelCase converter",
-    "snake_case converter",
-    "kebab-case",
-    "text utilities online",
-    "programming tools",
-    "markdown tools",
-    "text difference tool",
-    "encode decode online",
-    "random text generator",
-    "free online tools",
+    "diff checker",
+    "unicode converter",
+    "base64 encoder decoder",
+    "url encoder decoder",
+    "html entities converter",
+    "password generator",
+    "uuid generator",
+    "font generator",
+    "text cleaner",
+    "text formatter",
+    "developer tools",
+    "writer tools",
+    "seo text tools",
+    "online code utilities",
   ],
+
   authors: [
     {
       name: "Digital Crafts by Sushil Nair",
@@ -47,6 +50,7 @@ export const metadata: Metadata = {
     ],
     locale: "en_US",
     type: "website",
+    determiner: "the",
   },
   twitter: {
     card: "summary_large_image",
@@ -56,6 +60,10 @@ export const metadata: Metadata = {
     creator: "@YourTwitterHandle",
     images: ["/twitter-card.png"],
   },
+  alternates: {
+    canonical: "https://cleanformatter.com",
+  },
+  metadataBase: new URL("https://cleanformatter.com"),
 };
 
 export default function RootLayout({
@@ -65,6 +73,26 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon-16x16.png"
+        />
+        <link rel="manifest" href="/site.webmanifest" />
+      </head>
       <body>
         <ThemeProvider
           attribute="class"

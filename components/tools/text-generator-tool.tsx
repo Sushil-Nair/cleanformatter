@@ -20,6 +20,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { generateText, TextGeneratorOptions } from "@/lib/utils/text-generator";
+import AdUnit from "../ad-unit";
+import { MidSectionAd } from "../sections/ad-midsection";
 
 const aboutContent = (
   <div className="space-y-6">
@@ -210,6 +212,7 @@ export function TextGeneratorTool() {
           <p className="text-muted-foreground mt-2">
             Generate random text in multiple languages and formats
           </p>
+          <AdUnit slot="tool-header" format="horizontal" />
         </div>
 
         <Card>
@@ -327,6 +330,7 @@ export function TextGeneratorTool() {
               </div>
             </div>
           </CardContent>
+          <MidSectionAd />
         </Card>
 
         <AboutSection title="About Text Generator" content={aboutContent} />

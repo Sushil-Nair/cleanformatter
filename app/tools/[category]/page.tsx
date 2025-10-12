@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import { Header } from "@/components/header";
 import { ToolsPage } from "@/components/tools/tools-page";
 import { toolCategories } from "@/lib/tool-categories";
+import { Footer } from "@/components/sections/footer";
+import AdUnit from "@/components/ad-unit";
 
 export async function generateStaticParams() {
   return toolCategories.map((category) => ({
@@ -28,23 +30,29 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${category.name} - Text Tools & Utilities | Clean Formatter`,
-    description: `${category.description}. Collection of free online tools for text manipulation and formatting.`,
+    title: `${category.name} - Free Online Text & Code Tools | Clean Formatter`,
+    description: `${category.description}. Boost productivity with fast online tools for text conversion, code formatting, word counting, and more`,
     keywords: [
       category.name.toLowerCase(),
+      `${category.name.toLowerCase()} tools`,
+      `${category.name.toLowerCase()} online`,
       "text tools",
       "online tools",
       "free tools",
+      "developer tools",
+      "content creator tools",
+      "productivity tools",
+      "developer utilities",
       ...category.tools.map((tool) => tool.name.toLowerCase()),
     ].filter(Boolean),
     openGraph: {
-      title: `${category.name} - Text Tools & Utilities`,
+      title: `${category.name} - Free Online Text & Code Tools`,
       description: category.description,
       type: "website",
     },
     twitter: {
       card: "summary_large_image",
-      title: `${category.name} - Text Tools & Utilities`,
+      title: `${category.name} - Free Online Text & Code Tools`,
       description: category.description,
     },
   };
@@ -66,6 +74,13 @@ export default function Page({ params }: { params: { category: string } }) {
       <main className="flex-1 pt-16">
         <ToolsPage category={category} />
       </main>
+      <AdUnit
+        slot="footer-ad"
+        format="horizontal"
+        closeable
+        className="sticky bottom-0"
+      />
+      <Footer />
     </div>
   );
 }

@@ -16,6 +16,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { motion } from "framer-motion";
+import AdUnit from "../ad-unit";
+import { MidSectionAd } from "../sections/ad-midsection";
 
 const aboutContent = (
   <div className="space-y-6">
@@ -180,6 +182,7 @@ export function UUIDGeneratorTool() {
             </p>
           </div>
         </div>
+        <AdUnit slot="tool-header" format="horizontal" className="mt-2" />
 
         <Card>
           <CardContent className="p-6">
@@ -305,6 +308,7 @@ export function UUIDGeneratorTool() {
               </Card>
             </div>
           </CardContent>
+          <MidSectionAd />
         </Card>
 
         <AboutSection title="About UUID Generator" content={aboutContent} />

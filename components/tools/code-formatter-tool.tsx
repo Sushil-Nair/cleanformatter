@@ -17,6 +17,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import AdUnit from "../ad-unit";
+import { MidSectionAd } from "../sections/ad-midsection";
 
 const aboutContent = (
   <div className="space-y-6">
@@ -195,6 +197,7 @@ export function CodeFormatterTool() {
           <p className="text-muted-foreground mt-2">
             Format and beautify code in multiple programming languages
           </p>
+          <AdUnit slot="tool-header" format="horizontal" />
         </div>
 
         <Card>
@@ -277,6 +280,7 @@ export function CodeFormatterTool() {
               </div>
             </div>
           </CardContent>
+          <MidSectionAd />
         </Card>
 
         <AboutSection title="About Code Formatter" content={aboutContent} />

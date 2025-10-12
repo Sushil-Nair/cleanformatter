@@ -23,6 +23,8 @@ import {
   encodeUTF32,
   normalizeText,
 } from "@/lib/utils/unicode";
+import AdUnit from "../ad-unit";
+import { MidSectionAd } from "../sections/ad-midsection";
 
 const aboutContent = (
   <div className="space-y-6">
@@ -243,6 +245,7 @@ export function UnicodeConverterTool() {
             Convert text between different Unicode formats and analyze character
             properties
           </p>
+          <AdUnit slot="tool-header" format="horizontal" />
         </div>
 
         <Card>
@@ -314,6 +317,7 @@ export function UnicodeConverterTool() {
               </div>
             </div>
           </CardContent>
+          <MidSectionAd />
         </Card>
 
         <AboutSection title="About Unicode Converter" content={aboutContent} />

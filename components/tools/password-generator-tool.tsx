@@ -17,6 +17,8 @@ import {
 import { Copy, RefreshCw, Shield } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { motion } from "framer-motion";
+import AdUnit from "../ad-unit";
+import { MidSectionAd } from "../sections/ad-midsection";
 
 const aboutContent = (
   <div className="space-y-6">
@@ -188,6 +190,7 @@ export function PasswordGeneratorTool() {
             <p className="text-muted-foreground mt-2">
               Generate secure, random passwords with customizable options
             </p>
+            <AdUnit slot="tool-header" format="horizontal" />
           </div>
         </div>
 
@@ -438,6 +441,7 @@ export function PasswordGeneratorTool() {
               </Card>
             </div>
           </CardContent>
+          <MidSectionAd />
         </Card>
 
         <AboutSection title="About Password Generator" content={aboutContent} />

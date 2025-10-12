@@ -5,6 +5,8 @@ import { Copy, Heart, Instagram, Facebook, Twitter } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
+import AdUnit from "../ad-unit";
+import { MidSectionAd } from "../sections/ad-midsection";
 
 export default function FontGenerator() {
   const [input, setInput] = useState("Your text here");
@@ -397,6 +399,7 @@ export default function FontGenerator() {
         <p className="text-muted-foreground mt-2">
           Generate stylish text for social media posts and creative content.
         </p>
+        <AdUnit slot="tool-header" format="horizontal" />
       </div>
 
       <div id="toolArea" className="p-6">
@@ -518,6 +521,7 @@ export default function FontGenerator() {
           </div>
         )}
       </div>
+      <MidSectionAd />
     </div>
   );
 }
