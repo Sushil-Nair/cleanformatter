@@ -14,6 +14,11 @@ export async function generateStaticParams() {
   }));
 }
 
+interface BlogPostPageProps {
+  params: {
+    slug: string;
+  };
+}
 export async function generateMetadata({
   params,
 }: {
@@ -39,11 +44,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function BlogPostPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
+export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug: slugParam } = params;
   const post = getBlogPost(slugParam);
 
