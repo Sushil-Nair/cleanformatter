@@ -92,6 +92,12 @@ export default function RootLayout({
           href="/favicon-16x16.png"
         />
         <link rel="manifest" href="/site.webmanifest" />
+
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5120078891027855"
+          crossOrigin="anonymous"
+        ></script>
       </head>
       <body>
         <ThemeProvider

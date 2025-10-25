@@ -1,4 +1,4 @@
-import type { PyodideInterface } from './types';
+import type { PyodideInterface } from "./types";
 
 declare global {
   interface Window {
@@ -10,13 +10,13 @@ let pyodide: PyodideInterface | null = null;
 
 export async function initPyodide() {
   if (!pyodide) {
-    if (typeof window === 'undefined') {
-      throw new Error('Pyodide can only be loaded in the browser');
+    if (typeof window === "undefined") {
+      throw new Error("Pyodide can only be loaded in the browser");
     }
 
     // Load Pyodide script
-    const script = document.createElement('script');
-    script.src = 'https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js';
+    const script = document.createElement("script");
+    script.src = "https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js";
     document.head.appendChild(script);
 
     // Wait for script to load
@@ -25,13 +25,16 @@ export async function initPyodide() {
     });
 
     pyodide = await window.loadPyodide({
-      indexURL: "https://cdn.jsdelivr.net/pyodide/v0.25.0/full/"
+      indexURL: "https://cdn.jsdelivr.net/pyodide/v0.25.0/full/",
     });
-    
+
     // Install black formatter
-    await pyodide.loadPackage('micropip');
-    const micropip = pyodide.pyimport('micropip');
-    await micropip.install('black');
+    await pyodide.loadPackage("micropip");
+    const micropip = (await pyodide.runPythonAsync(
+      "import micropip; micropip"
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    )) as any;
+    await micropip.install("black");
   }
   return pyodide;
 }
@@ -47,10 +50,10 @@ export async function formatPythonCode(code: string): Promise<string> {
           except Exception as e:
               return str(e)
     `);
-    
+
     const result = await py.runPythonAsync(`format_code('''${code}''')`);
     return result as string;
   } catch (error) {
-    throw new Error('Failed to format Python code: ' + error);
+    throw new Error("Failed to format Python code: " + error);
   }
 }

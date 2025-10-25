@@ -15,11 +15,12 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: { category: string };
+  params: Promise<{ category: string }>;
 }): Promise<Metadata> {
+  const { category: categoryParam } = await params;
   const category = toolCategories.find(
     (cat) =>
-      cat.name.toLowerCase().replace(/[^a-z0-9]+/g, "-") === params.category
+      cat.name.toLowerCase().replace(/[^a-z0-9]+/g, "-") === categoryParam
   );
 
   if (!category) {
@@ -58,10 +59,15 @@ export async function generateMetadata({
   };
 }
 
-export default function Page({ params }: { params: { category: string } }) {
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ category: string }>;
+}) {
+  const { category: categoryParam } = await params;
   const category = toolCategories.find(
     (cat) =>
-      cat.name.toLowerCase().replace(/[^a-z0-9]+/g, "-") === params.category
+      cat.name.toLowerCase().replace(/[^a-z0-9]+/g, "-") === categoryParam
   );
 
   if (!category) {

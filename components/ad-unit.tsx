@@ -34,7 +34,7 @@ export default function AdUnit({
   closeable = false,
   style = {},
 }: AdUnitProps) {
-  const adRef = useRef<HTMLModElement>(null);
+  const adRef = useRef<HTMLModElement | null>(null);
   const [isClosed, setIsClosed] = useState(false);
 
   useEffect(() => {
@@ -130,7 +130,7 @@ export default function AdUnit({
       {closeable && (
         <button
           onClick={handleClose}
-          className="absolute top-0 right-0 z-10 p-1 bg-gray-200 hover:bg-gray-300 rounded-full transition-colors"
+          className="absolute top-0 right-0 z-10 p-1 bg-accent hover:bg-gray-300 rounded-full transition-colors"
           aria-label="Close advertisement"
         >
           <X className="w-4 h-4 text-muted-foreground" />
@@ -139,18 +139,16 @@ export default function AdUnit({
       <ins
         ref={adRef}
         className="adsbygoogle"
-        style={{ ...adConfig.style, ...style }}
+        style={{
+          ...(adConfig.style as React.CSSProperties),
+          ...(style as React.CSSProperties),
+        }}
         data-ad-client={client}
         data-ad-slot={slot}
         data-ad-format={adConfig.dataAdFormat}
         data-ad-layout={adConfig.dataAdLayout}
         data-full-width-responsive={adConfig.dataFullWidthResponsive}
       />
-      <div className="text-center p-4">
-        <div className="mb-2">📢</div>
-        <div>Advertisement</div>
-        <div className="text-xs opacity-75 mt-1">AdSense Slot: {slot}</div>
-      </div>
     </div>
   );
 }

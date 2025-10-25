@@ -20,10 +20,10 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: {
+  params: Promise<{
     category: string;
     tool: string;
-  };
+  }>;
 }): Promise<Metadata> {
   const { category: categoryParam, tool: toolParam } = await params;
   const category = toolCategories.find(
@@ -75,10 +75,10 @@ export async function generateMetadata({
 export default async function Page({
   params,
 }: {
-  params: {
+  params: Promise<{
     category: string;
     tool: string;
-  };
+  }>;
 }) {
   const { category: categoryParam, tool: toolParam } = await params;
   if (!categoryParam || !toolParam) {

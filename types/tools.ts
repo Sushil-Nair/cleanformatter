@@ -1,7 +1,7 @@
 export interface Tool {
   name: string;
   description: string;
-  functions: ToolFunction[];
+  functions?: ToolFunction[];
 }
 
 export interface ToolFunction {
@@ -26,7 +26,7 @@ export interface toolFAQ {
   name: string;
   description: string;
   popularTools: string[];
-  functions: ToolFunction[];
+  functions?: ToolFunction[];
   faq: {
     question: string;
     answer: string;

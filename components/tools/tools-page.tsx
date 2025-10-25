@@ -156,13 +156,13 @@ export default function ToolsPage({ category }: ToolsPageProps) {
           description={currentTool.description}
         />
       );
-    case "Find & Replace":
-      return (
-        <FindReplaceLayout
-          title={currentTool.name}
-          description={currentTool.description}
-        />
-      );
+    // case "Find & Replace":
+    //   return (
+    //     <FindReplaceLayout
+    //       title={currentTool.name}
+    //       description={currentTool.description}
+    //     />
+    //   );
     case "Case Converter":
       return (
         <CaseConverterTool
