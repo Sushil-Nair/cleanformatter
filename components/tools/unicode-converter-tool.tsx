@@ -245,7 +245,7 @@ export function UnicodeConverterTool() {
             Convert text between different Unicode formats and analyze character
             properties
           </p>
-          <AdUnit slot="tool-header" format="horizontal" />
+          <AdUnit slot="9721370550" format="horizontal" />
         </div>
 
         <Card>

@@ -30,7 +30,7 @@ export default function AdUnit({
   slot,
   format = "auto",
   className = "",
-  client = "ca-pub-XXXXXXXXXXXXXXXX", // Replace with your AdSense client ID
+  client = "ca-pub-5120078891027855", // Replace with your AdSense client ID
   closeable = false,
   style = {},
 }: AdUnitProps) {
@@ -72,19 +72,19 @@ export default function AdUnit({
         return {
           style: { width: "100%", height: "90px", maxWidth: "728px" },
           dataAdFormat: "horizontal",
-          dataFullWidthResponsive: "false",
+          dataFullWidthResponsive: "true",
         };
       case "vertical":
         return {
           style: { width: "300px", height: "600px" },
           dataAdFormat: "vertical",
-          dataFullWidthResponsive: "false",
+          dataFullWidthResponsive: "true",
         };
       case "rectangle":
         return {
           style: { width: "300px", height: "250px" },
           dataAdFormat: "rectangle",
-          dataFullWidthResponsive: "false",
+          dataFullWidthResponsive: "true",
         };
       case "square":
         return {

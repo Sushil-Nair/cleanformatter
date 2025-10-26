@@ -145,11 +145,11 @@ export default async function Page({
               />
             )}
           </div>
-          <AdUnit slot="sidebar" format="vertical" className="sticky" />
+          <AdUnit slot="2684656083" format="vertical" className="sticky" />
         </div>
       </main>
       <AdUnit
-        slot="tool-footer"
+        slot="8328397831"
         format="horizontal"
         className="sticky bottom-0 "
         closeable

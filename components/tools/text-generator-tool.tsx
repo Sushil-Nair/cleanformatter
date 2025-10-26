@@ -212,7 +212,7 @@ export function TextGeneratorTool() {
           <p className="text-muted-foreground mt-2">
             Generate random text in multiple languages and formats
           </p>
-          <AdUnit slot="tool-header" format="horizontal" />
+          <AdUnit slot="9721370550" format="horizontal" />
         </div>
 
         <Card>

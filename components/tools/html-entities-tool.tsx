@@ -238,7 +238,7 @@ export function HTMLEntitiesTool() {
           <p className="text-muted-foreground mt-2">
             Convert text to and from HTML entities with various encoding options
           </p>
-          <AdUnit slot="tool-header" format="horizontal" />
+          <AdUnit slot="9721370550" format="horizontal" />
         </div>
 
         <Card>

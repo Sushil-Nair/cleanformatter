@@ -264,7 +264,7 @@ export function FormattingTool() {
           <p className="text-muted-foreground mt-2">
             Clean and format text by removing unwanted formatting elements.
           </p>
-          <AdUnit slot="tool-header" format="horizontal" />
+          <AdUnit slot="9721370550" format="horizontal" />
         </div>
 
         <Card>

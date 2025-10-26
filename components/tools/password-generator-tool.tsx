@@ -190,7 +190,7 @@ export function PasswordGeneratorTool() {
             <p className="text-muted-foreground mt-2">
               Generate secure, random passwords with customizable options
             </p>
-            <AdUnit slot="tool-header" format="horizontal" />
+            <AdUnit slot="9721370550" format="horizontal" />
           </div>
         </div>
 

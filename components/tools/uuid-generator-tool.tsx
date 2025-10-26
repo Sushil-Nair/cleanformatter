@@ -182,7 +182,7 @@ export function UUIDGeneratorTool() {
             </p>
           </div>
         </div>
-        <AdUnit slot="tool-header" format="horizontal" className="mt-2" />
+        <AdUnit slot="9721370550" format="horizontal" className="mt-2" />
 
         <Card>
           <CardContent className="p-6">

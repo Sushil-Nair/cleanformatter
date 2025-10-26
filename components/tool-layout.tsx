@@ -120,6 +120,7 @@ export function ToolLayout({
         description: "Text has been copied to your clipboard",
         duration: 2000,
       });
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       toast({
         title: "Failed to copy",

@@ -282,7 +282,7 @@ export function Base64Tool() {
           <p className="text-muted-foreground mt-2">
             Convert text to and from Base64 format with advanced options
           </p>
-          <AdUnit slot="tool-header" format="horizontal" className="mt-2" />
+          <AdUnit slot="9721370550" format="horizontal" className="mt-2" />
         </div>
 
         <Card>

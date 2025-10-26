@@ -3,6 +3,8 @@ import AdUnit from "@/components/ad-unit";
 import GeneralFAQ, { FAQStructuredData } from "@/components/GeneralFAQ";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/sections/footer";
+import ToolSearch from "@/components/toolSearch";
+import { toolCategories } from "@/lib/tool-categories";
 
 export const metadata = {
   title: "FAQ - Frequently Asked Questions | Your Site",
@@ -14,6 +16,7 @@ export default function FAQPage() {
   return (
     <>
       <Header />
+      <ToolSearch toolCategories={toolCategories} />
       <FAQStructuredData />
       <main className="w-full relative mx-auto px-4 py-8 flex flex-col md:flex-row gap-4">
         <div className="sticky top-40 hidden md:grid grid-cols-1 w-full items-center flex-1 gap-4">

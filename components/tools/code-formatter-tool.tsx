@@ -197,7 +197,7 @@ export function CodeFormatterTool() {
           <p className="text-muted-foreground mt-2">
             Format and beautify code in multiple programming languages
           </p>
-          <AdUnit slot="tool-header" format="horizontal" />
+          <AdUnit slot="9721370550" format="horizontal" />
         </div>
 
         <Card>

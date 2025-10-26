@@ -14,13 +14,13 @@ export default function Home() {
       <ToolSearch toolCategories={toolCategories} />
       <main className="flex-1 mx-auto">
         <HeroSection />
-        <AdUnit slot="home-header" format="horizontal" />
+        <AdUnit slot="9721370550" format="horizontal" />
         <FeaturesSection />
         <AboutSection />
         <CtaSection />
       </main>
       <AdUnit
-        slot="footer-ad"
+        slot="8328397831"
         format="horizontal"
         closeable
         className="sticky bottom-0"

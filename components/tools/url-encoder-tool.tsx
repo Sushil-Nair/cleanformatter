@@ -233,7 +233,7 @@ export function URLEncoderTool() {
           <p className="text-muted-foreground mt-2">
             Convert URLs and query parameters with proper encoding
           </p>
-          <AdUnit slot="tool-header" format="horizontal" />
+          <AdUnit slot="9721370550" format="horizontal" />
         </div>
 
         <Card>

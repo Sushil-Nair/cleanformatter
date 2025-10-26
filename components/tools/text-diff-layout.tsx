@@ -222,7 +222,7 @@ export function TextDiffLayout({ title, description }: TextDiffLayoutProps) {
           {description && (
             <p className="text-muted-foreground mt-2">{description}</p>
           )}
-          <AdUnit slot="tool-header" format="horizontal" />
+          <AdUnit slot="9721370550" format="horizontal" />
         </div>
 
         <Card>

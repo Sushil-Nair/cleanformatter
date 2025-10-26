@@ -16,6 +16,8 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import AdUnit from "@/components/ad-unit";
 import { Footer } from "@/components/sections/footer";
+import ToolSearch from "@/components/toolSearch";
+import { toolCategories } from "@/lib/tool-categories";
 
 export default function ContactPage() {
   const GOOGLE_SCRIPT_URL =
@@ -96,6 +98,7 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
+      <ToolSearch toolCategories={toolCategories} />
       <main className="flex-1 pt-24">
         <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           {/* Header */}
