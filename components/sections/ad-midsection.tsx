@@ -6,7 +6,7 @@ export function MidSectionAd() {
   return (
     <section className="relative">
       <div className="container px-4 md:px-6">
-        <div className="flex flex-col md:flex-row items-center text-center space-y-4">
+        <div className="flex flex-col md:flex-row items-center text-center space-y-4 p-6">
           <AdUnit
             slot="7628849242"
             format="rectangle"

@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
@@ -19,6 +18,7 @@ import { Progress } from "@/components/ui/progress";
 import { motion } from "framer-motion";
 import AdUnit from "../ad-unit";
 import { MidSectionAd } from "../sections/ad-midsection";
+import { Textarea } from "../ui/textarea";
 
 const aboutContent = (
   <div className="space-y-6">
@@ -198,24 +198,25 @@ export function PasswordGeneratorTool() {
           <CardContent className="p-6">
             <div id="toolArea" className="space-y-8">
               {/* Password Output Section */}
-              <div className="space-y-4">
+              <div className="flex flex-col items-center gap-2 w-full">
                 <motion.div
-                  className="relative"
+                  className="flex flex-col sm:flex-row flex-grow w-full items-center justify-center gap-4"
                   animate={{ scale: [1, 1.02, 1] }}
                   transition={{ duration: 0.2 }}
                   key={password}
                 >
-                  <Input
+                  <Textarea
                     readOnly
                     value={password}
-                    className="pr-24 font-mono text-xl h-14 text-center tracking-wider"
+                    className="font-mono text-lg sm:text-xl h-14 text-center tracking-wider"
+                    aria-label="Generated Password"
                   />
-                  <div className="absolute right-1 top-1 flex gap-1">
+                  <div className="flex gap-2 mt-2 sm:mt-0">
                     <Button
                       variant="ghost"
                       size="sm"
                       onClick={handleCopy}
-                      className="h-12"
+                      className="h-12 flex items-center"
                     >
                       <Copy className="h-4 w-4 mr-2" />
                       Copy
@@ -224,7 +225,7 @@ export function PasswordGeneratorTool() {
                       variant="ghost"
                       size="sm"
                       onClick={regenerateDebounced()}
-                      className="h-12"
+                      className="h-12 flex items-center"
                     >
                       <RefreshCw className="h-4 w-4 mr-2" />
                       New
@@ -232,7 +233,7 @@ export function PasswordGeneratorTool() {
                   </div>
                 </motion.div>
 
-                <div className="space-y-2">
+                <div className="space-y-2 w-full">
                   <div className="flex items-center justify-between text-sm">
                     <span className="font-medium">
                       Password Strength: {getStrengthLabel(strength)}

@@ -384,7 +384,7 @@ export function CaseConverterTool({
           {description && (
             <p className="text-muted-foreground mt-2">{description}</p>
           )}
-          <AdUnit slot="9721370550" format="horizontal" />
+          <AdUnit slot="9721370550" format="horizontal" className="my-12" />
         </div>
 
         <Card>

@@ -28,7 +28,7 @@ export default function FAQPage() {
         <AdUnit
           slot="4272343576"
           format="vertical"
-          className="sticky top-40 flex-1"
+          className="hidden md:sticky top-40 flex-1"
         />
       </main>
       <AdUnit

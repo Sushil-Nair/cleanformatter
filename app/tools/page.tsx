@@ -93,7 +93,7 @@ export default function ToolsPage() {
       <AdUnit
         slot="8328397831"
         format="horizontal"
-        className="sticky bottom-0 "
+        className="sticky bottom-0 mt-12"
         closeable
       />
       <Footer />
