@@ -124,9 +124,7 @@ export default function AdUnit({
   const adConfig = getAdConfig();
 
   return (
-    <div
-      className={`relative flex justify-center items-center ${className} bg-red-400`}
-    >
+    <div className={`relative flex justify-center items-center ${className}`}>
       {closeable && (
         <button
           onClick={handleClose}
@@ -149,8 +147,6 @@ export default function AdUnit({
         data-ad-layout={adConfig.dataAdLayout}
         data-full-width-responsive={adConfig.dataFullWidthResponsive}
       />
-
-      <h1>Hello</h1>
     </div>
   );
 }
