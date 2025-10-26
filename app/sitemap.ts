@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 import { toolCategories } from "@/lib/tool-categories";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://casemasterpro.com";
+  const baseUrl = "https://cleanformatter.com";
 
   // Helper function to convert names to slugs
   const getSlug = (name: string) =>

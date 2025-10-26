@@ -287,7 +287,7 @@ export default function ContactPage() {
         </div>
       </main>
       <AdUnit
-        slot="footer-ad"
+        slot="8328397831"
         format="horizontal"
         closeable
         className="sticky bottom-0"

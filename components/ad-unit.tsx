@@ -125,12 +125,12 @@ export default function AdUnit({
 
   return (
     <div
-      className={`relative flex justify-center items-center ${className} bg-accent`}
+      className={`relative flex justify-center items-center ${className} bg-red-400`}
     >
       {closeable && (
         <button
           onClick={handleClose}
-          className="absolute top-0 right-0 z-10 p-1 bg-accent hover:bg-gray-300 rounded-full transition-colors"
+          className="absolute top-0 right-0 z-10 p-1 bg-accent hover:bg-muted-foreground rounded-full transition-colors"
           aria-label="Close advertisement"
         >
           <X className="w-4 h-4 text-muted-foreground" />
@@ -149,6 +149,8 @@ export default function AdUnit({
         data-ad-layout={adConfig.dataAdLayout}
         data-full-width-responsive={adConfig.dataFullWidthResponsive}
       />
+
+      <h1>Hello</h1>
     </div>
   );
 }

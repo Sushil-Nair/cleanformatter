@@ -1,3 +1,4 @@
+import AdUnit from "@/components/ad-unit";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/sections/footer";
 import { Card, CardContent } from "@/components/ui/card";
@@ -466,6 +467,12 @@ export default function TermsOfServicePage() {
           </div>
         </div>
       </main>
+      <AdUnit
+        slot="8328397831"
+        format="horizontal"
+        className="sticky bottom-0 "
+        closeable
+      />
       <Footer />
     </div>
   );

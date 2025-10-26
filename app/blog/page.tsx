@@ -85,10 +85,10 @@ export default function BlogPage() {
         </section>
       </div>
       <AdUnit
-        slot="footer-ad"
+        slot="8328397831"
         format="horizontal"
+        className="sticky bottom-0 "
         closeable
-        className="sticky bottom-0"
       />
       <Footer />
     </div>

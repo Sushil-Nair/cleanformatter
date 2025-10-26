@@ -77,14 +77,15 @@ export default async function Page({
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
+      <AdUnit slot="9721370550" format="horizontal" className="" />
       <main className="flex-1 pt-16">
         <ToolsPage category={category} />
       </main>
       <AdUnit
-        slot="footer-ad"
+        slot="8328397831"
         format="horizontal"
+        className="sticky bottom-0 "
         closeable
-        className="sticky bottom-0"
       />
       <Footer />
     </div>

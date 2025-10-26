@@ -14,7 +14,7 @@ export default function Home() {
       <ToolSearch toolCategories={toolCategories} />
       <main className="flex-1 mx-auto">
         <HeroSection />
-        <AdUnit slot="9721370550" format="horizontal" />
+        <AdUnit slot="9721370550" format="horizontal" closeable />
         <FeaturesSection />
         <AboutSection />
         <CtaSection />

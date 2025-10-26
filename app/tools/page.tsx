@@ -17,7 +17,7 @@ export default function ToolsPage() {
     <div className="min-h-screen flex flex-col">
       <Header />
       <ToolSearch toolCategories={toolCategories} />
-      <AdUnit slot="tools-header" format="horizontal" />
+      <AdUnit slot="9721370550" format="horizontal" />
       <main className="flex-1 pt-24">
         <div className="container px-4 md:px-6">
           <div className="space-y-16">
@@ -91,10 +91,10 @@ export default function ToolsPage() {
         </div>
       </main>
       <AdUnit
-        slot="footer-ad"
+        slot="8328397831"
         format="horizontal"
+        className="sticky bottom-0 "
         closeable
-        className="sticky bottom-0"
       />
       <Footer />
     </div>

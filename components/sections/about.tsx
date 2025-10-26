@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Laptop, Smartphone, Zap } from "lucide-react";
+import Image from "next/image";
 
 export function AboutSection() {
   return (
@@ -67,9 +68,10 @@ export function AboutSection() {
           </div>
           <div className="relative mt-8 lg:mt-0 rounded-xl overflow-hidden aspect-video shadow-xl">
             <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-primary/5 rounded-xl"></div>
-            <img
+            <Image
               src="https://images.pexels.com/photos/57690/pexels-photo-57690.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
               alt="Person typing on laptop"
+              fill
               className="w-full h-full object-cover rounded-xl"
             />
           </div>

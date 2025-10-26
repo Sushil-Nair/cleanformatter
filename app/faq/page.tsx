@@ -19,24 +19,23 @@ export default function FAQPage() {
       <ToolSearch toolCategories={toolCategories} />
       <FAQStructuredData />
       <main className="w-full relative mx-auto px-4 py-8 flex flex-col md:flex-row gap-4">
-        <div className="sticky top-40 hidden md:grid grid-cols-1 w-full items-center flex-1 gap-4">
-          <AdUnit slot="faq-side" format="square" />
-          <AdUnit slot="faq-side" format="square" />
-          <AdUnit slot="faq-side" format="square" />
-          <AdUnit slot="faq-side" format="square" />
-        </div>
+        <AdUnit
+          slot="2684656083"
+          format="vertical"
+          className="sticky top-40 flex-1"
+        />
         <GeneralFAQ className="flex-3" />
         <AdUnit
-          slot="sidebar"
+          slot="4272343576"
           format="vertical"
           className="sticky top-40 flex-1"
         />
       </main>
       <AdUnit
-        slot="footer-ad"
+        slot="8328397831"
         format="horizontal"
+        className="sticky bottom-0 "
         closeable
-        className="sticky bottom-0"
       />
       <Footer />
     </>

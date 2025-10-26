@@ -1,8 +1,59 @@
+# Allow all crawlers access to everything
 User-agent: *
+Disallow:
+
+# Block access to sensitive or non-public folders
+Disallow: /admin/
+Disallow: /private/
+Disallow: /login/
+Disallow: /cart/
+
+# Block specific file types commonly not needed in indexing
+Disallow: /*.pdf$
+Disallow: /*.doc$
+Disallow: /*.zip$
+
+User-agent: GPTBot
 Allow: /
 
-# Sitemap
-Sitemap: https://casemasterpro.com/sitemap.xml
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ChatGPT-OpenAI
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: MistralBot
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
 
 # Crawl-delay for polite crawling
 Crawl-delay: 1
@@ -10,3 +61,6 @@ Crawl-delay: 1
 # Disallow admin or private areas (if any in the future)
 # Disallow: /admin/
 # Disallow: /private/
+
+# Sitemap
+Sitemap: https://cleanformatter.com/sitemap.xml

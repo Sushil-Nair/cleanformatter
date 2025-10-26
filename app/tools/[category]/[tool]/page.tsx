@@ -112,10 +112,10 @@ export default async function Page({
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col w-full max-w-7xl mx-auto">
       <Header />
       <ToolSearch toolCategories={toolCategories} />
-      <main className="flex-1 pt-32">
+      <main className="flex-1 pt-32 py-36 container">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           <div className="lg:col-span-3">
             <ToolsPage category={toolCategory} />
@@ -145,7 +145,11 @@ export default async function Page({
               />
             )}
           </div>
-          <AdUnit slot="2684656083" format="vertical" className="sticky" />
+          <AdUnit
+            slot="2684656083"
+            format="vertical"
+            className="sticky top-40"
+          />
         </div>
       </main>
       <AdUnit
