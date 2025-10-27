@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "Online Text & Code Tools - Case Converter, Formatter, Counters",
@@ -58,7 +59,7 @@ export const metadata: Metadata = {
     title: "Online Text & Code Tools",
     description:
       "Fast, intuitive online tools for text transformation and code formatting.",
-    creator: "@YourTwitterHandle",
+    creator: "@CFormatter",
     images: ["/twitter-card.png"],
   },
   alternates: {
@@ -93,12 +94,12 @@ export default function RootLayout({
           href="/favicon-16x16.png"
         />
         <link rel="manifest" href="/site.webmanifest" />
-
-        <script
+        <Script
+          id="google-adsense"
           async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5120078891027855"
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID}`}
           crossOrigin="anonymous"
-        ></script>
+        />
       </head>
       <body>
         <ThemeProvider
