@@ -1,6 +1,4 @@
 import AdUnit from "@/components/ad-unit";
-import { Header } from "@/components/header";
-import { Footer } from "@/components/sections/footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Shield, Eye, Lock, Users, FileText, Mail } from "lucide-react";
@@ -8,7 +6,6 @@ import { Shield, Eye, Lock, Users, FileText, Mail } from "lucide-react";
 export default function PrivacyPolicyPage() {
   return (
     <div className="min-h-screen flex flex-col">
-      <Header />
       <main className="flex-1 pt-24 pb-16">
         <div className="container max-w-4xl mx-auto px-4 md:px-6">
           <div className="space-y-8">
@@ -358,7 +355,6 @@ export default function PrivacyPolicyPage() {
         className="sticky bottom-0 "
         closeable
       />
-      <Footer />
     </div>
   );
 }

@@ -15,7 +15,7 @@ export function MidSectionAd() {
           <AdUnit
             slot="4839034372"
             format="rectangle"
-            className="mx-auto px-4 sm:px-6 lg:px-8"
+            className="mx-auto px-4 sm:px-6 lg:px-8 hidden md:block"
           />
         </div>
       </div>

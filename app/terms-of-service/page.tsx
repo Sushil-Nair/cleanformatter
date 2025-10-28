@@ -1,6 +1,4 @@
 import AdUnit from "@/components/ad-unit";
-import { Header } from "@/components/header";
-import { Footer } from "@/components/sections/footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { FileText, Gavel, Users, Mail, ShieldCheck } from "lucide-react";
@@ -8,7 +6,6 @@ import { FileText, Gavel, Users, Mail, ShieldCheck } from "lucide-react";
 export default function TermsOfServicePage() {
   return (
     <div className="min-h-screen flex flex-col">
-      <Header />
       <main className="flex-1 pt-24 pb-16">
         <div className="container max-w-4xl mx-auto px-4 md:px-6">
           <div className="space-y-8">
@@ -473,7 +470,6 @@ export default function TermsOfServicePage() {
         className="sticky bottom-0 "
         closeable
       />
-      <Footer />
     </div>
   );
 }

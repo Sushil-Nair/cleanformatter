@@ -8,9 +8,7 @@ import {
   blogCategories,
   getPostsByCategory,
 } from "@/data/blog-posts";
-import { Search, Filter } from "lucide-react";
-import { Header } from "@/components/header";
-import { Footer } from "@/components/sections/footer";
+import { Search } from "lucide-react";
 import AdUnit from "@/components/ad-unit";
 
 export default function BlogPage() {
@@ -28,7 +26,6 @@ export default function BlogPage() {
 
   return (
     <div className="min-h-screen">
-      <Header />
       {/* Hero Section */}
       <section className="relative bg-accent pt-24 pb-16 md:pt-32 md:pb-24">
         <div className="container mx-auto px-4">
@@ -90,7 +87,6 @@ export default function BlogPage() {
         className="sticky bottom-0 "
         closeable
       />
-      <Footer />
     </div>
   );
 }

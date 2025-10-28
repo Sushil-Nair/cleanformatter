@@ -4,6 +4,8 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import Script from "next/script";
+import { Header } from "@/components/header";
+import { Footer } from "@/components/sections/footer";
 
 export const metadata: Metadata = {
   title: "Online Text & Code Tools - Case Converter, Formatter, Counters",
@@ -101,14 +103,16 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
       </head>
-      <body>
+      <body className="min-h-screen grid place-content-center">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
+          <Header />
           {children}
+          <Footer />
           <Toaster />
         </ThemeProvider>
       </body>

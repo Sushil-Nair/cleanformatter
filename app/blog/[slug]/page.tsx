@@ -4,8 +4,6 @@ import { Clock, Tag, ArrowLeft, Share2 } from "lucide-react";
 import { getBlogPost, blogPosts } from "@/data/blog-posts";
 import { Metadata } from "next";
 import Image from "next/image";
-import { Header } from "@/components/header";
-import { Footer } from "@/components/sections/footer";
 import AdUnit from "@/components/ad-unit";
 
 export async function generateStaticParams() {
@@ -52,7 +50,6 @@ export default async function BlogPostPage({
 
   return (
     <div className="min-h-screen">
-      <Header />
       {/* Header */}
       <div>
         <div className="mx-auto px-4 py-4 relative pt-24 pb-16 md:pt-32 md:pb-24">
@@ -142,7 +139,6 @@ export default async function BlogPostPage({
         className="sticky bottom-0 "
         closeable
       />
-      <Footer />
     </div>
   );
 }

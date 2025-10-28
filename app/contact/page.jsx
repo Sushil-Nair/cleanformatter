@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Header } from "@/components/header";
-import { Mail, MessageSquare, Phone, MapPin, Send } from "lucide-react";
+import { Mail, MessageSquare, MapPin, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -15,7 +14,6 @@ import {
 } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import AdUnit from "@/components/ad-unit";
-import { Footer } from "@/components/sections/footer";
 import ToolSearch from "@/components/toolSearch";
 import { toolCategories } from "@/lib/tool-categories";
 
@@ -97,7 +95,6 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header />
       <ToolSearch toolCategories={toolCategories} />
       <main className="flex-1 pt-24">
         <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -292,7 +289,6 @@ export default function ContactPage() {
         closeable
         className="sticky bottom-0"
       />
-      <Footer />
     </div>
   );
 }

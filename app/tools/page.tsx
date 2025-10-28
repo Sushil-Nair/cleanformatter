@@ -1,10 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Header } from "@/components/header";
 import { Card, CardContent } from "@/components/ui/card";
 import { toolCategories } from "@/lib/tool-categories";
-import { Footer } from "@/components/sections/footer";
 import Link from "next/link";
 import ToolSearch from "@/components/toolSearch";
 import AdUnit from "@/components/ad-unit";
@@ -15,7 +13,6 @@ export default function ToolsPage() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header />
       <ToolSearch toolCategories={toolCategories} />
       <AdUnit slot="9721370550" format="horizontal" />
       <main className="flex-1 pt-24">
@@ -96,7 +93,6 @@ export default function ToolsPage() {
         className="sticky bottom-0 mt-12"
         closeable
       />
-      <Footer />
     </div>
   );
 }

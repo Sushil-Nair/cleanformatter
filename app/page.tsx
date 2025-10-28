@@ -10,9 +10,8 @@ import { toolCategories } from "@/lib/tool-categories";
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col">
-      <Header />
       <ToolSearch toolCategories={toolCategories} />
-      <main className="flex-1 mx-auto">
+      <main className="flex-1 w-full mx-auto">
         <HeroSection />
         <AdUnit slot="9721370550" format="horizontal" closeable />
         <FeaturesSection />
@@ -25,7 +24,6 @@ export default function Home() {
         closeable
         className="sticky bottom-0"
       />
-      <Footer />
     </div>
   );
 }

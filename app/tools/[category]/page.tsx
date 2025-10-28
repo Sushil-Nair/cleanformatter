@@ -1,9 +1,7 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Header } from "@/components/header";
 import { ToolsPage } from "@/components/tools/tools-page";
 import { toolCategories } from "@/lib/tool-categories";
-import { Footer } from "@/components/sections/footer";
 import AdUnit from "@/components/ad-unit";
 
 export async function generateStaticParams() {
@@ -76,7 +74,6 @@ export default async function Page({
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header />
       <AdUnit slot="9721370550" format="horizontal" className="" />
       <main className="flex-1 pt-16">
         <ToolsPage category={category} />
@@ -87,7 +84,6 @@ export default async function Page({
         className="sticky bottom-0 "
         closeable
       />
-      <Footer />
     </div>
   );
 }

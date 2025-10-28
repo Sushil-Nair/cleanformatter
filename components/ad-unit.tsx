@@ -124,14 +124,16 @@ export default function AdUnit({
   const adConfig = getAdConfig();
 
   return (
-    <div className={`relative flex justify-center items-center ${className}`}>
+    <div
+      className={`relative flex justify-center items-center p-2 ${className}`}
+    >
       {closeable && (
         <button
           onClick={handleClose}
-          className="absolute top-0 right-0 z-10 p-1 bg-accent hover:bg-muted-foreground rounded-full transition-colors"
+          className="absolute top-1 right-1 z-10 p-1 bg-accent hover:bg-muted-foreground rounded-full transition-colors"
           aria-label="Close advertisement"
         >
-          <X className="w-4 h-4 text-muted-foreground" />
+          <X className="w-3 h-3 text-muted-foreground" />
         </button>
       )}
       <ins

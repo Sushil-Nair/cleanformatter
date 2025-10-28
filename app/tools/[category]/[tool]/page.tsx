@@ -1,9 +1,7 @@
 import { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
-import { Header } from "@/components/header";
 import { ToolsPage } from "@/components/tools/tools-page";
 import { toolCategories } from "@/lib/tool-categories";
-import { Footer } from "@/components/sections/footer";
 import AdUnit from "@/components/ad-unit";
 import ToolSearch from "@/components/toolSearch";
 import { FAQSectionCompact } from "@/components/sections/FAQSection";
@@ -113,7 +111,6 @@ export default async function Page({
 
   return (
     <div className="min-h-screen flex flex-col w-full">
-      <Header />
       <ToolSearch toolCategories={toolCategories} />
       <main className="flex-1 pt-32 mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 container">
@@ -148,17 +145,16 @@ export default async function Page({
           <AdUnit
             slot="2684656083"
             format="vertical"
-            className="sticky top-40"
+            className="sticky top-20 self-start hidden md:block"
           />
         </div>
       </main>
       <AdUnit
         slot="8328397831"
         format="horizontal"
-        className="sticky bottom-0 "
+        className="sticky bottom-0 mt-10"
         closeable
       />
-      <Footer />
     </div>
   );
 }

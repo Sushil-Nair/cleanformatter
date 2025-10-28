@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import AdUnit from "../ad-unit";
-import { MidSectionAd } from "../sections/ad-midsection";
 
 export default function FontGenerator() {
   const [input, setInput] = useState("Your text here");
@@ -1045,8 +1044,8 @@ export default function FontGenerator() {
   // };
 
   return (
-    <div className="container max-w-6xl mx-auto px-4 py-8">
-      <div className="p-6 border-b">
+    <div className="container w-full max-w-6xl mx-auto px-4 py-8">
+      <div className="p-6 border-b w-full">
         <h2 className="text-3xl font-bold tracking-tight">
           Fancy Font Generator
         </h2>
@@ -1056,7 +1055,7 @@ export default function FontGenerator() {
         <AdUnit slot="9721370550" format="horizontal" />
       </div>
 
-      <div id="toolArea" className="p-6">
+      <div id="toolArea" className="p-6 w-full">
         <div className="mb-8">
           <label className="block text-sm font-medium text-muted-foreground mb-2">
             Input Text
@@ -1152,7 +1151,6 @@ export default function FontGenerator() {
           </div>
         )} */}
       </div>
-      <MidSectionAd />
     </div>
   );
 }
