@@ -71,25 +71,25 @@ export default function AdUnit({
       case "horizontal":
         return {
           style: { width: "100%", height: "90px", maxWidth: "728px" },
-          dataAdFormat: "horizontal",
+          dataAdFormat: "auto",
           dataFullWidthResponsive: "true",
         };
       case "vertical":
         return {
           style: { width: "300px", height: "600px" },
-          dataAdFormat: "vertical",
+          dataAdFormat: "auto",
           dataFullWidthResponsive: "true",
         };
       case "rectangle":
         return {
           style: { width: "300px", height: "250px" },
-          dataAdFormat: "rectangle",
+          dataAdFormat: "auto",
           dataFullWidthResponsive: "true",
         };
       case "square":
         return {
           style: { width: "250px", height: "250px" },
-          dataAdFormat: "square",
+          dataAdFormat: "auto",
           dataFullWidthResponsive: "true",
         };
       case "in-article":
@@ -125,7 +125,7 @@ export default function AdUnit({
 
   return (
     <div
-      className={`relative flex justify-center items-center p-2 ${className}`}
+      className={`relative flex justify-center items-center p-2 dark:bg-background ${className}`}
     >
       {closeable && (
         <button

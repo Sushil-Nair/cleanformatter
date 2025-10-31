@@ -162,7 +162,7 @@ export default function ToolSearch({
   return (
     <div
       ref={searchRef}
-      className={`relative pt-24 pb-16 md:pt-32 md:pb-24 mx-auto w-full max-w-2xl ${className}`}
+      className={`relative pt-20 md:pt-24 mx-auto w-full max-w-2xl ${className}`}
     >
       <div className="relative">
         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5 pointer-events-none" />

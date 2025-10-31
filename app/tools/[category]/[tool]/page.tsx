@@ -112,9 +112,9 @@ export default async function Page({
   return (
     <div className="min-h-screen flex flex-col w-full">
       <ToolSearch toolCategories={toolCategories} />
-      <main className="flex-1 pt-32 mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 container">
-          <div className="lg:col-span-3">
+      <main className="flex-1 pt-10 mx-auto 2xl:max-w-7xl xl:max-w-5xl lg:max-w-4xl md:max-w-3xl sm:max-w-xl px-4 w-full">
+        <div className="grid grid-cols-1 gap-8 container">
+          <div className="flex flex-col gap-8">
             <ToolsPage category={toolCategory} />
             {toolFAQ && (
               <FAQSectionCompact
@@ -142,11 +142,11 @@ export default async function Page({
               />
             )}
           </div>
-          <AdUnit
+          {/* <AdUnit
             slot="2684656083"
             format="vertical"
             className="sticky top-20 self-start hidden md:block"
-          />
+          /> */}
         </div>
       </main>
       <AdUnit
