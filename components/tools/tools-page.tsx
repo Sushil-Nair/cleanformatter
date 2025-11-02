@@ -90,7 +90,7 @@ function ToolsPageContent() {
 
                               <div className="flex flex-wrap gap-2">
                                 {tool.popularTools
-                                  .slice(0, 3)
+                                  ?.slice(0, 3)
                                   .map((popularTool) => (
                                     <span
                                       key={popularTool}
