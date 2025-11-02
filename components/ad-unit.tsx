@@ -65,7 +65,7 @@ export default function AdUnit({
             }
           });
         },
-        { rootMargin: "200px" } // start loading 200px before ad is visible
+        { rootMargin: "200px" }
       );
       intersectionObserver.current.observe(adRef.current);
     } else {
@@ -93,61 +93,54 @@ export default function AdUnit({
       case "horizontal":
         return {
           style: {
-            width: "100%",
-            height: "60px",
-            maxWidth: "728px",
-            minHeight: "60px",
-            aspectRatio: "728 / 90",
+            display: "block",
+            minWidth: "300px",
+            minHeight: "50px",
           },
-          dataAdFormat: "auto",
+          dataAdFormat: "horizontal",
           dataFullWidthResponsive: "true",
         };
       case "vertical":
         return {
           style: {
-            width: "100%",
-            maxWidth: "300px",
-            height: "auto",
-            aspectRatio: "300 / 600",
+            display: "block",
+            minWidth: "120px",
+            minHeight: "240px",
           },
-          dataAdFormat: "auto",
+          dataAdFormat: "vertical",
           dataFullWidthResponsive: "true",
         };
       case "rectangle":
         return {
           style: {
-            width: "100%",
-            maxWidth: "300px",
-            height: "auto",
-            aspectRatio: "300 / 250",
+            display: "block",
+            minWidth: "250px",
+            minHeight: "250px",
           },
-          dataAdFormat: "auto",
+          dataAdFormat: "rectangle",
           dataFullWidthResponsive: "true",
         };
       case "square":
         return {
           style: {
-            width: "100%",
-            maxWidth: "250px",
-            height: "auto",
-            aspectRatio: "250 / 250",
+            display: "block",
+            minWidth: "200px",
+            minHeight: "200px",
           },
           dataAdFormat: "auto",
           dataFullWidthResponsive: "true",
         };
       case "in-article":
         return {
-          style: { display: "block", textAlign: "center" },
+          style: { display: "block" },
           dataAdFormat: "fluid",
           dataAdLayout: "in-article",
-          dataFullWidthResponsive: "true",
         };
       case "in-feed":
         return {
           style: { display: "block" },
           dataAdFormat: "fluid",
           dataAdLayout: "in-feed",
-          dataFullWidthResponsive: "true",
         };
       default:
         return {
@@ -167,16 +160,14 @@ export default function AdUnit({
   const adConfig = getAdConfig();
 
   return (
-    <div
-      className={`relative flex justify-center items-center mt-4 p-2 ${className}`}
-    >
+    <div className={`relative w-full ${className}`}>
       {closeable && (
         <button
           onClick={handleClose}
-          className="absolute top-1 right-1 z-10 p-1 bg-accent hover:bg-muted-foreground rounded-full transition-colors"
+          className="absolute top-0 right-0 z-10 p-1 bg-gray-800/50 hover:bg-gray-700/50 rounded-full transition-colors"
           aria-label="Close advertisement"
         >
-          <X className="w-3 h-3 text-muted-foreground" />
+          <X className="w-3 h-3 text-gray-300" />
         </button>
       )}
       <ins
