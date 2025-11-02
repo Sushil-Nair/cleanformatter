@@ -30,8 +30,8 @@ const textDiffAboutContent = (
       <strong>Text Comparison Tool</strong> – the ultimate solution for spotting
       changes, tracking revisions, and ensuring accuracy in documents, code, or
       content. Whether you&apos;re merging edits, auditing code, or reviewing
-      contracts, our Text Diff tool highlights additions, deletions, and
-      modifications in seconds, saving you time and reducing errors.
+      contracts, our Text Diff tool highlights additions and deletions in
+      seconds, saving you time and reducing errors.
     </p>
 
     <hr />
@@ -46,9 +46,8 @@ const textDiffAboutContent = (
           </li>
           <li>
             Additions highlighted in{" "}
-            <span className="text-green-500">green</span>, deletions in{" "}
-            <span className="text-red-500">red</span>, and modifications in{" "}
-            <span className="text-blue-500">blue</span>.
+            <span className="text-green-500">green</span> and deletions in{" "}
+            <span className="text-red-500">red</span>.
           </li>
         </ul>
       </div>
@@ -159,6 +158,7 @@ export function TextDiffLayout({ title, description }: TextDiffLayoutProps) {
   const [originalText, setOriginalText] = React.useState("");
   const [modifiedText, setModifiedText] = React.useState("");
   const [diffMode, setDiffMode] = React.useState<DiffMode>("words");
+  const [showLineNumbers, setShowLineNumbers] = React.useState(false);
   const { toast } = useToast();
 
   const getDiff = (text1: string, text2: string, mode: DiffMode) => {
@@ -175,6 +175,8 @@ export function TextDiffLayout({ title, description }: TextDiffLayoutProps) {
   };
 
   const renderDiff = (parts: DiffPart[]) => {
+    let lineNumber = 1;
+
     return parts.map((part, i) => {
       const className = part.added
         ? "bg-green-500/20 dark:bg-green-500/30"
@@ -182,10 +184,30 @@ export function TextDiffLayout({ title, description }: TextDiffLayoutProps) {
         ? "bg-red-500/20 dark:bg-red-500/30"
         : "";
 
+      const lines = part.value.split("\n");
+
       return (
-        <span key={i} className={className}>
-          {part.value}
-        </span>
+        <React.Fragment key={i}>
+          {lines.map((line, idx) => {
+            const currentLineNumber = lineNumber;
+            lineNumber++;
+            return (
+              <div
+                key={`${i}-${idx}`}
+                className={`flex ${
+                  showLineNumbers ? "gap-2" : ""
+                } whitespace-pre-wrap font-mono`}
+              >
+                {showLineNumbers && (
+                  <span className="select-none text-muted-foreground w-8 text-right tabular-nums">
+                    {currentLineNumber}
+                  </span>
+                )}
+                <span className={className}>{line}</span>
+              </div>
+            );
+          })}
+        </React.Fragment>
       );
     });
   };
@@ -264,6 +286,13 @@ export function TextDiffLayout({ title, description }: TextDiffLayoutProps) {
                   }
                 >
                   Line
+                </Button>
+                <Button
+                  variant={showLineNumbers ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setShowLineNumbers(!showLineNumbers)}
+                >
+                  {showLineNumbers ? "Hide Line Numbers" : "Show Line Numbers"}
                 </Button>
               </div>
 

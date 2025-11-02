@@ -54,7 +54,7 @@ export async function generateMetadata({
       "content creator tools",
       "productivity tools",
       "developer utilities",
-      ...tool.popularTools,
+      ...(tool.popularTools ?? []),
       category.name.toLowerCase(),
     ].filter(Boolean),
     openGraph: {

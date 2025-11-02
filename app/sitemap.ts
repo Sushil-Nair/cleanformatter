@@ -1,5 +1,6 @@
 import { MetadataRoute } from "next";
 import { toolCategories } from "@/lib/tool-categories";
+import { blogPosts } from "@/data/blog-posts";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://cleanformatter.com";
@@ -34,6 +35,30 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.3,
     },
+    {
+      url: `${baseUrl}/feature-guide`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.3,
+    },
+    {
+      url: `${baseUrl}/contact`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.3,
+    },
+    {
+      url: `${baseUrl}/blog`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.3,
+    },
+    {
+      url: `${baseUrl}/faq`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.3,
+    },
   ];
 
   // Category pages
@@ -56,5 +81,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }))
   );
 
-  return [...staticPages, ...categoryPages, ...toolPages];
+  const blogPages: MetadataRoute.Sitemap = blogPosts.map((post) => ({
+    url: `${baseUrl}/blog/${post.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly" as const,
+    priority: 0.7,
+  }));
+
+  return [...staticPages, ...categoryPages, ...toolPages, ...blogPages];
 }

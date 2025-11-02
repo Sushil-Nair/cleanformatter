@@ -16,6 +16,7 @@ import { useToast } from "@/hooks/use-toast";
 import AdUnit from "@/components/ad-unit";
 import ToolSearch from "@/components/toolSearch";
 import { toolCategories } from "@/lib/tool-categories";
+import Link from "next/link";
 
 export default function ContactPage() {
   const GOOGLE_SCRIPT_URL =
@@ -247,7 +248,7 @@ export default function ContactPage() {
               <div className=" rounded-2xl shadow-sm border p-6">
                 <h3 className="text-xl font-semibold mb-4">Quick Help</h3>
                 <div className="space-y-3">
-                  <a
+                  <Link
                     href="/faq"
                     className="block p-3 rounded-lg bg-accent dark:bg-primary/10"
                   >
@@ -255,16 +256,16 @@ export default function ContactPage() {
                     <div className="text-sm text-muted-foreground">
                       Find answers to common questions
                     </div>
-                  </a>
-                  <a
-                    href="/blog"
+                  </Link>
+                  <Link
+                    href="/feature-guide"
                     className="block p-3 rounded-lg bg-accent dark:bg-primary/10"
                   >
                     <div className="font-medium">Feature Guides</div>
                     <div className="text-sm text-muted-foreground">
                       Learn how to use our tools
                     </div>
-                  </a>
+                  </Link>
                 </div>
               </div>
 

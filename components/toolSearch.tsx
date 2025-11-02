@@ -3,21 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Search, X } from "lucide-react";
 import Link from "next/link";
-
-interface Tool {
-  name: string;
-  description: string;
-  popularTools: string[];
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  functions?: any;
-}
-
-interface ToolCategory {
-  name: string;
-  description: string;
-  icon: React.ReactNode;
-  tools: Tool[];
-}
+import type { ToolCategory, Tool } from "@/lib/tool-categories";
 
 interface ToolSearchProps {
   toolCategories: ToolCategory[];
@@ -71,7 +57,7 @@ export default function ToolSearch({
         const matchesCategoryDesc = category.description
           .toLowerCase()
           .includes(query);
-        const matchesPopularTools = tool.popularTools.some((pt) =>
+        const matchesPopularTools = tool.popularTools?.some((pt) =>
           pt.toLowerCase().includes(query)
         );
 
@@ -162,7 +148,7 @@ export default function ToolSearch({
   return (
     <div
       ref={searchRef}
-      className={`relative pt-20 md:pt-24 mx-auto w-full max-w-2xl ${className}`}
+      className={`relative px-4 pt-20 md:pt-24 mx-auto w-full max-w-2xl ${className}`}
     >
       <div className="relative">
         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5 pointer-events-none" />
@@ -218,7 +204,7 @@ export default function ToolSearch({
                       <span className="text-xs font-medium text-primary/80 bg-accent/50 px-2 py-1 rounded">
                         {highlightMatch(tool.categoryName, searchQuery)}
                       </span>
-                      {tool.popularTools.length > 0 && (
+                      {tool.popularTools && tool.popularTools.length > 0 && (
                         <div className="flex flex-wrap gap-1">
                           {tool.popularTools.slice(0, 3).map((pt, i) => (
                             <span

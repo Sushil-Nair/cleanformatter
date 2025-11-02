@@ -6,6 +6,7 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import Script from "next/script";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/sections/footer";
+import BackToTopButton from "@/components/backToTop";
 
 export const metadata: Metadata = {
   title: "Online Text & Code Tools - Case Converter, Formatter, Counters",
@@ -98,6 +99,7 @@ export default function RootLayout({
         <link rel="manifest" href="/site.webmanifest" />
         <Script
           id="google-adsense"
+          strategy="afterInteractive"
           async
           src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID}`}
           crossOrigin="anonymous"
@@ -112,6 +114,7 @@ export default function RootLayout({
         >
           <Header />
           {children}
+          <BackToTopButton />
           <Footer />
           <Toaster />
         </ThemeProvider>

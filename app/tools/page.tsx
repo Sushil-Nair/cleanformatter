@@ -9,7 +9,10 @@ import AdUnit from "@/components/ad-unit";
 
 export default function ToolsPage() {
   const getSlug = (name: string) =>
-    name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+    name
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-") // replace groups of non-alphanumerics with '-'
+      .replace(/^-+|-+$/g, "");
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -64,16 +67,21 @@ export default function ToolsPage() {
                               </p>
 
                               <div className="flex flex-wrap gap-2">
-                                {tool.popularTools
-                                  .slice(0, 3)
-                                  .map((popularTool) => (
-                                    <span
-                                      key={popularTool}
-                                      className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors group-hover:border-primary/30"
-                                    >
-                                      {popularTool}
-                                    </span>
-                                  ))}
+                                {tool.popularTools &&
+                                  tool.popularTools.length > 0 && (
+                                    <>
+                                      {tool.popularTools
+                                        .slice(0, 3)
+                                        .map((popularTool) => (
+                                          <span
+                                            key={popularTool}
+                                            className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors group-hover:border-primary/30"
+                                          >
+                                            {popularTool}
+                                          </span>
+                                        ))}
+                                    </>
+                                  )}
                               </div>
                             </div>
                           </CardContent>

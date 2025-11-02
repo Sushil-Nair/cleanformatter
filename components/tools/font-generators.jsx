@@ -6,6 +6,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import AdUnit from "../ad-unit";
+import FontSizeDropdown from "../fontSize";
+import { ScrollArea, ScrollBar } from "../ui/scroll-area";
+import { MidSectionAd } from "../sections/ad-midsection";
 
 export default function FontGenerator() {
   const [input, setInput] = useState("Your text here");
@@ -1007,6 +1010,8 @@ export default function FontGenerator() {
       .join("");
   };
 
+  const [fontSize, setFontSize] = useState(20);
+
   // useEffect(() => {
   //   const savedFavorites = localStorage.getItem("favorite-fonts");
   //   if (savedFavorites) {
@@ -1052,7 +1057,7 @@ export default function FontGenerator() {
         <p className="text-muted-foreground mt-2">
           Generate stylish text for social media posts and creative content.
         </p>
-        <AdUnit slot="9721370550" format="horizontal" />
+        <AdUnit slot="9721370550" format="horizontal" className="mt-5" />
       </div>
 
       <div id="toolArea" className="p-6 w-full">
@@ -1066,10 +1071,11 @@ export default function FontGenerator() {
             placeholder="Enter text to generate fancy fonts..."
             className="text-lg"
           />
+          <FontSizeDropdown fontSize={fontSize} setFontSize={setFontSize} />
         </div>
 
         {/* Font Styles */}
-        <div className="space-y-4">
+        <ScrollArea className="space-y-4 h-[500px]">
           <h3 className="text-lg font-semibold tracking-tight">
             Generated Styles
           </h3>
@@ -1095,8 +1101,11 @@ export default function FontGenerator() {
                       </Button>
                     </div>
                   </div>
-                  <div className="rounded border p-4 min-h-[60px] flex items-center">
-                    <span className="text-xl break-all font-medium text-foreground">
+                  <div
+                    className="rounded border p-4 min-h-[60px] flex items-center"
+                    style={{ fontSize: `${fontSize}px` }}
+                  >
+                    <span className="break-all font-medium text-foreground">
                       {convertedText}
                     </span>
                   </div>
@@ -1104,7 +1113,8 @@ export default function FontGenerator() {
               );
             })}
           </div>
-        </div>
+          <ScrollBar orientation="vertical" />
+        </ScrollArea>
 
         {/* Favorites Section */}
         {/* {favorites.length > 0 && (
@@ -1150,6 +1160,7 @@ export default function FontGenerator() {
             </div>
           </div>
         )} */}
+        <MidSectionAd />
       </div>
     </div>
   );

@@ -8,8 +8,46 @@ import {
   Palette,
 } from "lucide-react";
 import { ToolFunction } from "@/types/tools";
+import Link from "next/link";
 
-const caseFunctions: ToolFunction[] = [
+export interface FAQ {
+  question: string;
+  answer: string;
+}
+
+export interface TroubleshootingItem {
+  issue: string;
+  solution: string | React.ReactNode;
+}
+
+export interface ToolFunctions {
+  name: string;
+  description: string;
+}
+
+export interface Tool {
+  name: string;
+  description: string;
+  detailedDescription: string;
+  primaryUseCases: string[];
+  howToUse: string[];
+  popularTools?: string[] | undefined;
+  functions?: ToolFunction[];
+  advancedTips: string[] | React.ReactNode[];
+  troubleshooting: TroubleshootingItem[];
+  detailedExamples: string[];
+  link: string;
+  faq: FAQ[];
+}
+
+export interface ToolCategory {
+  name: string;
+  description: string;
+  icon: React.ReactNode;
+  tools: Tool[];
+}
+
+const caseFunctions: ToolFunctions[] = [
   { name: "UPPERCASE", description: "Convert text to uppercase" },
   { name: "lowercase", description: "Convert text to lowercase" },
   {
@@ -36,21 +74,31 @@ const caseFunctions: ToolFunction[] = [
   { name: "Sort Lines (Z-A)", description: "Sort lines in reverse" },
 ];
 
-export const toolCategories = [
+export const toolCategories: ToolCategory[] = [
   {
     name: "Text Editing",
     description: "Essential text editing and manipulation tools",
     icon: <TextSelect className="h-8 w-8" />,
     tools: [
-      // {
-      //   name: "Find & Replace",
-      //   description: "Search and replace text patterns",
-      //   popularTools: ["Simple Replace", "Regex Replace", "Batch Replace"]
-      // },
       {
         name: "Case Converter",
         description:
           "From UPPERCASE to camelCase to kebab-case — convert text instantly. Built for writers & devs. No sign-up, no drama.",
+        detailedDescription:
+          "The Case Converter is a powerful online text transformation tool designed to streamline text formatting for developers, content creators, and professional writers. Whether you need to convert text to UPPERCASE, lowercase, Title Case, camelCase, snake_case, kebab-case, or any other popular case format, this free tool handles all conversions instantly in your browser. Perfect for programming variable names, API endpoints, documentation, social media content, and professional documents, the Case Converter supports over 18 different case styles including SCREAMING_SNAKE_CASE, PascalCase, dot.case, and path/case. The tool also includes advanced text manipulation features like trimming whitespace, removing duplicate lines, sorting lines alphabetically, and toggling character cases. All processing happens client-side, ensuring complete privacy and data security without requiring registration or file uploads. Ideal for software developers working with multiple programming languages, technical writers formatting documentation, content managers preparing blog posts, and students organizing academic papers, this case converter tool eliminates manual formatting errors and saves valuable time in text preprocessing workflows.",
+        primaryUseCases: [
+          "Converting variable names between programming case conventions (camelCase, snake_case, PascalCase) for different coding standards and languages",
+          "Formatting social media content, blog headlines, and marketing copy with proper Title Case or sentence case capitalization",
+          "Preparing API endpoint URLs and route paths using kebab-case or dot.case notation for web development projects",
+          "Standardizing document headings, titles, and section names to consistent casing styles for professional reports and academic papers",
+          "Converting file names and folder structures to consistent naming conventions across development projects and documentation systems",
+        ],
+        howToUse: [
+          "Paste or type your text into the input text area at the top of the case converter interface",
+          "Select your desired case conversion style from the dropdown menu or function buttons (e.g., UPPERCASE, camelCase, snake_case)",
+          "View the instantly converted text in the output area below, with real-time transformation as you type",
+          "Copy the converted text with a single click or download it as a text file for use in your projects and documents",
+        ],
         popularTools: [
           "UPPERCASE",
           "lowercase",
@@ -72,6 +120,44 @@ export const toolCategories = [
           "Sort Lines (Z-A)",
         ],
         functions: caseFunctions,
+        advancedTips: [
+          "Chain multiple case conversions together by first converting to lowercase, then applying your target case style for more predictable results with mixed-case input",
+          "Use the sort lines feature before removing duplicates to group similar entries together and make manual review easier for large datasets",
+          "Use trim whitespace with remove empty lines to clean up copied text from PDFs or formatted documents that contain irregular spacing and then use Case Converter to format it",
+          "Leverage keyboard shortcuts by bookmarking the tool and using browser extensions to quickly access case conversion without leaving your development environment",
+          "When converting code variables, verify that reserved keywords in your programming language are handled correctly after case conversion to avoid syntax errors",
+        ],
+        troubleshooting: [
+          {
+            issue:
+              "Converted text remains unchanged or does not match the selected case style",
+            solution:
+              "Ensure the input text is free of hidden formatting or special characters by first cleaning it using a formatting removal tool. Also, refresh the page or try a different browser to fix any JavaScript execution errors.",
+          },
+          {
+            issue:
+              "Copy or download buttons do not work after text conversion.",
+            solution:
+              "Verify the site is accessed over HTTPS and that browser permissions allow clipboard access and downloads. Clear browser cache or disable interfering extensions, and make sure there is valid output text before using these features.",
+          },
+          {
+            issue:
+              "camelCase or PascalCase conversion doesn't handle abbreviations or acronyms correctly",
+            solution:
+              "Acronyms and abbreviations may require manual adjustment after conversion. For best results, convert to lowercase first, then manually correct acronyms before applying camelCase or PascalCase. Consider using snake_case or kebab-case for text containing multiple acronyms, as these formats handle abbreviations more predictably.",
+          },
+          {
+            issue: "Performance slows down with very large input texts.",
+            solution:
+              "For extremely large texts (over 100,000 characters), consider breaking the input into smaller chunks and processing them separately. Close other browser tabs to free up memory, or use a modern browser with better performance optimization like Chrome or Firefox.",
+          },
+        ],
+        detailedExamples: [
+          "A software developer working on a Node.js project receives variable names in Title Case from documentation (e.g., 'User Profile Data') and needs to convert them to camelCase ('userProfileData') for JavaScript code. Using the case converter, they paste the entire list of variable names, select camelCase conversion, and instantly get properly formatted code-ready variables that follow JavaScript naming conventions.",
+          "A content manager preparing blog post headlines needs to ensure consistent Title Case formatting across 50 article titles copied from various sources with inconsistent capitalization. They paste all titles into the case converter, select Title Case, and immediately receive properly capitalized headlines ready for publication, saving hours of manual editing work.",
+          "A database administrator needs to convert table column names from snake_case (e.g., 'user_profile_id') to kebab-case for use in REST API endpoints (e.g., 'user-profile-id'). They use the case converter to transform an entire schema documentation file at once, ensuring consistent API route naming across their microservices architecture.",
+        ],
+        link: "https://cleanformatter.com/tools/text-editing/case-converter",
         faq: [
           {
             question: "What is a case converter tool?",
@@ -101,7 +187,7 @@ export const toolCategories = [
           {
             question: "Is this tool free to use?",
             answer:
-              "Yes, the case converter tool is completely free and doesn’t require any registration or login.",
+              "Yes, the case converter tool is completely free and doesn't require any registration or login.",
           },
           {
             question: "Can I copy or download the converted text?",
@@ -123,17 +209,91 @@ export const toolCategories = [
             answer:
               "No. The tool runs entirely client-side — meaning your text never leaves your browser or gets stored anywhere.",
           },
+          {
+            question: "What's the difference between camelCase and PascalCase?",
+            answer:
+              "camelCase starts with a lowercase letter (e.g., 'firstName'), while PascalCase starts with an uppercase letter (e.g., 'FirstName'). Both are commonly used in programming for variable and class naming conventions.",
+          },
+          {
+            question: "Can the case converter handle special characters?",
+            answer:
+              "Yes. The tool preserves all special characters, numbers, punctuation marks, and Unicode characters during case conversion, ensuring your text integrity remains intact.",
+          },
         ],
       },
       {
         name: "Text Counter",
         description: "Count characters, words, and lines",
+        detailedDescription:
+          "The Text Counter is an essential online tool for writers, editors, students, SEO professionals, and content creators who need accurate real-time text statistics and word count analysis. This comprehensive character counter and word counting tool instantly calculates multiple text metrics including total word count, character count with and without spaces, sentence count, paragraph count, reading time estimates, and average word length. Perfect for meeting strict content length requirements on social media platforms like Twitter (X) character limits, Instagram caption restrictions, meta description length for SEO optimization, academic essay word counts, and professional document specifications. The tool supports Unicode text across all languages and alphabets, accurately counting emojis, special characters, punctuation marks, and multilingual content. Writers use it to track novel progress and meet publishing requirements, students ensure essays meet assignment specifications, SEO specialists optimize content length for search engine rankings, and social media managers verify posts fit platform constraints. All text analysis happens instantly in your browser with complete privacy protection, requiring no registration, file uploads, or data transmission to external servers.",
+        primaryUseCases: [
+          "Verifying blog posts and articles meet SEO-recommended word count ranges (typically 1,500-2,500 words) for better search engine rankings and content performance",
+          "Ensuring social media posts stay within platform character limits: Twitter/X (280 characters), Instagram captions (2,200 characters), and LinkedIn posts (3,000 characters)",
+          "Tracking academic essay and research paper word counts to meet university assignment requirements and thesis length specifications",
+          "Optimizing meta descriptions for SEO by keeping them between 150-160 characters for proper display in Google search results",
+          "Monitoring novel and manuscript progress by tracking daily word count goals and overall chapter length for fiction and non-fiction writing projects",
+        ],
+        howToUse: [
+          "Paste or type your text directly into the text counter input area, or upload a document file if supported",
+          "View real-time statistics automatically displayed below the input area, showing word count, character count, and other metrics",
+          "Toggle between 'with spaces' and 'without spaces' character counts to meet specific formatting requirements for different platforms",
+          "Review additional metrics like sentence count and paragraph count",
+          "Use the reset button to reset the counter and start fresh, or copy your statistics for reporting and documentation purposes",
+        ],
         popularTools: ["Word Count", "Character Count", "Line Count"],
+        advancedTips: [
+          "Use the text counter during the writing process by keeping it open in a separate browser tab to monitor progress in real-time without disrupting your workflow",
+          "Set custom word count goals by noting your starting count and calculating your target endpoint, helping maintain consistent writing productivity",
+          "Compare character counts with and without spaces when optimizing for SMS messaging or platforms that count spaces differently",
+          "Leverage the reading time estimate to gauge article length appropriateness for your target audience's attention span and engagement patterns",
+          "Combine with word processing software's built-in counter to cross-verify accuracy for critical submissions like journal publications or legal documents",
+        ],
+        troubleshooting: [
+          {
+            issue:
+              "Word count differs from Microsoft Word or Google Docs count by a few words",
+            solution:
+              "Different tools use slightly different algorithms for defining word boundaries, especially with hyphenated words, contractions, and special characters. The text counter follows standard Unicode word boundary detection. For critical submissions, use the same tool consistently for accurate tracking, and verify requirements with your institution or publisher regarding which counting method they prefer.",
+          },
+          {
+            issue: "Character count seems off when pasting formatted text.",
+            solution: (
+              <>
+                When pasting text from rich text editors or formatted documents,
+                hidden characters or formatting codes may be included that
+                affect the character count. To ensure accurate counting, first
+                paste the text into the{" "}
+                <Link
+                  href="https://cleanformatter.com/tools/clean-format/remove-formatting"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-primary underline"
+                >
+                  Remove Formatting tool
+                </Link>{" "}
+                to strip formatting, then copy it from there into the text
+                counter tool.
+              </>
+            ),
+          },
+          {
+            issue:
+              "Emojis and special Unicode characters are counted incorrectly or cause unexpected results",
+            solution:
+              "Modern text counters should handle Unicode properly, but some emojis are composed of multiple Unicode characters. If you notice discrepancies, try pasting the same text into multiple online counters to identify the most accurate one. For professional work requiring precise emoji counts, consider using specialized Unicode analyzers alongside the standard text counter.",
+          },
+        ],
+        detailedExamples: [
+          "A freelance content writer receives an assignment to write a 2,000-word blog post about digital marketing trends. They use the text counter throughout the writing process to monitor progress, checking periodically to ensure they're on track. When they reach 1,850 words, they realize they need one more section to meet the requirement, adjusting their outline accordingly before final submission.",
+          "An SEO specialist optimizes website meta descriptions for 50 product pages, needing each description to be between 150-160 characters for optimal Google search result display. Using the text counter, they paste each description, verify the character count with spaces, and edit accordingly to maximize information while staying within the limit. This ensures all meta descriptions display completely without truncation in search results.",
+          "A university student writing a 3,500-word research paper uses the text counter to track daily writing progress toward their deadline. They paste their work-in-progress each evening, noting they've written 800 words on day one, 1,200 words by day two, and calculate they need 500 words daily for the remaining three days to complete the assignment on time with buffer for editing.",
+        ],
+        link: "https://cleanformatter.com/tools/text-editing/text-counter",
         faq: [
           {
             question: "What is a Text Counter tool?",
             answer:
-              "A Text Counter tool counts the number of characters, words, sentences, and paragraphs in your text instantly. It’s useful for writers, students, developers, and anyone tracking content length.",
+              "A Text Counter tool counts the number of characters, words, sentences, and paragraphs in your text instantly. It's useful for writers, students, developers, and anyone tracking content length.",
           },
           {
             question: "How do I use the Text Counter?",
@@ -158,7 +318,7 @@ export const toolCategories = [
           {
             question: "Is the Text Counter tool free?",
             answer:
-              "Yes, it’s 100% free and requires no login, signup, or installation.",
+              "Yes, it's 100% free and requires no login, signup, or installation.",
           },
           {
             question: "Can I count characters in code or special symbols?",
@@ -178,14 +338,104 @@ export const toolCategories = [
           {
             question: "Can I use it for SEO optimization?",
             answer:
-              "Absolutely. The Text Counter helps SEO writers stay within Google’s ideal content length guidelines for titles, meta descriptions, and blog posts.",
+              "Absolutely. The Text Counter helps SEO writers stay within Google's ideal content length guidelines for titles, meta descriptions, and blog posts.",
+          },
+          {
+            question: "How accurate is the reading time estimate?",
+            answer:
+              "Reading time is calculated based on average reading speeds (typically 200-250 words per minute). Actual reading time varies by content complexity, reader experience, and subject matter familiarity.",
+          },
+          {
+            question:
+              "Can I count words in documents from Word or Google Docs?",
+            answer:
+              "Yes. Simply copy your text from Word, Google Docs, or any text editor and paste it into the Text Counter. Formatting will be stripped automatically, providing accurate counts based on plain text.",
           },
         ],
       },
       {
         name: "Text Diff",
         description: "Compare two texts and find differences",
+        detailedDescription:
+          "The Text Diff tool is an advanced online comparison utility designed for developers, writers, editors, legal professionals, and content managers who need to identify changes between two versions of text or code. This powerful diff checker performs line-by-line, word-by-word, and character-by-character comparisons to highlight additions, deletions, and modifications with color-coded visual indicators. Perfect for code review processes, document version control, plagiarism detection, contract comparison, manuscript editing, and content revision tracking. The tool supports multiple comparison modes including side-by-side view, inline diff display, and unified diff format commonly used in software development. Developers use it to review pull requests, compare configuration files, and track changes in source code across Git commits. Technical writers rely on it for documentation updates, API specification changes, and policy document revisions. Legal teams compare contract versions to identify modifications in terms and conditions. All text comparison happens client-side in your browser, ensuring sensitive documents and proprietary code remain completely private without server transmission or storage. The tool handles large files efficiently and supports syntax highlighting for popular programming languages.",
+        primaryUseCases: [
+          "Comparing two versions of source code to review changes in pull requests, code commits, and feature branches during software development workflows",
+          "Tracking document revisions and edits in contracts, legal agreements, technical specifications, and policy documents to identify what content was modified",
+          "Detecting plagiarism or unauthorized copying by comparing original content against potentially copied or paraphrased text from external sources",
+          "Reviewing article and blog post edits by comparing draft versions against published content to verify editorial changes and fact-checking corrections",
+          "Analyzing configuration file differences between development, staging, and production environments to prevent deployment errors and maintain consistency",
+        ],
+        howToUse: [
+          "Paste or type your original text (baseline version) into the left-side text area labeled as 'Original Text'",
+          "Paste or type the modified text (comparison version) into the right-side text area labeled as 'Modified Text'",
+          "Review the highlighted changes where additions are typically shown in green and deletions in red",
+          "Toggle between different view modes (side-by-side, inline, unified) to analyze differences in the format that works best for your task",
+        ],
         popularTools: ["Side by Side", "Inline Diff", "Word Diff"],
+        advancedTips: [
+          <>
+            Utilize the <code>'remove whitespace'</code> option available in the{" "}
+            <Link
+              href="https://cleanformatter.com/tools/clean-format/fix-spacing"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-primary underline"
+            >
+              Fix Spacing tool
+            </Link>{" "}
+            prior to comparing your code. This approach ensures that your
+            analysis focuses solely on substantive code changes, excluding
+            variations due to indentation or formatting that do not impact
+            functionality.
+          </>,
+          "Enable line number display for easier reference when discussing changes with team members or documenting specific modifications in code review comments",
+        ],
+        troubleshooting: [
+          {
+            issue:
+              "The diff tool shows too many irrelevant formatting or whitespace changes obscuring actual content differences",
+            solution: (
+              <>
+                First use the{" "}
+                <Link
+                  href="https://cleanformatter.com/tools/clean-format/fix-spacing"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-primary underline"
+                >
+                  Fix Spacing
+                </Link>{" "}
+                or{" "}
+                <Link
+                  href="https://cleanformatter.com/tools/clean-format/remove-formatting"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-primary underline"
+                >
+                  Remove Formatting
+                </Link>{" "}
+                tool to clean up your text. Then use the diff tool to compare.
+                Enable the 'ignore whitespace changes' or 'ignore blank lines'
+                options. This filters out insignificant formatting differences
+                and highlights only meaningful content changes. For code
+                comparison, also enable 'normalize line endings' to prevent
+                Unix/Windows line ending differences from showing as changes.
+              </>
+            ),
+          },
+          {
+            issue:
+              "Large files cause the browser to slow down or freeze during comparison",
+            solution:
+              "For very large files (over 10,000 lines), consider splitting them into smaller sections and comparing incrementally. Close other browser tabs to free up memory, or try using the tool in a modern browser with better performance optimization like Chrome or Firefox.",
+          },
+        ],
+        detailedExamples: [
+          "A software developer reviews a colleague's pull request containing changes to a JavaScript React component. Using the text diff tool, they paste the original component code (main branch) and the modified code (feature branch) side-by-side. The comparison reveals that error handling was added (shown in green), a deprecated API call was removed (shown in red), and variable naming was improved (shown as deletion + addition). The developer uses this analysis to provide specific feedback on code quality and approve the merge.",
+          "A technical writer updates API documentation after new features were added to version 2.0 of a REST API. They use the text diff tool to compare the previous version 1.0 documentation with the draft 2.0 version. The inline diff view shows which endpoints were added, which parameters changed, and where examples were updated. This helps ensure all changes are intentional and no information was accidentally removed during the documentation update process.",
+          "A legal professional compares two versions of a commercial contract to identify changes made during negotiation. They paste both versions into the diff tool, which highlights that the payment terms section was modified (payment deadline extended from 30 to 45 days), a new confidentiality clause was added, and a liability limitation was adjusted. This allows them to quickly brief their client on what changed without manually reading both contracts word-by-word.",
+        ],
+        link: "https://cleanformatter.com/tools/text-editing/text-diff",
         faq: [
           {
             question: "What is a Text Diff tool?",
@@ -215,12 +465,28 @@ export const toolCategories = [
           {
             question: "Can I compare large text files?",
             answer:
-              "Yes, the Text Diff tool can handle large files, but extremely large comparisons may slow down the browser depending on your device’s memory and performance.",
+              "Yes, the Text Diff tool can handle large files, but extremely large comparisons may slow down the browser depending on your device's memory and performance.",
           },
           {
             question: "Why should I use a Text Diff tool?",
             answer:
-              "It’s an efficient way to track revisions, detect plagiarism, review code changes, and ensure document consistency without manually checking every line.",
+              "It's an efficient way to track revisions, detect plagiarism, review code changes, and ensure document consistency without manually checking every line.",
+          },
+          {
+            question: "What do the different colors in the diff view mean?",
+            answer:
+              "Typically, green highlights indicate additions (new content), red highlights indicate deletions (removed content), and yellow or blue highlights indicate modifications (changed content). Color schemes may vary between different diff tools.",
+          },
+          {
+            question: "Can I export or save the diff comparison results?",
+            answer:
+              "Many text diff tools allow you to copy the comparison results, export as HTML, or generate unified diff format (patch files) that can be used with version control systems like Git.",
+          },
+          {
+            question:
+              "Does the Text Diff tool support syntax highlighting for code?",
+            answer:
+              "Advanced text diff tools often include syntax highlighting for popular programming languages, making it easier to read and understand code changes within the context of the language's syntax structure.",
           },
         ],
       },
@@ -234,7 +500,64 @@ export const toolCategories = [
       {
         name: "Remove Formatting",
         description: "Strip HTML and formatting",
-        popularTools: ["Strip HTML", "Strip Markdown", "Plain Text"],
+        detailedDescription:
+          "The Remove Formatting tool is a specialized online text cleaning utility that strips unwanted HTML tags, inline CSS styles, rich text formatting, and hidden code from copied content, converting it to clean plain text. Essential for content publishers, web developers, bloggers, and anyone copying text from websites, Microsoft Word documents, PDFs, or WYSIWYG editors that embed invisible formatting code. When you copy content from formatted sources, hidden HTML markup, style attributes, font specifications, and special characters often come along, causing formatting conflicts when pasted into content management systems, email clients, or text editors. This tool removes all HTML entities, strips style tags, eliminates font declarations, cleans span elements, removes div containers, and converts formatted text to pure ASCII or Unicode text. Perfect for cleaning WordPress posts, preparing email newsletter content, formatting social media captions, creating plain text documentation, and ensuring consistent styling across platforms. The tool preserves paragraph breaks and basic text structure while removing all visual formatting, making content ready for republishing with your preferred styling. All text processing happens instantly in your browser with complete privacy, requiring no file uploads or account registration.",
+        primaryUseCases: [
+          "Cleaning text copied from Microsoft Word or Google Docs before pasting into WordPress, Medium, or other CMS platforms to avoid formatting conflicts and hidden code",
+          "Removing HTML tags and inline styles from website content when repurposing articles or migrating content between different content management systems",
+          "Stripping formatting from email content copied from Outlook or Gmail to ensure plain text compatibility and prevent rendering issues in email clients",
+          "Converting rich text formatted documents to plain text for use in command-line tools, code editors, or systems that don't support styled text",
+          "Preparing clean text for social media posts by removing unwanted formatting, links, and special characters that may not display correctly on platforms like Twitter or LinkedIn",
+        ],
+        howToUse: [
+          "Copy the formatted text from your source (Word document, website, PDF, or email) using Ctrl+C (Cmd+C on Mac)",
+          "Paste the text into the Remove Formatting tool's input area using Ctrl+V (Cmd+V on Mac) — the tool will accept rich formatted text",
+          "The text will be automatically processed to strip all HTML tags, styles, and formatting codes. The cleaned result will be displayed immediately in the output section",
+          "Review the cleaned plain text output to verify formatting has been removed while preserving content structure",
+          "Copy the cleaned text with one click and paste it into your target application or document with confidence that no hidden formatting will interfere",
+        ],
+        popularTools: [
+          "Strip HTML",
+          "Remove Markdown",
+          "Plain Text",
+          "Clean Links",
+          "Filter Special Characters",
+          "Remove Styles",
+          "Fix Spacing",
+        ],
+        advancedTips: [
+          "Process text through the tool before pasting into email clients to ensure consistent formatting across different email platforms and prevent layout breaking",
+          "Use the tool as a preprocessing step before running text through other formatters or converters to ensure clean input without interference from hidden markup",
+          "Create a browser bookmark or hotkey to quickly access the formatting remover when frequently copying content from various sources during research or content curation",
+          "Combine with other text tools in sequence: first remove formatting, then apply case conversion or trim whitespace for comprehensive text preparation",
+          "When migrating large amounts of content, paste articles in batches through the tool rather than one by one to streamline the cleaning workflow",
+        ],
+        troubleshooting: [
+          {
+            issue:
+              "Line breaks and paragraph structure are removed along with formatting, creating one large block of text",
+            solution:
+              "The tool should preserve paragraph breaks by default. If this isn't happening, check if the 'Filter Special Character' option is enabled and disable it. Also, ensure that the source text uses standard line break characters (LF or CRLF). If the issue persists, try pasting the text into a plain text editor first to normalize line endings before using the Remove Formatting tool.",
+          },
+          {
+            issue:
+              "Special characters or accented letters are being removed or converted incorrectly",
+            solution:
+              "The formatting remover preserve all Unicode characters including accents, umlauts, and special symbols. If this isn't happening, check if the 'Filter Special Character' option is enabled and disable it. If characters are still being corrupted, try using a different browser or check if your source text is encoded properly. Ensure your browser is set to use UTF-8 encoding for best compatibility with diverse character sets.",
+          },
+          {
+            issue:
+              "Hyperlinks are completely removed when I need to keep the URL text",
+            solution:
+              "Make sure the 'Clean Link' option is turned off, this will keep the actual URL text. The tool removes HTML anchor tags but preserves the visible link text. If you want to keep the URL itself, ensure you're copying the full link text from the source before pasting it into the tool.",
+          },
+        ],
+        detailedExamples: [
+          "A blogger copies an interesting article section from a news website to reference in their own blog post. The copied text includes hidden HTML tags, inline CSS styling, and tracking links. They paste it into the Remove Formatting tool, which strips all the HTML markup and styling code, leaving clean plain text. They can now paste this into their WordPress editor and apply their own blog's consistent styling without formatting conflicts or broken layouts.",
+          "A marketing manager receives a newsletter draft from their designer as a formatted Word document with custom fonts, colors, and embedded images. To prepare it for their email service provider (Mailchimp), which requires clean HTML, they first paste the text content into the Remove Formatting tool to strip Word's proprietary formatting codes. The cleaned text is then pasted into Mailchimp's editor, where they apply the email template's proper styling, ensuring consistent rendering across all email clients.",
+          "A student researching a paper copies content from multiple PDF academic journals that contain complex formatting, headers, footers, and page numbers. Each copy-paste brings unwanted formatting that disrupts their research notes document. They use the Remove Formatting tool to clean each copied section, removing all PDF artifacts and formatting codes, before pasting into their notes. This creates a clean, uniform document where they can focus on content without distraction from inconsistent formatting.",
+        ],
+        link: "https://cleanformatter.com/tools/clean-format/remove-formatting",
         faq: [
           {
             question: "What is the Remove Formatting tool?",
@@ -272,12 +595,68 @@ export const toolCategories = [
             answer:
               "Yes. After removing formatting, you can safely copy and paste the cleaned text into CMS editors, emails, or documents without worrying about hidden code.",
           },
+          {
+            question: "Will the tool remove images and embedded media?",
+            answer:
+              "Yes. The Remove Formatting tool strips all non-text elements including images, videos, and embedded objects, leaving only the text content. If you need to preserve images, save them separately before cleaning the text.",
+          },
+          {
+            question: "Does it work with text from PDF files?",
+            answer:
+              "Yes. Text copied from PDFs often contains unusual formatting, line breaks, and hidden characters. The Remove Formatting tool effectively cleans PDF text, making it ready for use in other documents or online platforms.",
+          },
+          {
+            question: "Can I undo the formatting removal if needed?",
+            answer:
+              "The Remove Formatting tool permanently removes formatting from the processed text. To preserve your original formatted text, copy it to a safe location before cleaning, or keep your source document open so you can return to it if needed.",
+          },
         ],
       },
       {
         name: "Fix Spacing",
         description: "Fix inconsistent spacing and indentation",
-        popularTools: ["Fix Whitespace", "Fix Indentation", "Remove Tabs"],
+        detailedDescription:
+          "The Fix Spacing tool is a comprehensive text and code formatting utility designed to automatically correct inconsistent whitespace, irregular indentation, mixed tabs and spaces, and improper line endings in documents and source code. Essential for software developers, technical writers, content editors, and anyone working with structured text or programming code who needs to maintain professional formatting standards. This tool eliminates common spacing issues including extra spaces between words, inconsistent indentation levels in code blocks, mixed tab and space characters, irregular line breaks, trailing whitespace at line ends, and multiple consecutive blank lines. Perfect for cleaning up code before commits, standardizing documentation formatting, preparing text for publication, normalizing configuration files, and ensuring consistent spacing across collaborative projects. The tool supports conversion between tabs and spaces with configurable indentation width, automatic removal of trailing whitespace, normalization of line endings between Unix (LF), Windows (CRLF), and Mac formats, and intelligent handling of code blocks in multiple programming languages. All processing happens client-side in your browser, ensuring your code and sensitive text remains completely private without server transmission or storage.",
+        primaryUseCases: [
+          "Standardizing code indentation across team projects by converting tabs to spaces (or vice versa) and ensuring consistent indentation levels throughout source files",
+          "Cleaning up text copied from PDFs or web pages that contains irregular spacing, extra blank lines, and inconsistent paragraph breaks",
+          "Preparing code for version control commits by removing trailing whitespace and normalizing line endings to prevent unnecessary diff conflicts",
+          "Fixing formatting in configuration files (JSON, YAML, XML) where inconsistent indentation can cause parsing errors or reduce readability",
+          "Normalizing whitespace in documentation, markdown files, and technical specifications to ensure professional presentation and consistent formatting standards",
+        ],
+        howToUse: [
+          "Paste or type your text or code containing spacing issues into the Fix Spacing tool's input text area",
+          "Select your desired spacing options such as 'Remove Extra Spaces', 'Convert Tabs to Spaces', 'Normalize Indentation', or 'Fix Line Endings'",
+          "Review the formatted output with properly aligned indentation and consistent spacing, then copy or download the corrected text for use in your projects",
+        ],
+        popularTools: [
+          "Remove Extra Whitespace",
+          "Convert Tabs to Spaces",
+          "Normalize Punctuation",
+          "Normalize Line Endings",
+          "Remove Empty Lines",
+          "Trim Lines",
+        ],
+        advancedTips: [
+          "Configure your code editor to match the Fix Spacing tool's settings (tab width, space indentation) to maintain consistency when making future edits to formatted files",
+          "Use the tool as part of your pre-commit workflow by running all code through it before pushing changes to version control, preventing whitespace-related merge conflicts",
+          "Combine Fix Spacing with syntax validators for your programming language to ensure both formatting and code correctness before deployment",
+          "For large codebases, process files individually or in small batches rather than the entire project at once to avoid browser performance issues with very large text inputs",
+        ],
+        troubleshooting: [
+          {
+            issue:
+              "Code functionality breaks after fixing spacing, especially in Python or YAML files",
+            solution:
+              "Some languages like Python and YAML are whitespace-sensitive where indentation affects code execution. If your code breaks after spacing fixes, verify that the tool preserved indentation hierarchy correctly. Check that nested blocks maintain proper relative indentation levels and that mixed tabs/spaces weren't partially converted. For YAML, ensure consistent indentation (usually 2 spaces) throughout. You may need to manually verify critical sections after automated formatting.",
+          },
+        ],
+        detailedExamples: [
+          "A development team receives code contributions from multiple developers who use different editors with varying tab/space preferences. One developer uses 4-space indentation, another uses tabs, and a third uses 2-space indentation. The code maintainer pastes the contributed code into the Fix Spacing tool, selects 'Convert Tabs to Spaces' with 2-space indentation (matching their project standard), and clicks fix. The tool standardizes all indentation to 2 spaces, removes trailing whitespace, and normalizes line endings to LF, making the code ready for merging into the main branch without formatting conflicts.",
+          "A technical writer copies documentation from an old PDF specification that contains irregular spacing—some sections have double spaces after periods, inconsistent indentation in code examples, and extra blank lines between paragraphs. They paste the entire document into the Fix Spacing tool, enable 'Remove Extra Whitespace' and 'Normalize Punctuation' options. The tool removes double spaces, standardizes paragraph spacing, and cleans up the code example indentation, resulting in professionally formatted documentation ready for publishing on their company's website.",
+          "A DevOps engineer works with YAML configuration files for Kubernetes deployments. After manually editing several files, they notice inconsistent indentation—some sections use 2 spaces, others have tabs, and there's trailing whitespace causing YAML parsing warnings. They use the Fix Spacing tool to normalize all YAML files: converting tabs to 2 spaces, removing trailing whitespace, and ensuring consistent indentation depth. After fixing, the YAML files parse correctly without warnings and deploy successfully to the cluster.",
+        ],
+        link: "https://cleanformatter.com/tools/clean-format/fix-spacing",
         faq: [
           {
             question: "What is the Fix Spacing tool?",
@@ -313,7 +692,7 @@ export const toolCategories = [
           {
             question: "Is the Fix Spacing tool free to use?",
             answer:
-              "Yes, it’s completely free and requires no login, signup, or download.",
+              "Yes, it's completely free and requires no login, signup, or download.",
           },
           {
             question: "Does it support large text or code formatting?",
@@ -331,12 +710,70 @@ export const toolCategories = [
             answer:
               "Popular tools included with Fix Spacing are Fix Whitespace, Fix Indentation, and Remove Tabs, which provide additional text and code formatting utilities.",
           },
+          {
+            question:
+              "Can the Fix Spacing tool handle different programming languages?",
+            answer:
+              "Yes. The tool works with all text-based programming languages including JavaScript, Python, Java, C++, HTML, CSS, and more. It applies consistent spacing rules that work across different syntax styles.",
+          },
+          {
+            question: "What's the difference between tabs and spaces?",
+            answer:
+              "Tabs are single characters that editors render as indentation (width varies by editor settings), while spaces are fixed-width characters. Many coding standards prefer spaces (typically 2 or 4) for consistency across different editors and platforms. The Fix Spacing tool can convert between them based on your preference.",
+          },
         ],
       },
       {
         name: "Text Wrapper",
         description: "Wrap text to specific width",
-        popularTools: ["Word Wrap", "Character Wrap", "Smart Wrap"],
+        detailedDescription:
+          "The Text Wrapper tool is a specialized text formatting utility that automatically adjusts line length by wrapping text to a specified width, ensuring content fits within designated boundaries for improved readability and professional presentation. Essential for developers formatting code comments, technical writers preparing documentation with fixed-width constraints, email composers ensuring compatibility across clients, and content creators optimizing text for various display formats. This tool intelligently breaks lines at word boundaries (word wrap), character positions (hard wrap), or using smart algorithms that balance line lengths for aesthetic appeal. Perfect for formatting plain text emails, creating ASCII art, preparing code documentation, formatting terminal output, ensuring text compatibility with fixed-width displays, and optimizing content for command-line interfaces. The tool supports multiple wrapping modes including word wrap (breaks at word boundaries), character wrap (breaks at exact character position), smart wrap (optimizes for balanced line lengths), and code wrap (respects indentation). Common use cases include formatting Git commit messages to 72 characters, wrapping email text to 78 characters for client compatibility, creating readable README files, and preparing text for legacy systems with width limitations. All text wrapping happens instantly in your browser with complete privacy.",
+        primaryUseCases: [
+          "Formatting Git commit messages and code comments to standard line length limits (typically 72-80 characters) for better readability in version control tools",
+          "Wrapping plain text email content to 78 characters per line to ensure proper display across different email clients and prevent horizontal scrolling",
+          "Creating properly formatted README files and documentation with consistent line lengths for better readability on GitHub and code repositories",
+          "Preparing text for display in command-line interfaces, terminal applications, and fixed-width console outputs where line length is constrained",
+          "Formatting long strings and text content in programming code to meet linting rules and coding standards that enforce maximum line length",
+        ],
+        howToUse: [
+          "Paste or type your text content into the Text Wrapper tool's input text area, regardless of current line lengths or formatting",
+          "Specify your desired line width in characters (common values are 72, 78, or 80 characters) using the width input field or slider",
+          "Select your preferred wrapping mode: word wrap (breaks at spaces), character wrap (breaks at exact position), or smart wrap (balanced lines)",
+          "Copy the wrapped text output and paste it into your target application, document, or code editor where width constraints apply",
+        ],
+        popularTools: [
+          "Word Wrap",
+          "Character Wrap",
+          "Smart Wrap",
+          "Code Wrap",
+        ],
+        advancedTips: [
+          "Use word wrap mode for natural language text to maintain readability and prevent breaking words mid-syllable, especially important for emails and documentation",
+          "Enable smart wrap for paragraphs where you want balanced line lengths rather than filling each line to maximum width, creating more aesthetically pleasing text blocks",
+          "For code comments, use wrap settings that account for indentation by subtracting indent width from total line length (e.g., 72 characters minus 4-space indent = 68 character wrap)",
+          "When wrapping text for emails, use 78 characters as the standard to ensure compatibility with the widest range of email clients without triggering horizontal scrollbars",
+          "Combine text wrapping with other formatting tools in sequence: first fix spacing and remove formatting, then apply wrapping for comprehensive text preparation",
+        ],
+        troubleshooting: [
+          {
+            issue:
+              "Wrapped text appears correct in the tool but displays incorrectly when pasted into email or documents",
+            solution:
+              "The target application may be using proportional fonts (where characters have varying widths) while the wrapper assumes monospace fonts (fixed character widths). Ensure both the wrapper tool and your target application use the same font type. For emails, some clients automatically re-flow text, overriding manual wrapping. In such cases, use HTML email formatting instead of plain text wrapping.",
+          },
+          {
+            issue:
+              "Indented text or code loses indentation structure after wrapping",
+            solution:
+              "Standard text wrappers may not preserve indentation in subsequent wrapped lines. Use Code Formatter tool to fix the indentation issue. This tool will maintain indent levels on continuation lines.",
+          },
+        ],
+        detailedExamples: [
+          "A developer writes a detailed Git commit message explaining a complex code change. The message is several paragraphs long with no line breaks, making it difficult to read in Git logs and GitHub interfaces. They paste the message into the Text Wrapper tool, set the width to 72 characters (Git standard), select word wrap mode, and click wrap. The tool intelligently breaks the commit message into multiple lines at word boundaries, creating a properly formatted commit message that displays beautifully in all Git interfaces without requiring horizontal scrolling.",
+          "A technical writer prepares a plain text README file for an open-source project. The documentation includes long paragraphs explaining installation procedures and usage examples. To ensure the README displays correctly on GitHub and in terminal viewers, they paste the content into the Text Wrapper, set it to 80 characters width with smart wrap enabled. The tool creates balanced line lengths that look professional and are easily readable in both GitHub's web interface and command-line text viewers like 'less' or 'cat'.",
+          "An email marketer composes a plain text newsletter for subscribers who prefer non-HTML emails. The draft contains long paragraphs that would display poorly in some email clients, potentially with horizontal scrolling. They use the Text Wrapper set to 78 characters with word wrap to format the entire newsletter. The wrapped text ensures compatibility with older email clients like Outlook and webmail interfaces, providing a consistent reading experience regardless of the subscriber's email software or screen width.",
+        ],
+        link: "https://cleanformatter.com/tools/clean-format/text-wrapper",
         faq: [
           {
             question: "What is the Text Wrapper tool?",
@@ -374,6 +811,23 @@ export const toolCategories = [
             answer:
               "Currently, the Text Wrapper tool works online and requires an internet connection to function.",
           },
+          {
+            question:
+              "What is the recommended line width for different use cases?",
+            answer:
+              "Common standards include 72-80 characters for code comments and Git commits, 78 characters for email compatibility, 100-120 characters for modern documentation, and 60-65 characters for optimal reading comfort in plain text.",
+          },
+          {
+            question:
+              "Does text wrapping affect the actual content or just display?",
+            answer:
+              "Text wrapping inserts actual line break characters into your text at the specified width. The wrapped text becomes the permanent format unless you unwrap or reformat it again. This differs from soft wrapping in text editors which only affects visual display.",
+          },
+          {
+            question: "Can I unwrap text that has already been wrapped?",
+            answer:
+              "While the Text Wrapper tool focuses on wrapping, you can unwrap text by removing line breaks and creating one continuous line, then re-wrapping to a different width if needed. Some advanced text tools offer dedicated unwrap functions for this purpose.",
+          },
         ],
       },
     ],
@@ -386,7 +840,57 @@ export const toolCategories = [
       {
         name: "Code Formatter",
         description: "Format code in various languages",
-        popularTools: ["JavaScript", "HTML", "CSS", "JSON"],
+        detailedDescription:
+          "The Code Formatter is an advanced online code beautification and standardization tool that automatically formats source code in multiple programming languages according to industry-standard style guidelines and best practices. Essential for software developers, development teams, code reviewers, and anyone maintaining codebases who need consistent, readable, and professionally formatted code. This comprehensive formatter supports popular programming languages including JavaScript, TypeScript, HTML, CSS, JSON, Python, and more, applying appropriate indentation, spacing, line breaks, and syntax conventions specific to each language. Perfect for cleaning up minified code, standardizing team code submissions, preparing code for version control commits, beautifying code before sharing or publishing, and ensuring consistent formatting across large projects with multiple contributors. The tool automatically handles indentation levels, spaces around operators, bracket placement, line length limits, comment formatting, and adherence to language-specific style guides like PEP 8 for Python or Airbnb style for JavaScript. Advanced features include code minification (opposite of formatting), custom rule configuration, and support for framework-specific conventions. All code formatting happens client-side in your browser, ensuring your proprietary source code remains completely private without server transmission.",
+        primaryUseCases: [
+          "Beautifying minified or compressed JavaScript, CSS, and JSON code from production builds to make it readable for debugging and analysis",
+          "Standardizing code formatting across development teams by enforcing consistent indentation, spacing, and style guidelines before committing to version control",
+          "Preparing code snippets for documentation, tutorials, blog posts, and technical presentations with professional formatting that's easy to read",
+          "Cleaning up auto-generated code from scaffolding tools, code generators, or AI assistants that may produce inconsistent formatting",
+          "Reformatting legacy code that doesn't follow modern style guidelines or has inconsistent formatting from multiple contributors over time",
+        ],
+        howToUse: [
+          "Paste or type your unformatted, minified, or inconsistently formatted code into the Code Formatter's input text area",
+          "Select the programming language of your code from the language dropdown menu (JavaScript, Python, HTML, CSS, JSON, etc.)",
+          "Click the 'Minify Code' button to process your code and apply the code minification formatting rules for the selected language",
+          "Review the formatted code in the output area, then copy it for use in your IDE, paste it into documentation, or download as a file",
+        ],
+        popularTools: [
+          "JavaScript",
+          "HTML",
+          "CSS",
+          "JSON",
+          "Python",
+          "TypeScript",
+          "Minify Code",
+        ],
+        advancedTips: [
+          "Configure your code editor's formatter to match the online Code Formatter's settings to maintain consistency when working on files locally versus formatting online",
+          "Use the formatter as a pre-commit hook in Git to automatically format code before it enters the repository, preventing unformatted code from being merged",
+          "When beautifying minified code for debugging, save the original minified version separately as the formatted version may not match the production code exactly",
+          "Combine code formatting with linting tools to catch both style issues and potential bugs simultaneously for comprehensive code quality improvement",
+          "For large projects, format files incrementally rather than the entire codebase at once to avoid massive diffs and make code review easier for your team",
+        ],
+        troubleshooting: [
+          {
+            issue:
+              "Code formatter breaks my code or introduces syntax errors that weren't there before",
+            solution:
+              "The formatter should never change code logic, only styling. If errors appear after formatting, the original code likely had syntax errors that weren't visible in the minified version. Validate your code with a syntax checker before formatting. Alternatively, the formatter might be set to the wrong language—verify you've selected the correct language from the dropdown. For framework-specific code (like JSX or Vue templates), use formatters that specifically support those syntaxes.",
+          },
+          {
+            issue:
+              "Very large code files cause the formatter to freeze or take too long to process",
+            solution:
+              "Online code formatters may struggle with files exceeding 10,000-50,000 lines due to browser memory limitations. For large files, split them into smaller modules and format individually, or use command-line formatting tools (like prettier-cli, black, or language-specific formatters) that handle large files more efficiently. Close other browser tabs to free up memory if processing medium-sized files online.",
+          },
+        ],
+        detailedExamples: [
+          "A frontend developer needs to debug a production issue but the JavaScript bundle is minified into a single unreadable line. They paste the minified code into the Code Formatter, select 'JavaScript' as the language, and click format. The tool expands the code with proper indentation, line breaks, and spacing, transforming it from an incomprehensible single line into a readable multi-line format where they can set breakpoints and trace the execution flow to identify the bug.",
+          "A development team inherits a legacy codebase where each contributor used different formatting styles—some used tabs, others used 2 or 4 spaces, and brace placement is inconsistent. The team lead pastes each file through the Code Formatter with standardized settings (4-space indentation, Allman brace style) and commits the reformatted code. This creates a consistent baseline where future code reviews focus on logic and functionality rather than formatting disputes.",
+          "A technical blogger writes a tutorial on React hooks and includes code examples. The examples were copied from their development environment with minimal formatting. They paste each code snippet into the Code Formatter, select 'JavaScript' (for JSX), and format it. The resulting beautifully formatted code with consistent indentation and spacing makes the tutorial more professional and easier for readers to understand and copy into their own projects.",
+        ],
+        link: "https://cleanformatter.com/tools/code-format/code-formatter",
         faq: [
           {
             question: "What is the Code Formatter tool?",
@@ -426,6 +930,23 @@ export const toolCategories = [
             answer:
               "Many Code Formatters support integration with code editors, CI pipelines, and version control systems for automated formatting.",
           },
+          {
+            question:
+              "What is code minification and how does it relate to formatting?",
+            answer:
+              "Code minification is the opposite of formatting—it removes all unnecessary characters (whitespace, line breaks, comments) to reduce file size for production. The Code Formatter beautifies minified code back to readable format for development and debugging purposes.",
+          },
+          {
+            question: "Does the Code Formatter work with TypeScript and JSX?",
+            answer:
+              "Yes, modern Code Formatters support TypeScript and JSX (React) syntax, properly formatting type annotations, generics, and JSX elements according to best practices for these languages.",
+          },
+          {
+            question:
+              "Will formatting my code change its functionality or behavior?",
+            answer:
+              "No. Code formatters only change whitespace, indentation, and line breaks—never the logic or functionality of your code. The formatted code will execute identically to the original. However, always test after formatting to ensure no unintended issues were introduced.",
+          },
         ],
       },
     ],
@@ -438,7 +959,61 @@ export const toolCategories = [
       {
         name: "Unicode Converter",
         description: "Convert text to and from Unicode",
-        popularTools: ["Code Points", "UTF-8", "UTF-16", "UTF-32"],
+        detailedDescription:
+          "The Unicode Converter is a specialized text encoding and decoding tool that transforms text between various Unicode formats including Code Points, UTF-8, UTF-16, UTF-32, and normalized forms (NFC, NFD, NFKC, NFKD) for ensuring cross-platform text compatibility and proper character rendering. Essential for software developers working with internationalization, web developers handling multilingual content, data analysts processing text from various sources, and anyone dealing with special characters, emojis, or non-Latin scripts. This comprehensive converter handles the complete Unicode standard with support for over 140,000 characters across all modern and historical writing systems. Perfect for encoding text for web applications, converting between different character encoding schemes, analyzing Unicode composition, creating fancy text for social media, debugging encoding issues in databases and APIs, and ensuring proper text representation across different operating systems and applications. The tool displays character code points in hexadecimal and decimal formats, shows Unicode block names, identifies character properties, and supports bidirectional text for languages like Arabic and Hebrew. All conversions happen client-side in your browser ensuring complete privacy for sensitive multilingual content.",
+        primaryUseCases: [
+          "Converting text to Unicode code points for debugging character encoding issues in web applications, databases, and API responses",
+          "Transforming text between UTF-8, UTF-16, and UTF-32 encodings to ensure compatibility across different programming languages, platforms, and systems",
+          "Creating stylish Unicode text with special characters, mathematical symbols, and decorative fonts for social media bios, posts, and gaming usernames",
+          "Analyzing character composition and normalization to resolve text comparison issues where visually identical characters have different Unicode representations",
+          "Encoding and decoding Unicode escape sequences (\\u0000 format) for use in JSON, JavaScript strings, and programming language literals",
+        ],
+        howToUse: [
+          "Paste or type your text into the Unicode Converter's input area, which can contain any characters from any language or script",
+          "Select your desired conversion format from the options: Code Points (hexadecimal or decimal), UTF-8, UTF-16, UTF-32, or Unicode escape sequences",
+          "View the converted output showing Unicode code points, byte sequences, or escaped characters depending on your selected format",
+          "Copy the encoded text for use in programming, paste it into databases, or use the analysis to understand character composition and encoding",
+        ],
+        popularTools: [
+          "Code Points",
+          "UTF-8",
+          "UTF-16",
+          "UTF-32",
+          "Normalize (NFC)",
+        ],
+        advancedTips: [
+          "Use Unicode normalization (NFC or NFD) before comparing or searching text to ensure characters with multiple representations match correctly, especially for accented letters",
+          "When debugging encoding issues, convert text to code points to see the actual Unicode values and identify invisible characters or encoding corruption",
+          "Leverage the tool to find Unicode characters by pasting a character and viewing its code point, then searching Unicode databases for similar characters in the same block",
+          "For web development, use the Unicode escape sequence format to safely embed special characters in JavaScript strings without encoding issues",
+          "Combine the Unicode Converter with a hex editor when analyzing binary file encodings to understand how text is stored at the byte level",
+        ],
+        troubleshooting: [
+          {
+            issue:
+              "Converted text displays as question marks or boxes when pasted into applications",
+            solution:
+              "The target application or font doesn't support the Unicode characters you're using. Ensure the application supports Unicode (most modern apps do) and that you're using a font containing those characters. System fonts like Arial Unicode MS, Noto Sans, or similar comprehensive fonts support most Unicode ranges. For web applications, specify fallback fonts in CSS that include good Unicode coverage.",
+          },
+          {
+            issue:
+              "Text looks correct but string comparison or search functions fail to find matches",
+            solution:
+              "The text likely contains different Unicode normalization forms. Characters like 'é' can be represented as a single precomposed character (U+00E9) or as 'e' + combining acute accent (U+0065 U+0301). Use Unicode normalization (NFC or NFD) to convert text to a consistent form before comparison. In programming, use locale-aware comparison functions that handle Unicode properly.",
+          },
+          {
+            issue:
+              "UTF-8 byte sequences are incorrect or don't decode properly in other tools",
+            solution:
+              "Verify you're interpreting the bytes correctly—UTF-8 uses variable-length encoding (1-4 bytes per character). Ensure the entire byte sequence is being processed together, not split across boundaries. Some tools may show UTF-8 bytes in hexadecimal while others use decimal or octal notation. Cross-check using an authoritative UTF-8 encoding table to verify byte sequences match expected values for your characters.",
+          },
+        ],
+        detailedExamples: [
+          "A web developer notices that user-submitted text with emojis displays correctly in the browser but breaks in email notifications. They paste an emoji into the Unicode Converter and see it's composed of multiple code points (base emoji + modifiers). They discover their email system only supports UTF-8 with BMP characters. The developer implements emoji detection and conversion to ensure complex emojis are properly encoded before sending emails, preventing display issues.",
+          "A data analyst receives customer feedback data from multiple international sources and notices that searches for 'café' don't match some entries even though they look identical. Using the Unicode Converter, they analyze both strings and discover one uses precomposed 'é' (U+00E9) while the other uses 'e' + combining acute accent (U+0065 + U+0301). They apply NFC normalization to the entire dataset, standardizing all text to precomposed forms, which fixes the search functionality.",
+          "A game developer wants to allow players to use special Unicode characters in usernames for creative expression. They use the Unicode Converter to analyze which characters are safe (single code points, no combining marks) and which might cause display issues. They create a whitelist of supported Unicode blocks (Basic Latin, Latin Extended, Common symbols) and use the converter to validate usernames during account creation, preventing problematic character combinations while allowing creative expression.",
+        ],
+        link: "https://cleanformatter.com/tools/unicode/unicode-converter",
         faq: [
           {
             question: "What is the Unicode Converter tool?",
@@ -477,12 +1052,77 @@ export const toolCategories = [
             answer:
               "Typically, these tools operate online, but some desktop applications or PWA versions support offline use for convenience.",
           },
+          {
+            question:
+              "What is the difference between UTF-8, UTF-16, and UTF-32?",
+            answer:
+              "UTF-8 uses 1-4 bytes per character and is most common for web content. UTF-16 uses 2 or 4 bytes and is used by Windows and Java internally. UTF-32 uses exactly 4 bytes per character, offering simplicity but larger file sizes. UTF-8 is generally preferred for storage and transmission due to efficiency.",
+          },
+          {
+            question: "What are Unicode code points?",
+            answer:
+              "Unicode code points are unique numeric identifiers assigned to each character in the Unicode standard. They're typically represented in hexadecimal format like U+0041 for 'A' or U+1F600 for 😀. The Unicode Converter displays these code points to help you understand character encoding.",
+          },
+          {
+            question: "How do I type Unicode characters directly?",
+            answer:
+              "Methods vary by operating system: On Windows, use Alt codes or the Character Map. On Mac, use Option key combinations or the Character Viewer. On Linux, use Ctrl+Shift+U followed by the code point. The Unicode Converter helps you find the code points you need for these methods.",
+          },
         ],
       },
       {
         name: "Character Finder",
         description: "Find and insert special characters",
-        popularTools: ["Symbols", "Emojis", "Math Symbols"],
+        detailedDescription:
+          'The Character Finder is an intuitive Unicode character search and insertion tool that helps users quickly discover, preview, and copy special characters, symbols, emojis, mathematical operators, currency signs, and decorative glyphs from the complete Unicode standard. Essential for content creators, designers, writers, developers, and anyone needing special characters beyond the standard keyboard layout. This comprehensive character browser organizes over 140,000 Unicode characters into logical categories including arrows, mathematical symbols, Greek letters, punctuation marks, geometric shapes, emoji collections, currency symbols, and language-specific diacritics. Perfect for adding special characters to documents, inserting emojis into social media posts, finding mathematical notation for academic papers, locating currency symbols for financial content, discovering decorative elements for design work, and accessing technical symbols for programming documentation. The tool features powerful search by character name, category browsing, visual preview of glyphs, click-to-copy functionality, and displays character code points for technical reference. Users can search by description ("arrow", "copyright", "heart emoji"), browse by Unicode block, or filter by category to find exactly the character they need. All character lookup happens instantly in your browser without requiring special fonts or system configuration.',
+        primaryUseCases: [
+          "Finding and inserting emoji characters into social media posts, messages, and marketing content when platform native emoji pickers are unavailable",
+          "Locating mathematical symbols and operators (∑, ∫, ≠, √, ∞) for academic papers, scientific documentation, and technical writing",
+          "Discovering currency symbols beyond the dollar sign ($, €, ¥, £, ₹, ₿) for international financial content and e-commerce applications",
+          "Accessing arrow symbols, geometric shapes, and decorative characters for creating visual diagrams, flowcharts, and design elements in plain text",
+          "Finding diacritical marks and accented characters for properly spelling names and words in languages beyond your keyboard's native support",
+        ],
+        howToUse: [
+          "Browse character categories (Symbols, Emojis, Math Symbols, Currency, etc.) or use the search box to find characters by name or description",
+          "Type keywords in the search field such as 'arrow', 'heart', 'copyright', or 'sum' to filter and display matching characters",
+          "Click or tap on any character in the results to select it, which typically copies it to your clipboard automatically",
+          "Paste the copied character into your document, social media post, design file, or application using Ctrl+V (Cmd+V on Mac)",
+          "View additional information such as character name, Unicode code point, and HTML entity if you need technical reference details",
+        ],
+        popularTools: ["Symbols", "Emojis", "Math Symbols", "Currency Symbols"],
+        advancedTips: [
+          "Bookmark frequently used characters or create a personal collection in a text file for quick access without searching each time",
+          "Use the Unicode code point information to create keyboard shortcuts or text replacement rules in your operating system for characters you use regularly",
+          "Combine the Character Finder with your design software's glyph panel to ensure the character you found is supported by your chosen font",
+          "When searching, try multiple related terms if your first search doesn't find the character (e.g., try 'check', 'tick', 'checkmark', and 'approval')",
+          "For emoji variations (skin tones, gender), look for the base emoji first, then check if modifier options are available in the character details",
+        ],
+        troubleshooting: [
+          {
+            issue:
+              "Character displays as a box or question mark after copying and pasting into my document",
+            solution:
+              "The font you're using doesn't contain that character. Switch to a Unicode-compliant font with broad character support like Arial Unicode MS, Noto Sans, Segoe UI Symbol, or a specialized emoji font like Noto Color Emoji. In web applications, ensure your CSS includes appropriate fallback fonts. Some very rare Unicode characters may not be supported by any installed fonts—you may need to download a font that specifically includes that Unicode block.",
+          },
+          {
+            issue:
+              "Emoji appears in color in the Character Finder but displays as black-and-white in my application",
+            solution:
+              "Your application or system doesn't support color emoji (emoji fonts with embedded color data). This is common in older applications or certain operating systems. The emoji is still technically correct but renders as a monochrome glyph. To see color emoji, use a modern application with emoji support or ensure your system has color emoji fonts installed (like Apple Color Emoji on Mac, Segoe UI Emoji on Windows, or Noto Color Emoji on Linux).",
+          },
+          {
+            issue:
+              "Multiple similar characters appear in search results and I don't know which one to use",
+            solution:
+              "Check the character descriptions and Unicode code points to understand the differences. For example, there are multiple dash characters: hyphen (-), en dash (–), em dash (—), and minus sign (−), each with specific typographic uses. Review the character name and intended use case. For technical writing, prefer the semantically correct character; for casual use, the most common variant is usually fine. Hovering over or clicking characters often reveals additional details to help you choose.",
+          },
+        ],
+        detailedExamples: [
+          "A marketing manager creates social media posts and wants to add visual interest with emoji without using their phone's emoji keyboard. They open the Character Finder, search for 'star' and find various star symbols (★, ⭐, ✨). They click the glittering stars emoji ✨, which copies to clipboard, then paste it into their desktop social media scheduling tool. The emoji appears correctly, making their posts more engaging and visually appealing without needing to switch devices.",
+          "A mathematics professor writes lecture notes in LaTeX and needs to insert the summation symbol ∑. Rather than looking up LaTeX commands, they use the Character Finder, search for 'sum', and find the summation symbol Σ (uppercase sigma) and ∑ (n-ary summation). They copy the correct n-ary summation symbol and paste it into their word processor for quick note-taking, later converting to proper LaTeX syntax for the final document.",
+          "An e-commerce developer builds a multi-currency website and needs to display prices in various currencies. Using the Character Finder, they search 'currency' and discover symbols they weren't aware of: Indian Rupee (₹), Bitcoin (₿), Turkish Lira (₺). They copy the relevant currency code points and implement them in their website's CSS and JavaScript, ensuring proper currency symbol display for international customers.",
+        ],
+        link: "https://cleanformatter.com/tools/unicode/character-finder",
         faq: [
           {
             question: "What is the Character Finder tool?",
@@ -514,12 +1154,79 @@ export const toolCategories = [
             answer:
               "Yes, the Character Finder tool is designed to be mobile-friendly and works well across desktop and mobile browsers.",
           },
+          {
+            question:
+              "How many characters are available in the Character Finder?",
+            answer:
+              "The Character Finder provides access to thousands of Unicode characters including the complete emoji set, mathematical symbols, arrows, geometric shapes, currency symbols, and characters from dozens of world languages and historical scripts.",
+          },
+          {
+            question:
+              "Can I search for characters by description instead of name?",
+            answer:
+              "Yes, most Character Finders support descriptive searches. For example, searching 'happy face' will show various smiley emoji, and 'check' will show checkmark symbols. Try different related terms if your first search doesn't find what you need.",
+          },
+          {
+            question:
+              "What's the difference between similar-looking characters?",
+            answer:
+              "Unicode includes many visually similar characters with different semantic meanings. For example, there are multiple dash types (hyphen, en dash, em dash, minus sign) and different space widths. The Character Finder usually displays character names and code points to help you distinguish between them and choose the appropriate one for your use case.",
+          },
         ],
       },
       {
         name: "Text Analysis",
         description: "Analyze Unicode text properties",
+        detailedDescription:
+          "The Text Analysis tool is a comprehensive Unicode character inspection and diagnostic utility that examines text at the character level to reveal hidden properties, encoding details, invisible characters, script composition, and potential compatibility issues. Essential for developers debugging encoding problems, linguists analyzing multilingual text, security professionals detecting malicious Unicode, and content creators ensuring text displays correctly across platforms. This advanced analyzer provides detailed information about each character including Unicode code points, character names, Unicode blocks, script classifications, general categories (letter, number, punctuation, etc.), bidirectional text properties, combining character sequences, normalization forms, and byte-level encoding representations in UTF-8, UTF-16, and UTF-32. Perfect for identifying invisible characters causing bugs, detecting homograph attacks in domain names, analyzing mixed-script text, understanding emoji composition, troubleshooting database encoding issues, and verifying text normalization. The tool highlights potentially problematic characters including zero-width spaces, direction override characters, deprecated Unicode points, and visually similar characters from different scripts that could be used in phishing attacks. All analysis happens client-side ensuring sensitive text data remains completely private.",
+        primaryUseCases: [
+          "Detecting invisible or zero-width characters in text that cause unexpected behavior in applications, search functions, or string comparisons",
+          "Analyzing mixed-script text to identify characters from different writing systems that might indicate security issues like homograph attacks in URLs",
+          "Troubleshooting text encoding issues by examining byte-level UTF-8/UTF-16/UTF-32 representations to identify corruption or incorrect encoding",
+          "Understanding emoji composition by revealing base characters, skin tone modifiers, gender variants, and zero-width joiners used in complex emoji sequences",
+          "Validating text normalization by comparing NFC, NFD, NFKC, and NFKD forms to ensure consistent character representation for database storage and comparison",
+        ],
+        howToUse: [
+          "Paste or type text containing characters you want to analyze into the Text Analysis tool's input area",
+          "View the detailed character-by-character breakdown showing each character's name, code point, category, and script in the analysis results",
+          "Review encoding information displayed for each character, including UTF-8 byte sequences and alternative Unicode representations",
+          "Check for warnings about invisible characters, direction overrides, deprecated code points, or mixed scripts that might cause problems",
+          "Use the export or copy function to save the analysis results for documentation, bug reports, or sharing with team members",
+        ],
         popularTools: ["Character Info", "Encoding Info", "Script Info"],
+        advancedTips: [
+          "Use the tool to create Unicode character whitelists for input validation by analyzing legitimate text samples and noting their character categories and scripts",
+          "Compare analysis results before and after text normalization to understand how NFC/NFD transformations affect character composition in your data",
+          "Leverage script detection to implement language-specific text processing rules, font selection, or input validation based on writing system",
+          "Analyze problematic user input that passes validation but causes display issues by examining for invisible characters, direction overrides, or encoding corruption",
+          "Document Unicode character usage patterns in your application by analyzing sample text and creating a character inventory for font selection and testing",
+        ],
+        troubleshooting: [
+          {
+            issue:
+              "Text appears normal but search or comparison functions fail to match identical-looking strings",
+            solution:
+              "Use the Text Analysis tool to examine both strings character-by-character. Look for differences in Unicode normalization forms (NFC vs NFD), invisible characters (zero-width spaces, zero-width joiners), or visually identical characters from different scripts (homoglyphs). The analyzer will reveal these hidden differences. Normalize both strings to the same form (NFC or NFD) before comparison, or use Unicode-aware comparison functions that handle these variations automatically.",
+          },
+          {
+            issue:
+              "Text displays incorrectly with unexpected characters or garbled output after database storage or API transmission",
+            solution:
+              "Analyze the corrupted text to see how characters are being represented. Common issues include UTF-8 data treated as Latin-1 (producing mojibake like 'Ã©' for 'é'), truncated multi-byte sequences, or double-encoding. The tool's encoding information shows expected vs actual byte sequences. Fix by ensuring consistent UTF-8 encoding throughout your data pipeline: database columns should be UTF-8, API content-type headers should specify UTF-8, and file operations should use UTF-8 encoding explicitly.",
+          },
+          {
+            issue:
+              "Security warnings appear about suspicious characters but the text looks normal to users",
+            solution:
+              "The Text Analysis tool may have detected homograph attacks (visually similar characters from different scripts, like Cyrillic 'а' vs Latin 'a'), invisible direction override characters, or other Unicode security issues. These are invisible to users but can be exploited for phishing or bypassing filters. Review the character details to understand which specific characters are flagged. Implement input validation that restricts text to expected scripts, rejects invisible formatting characters in contexts where they're inappropriate, and normalizes text before display or comparison.",
+          },
+        ],
+        detailedExamples: [
+          "A web developer receives bug reports that users can't log in even though they're entering the correct username. Using the Text Analysis tool, they analyze a failing username and discover it contains a zero-width space character (U+200B) invisible to users but treated as part of the username. The developer implements input sanitization that removes invisible characters during registration and login, fixing the issue and preventing similar problems with email addresses and other user input.",
+          "A security engineer analyzes a suspicious domain name that looks like 'paypal.com' but doesn't match the legitimate site. The Text Analysis tool reveals several characters are actually Cyrillic letters that look identical to Latin letters (а, е, о are Cyrillic, not Latin). This is a homograph attack attempting to phish users. The engineer documents the specific Unicode characters used and implements detection logic that checks for mixed-script domain names and warns users about potential phishing attempts.",
+          "A database administrator migrates text data from an old system and notices some customer names display incorrectly. Using the Text Analysis tool, they analyze affected names and discover they're stored in NFD normalization (decomposed form with separate combining characters) but the new system expects NFC (precomposed characters). For example, 'José' is stored as 'J', 'o', 's', 'e', combining acute accent instead of 'J', 'o', 's', 'é'. They run a normalization script to convert all text to NFC before migration, ensuring consistent display and comparison in the new database.",
+        ],
+        link: "https://cleanformatter.com/tools/unicode/text-analysis",
         faq: [
           {
             question: "What is the Text Analysis tool?",
@@ -559,6 +1266,22 @@ export const toolCategories = [
             answer:
               "Yes, the tool supports multilingual Unicode text, making it effective for text analysis across diverse languages and scripts.",
           },
+          {
+            question:
+              "What are homograph attacks and how does the tool detect them?",
+            answer:
+              "Homograph attacks use visually similar characters from different scripts (like Cyrillic 'а' vs Latin 'a') to create deceptive text, often in phishing URLs. The Text Analysis tool detects these by showing the actual Unicode code point and script for each character, revealing when visually identical characters are actually from different writing systems.",
+          },
+          {
+            question: "What are zero-width characters and why do they matter?",
+            answer:
+              "Zero-width characters like zero-width space (U+200B), zero-width joiner (U+200D), and zero-width non-joiner (U+200C) are invisible but can affect text processing, search, and comparison. The Text Analysis tool makes these visible by displaying their presence and properties, helping you identify why strings that look identical don't match or why text behaves unexpectedly.",
+          },
+          {
+            question: "How can I use the tool to fix mojibake (garbled text)?",
+            answer:
+              "Mojibake occurs when text encoded in one character set is incorrectly interpreted as another. The Text Analysis tool shows you the actual bytes and Unicode code points, helping identify the encoding mismatch. Common patterns like 'Ã©' for 'é' indicate UTF-8 interpreted as Latin-1. Use the analysis to determine the correct source encoding, then re-decode the data properly.",
+          },
         ],
       },
     ],
@@ -571,7 +1294,61 @@ export const toolCategories = [
       {
         name: "Base64",
         description: "Encode/decode Base64",
-        popularTools: ["Standard Base64", "URL-safe Base64", "File Upload"],
+        detailedDescription:
+          "The Base64 Encoder/Decoder is an essential data encoding conversion tool that transforms binary data and text into ASCII-safe Base64 format and vice versa, enabling safe transmission and storage of binary content in text-only systems. Critical for web developers embedding images in HTML/CSS, API developers sending binary data in JSON, email systems handling attachments, and anyone working with data URIs or encoded credentials. Base64 encoding converts binary data (images, files, encrypted data) into a text representation using only 64 ASCII characters (A-Z, a-z, 0-9, +, /), making it safe for transmission through systems that only handle text, such as JSON APIs, XML files, email protocols, and URLs. While not encryption or security, Base64 ensures data integrity during transmission by avoiding interpretation issues with special characters or binary data. Perfect for creating data URIs for embedded images, encoding API authentication tokens, preparing email attachments, storing binary data in JSON/XML, and converting files for web-safe transmission. The tool supports standard Base64 encoding, URL-safe Base64 variant (using - and _ instead of + and /), and handles large files efficiently with proper chunking. Common applications include embedding small images directly in CSS or HTML, encoding JWT tokens for authentication, transmitting binary files through REST APIs, storing certificates and keys in configuration files, and creating mailto links with encoded attachments. All encoding and decoding happens client-side ensuring complete privacy for sensitive data.",
+        primaryUseCases: [
+          "Embedding small images (icons, logos) directly into HTML or CSS files as data URIs to reduce HTTP requests and improve page load times",
+          "Encoding API authentication tokens (like JWTs) for secure transmission in HTTP headers or URL query parameters",
+          "Preparing email attachments by encoding binary files into Base64 format for inclusion in MIME email messages",
+          "Storing binary data (images, documents) in JSON or XML files by converting them to Base64 strings for text-only storage systems",
+          "Converting files (images, documents, binaries) to Base64 for safe transmission over text-based protocols like HTTP, WebSockets, or form submissions",
+        ],
+        howToUse: [
+          "For encoding: Paste your text or upload a file (image, document, binary data) into the Base64 encoder input area",
+          "Click the 'Encode to Base64' button to convert your data into Base64 ASCII-safe text format",
+          "Copy the Base64 encoded string from the output area for use in your HTML, API calls, configuration files, or data storage",
+          "For decoding: Paste the Base64 encoded string into the decoder input area",
+          "Click 'Decode from Base64' to convert back to original text or download the decoded binary file (for images, documents, etc.)",
+        ],
+        popularTools: [
+          "Standard Base64",
+          "URL-safe Base64",
+          "ASCII",
+          "ISO-8859-1",
+        ],
+        advancedTips: [
+          "Use URL-safe Base64 encoding (replacing + with - and / with _) when the encoded string will be used in URLs or filenames to avoid character encoding issues",
+          "For large files, be aware that Base64 encoding increases size by approximately 33%, so consider alternatives like direct binary transmission for very large files",
+          "When embedding Base64 images in CSS or HTML, include the appropriate data URI scheme (data:image/png;base64, or data:image/jpeg;base64,) before the encoded string",
+          "Cache Base64 encoded data when possible since encoding large files can be CPU-intensive, especially in browsers with performance limitations",
+          "Verify Base64 string integrity by checking that the length is a multiple of 4 characters (padding with = is used to achieve this)",
+        ],
+        troubleshooting: [
+          {
+            issue:
+              "Decoded image or file is corrupted or won't open after Base64 decoding",
+            solution:
+              "Ensure you copied the complete Base64 string including any padding characters (=) at the end. Missing even one character will corrupt the entire file. Verify there are no extra spaces, line breaks, or characters inserted during copy-paste. If the Base64 string was extracted from a data URI, make sure you removed the prefix (data:image/png;base64,) before decoding. For large files, check that your browser didn't truncate the string due to input field limitations—you may need to use file upload instead of paste.",
+          },
+          {
+            issue:
+              "Base64 encoded string contains + and / characters that break when used in URLs",
+            solution:
+              "Standard Base64 uses + and / characters which have special meaning in URLs and need escaping. Switch to URL-safe Base64 encoding which replaces + with - (hyphen) and / with _ (underscore), making the encoded string safe for use in URLs, filenames, and query parameters without additional escaping. Most Base64 tools offer a URL-safe variant option.",
+          },
+          {
+            issue:
+              "Encoding very large files causes browser to freeze or crash",
+            solution:
+              "Base64 encoding large files (>10MB) in the browser can consume significant memory since JavaScript must load the entire file into memory. For large files, consider server-side encoding, or use streaming/chunked encoding if your Base64 tool supports it. Alternatively, reconsider whether Base64 is the right approach—for large binary data, direct binary uploads or multipart form data may be more efficient than Base64 encoding.",
+          },
+        ],
+        detailedExamples: [
+          "A frontend developer needs to display a small company logo on every page without making separate HTTP requests. They convert the 5KB PNG logo to Base64 using the encoder tool, then embed it directly in their CSS: background-image: url(data:image/png;base64,iVBORw0KG...). This eliminates one HTTP request, slightly improving page load time. The 33% size increase is acceptable for small images, and the Base64 string is cached with the CSS file.",
+          "An API developer builds a REST API that needs to send PDF documents as JSON responses. Since JSON doesn't support binary data natively, they read each PDF file, encode it to Base64, and include it in the JSON response as a string field. The frontend application receives the JSON, extracts the Base64 string, decodes it back to binary, and creates a downloadable PDF file for the user. This allows seamless PDF transmission through a JSON-only API architecture.",
+          "A DevOps engineer needs to store SSL certificates in a YAML configuration file for Kubernetes deployment. YAML is text-only and doesn't handle multi-line certificates well. They use the Base64 encoder to convert the certificate and private key files into Base64 strings, then include these strings in the YAML file. During deployment, the application decodes the Base64 strings back to certificate files, enabling secure certificate management within text-based configuration systems.",
+        ],
+        link: "https://cleanformatter.com/tools/encode-decode/base64",
         faq: [
           {
             question: "What is Base64 encoding?",
@@ -581,28 +1358,28 @@ export const toolCategories = [
           {
             question: "Why do we use Base64 encoding?",
             answer:
-              "It’s mainly used to encode data like images, files, or credentials into a text format that won’t break during data transmission. Think of it as a “safe packaging” for binary data.",
+              "It's mainly used to encode data like images, files, or credentials into a text format that won't break during data transmission. Think of it as a 'safe packaging' for binary data.",
           },
           {
             question: "How do I use this Base64 Encoder/Decoder tool?",
             answer:
-              "Simply paste your Base64 string into the “Decode” input box and hit Decode. The tool will instantly convert it back to readable text or file data.",
+              "Simply paste your Base64 string into the 'Decode' input box and hit Decode. The tool will instantly convert it back to readable text or file data.",
           },
           {
             question: "Is Base64 encryption secure?",
             answer:
-              "Nope — Base64 is not encryption, it’s just encoding. It doesn’t protect data, it only changes how it looks. Anyone can decode Base64 easily.",
+              "Nope — Base64 is not encryption, it's just encoding. It doesn't protect data, it only changes how it looks. Anyone can decode Base64 easily.",
           },
           {
             question:
-              "What’s the difference between Base64 encoding and hashing?",
+              "What's the difference between Base64 encoding and hashing?",
             answer:
               "Encoding (like Base64) is reversible, hashing (like SHA-256) is not. Base64 is used for data representation, while hashing is used for data integrity or security.",
           },
           {
             question: "Can I encode images or files using this tool?",
             answer:
-              "Yes! Just upload or paste the Base64 string of your image or file, and you’ll get the encoded or decoded result instantly.",
+              "Yes! Just upload or paste the Base64 string of your image or file, and you'll get the encoded or decoded result instantly.",
           },
           {
             question: "What are common use cases for Base64 encoding?",
@@ -612,7 +1389,7 @@ export const toolCategories = [
           {
             question: "Does Base64 increase the data size?",
             answer:
-              "Yes — Base64 encoding expands data size by roughly 33%. It’s a tradeoff for safe text-based transport.",
+              "Yes — Base64 encoding expands data size by roughly 33%. It's a tradeoff for safe text-based transport.",
           },
           {
             question: "Is my data private when using this tool?",
@@ -624,12 +1401,70 @@ export const toolCategories = [
             answer:
               "Developers, data analysts, and anyone dealing with encoded text, web APIs, or file conversions can benefit from it.",
           },
+          {
+            question: "What is URL-safe Base64 encoding?",
+            answer:
+              "URL-safe Base64 replaces characters that have special meaning in URLs (+ becomes -, / becomes _) making the encoded string safe for use in URLs, query parameters, and filenames without additional escaping.",
+          },
+          {
+            question: "Can I encode password or sensitive data with Base64?",
+            answer:
+              "While you can encode sensitive data with Base64, remember it's NOT encryption. Base64 encoded data can be decoded by anyone instantly. For security, use proper encryption algorithms (AES, RSA) before Base64 encoding if needed for transport.",
+          },
         ],
       },
       {
         name: "URL Encoding",
         description: "Encode/decode URLs",
+        detailedDescription:
+          "The URL Encoding tool is a specialized web development utility that converts special characters, spaces, and reserved symbols in URLs into percent-encoded format (%20, %3A, etc.) ensuring safe transmission and proper interpretation by web servers and browsers. Essential for web developers building APIs, frontend developers handling query parameters, SEO professionals managing URL structures, and anyone working with web links containing special characters. URL encoding (also called percent-encoding or URI encoding) transforms characters that have special meaning in URLs or aren't safe for transmission into a format using % followed by hexadecimal values. Critical for encoding spaces, non-ASCII characters, reserved characters (&, =, ?, #, /), and special symbols in URL paths, query strings, and form data. Perfect for preparing search queries with special characters, encoding international domain names, formatting GET request parameters, creating shareable links with complex data, and ensuring cross-browser URL compatibility. The tool supports both component encoding (encodes everything including /, :, etc.) and URI encoding (preserves URL structure characters), handles bulk URL processing for batch operations, and properly encodes Unicode characters for international URLs. Common use cases include encoding search terms for query strings, formatting data for GET requests, preparing URLs for social media sharing, and ensuring URL validity across different systems and character sets.",
+        primaryUseCases: [
+          "Encoding search queries and form data for GET request URLs, converting spaces to %20 and special characters to percent-encoded equivalents",
+          "Preparing URLs with international characters (Chinese, Arabic, emoji) for cross-browser compatibility and proper server interpretation",
+          "Formatting query string parameters containing special characters (&, =, ?) that would otherwise break URL parsing",
+          "Creating shareable links with encoded data in URL parameters for email campaigns, social media posts, and marketing materials",
+          "Encoding redirect URLs and callback parameters in OAuth flows and authentication systems where URLs are passed as parameters",
+        ],
+        howToUse: [
+          "Paste or type your URL or text containing special characters into the URL encoding tool's input field",
+          "Select encoding type: Component Encoding (encodes all special characters) or URI Encoding (preserves URL structure like :// and /)",
+          "Click 'Encode URL' to convert special characters to percent-encoded format (%20 for space, %2F for /, etc.)",
+          "For decoding: Paste a percent-encoded URL and click 'Decode URL' to convert back to readable format with original characters",
+          "Copy the encoded or decoded URL for use in your web applications, APIs, HTML links, or browser address bar",
+        ],
         popularTools: ["URI Encoding", "Component Encoding", "Bulk Processing"],
+        advancedTips: [
+          "Use encodeURIComponent() in JavaScript for encoding individual parameter values, and encodeURI() for encoding complete URLs while preserving URL structure",
+          "When building query strings manually, encode parameter values individually before concatenating with & and = to avoid double-encoding issues",
+          "Be aware that some characters like spaces can be encoded as both %20 and + depending on context (+ is common in form data, %20 in paths)",
+          "For international URLs (non-ASCII), ensure your server and application properly handle UTF-8 encoded URLs throughout the entire request pipeline",
+          "When decoding URLs, apply decoding only once—multiple decoding passes can cause errors or security vulnerabilities with specially crafted inputs",
+        ],
+        troubleshooting: [
+          {
+            issue:
+              "Encoded URL doesn't work or returns 404 errors when accessed",
+            solution:
+              "Verify you encoded only the parts that need encoding (query parameters, path segments) and not the entire URL including protocol (https://) and domain. Use URI encoding for full URLs (preserves structure) and component encoding only for individual parameters. Also check that your server properly decodes URLs—some servers require specific configuration for UTF-8 URL support.",
+          },
+          {
+            issue:
+              "Special characters appear as %XX codes in the browser address bar or links",
+            solution:
+              "This is normal and expected—browsers display percent-encoded URLs in the address bar but automatically decode them when displaying page content. Modern browsers show human-readable versions in the UI but use encoded versions when transmitting. If you need human-readable URLs everywhere, consider using URL slugs with hyphens instead of special characters in your URL design.",
+          },
+          {
+            issue: "Plus signs (+) in URLs are decoded as spaces or vice versa",
+            solution:
+              "The + character has special meaning in query strings (application/x-www-form-urlencoded format) where it represents a space, but in other contexts it should be encoded as %2B. When encoding spaces, use %20 in URL paths and either %20 or + in query strings depending on your server's expectations. Be consistent throughout your application and test with your specific server environment.",
+          },
+        ],
+        detailedExamples: [
+          "A developer builds a search feature where users can search for phrases containing special characters. A user searches for 'Rock & Roll' which contains an ampersand that would break the URL query string. The developer uses URL encoding to convert the search term to 'Rock%20%26%20Roll' before appending it to the search URL: /search?q=Rock%20%26%20Roll. The server receives the encoded URL, decodes it properly, and returns search results for the complete phrase including the ampersand.",
+          "An e-commerce site needs to create shareable product links for social media that include the product name in the URL for SEO purposes. A product named 'Coffee Table (48\"x24\")' contains parentheses and quotes that aren't URL-safe. The developer encodes the product name to 'Coffee%20Table%20%2848%22x24%22%29' creating a valid URL: /products/Coffee%20Table%20%2848%22x24%22%29 that works across all platforms and browsers without breaking link parsing.",
+          "A web application implements OAuth authentication where the callback URL must be passed as a parameter to the authorization server. The callback URL itself is 'https://myapp.com/auth/callback?session=abc123' which contains special characters. The developer encodes the entire callback URL using component encoding, resulting in 'https%3A%2F%2Fmyapp.com%2Fauth%2Fcallback%3Fsession%3Dabc123' and passes it as: authorize?redirect_uri=https%3A%2F%2Fmyapp.com%2Fauth%2Fcallback%3Fsession%3Dabc123. This prevents the authorization server from misinterpreting the callback URL's query parameters.",
+        ],
+        link: "https://cleanformatter.com/tools/encode-decode/url-encoding",
         faq: [
           {
             question: "What is the URL Encoding tool?",
@@ -667,12 +1502,72 @@ export const toolCategories = [
             answer:
               "Currently, the URL Encoding tool requires an internet connection as it functions within your web browser.",
           },
+          {
+            question: "What characters need to be URL encoded?",
+            answer:
+              "Characters that should be encoded include spaces, reserved characters (& = ? # / : @), non-ASCII characters (Chinese, Arabic, emoji), and control characters. Safe characters include letters (A-Z, a-z), numbers (0-9), and a few symbols like - _ . ~",
+          },
+          {
+            question:
+              "Can I encode international domain names (IDN) with this tool?",
+            answer:
+              "Yes, the URL Encoding tool can encode international characters in URLs. However, full IDN support requires Punycode encoding for domain names themselves, which is a different process from percent-encoding paths and parameters.",
+          },
         ],
       },
       {
         name: "HTML Entities",
         description: "Convert HTML entities",
+        detailedDescription:
+          "The HTML Entities tool is a comprehensive character conversion utility that encodes special characters into HTML entity codes (named, numeric, or hexadecimal) and decodes them back to original characters, ensuring proper display and preventing XSS security vulnerabilities in web content. Essential for web developers building secure applications, content managers working with CMS platforms, email template designers, and anyone embedding user-generated content in HTML documents. HTML entities are special codes that represent characters with special meaning in HTML (like <, >, &, quotes) or characters not easily typed on keyboards (©, €, ™, accented letters). By converting these characters to entities (&lt; for <, &copy; for ©, &#8364; for €), you ensure they display correctly without being interpreted as HTML markup. Perfect for preventing XSS attacks by escaping user input, displaying code snippets in HTML without execution, rendering special characters and symbols correctly across all browsers, preparing content for XML and RSS feeds, and ensuring email HTML compatibility. The tool supports named entities (&amp;, &lt;, &gt;), decimal numeric entities (&#169;), and hexadecimal entities (&#xA9;), with comprehensive coverage of HTML5 entity specifications including mathematical symbols, Greek letters, arrows, and special punctuation marks. All conversions happen client-side ensuring privacy for sensitive content.",
+        primaryUseCases: [
+          "Escaping user-generated content before displaying in HTML to prevent cross-site scripting (XSS) attacks and injection vulnerabilities",
+          "Displaying HTML code examples and snippets on web pages without the browser interpreting them as actual markup",
+          "Converting special characters and symbols (©, ®, ™, €, mathematical symbols) to HTML entities for reliable cross-browser display",
+          "Preparing content for XML, RSS feeds, and email HTML where certain characters must be encoded to prevent parsing errors",
+          "Ensuring proper display of multilingual content with accented characters and diacritics in older browsers or limited character set environments",
+        ],
+        howToUse: [
+          "For encoding: Paste text containing special characters (< > & \" ') or symbols (© € ™) into the HTML Entities encoder input",
+          "Select encoding format: Named Entities (&lt;), Decimal Entities (&#60;), or Hexadecimal Entities (&#x3C;)",
+          "Click 'Encode to HTML Entities' to convert special characters into their entity equivalents for safe use in HTML",
+          "For decoding: Paste HTML containing entity codes into the decoder input area",
+          "Click 'Decode HTML Entities' to convert entity codes back to readable characters for editing or plain text export",
+        ],
         popularTools: ["Named Entities", "Numeric Entities", "Hex Entities"],
+        advancedTips: [
+          "Always encode user input before inserting into HTML to prevent XSS attacks—treat all user data as potentially malicious and encode < > & \" '",
+          "Use named entities (&amp;, &lt;) for common characters when readability of HTML source code matters, numeric entities for less common symbols",
+          "When displaying code snippets, encode the entire code block rather than selectively encoding to avoid missing special characters",
+          "For XML and RSS feeds, encode & < > \" ' as they're the five special characters that must always be escaped in XML",
+          "Modern HTML5 supports many named entities (over 2,000), but for maximum compatibility with older systems, use numeric entities for uncommon symbols",
+        ],
+        troubleshooting: [
+          {
+            issue:
+              "HTML entities display as literal text (&lt;div&gt;) instead of rendering as characters (<div>)",
+            solution:
+              "This occurs when HTML entities are double-encoded or when displaying HTML in plain text contexts. Verify you're inserting the entity-encoded text into actual HTML (inside .innerHTML or HTML files), not text nodes or text areas. If entities show literally in the browser, check that your HTML isn't being treated as plain text—view page source to confirm. For display in text areas or plain text, decode entities first before insertion.",
+          },
+          {
+            issue:
+              "Some special characters still display incorrectly even after encoding to HTML entities",
+            solution:
+              "Ensure your HTML document has proper character encoding declared with <meta charset='UTF-8'> in the head section. Some symbols may require specific fonts that support those Unicode ranges—verify the font family in your CSS includes glyphs for the characters you're using. For very rare Unicode characters, consider using numeric entities instead of named entities which may not be recognized by all browsers.",
+          },
+          {
+            issue:
+              "Apostrophes and quotes break JavaScript strings when HTML is inserted dynamically",
+            solution:
+              "When inserting HTML-entity-encoded content into JavaScript strings, you need both JavaScript escaping and HTML entity encoding. For example, encode quotes as &quot; or &#39; in HTML, and additionally escape them for JavaScript context. Better approach: use DOM methods like createElement and textContent which handle escaping automatically, or use template literals with proper sanitization libraries.",
+          },
+        ],
+        detailedExamples: [
+          "A web developer builds a comments section where users can post messages. To prevent XSS attacks, they encode all user input before displaying. When a user posts '<script>alert(\"hacked\")</script>', the developer's code encodes it to '&lt;script&gt;alert(&quot;hacked&quot;)&lt;/script&gt;' before inserting into the page HTML. The browser displays the text literally rather than executing the script, protecting other users from malicious code injection.",
+          'A technical blogger writes tutorials teaching HTML and needs to display code examples in their blog posts. They write a code snippet: <div class="container">Hello World</div>. Using the HTML Entities tool, they encode it to: &lt;div class=&quot;container&quot;&gt;Hello World&lt;/div&gt;, then wrap it in <code> tags. Readers see the actual HTML code as text rather than the browser rendering a div element.',
+          "An e-commerce site displays product descriptions that include special characters like copyright symbols, currency signs, and trademark symbols: 'Price: €99.99 © 2024 Brand™'. To ensure these symbols display correctly across all browsers and email clients, the developer encodes them to: 'Price: &euro;99.99 &copy; 2024 Brand&trade;'. This guarantees consistent display regardless of the user's browser, email client, or device character set support.",
+        ],
+        link: "https://cleanformatter.com/tools/encode-decode/html-entities",
         faq: [
           {
             question: "What is the HTML Entities tool?",
@@ -710,10 +1605,27 @@ export const toolCategories = [
             answer:
               "Yes, the tool efficiently handles large texts, making it suitable for web developers and content editors working on sizable documents.",
           },
+          {
+            question: "What is XSS and how do HTML entities prevent it?",
+            answer:
+              "XSS (Cross-Site Scripting) is a security vulnerability where attackers inject malicious scripts into web pages. By encoding special characters like < and > as &lt; and &gt;, HTML entities prevent user input from being interpreted as executable code, protecting your site from XSS attacks.",
+          },
+          {
+            question: "Should I encode all special characters or just some?",
+            answer:
+              "At minimum, always encode the five XML-special characters: < > & \" ' (less than, greater than, ampersand, double quote, single quote). These are essential for security and proper HTML parsing. Other characters like © or € can be encoded for compatibility but aren't strictly required in UTF-8 documents.",
+          },
+          {
+            question:
+              "What's the difference between named and numeric entities?",
+            answer:
+              "Named entities (&copy;, &euro;) are memorable and readable in HTML source code but limited in number. Numeric entities (&#169;, &#8364;) can represent any Unicode character and are universally supported. Hexadecimal entities (&#xA9;) are similar to numeric but use base-16 notation. Use named entities for common characters and numeric for everything else.",
+          },
         ],
       },
     ],
   },
+
   {
     name: "Random Generator",
     description: "Generate random text and data",
@@ -722,7 +1634,53 @@ export const toolCategories = [
       {
         name: "Text Generator",
         description: "Generate random text",
+        detailedDescription:
+          "The Text Generator tool is a versatile utility that creates random placeholder text for design mockups, testing, and content generation. It supports various text types including Lorem Ipsum, random words, and complete sentences to suit different project needs. Ideal for designers, developers, and writers needing quick filler text without the hassle of manual creation. The tool generates coherent placeholder text that mimics natural language patterns, making it perfect for visual layouts, UI/UX prototypes, and content testing. Users can customize the length and type of generated text to fit specific requirements. All text generation happens client-side ensuring privacy and security of your data.",
+        primaryUseCases: [
+          "Creating Lorem Ipsum placeholder text for website and app design mockups to visualize layouts without real content",
+          "Generating random words or phrases for testing search functionality, autocomplete features, or input fields in applications",
+          "Producing sample sentences for UI/UX prototypes to demonstrate how text will appear in various components like cards, modals, and tooltips",
+          "Filling content gaps in wireframes and prototypes quickly without needing to write actual text",
+          "Assisting writers and content creators by providing random text snippets for brainstorming, idea generation, or overcoming writer's block",
+        ],
+        howToUse: [
+          "Select the type of text you want to generate: Lorem Ipsum, random words, or sentences",
+          "Specify the desired length or number of words/sentences to generate according to your project needs",
+          "Click the 'Generate Text' button to create the random placeholder text",
+          "Copy the generated text from the output area for use in your design mockups, prototypes, or testing scenarios",
+        ],
         popularTools: ["Lorem Ipsum", "Words", "Sentences"],
+        advancedTips: [
+          "Use Lorem Ipsum for traditional placeholder text that resembles natural language structure, ideal for most design mockups",
+          "Choose random words when testing search functionalities or input fields where specific word patterns are not required",
+          "Select complete sentences to visualize how text will appear in UI components like cards, modals, and tooltips",
+          "Adjust the length of generated text to match the expected content size in your design, ensuring accurate layout representation",
+          "Combine different types of generated text (words and sentences) to create varied content for more comprehensive testing scenarios",
+        ],
+        troubleshooting: [
+          {
+            issue: "Generated text doesn't fit well in my design layout",
+            solution:
+              "Adjust the length of the generated text to better match the expected content size in your design. Experiment with different types of text (Lorem Ipsum, words, sentences) to find the best fit for your layout requirements.",
+          },
+          {
+            issue: "The generated text feels too repetitive or lacks variety",
+            solution:
+              "Try generating a larger amount of text or using different generation types to increase variety. If using Lorem Ipsum, consider mixing in random words or sentences to create a more diverse content sample.",
+          },
+          {
+            issue:
+              "I need specific types of words or phrases in the generated text",
+            solution:
+              "While the tool generates random text, you can manually edit the output to include specific words or phrases as needed. Alternatively, use the random words option to generate a list of words that you can customize further.",
+          },
+        ],
+        detailedExamples: [
+          "A UI/UX designer is creating a new mobile app prototype and needs placeholder text to visualize how content will appear in various screens. They use the Text Generator tool to create Lorem Ipsum text that fits the design layout, allowing stakeholders to focus on the visual aspects without being distracted by real content.",
+          "A developer is testing the search functionality of a web application and requires random words to simulate user input. They generate a list of random words using the Text Generator tool, which helps them evaluate how the search algorithm handles different inputs and ensures robust performance.",
+          "A content writer is experiencing writer's block and needs inspiration for new ideas. They use the Text Generator tool to produce random sentences, which sparks creativity and helps them overcome the hurdle by providing fresh text snippets to build upon.",
+        ],
+        link: "https://cleanformatter.com/tools/random-generator/text-generator",
         faq: [
           {
             question: "What is the Text Generator tool?",
@@ -765,7 +1723,52 @@ export const toolCategories = [
       {
         name: "Password Generator",
         description: "Generate secure passwords",
+        detailedDescription:
+          "The Password Generator tool is a robust utility that creates secure, random passwords to help protect your online accounts from hacking and unauthorized access. It offers various password types including strong complex passwords, memorable phrases, and numeric PINs to cater to different security and usability needs. Ideal for individuals, IT professionals, and organizations looking to enhance their cybersecurity practices by using strong, unique passwords. The tool generates passwords using randomization algorithms that include uppercase and lowercase letters, numbers, and special characters to ensure unpredictability. Users can customize password length and complexity based on their specific requirements. All password generation occurs client-side, ensuring your sensitive data remains private and secure.",
+        primaryUseCases: [
+          "Creating strong, complex passwords for online accounts to enhance security against brute-force attacks and unauthorized access",
+          "Generating memorable passwords using phrases that are easier to recall while still maintaining a good level of security",
+          "Producing numeric PINs for devices, banking apps, or two-factor authentication systems where numeric codes are required",
+          "Assisting IT professionals and organizations in implementing robust password policies by providing unique, random passwords for employees",
+          "Helping individuals avoid password reuse by generating different passwords for each account, reducing the risk of credential stuffing attacks",
+        ],
+        howToUse: [
+          "Select the type of password you want to generate: Strong complex password, memorable phrase, or numeric PIN",
+          "Specify the desired length and complexity options (e.g., inclusion of uppercase letters, numbers, special characters) based on your security needs",
+          "Copy the generated password from the output area for use in your online accounts, applications, or devices",
+        ],
         popularTools: ["Strong", "Memorable", "PIN"],
+        advancedTips: [
+          "Use strong complex passwords that combine uppercase and lowercase letters, numbers, and special characters for maximum security",
+          "Choose memorable phrases that are easy to recall but still contain a mix of character types to balance usability and security",
+          "For numeric PINs, select a length of at least 6 digits to reduce the risk of guessing attacks",
+          "Avoid using common words or patterns in passwords, as these can be easily cracked by attackers using dictionary attacks",
+          "Regularly update your passwords and avoid reusing them across multiple accounts to minimize the impact of potential breaches",
+        ],
+        troubleshooting: [
+          {
+            issue: "Generated passwords are too weak or predictable",
+            solution:
+              "Ensure you select the appropriate complexity options when generating passwords. Use a mix of character types (uppercase, lowercase, numbers, special characters) and choose a longer length for stronger security.",
+          },
+          {
+            issue: "I have trouble remembering the generated passwords",
+            solution:
+              "Consider using the memorable phrase option, which creates passwords that are easier to recall. You can also use password managers to securely store and manage your passwords, allowing you to use strong, unique passwords without needing to remember them all.",
+          },
+          {
+            issue:
+              "I need passwords that comply with specific organizational policies",
+            solution:
+              "Customize the password generation settings to meet your organization's requirements, such as minimum length and character type inclusion. If necessary, generate multiple passwords and select those that best fit the policy criteria.",
+          },
+        ],
+        detailedExamples: [
+          "An individual is creating a new online account and wants to ensure their password is secure. They use the Password Generator tool to create a strong complex password that includes a mix of uppercase letters, lowercase letters, numbers, and special characters. This helps protect their account from potential hacking attempts.",
+          "A company IT administrator needs to set up new user accounts for employees and wants to enforce strong password policies. They utilize the Password Generator tool to generate unique, random passwords for each employee, ensuring that all passwords meet the organization's security standards.",
+          "A user wants to set up two-factor authentication on their banking app, which requires a numeric PIN. They use the Password Generator tool to create a secure 6-digit PIN that is difficult to guess, enhancing the security of their financial information.",
+        ],
+        link: "https://cleanformatter.com/tools/random-generator/password-generator",
         faq: [
           {
             question: "What is the Password Generator tool?",
@@ -810,7 +1813,52 @@ export const toolCategories = [
       {
         name: "UUID Generator",
         description: "Generate UUIDs/GUIDs",
+        detailedDescription:
+          "The UUID Generator tool is a specialized utility that creates universally unique identifiers (UUIDs/GUIDs) used to uniquely identify objects across systems. It supports various UUID versions including v4 (random), v5 (namespace and name-based hashing), and custom versions for specialized use cases. Ideal for developers, database administrators, and system architects who need reliable unique identifiers for distributed systems, databases, and applications. The tool generates UUIDs using cryptographically strong random number generation, timestamps, and hashing methods depending on the version selected. Users can customize the format and version of the UUIDs generated to fit their specific requirements. All UUID generation occurs client-side, ensuring your data remains private and secure.",
+        primaryUseCases: [
+          "Generating unique identifiers for database records to ensure data integrity and prevent collisions in distributed databases",
+          "Creating unique session IDs for web applications to track user sessions securely without risk of duplication",
+          "Producing unique keys for distributed systems and microservices architectures where multiple components need to generate IDs independently",
+          "Assisting developers in creating unique identifiers for objects in programming languages that require UUIDs for object tracking and management",
+          "Facilitating testing and development by providing a quick way to generate UUIDs for mock data and simulations",
+        ],
+        howToUse: [
+          "Select the version of UUID you want to generate: v4 (random), v5 (namespace and name-based), or custom version",
+          "Specify any additional parameters required for the selected version, such as namespace and name for v5 UUIDs",
+          "Click the 'Generate UUID' button to create the unique identifier",
+          "Copy the generated UUID from the output area for use in your applications, databases, or systems",
+        ],
         popularTools: ["v4", "v5", "Custom"],
+        advancedTips: [
+          "Use v4 UUIDs for general-purpose unique identifiers that require randomness and are easy to generate",
+          "Choose v5 UUIDs when you need deterministic UUIDs based on a namespace and name, ensuring the same input always produces the same UUID",
+          "For custom UUID versions, ensure you understand the specific requirements and structure needed for your application",
+          "In distributed systems, use UUIDs to avoid ID collisions when multiple nodes generate identifiers independently",
+          "Regularly review your UUID generation strategy to ensure it meets the evolving needs of your applications and systems",
+        ],
+        troubleshooting: [
+          {
+            issue: "Generated UUIDs are not unique",
+            solution:
+              "Ensure you are using the appropriate version of UUID for your use case. v4 UUIDs are designed to be random and unique, while v5 UUIDs are deterministic based on input. If you need guaranteed uniqueness, consider using v4 or implementing additional checks in your system.",
+          },
+          {
+            issue: "I need UUIDs that comply with specific format requirements",
+            solution:
+              "Customize the UUID generation settings to meet your format requirements. If using custom versions, ensure you understand the structure needed for your application. Validate the generated UUIDs against your format specifications.",
+          },
+          {
+            issue: "I need to generate a large number of UUIDs quickly",
+            solution:
+              "The UUID Generator tool is optimized for performance, but if you require bulk generation, consider using a script or library in your programming language that can generate UUIDs in batches for efficiency.",
+          },
+        ],
+        detailedExamples: [
+          "A developer is building a distributed application that requires unique identifiers for user sessions. They use the UUID Generator tool to create v4 UUIDs, ensuring that each session ID is unique and random, preventing any potential collisions across multiple servers.",
+          "A database administrator needs to assign unique IDs to new records in a distributed database system. They utilize the UUID Generator tool to produce v5 UUIDs based on a specific namespace and name, ensuring that the same input consistently generates the same UUID for data integrity.",
+          "A software engineer is testing a new application and requires a large number of unique identifiers for mock data. They use the UUID Generator tool to quickly generate multiple UUIDs, facilitating efficient testing and development without the risk of ID duplication.",
+        ],
+        link: "https://cleanformatter.com/tools/random-generator/uuid-generator",
         faq: [
           {
             question: "What is the UUID Generator tool?",
@@ -859,7 +1907,55 @@ export const toolCategories = [
       {
         name: "Font Generators",
         description: "Create stylish text for your social media posts.",
+        detailedDescription:
+          "The Font Generator tool is a creative utility that allows users to generate stylish and visually appealing text for social media posts, bios, messages, and more. It offers a variety of font styles including fancy, mirror, handwritten, Fortnite, bubble fonts, and many others to help content stand out. Ideal for social media enthusiasts, marketers, influencers, and anyone looking to enhance their digital presence with unique typography. The tool provides real-time font styling with options to customize size and effects, making it easy to create eye-catching text. All font generation happens client-side ensuring privacy for your content.",
+        primaryUseCases: [
+          "Creating unique and attractive text styles for social media bios, posts, and stories to increase engagement and visibility",
+          "Designing eye-catching marketing content with stylish fonts that capture attention and convey brand personality",
+          "Enhancing personal messages and chat communications with fun and creative font styles",
+          "Customizing text for blogs, websites, and digital content to improve aesthetics and readability",
+          "Experimenting with different font styles for creative projects, graphic design, and digital art",
+        ],
+        howToUse: [
+          "Select the desired font style from the available options (fancy, mirror, handwritten, etc.)",
+          "Enter the text you want to style in the input area",
+          "Adjust font size and effects using the provided sliders or options",
+          "Copy the generated stylish text from the output area for use in your social media posts, messages, or digital content",
+        ],
         popularTools: ["Facebook", "Instagram", "Twitter"],
+        advancedTips: [
+          "Experiment with different font styles to find the one that best matches your brand or personal aesthetic",
+          "Use larger font sizes for headlines and important messages to make them stand out",
+          "Combine multiple font styles in a single post for a dynamic and engaging look",
+          "Consider the readability of the font style when using it for longer text blocks",
+          "Regularly update your font styles to keep your content fresh and appealing to your audience",
+        ],
+        troubleshooting: [
+          {
+            issue:
+              "Generated fonts do not display correctly on certain platforms",
+            solution:
+              "Ensure that the platform you are using supports Unicode characters, as some stylish fonts rely on special Unicode symbols. If issues persist, try using a different font style that is more widely supported.",
+          },
+          {
+            issue:
+              "The stylish text is difficult to read due to font complexity",
+            solution:
+              "Choose simpler font styles for longer text blocks or important messages. Adjust the font size to improve readability, and consider using bold or italic effects to enhance visibility.",
+          },
+          {
+            issue:
+              "I need to generate fonts for a specific social media platform",
+            solution:
+              "Select the font style that is optimized for the platform you are targeting. Some platforms may have specific font styles that work better, so experiment with different options to find the best fit.",
+          },
+        ],
+        detailedExamples: [
+          "A social media influencer wants to create a unique bio for their Instagram profile. They use the Font Generator tool to select a fancy font style and customize the size, resulting in an eye-catching bio that attracts more followers.",
+          "A marketer is designing a promotional post for Facebook and needs stylish text to make the message stand out. They utilize the Font Generator tool to create bold and colorful text that captures attention and increases engagement with the post.",
+          "A user wants to send a fun message to friends in a chat application. They use the Font Generator tool to create mirror-style text, adding a playful touch to their message that makes it more memorable and entertaining.",
+        ],
+        link: "https://cleanformatter.com/tools/font-generator/font-generators",
         faq: [
           {
             question: "What is the Font Generator tool?",

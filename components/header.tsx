@@ -57,10 +57,22 @@ export function Header() {
         </div>
         <nav className="hidden md:flex items-center gap-6">
           <Link
-            href="/#features"
+            href="/feature-guide"
             className="text-sm font-medium hover:text-primary transition-colors"
           >
             Features
+          </Link>
+          <Link
+            href="/contact"
+            className="text-sm font-medium hover:text-primary transition-colors"
+          >
+            Contact
+          </Link>
+          <Link
+            href="/blog"
+            className="text-sm font-medium hover:text-primary transition-colors"
+          >
+            Blog
           </Link>
           <Link
             href="/#about"
@@ -83,19 +95,26 @@ export function Header() {
           </SheetTrigger>
           <SheetContent side="right" className="w-[240px] sm:w-[300px]">
             <nav className="flex flex-col gap-4 mt-8">
-              {/* <Link
-                href="/tools"
-                className="text-sm font-medium hover:text-primary"
-                onClick={handleLinkClick}
-              >
-                Tools
-              </Link> */}
               <Link
-                href="/#features"
+                href="/feature-guide"
                 className="text-sm font-medium hover:text-primary"
                 onClick={handleLinkClick}
               >
                 Features
+              </Link>
+              <Link
+                href="/contact"
+                className="text-sm font-medium hover:text-primary"
+                onClick={handleLinkClick}
+              >
+                Contact
+              </Link>
+              <Link
+                href="/blog"
+                className="text-sm font-medium hover:text-primary"
+                onClick={handleLinkClick}
+              >
+                Blog
               </Link>
               <Link
                 href="/#about"

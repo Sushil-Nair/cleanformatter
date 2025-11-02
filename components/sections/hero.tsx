@@ -28,7 +28,7 @@ export function HeroSection() {
               size="lg"
               className="rounded-full px-8"
             >
-              <Link href="#features">Learn More</Link>
+              <Link href="/feature-guide">Learn More</Link>
             </Button>
           </div>
         </div>

@@ -5,8 +5,7 @@ import { X } from "lucide-react";
 
 declare global {
   interface Window {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    adsbygoogle: any[];
+    adsbygoogle?: any[];
   }
 }
 
@@ -24,71 +23,115 @@ interface AdUnitProps {
   client?: string;
   closeable?: boolean;
   style?: React.CSSProperties;
+  id?: string;
 }
 
 export default function AdUnit({
   slot,
   format = "auto",
   className = "",
-  client = "ca-pub-5120078891027855", // Replace with your AdSense client ID
+  client = process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID,
   closeable = false,
   style = {},
+  id,
 }: AdUnitProps) {
   const adRef = useRef<HTMLModElement | null>(null);
   const [isClosed, setIsClosed] = useState(false);
+  const [adLoaded, setAdLoaded] = useState(false);
+  const intersectionObserver = useRef<IntersectionObserver | null>(null);
 
+  // Setup IntersectionObserver for lazy loading
   useEffect(() => {
     if (isClosed) return;
 
-    let timeoutId: NodeJS.Timeout;
+    if (!adRef.current) return;
 
-    const loadAd = () => {
-      if (typeof window !== "undefined" && adRef.current) {
+    if ("IntersectionObserver" in window) {
+      intersectionObserver.current = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting && !adLoaded) {
+              if (window.adsbygoogle && adRef.current) {
+                try {
+                  (window.adsbygoogle = window.adsbygoogle || []).push({});
+                  setAdLoaded(true);
+                  if (intersectionObserver.current && adRef.current) {
+                    intersectionObserver.current.unobserve(adRef.current);
+                  }
+                } catch (error) {
+                  console.error("AdSense error:", error);
+                }
+              }
+            }
+          });
+        },
+        { rootMargin: "200px" } // start loading 200px before ad is visible
+      );
+      intersectionObserver.current.observe(adRef.current);
+    } else {
+      // Fallback if IntersectionObserver not supported
+      if ((window as any).adsbygoogle && !adLoaded && adRef.current) {
         try {
-          // Check if adsbygoogle is available
-          if (window.adsbygoogle) {
-            (window.adsbygoogle = window.adsbygoogle || []).push({});
-          } else {
-            // Retry if not loaded yet
-            timeoutId = setTimeout(loadAd, 100);
-          }
+          ((window as any).adsbygoogle =
+            (window as any).adsbygoogle || []).push({});
+          setAdLoaded(true);
         } catch (error) {
           console.error("AdSense error:", error);
         }
       }
-    };
-
-    // Initial load attempt
-    timeoutId = setTimeout(loadAd, 100);
+    }
 
     return () => {
-      if (timeoutId) clearTimeout(timeoutId);
+      if (intersectionObserver.current && adRef.current) {
+        intersectionObserver.current.unobserve(adRef.current);
+      }
     };
-  }, [isClosed]);
+  }, [isClosed, adLoaded]);
 
   const getAdConfig = () => {
     switch (format) {
       case "horizontal":
         return {
-          style: { width: "100%", height: "90px", maxWidth: "728px" },
+          style: {
+            width: "100%",
+            height: "60px",
+            maxWidth: "728px",
+            minHeight: "60px",
+            aspectRatio: "728 / 90",
+          },
           dataAdFormat: "auto",
           dataFullWidthResponsive: "true",
         };
       case "vertical":
         return {
-          style: { width: "300px", height: "600px" },
+          style: {
+            width: "100%",
+            maxWidth: "300px",
+            height: "auto",
+            aspectRatio: "300 / 600",
+          },
           dataAdFormat: "auto",
           dataFullWidthResponsive: "true",
         };
       case "rectangle":
         return {
-          style: { width: "300px", height: "250px" },
+          style: {
+            width: "100%",
+            maxWidth: "300px",
+            height: "auto",
+            aspectRatio: "300 / 250",
+          },
           dataAdFormat: "auto",
           dataFullWidthResponsive: "true",
         };
       case "square":
         return {
-          style: { width: "250px", height: "250px" },
+          style: {
+            width: "100%",
+            maxWidth: "250px",
+            height: "auto",
+            aspectRatio: "250 / 250",
+          },
           dataAdFormat: "auto",
           dataFullWidthResponsive: "true",
         };
@@ -106,7 +149,7 @@ export default function AdUnit({
           dataAdLayout: "in-feed",
           dataFullWidthResponsive: "true",
         };
-      default: // auto
+      default:
         return {
           style: { display: "block" },
           dataAdFormat: "auto",
@@ -125,7 +168,7 @@ export default function AdUnit({
 
   return (
     <div
-      className={`relative flex justify-center items-center p-2 dark:bg-background ${className}`}
+      className={`relative flex justify-center items-center mt-4 p-2 ${className}`}
     >
       {closeable && (
         <button
@@ -137,6 +180,7 @@ export default function AdUnit({
         </button>
       )}
       <ins
+        id={id}
         ref={adRef}
         className="adsbygoogle"
         style={{
@@ -150,139 +194,5 @@ export default function AdUnit({
         data-full-width-responsive={adConfig.dataFullWidthResponsive}
       />
     </div>
-  );
-}
-
-// Specialized ad components for easy use
-export function HorizontalAd({
-  slot,
-  className = "",
-  closeable = false,
-}: {
-  slot: string;
-  className?: string;
-  closeable?: boolean;
-}) {
-  return (
-    <AdUnit
-      slot={slot}
-      format="horizontal"
-      className={className}
-      closeable={closeable}
-    />
-  );
-}
-
-export function VerticalAd({
-  slot,
-  className = "",
-  closeable = false,
-}: {
-  slot: string;
-  className?: string;
-  closeable?: boolean;
-}) {
-  return (
-    <AdUnit
-      slot={slot}
-      format="vertical"
-      className={className}
-      closeable={closeable}
-    />
-  );
-}
-
-export function RectangleAd({
-  slot,
-  className = "",
-  closeable = false,
-}: {
-  slot: string;
-  className?: string;
-  closeable?: boolean;
-}) {
-  return (
-    <AdUnit
-      slot={slot}
-      format="rectangle"
-      className={className}
-      closeable={closeable}
-    />
-  );
-}
-
-export function SquareAd({
-  slot,
-  className = "",
-  closeable = false,
-}: {
-  slot: string;
-  className?: string;
-  closeable?: boolean;
-}) {
-  return (
-    <AdUnit
-      slot={slot}
-      format="square"
-      className={className}
-      closeable={closeable}
-    />
-  );
-}
-
-export function InArticleAd({
-  slot,
-  className = "",
-  closeable = false,
-}: {
-  slot: string;
-  className?: string;
-  closeable?: boolean;
-}) {
-  return (
-    <AdUnit
-      slot={slot}
-      format="in-article"
-      className={className}
-      closeable={closeable}
-    />
-  );
-}
-
-export function InFeedAd({
-  slot,
-  className = "",
-  closeable = false,
-}: {
-  slot: string;
-  className?: string;
-  closeable?: boolean;
-}) {
-  return (
-    <AdUnit
-      slot={slot}
-      format="in-feed"
-      className={className}
-      closeable={closeable}
-    />
-  );
-}
-
-export function ResponsiveAd({
-  slot,
-  className = "",
-  closeable = false,
-}: {
-  slot: string;
-  className?: string;
-  closeable?: boolean;
-}) {
-  return (
-    <AdUnit
-      slot={slot}
-      format="auto"
-      className={className}
-      closeable={closeable}
-    />
   );
 }
