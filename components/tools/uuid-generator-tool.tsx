@@ -16,8 +16,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { motion } from "framer-motion";
-import AdUnit from "../ad-unit";
-import { MidSectionAd } from "../sections/ad-midsection";
+import { Textarea } from "../ui/textarea";
+// import AdUnit from "../ad-unit";
 
 const aboutContent = (
   <div className="space-y-6">
@@ -169,40 +169,38 @@ export function UUIDGeneratorTool() {
   };
 
   return (
-    <div className="container max-w-6xl mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8">
       <div className="space-y-4">
         <div className="flex items-center gap-3">
           <Key className="h-8 w-8 text-primary" />
           <div>
-            <h1 className="text-3xl font-bold tracking-tight">
-              UUID Generator
-            </h1>
+            <h1 className="font-bold tracking-tight">UUID Generator</h1>
             <p className="text-muted-foreground mt-2">
               Generate RFC 4122 compliant UUIDs
             </p>
           </div>
         </div>
-        <AdUnit slot="9721370550" format="horizontal" className="mt-2" />
+        {/* <AdUnit slot="9721370550" format="horizontal" className="mt-2" /> */}
 
         <Card>
           <CardContent className="p-6">
             <div id="toolArea" className="space-y-8">
               {/* UUID Output Section */}
-              <div className="space-y-4">
+              <div className="flex flex-col items-center gap-2 w-full">
                 <motion.div
-                  className="relative"
+                  className="flex flex-col sm:flex-row flex-grow w-full items-center justify-center gap-4"
                   animate={{ scale: [1, 1.02, 1] }}
                   transition={{ duration: 0.2 }}
                   key={uuid}
                 >
-                  <Input
+                  <Textarea
                     readOnly
                     value={uuid}
                     className={`pr-24 font-mono text-xl h-14 text-center tracking-wider ${
                       !isValid ? "border-red-500" : ""
                     }`}
                   />
-                  <div className="absolute right-1 top-1 flex gap-1">
+                  <div className="flex gap-2 mt-2 sm:mt-0">
                     <Button
                       variant="ghost"
                       size="sm"
@@ -308,7 +306,6 @@ export function UUIDGeneratorTool() {
               </Card>
             </div>
           </CardContent>
-          <MidSectionAd />
         </Card>
 
         <AboutSection title="About UUID Generator" content={aboutContent} />

@@ -86,3 +86,17 @@ body {
 html {
   scroll-behavior: smooth;
 }
+
+@layer components {
+  .tools-title h1 {
+    @apply text-xl md:text-2xl leading-tight md:leading-tight font-bold;
+  }
+
+  .tools-title p {
+    @apply text-xs md:text-sm leading-6 md:leading-7;
+  }
+
+  .tools-title h2 {
+    @apply text-lg md:text-xl leading-tight md:leading-tight font-bold;
+  }
+}

@@ -7,8 +7,7 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { diffChars, diffWords, diffLines } from "diff";
 import { AboutSection } from "@/components/tools/about-section";
-import AdUnit from "../ad-unit";
-import { MidSectionAd } from "../sections/ad-midsection";
+// import AdUnit from "../ad-unit";
 
 interface TextDiffLayoutProps {
   title: string;
@@ -237,20 +236,20 @@ export function TextDiffLayout({ title, description }: TextDiffLayoutProps) {
   };
 
   return (
-    <div className="container max-w-7xl mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8">
       <div className="space-y-4">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">{title}</h1>
+          <h1 className="font-bold tracking-tight">{title}</h1>
           {description && (
             <p className="text-muted-foreground mt-2">{description}</p>
           )}
-          <AdUnit slot="9721370550" format="horizontal" />
+          {/* <AdUnit slot="9721370550" format="horizontal" /> */}
         </div>
 
         <Card>
           <CardContent className="p-6">
             <div id="toolArea" className="space-y-6">
-              <div className="flex items-center justify-end gap-2">
+              <div className="flex items-center flex-wrap justify-end gap-2">
                 <Button
                   variant="outline"
                   size="sm"
@@ -296,7 +295,7 @@ export function TextDiffLayout({ title, description }: TextDiffLayoutProps) {
                 </Button>
               </div>
 
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
                     <h3 className="text-sm font-medium">Original Text</h3>
@@ -356,7 +355,6 @@ export function TextDiffLayout({ title, description }: TextDiffLayoutProps) {
               </div>
             </div>
           </CardContent>
-          <MidSectionAd />
         </Card>
 
         <AboutSection title="About Text Diff" content={textDiffAboutContent} />

@@ -1,4 +1,4 @@
-import AdUnit from "@/components/ad-unit";
+// import AdUnit from "@/components/ad-unit";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { FileText, Gavel, Users, Mail, ShieldCheck } from "lucide-react";
@@ -464,12 +464,12 @@ export default function TermsOfServicePage() {
           </div>
         </div>
       </main>
-      <AdUnit
+      {/* <AdUnit
         slot="8328397831"
         format="horizontal"
         className="sticky bottom-0 "
         closeable
-      />
+      /> */}
     </div>
   );
 }

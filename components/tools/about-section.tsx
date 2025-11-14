@@ -15,9 +15,9 @@ export function AboutSection({ title, content }: AboutSectionProps) {
       <Card id="aboutSection" className="mt-8">
         <CardContent className="p-6">
           <div className="space-y-4">
-            <h2 className="text-2xl font-bold tracking-tight">{title}</h2>
+            <h2 className="font-bold tracking-tight">{title}</h2>
             <ScrollArea className="h-[600px] pr-4">
-              <div className="prose prose-neutral dark:prose-invert max-w-none">
+              <div className="prose prose-neutral dark:prose-invert max-w-none text-sm">
                 {content}
               </div>
             </ScrollArea>

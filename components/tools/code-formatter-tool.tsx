@@ -17,8 +17,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import AdUnit from "../ad-unit";
-import { MidSectionAd } from "../sections/ad-midsection";
+// import AdUnit from "../ad-unit";
 
 const aboutContent = (
   <div className="space-y-6">
@@ -190,14 +189,14 @@ export function CodeFormatterTool() {
   };
 
   return (
-    <div className="container max-w-6xl mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8">
       <div className="space-y-4">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Code Formatter</h1>
+          <h1 className="font-bold tracking-tight">Code Formatter</h1>
           <p className="text-muted-foreground mt-2">
             Format and beautify code in multiple programming languages
           </p>
-          <AdUnit slot="9721370550" format="horizontal" />
+          {/* <AdUnit slot="9721370550" format="horizontal" /> */}
         </div>
 
         <Card>
@@ -232,7 +231,7 @@ export function CodeFormatterTool() {
               </div>
 
               <div className="space-y-4">
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col md:flex-row items-center justify-between gap-4">
                   <div className="flex items-center space-x-2">
                     <Switch
                       id="minify-mode"
@@ -280,7 +279,6 @@ export function CodeFormatterTool() {
               </div>
             </div>
           </CardContent>
-          <MidSectionAd />
         </Card>
 
         <AboutSection title="About Code Formatter" content={aboutContent} />

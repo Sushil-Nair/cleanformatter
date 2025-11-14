@@ -13,7 +13,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import AdUnit from "@/components/ad-unit";
+// import AdUnit from "@/components/ad-unit";
 import ToolSearch from "@/components/toolSearch";
 import { toolCategories } from "@/lib/tool-categories";
 import Link from "next/link";
@@ -284,12 +284,12 @@ export default function ContactPage() {
           </div>
         </div>
       </main>
-      <AdUnit
+      {/* <AdUnit
         slot="8328397831"
         format="horizontal"
         closeable
         className="sticky bottom-0"
-      />
+      /> */}
     </div>
   );
 }

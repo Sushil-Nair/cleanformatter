@@ -2,7 +2,6 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ToolsPage } from "@/components/tools/tools-page";
 import { toolCategories } from "@/lib/tool-categories";
-import AdUnit from "@/components/ad-unit";
 
 export async function generateStaticParams() {
   return toolCategories.map((category) => ({
@@ -74,16 +73,16 @@ export default async function Page({
 
   return (
     <div className="min-h-screen flex flex-col">
-      <AdUnit slot="9721370550" format="horizontal" className="" />
+      {/* <AdUnit slot="9721370550" format="horizontal" className="" /> */}
       <main className="flex-1 pt-16">
         <ToolsPage category={category} />
       </main>
-      <AdUnit
+      {/* <AdUnit
         slot="8328397831"
         format="horizontal"
         className="sticky bottom-0 "
         closeable
-      />
+      /> */}
     </div>
   );
 }

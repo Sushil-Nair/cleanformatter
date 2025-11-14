@@ -20,8 +20,7 @@ import {
   removeIndentation,
   filterSpecialCharacters,
 } from "@/lib/utils/formatting";
-import AdUnit from "../ad-unit";
-import { MidSectionAd } from "../sections/ad-midsection";
+// import AdUnit from "../ad-unit";
 
 interface FormatOptions {
   stripHtml: boolean;
@@ -255,16 +254,14 @@ export function FormattingTool() {
   };
 
   return (
-    <div className="container max-w-6xl mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8">
       <div className="space-y-4">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">
-            Remove Formatting
-          </h1>
+          <h1 className="font-bold tracking-tight">Remove Formatting</h1>
           <p className="text-muted-foreground mt-2">
             Clean and format text by removing unwanted formatting elements.
           </p>
-          <AdUnit slot="9721370550" format="horizontal" />
+          {/* <AdUnit slot="9721370550" format="horizontal" /> */}
         </div>
 
         <Card>
@@ -380,7 +377,6 @@ export function FormattingTool() {
               </div>
             </div>
           </CardContent>
-          <MidSectionAd />
         </Card>
 
         <AboutSection

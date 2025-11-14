@@ -9,7 +9,7 @@ import {
   getPostsByCategory,
 } from "@/data/blog-posts";
 import { Search } from "lucide-react";
-import AdUnit from "@/components/ad-unit";
+// import AdUnit from "@/components/ad-unit";
 
 export default function BlogPage() {
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -81,12 +81,12 @@ export default function BlogPage() {
           )}
         </section>
       </div>
-      <AdUnit
+      {/* <AdUnit
         slot="8328397831"
         format="horizontal"
         className="sticky bottom-0 "
         closeable
-      />
+      /> */}
     </div>
   );
 }

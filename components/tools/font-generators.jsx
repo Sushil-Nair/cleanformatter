@@ -5,10 +5,9 @@ import { Copy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
-import AdUnit from "../ad-unit";
+// import AdUnit from "../ad-unit";
 import FontSizeDropdown from "../fontSize";
 import { ScrollArea, ScrollBar } from "../ui/scroll-area";
-import { MidSectionAd } from "../sections/ad-midsection";
 
 export default function FontGenerator() {
   const [input, setInput] = useState("Your text here");
@@ -1049,36 +1048,31 @@ export default function FontGenerator() {
   // };
 
   return (
-    <div className="container w-full max-w-6xl mx-auto px-4 py-8">
+    <div className="container w-full mx-auto px-4 py-8">
       <div className="p-6 border-b w-full">
-        <h2 className="text-3xl font-bold tracking-tight">
-          Fancy Font Generator
-        </h2>
+        <h1 className="font-bold tracking-tight">Fancy Font Generator</h1>
         <p className="text-muted-foreground mt-2">
           Generate stylish text for social media posts and creative content.
         </p>
-        <AdUnit slot="9721370550" format="horizontal" className="mt-5" />
+        {/* <AdUnit slot="9721370550" format="horizontal" className="mt-5" /> */}
       </div>
 
       <div id="toolArea" className="p-6 w-full">
         <div className="mb-8">
-          <label className="block text-sm font-medium text-muted-foreground mb-2">
+          <label className="block font-medium text-muted-foreground mb-2">
             Input Text
           </label>
           <Input
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Enter text to generate fancy fonts..."
-            className="text-lg"
           />
           <FontSizeDropdown fontSize={fontSize} setFontSize={setFontSize} />
         </div>
 
         {/* Font Styles */}
         <ScrollArea className="space-y-4 h-[500px]">
-          <h3 className="text-lg font-semibold tracking-tight">
-            Generated Styles
-          </h3>
+          <h3 className="font-semibold tracking-tight">Generated Styles</h3>
           <div className="grid grid-cols-1 gap-4">
             {fontStyles.map((style) => {
               const convertedText = style.convert(input);
@@ -1160,7 +1154,6 @@ export default function FontGenerator() {
             </div>
           </div>
         )} */}
-        <MidSectionAd />
       </div>
     </div>
   );

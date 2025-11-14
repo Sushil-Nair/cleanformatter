@@ -19,8 +19,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { encodeURL, decodeURL, URLEncoderOptions } from "@/lib/utils/url";
-import AdUnit from "../ad-unit";
-import { MidSectionAd } from "../sections/ad-midsection";
+// import AdUnit from "../ad-unit";
 
 const aboutContent = (
   <div className="space-y-6">
@@ -224,16 +223,14 @@ export function URLEncoderTool() {
   };
 
   return (
-    <div className="container max-w-6xl mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8">
       <div className="space-y-4">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">
-            URL Encoder/Decoder
-          </h1>
+          <h1 className="font-bold tracking-tight">URL Encoder/Decoder</h1>
           <p className="text-muted-foreground mt-2">
             Convert URLs and query parameters with proper encoding
           </p>
-          <AdUnit slot="9721370550" format="horizontal" />
+          {/* <AdUnit slot="9721370550" format="horizontal" /> */}
         </div>
 
         <Card>
@@ -366,7 +363,6 @@ export function URLEncoderTool() {
               </div>
             </div>
           </CardContent>
-          <MidSectionAd />
         </Card>
 
         <AboutSection

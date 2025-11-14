@@ -20,8 +20,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { encodeBase64, decodeBase64, Base64Options } from "@/lib/utils/base64";
-import AdUnit from "../ad-unit";
-import { MidSectionAd } from "../sections/ad-midsection";
+// import AdUnit from "../ad-unit";
 
 const aboutContent = (
   <div className="space-y-6">
@@ -273,16 +272,14 @@ export function Base64Tool() {
   };
 
   return (
-    <div className="container max-w-6xl mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8">
       <div className="space-y-4">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">
-            Base64 Encoder/Decoder
-          </h1>
+          <h1 className="font-bold tracking-tight">Base64 Encoder/Decoder</h1>
           <p className="text-muted-foreground mt-2">
             Convert text to and from Base64 format with advanced options
           </p>
-          <AdUnit slot="9721370550" format="horizontal" className="mt-2" />
+          {/* <AdUnit slot="9721370550" format="horizontal" className="mt-2" /> */}
         </div>
 
         <Card>
@@ -440,7 +437,6 @@ export function Base64Tool() {
               </div>
             </div>
           </CardContent>
-          <MidSectionAd />
         </Card>
 
         <AboutSection

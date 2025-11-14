@@ -106,7 +106,7 @@ export function FAQSectionCompact({
   }
 
   return (
-    <div id="FAQSection" className={`w-full ${className}`}>
+    <div id="FAQSection" className={`w-full tool-title ${className}`}>
       <Card className="mt-8">
         <CardContent className="p-6">
           <h3 className="text-xl font-bold mb-4">{title}</h3>
@@ -118,11 +118,9 @@ export function FAQSectionCompact({
                 className="border-b border-accent"
               >
                 <AccordionTrigger className="text-left hover:no-underline py-3">
-                  <span className="font-medium text-sm pr-4">
-                    {faq.question}
-                  </span>
+                  <span className="font-medium pr-4">{faq.question}</span>
                 </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground text-sm pb-3 leading-relaxed">
+                <AccordionContent className="text-muted-foreground pb-3 leading-relaxed">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>
@@ -130,7 +128,7 @@ export function FAQSectionCompact({
           </Accordion>
         </CardContent>
         <div className="text-center p-6">
-          <p className="text-sm text-muted-foreground">
+          <p className="text-muted-foreground">
             Still have questions?{" "}
             <Link
               href="/contact"

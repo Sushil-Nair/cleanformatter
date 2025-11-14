@@ -16,8 +16,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import AdUnit from "../ad-unit";
-import { MidSectionAd } from "../sections/ad-midsection";
+// import AdUnit from "../ad-unit";
 
 interface CaseConverterToolProps {
   title: string;
@@ -377,14 +376,16 @@ export function CaseConverterTool({
   };
 
   return (
-    <div className="container max-w-6xl mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8">
       <div className="space-y-4">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">{title}</h1>
+          <h1 className="font-bold tracking-tight">{title}</h1>
           {description && (
-            <p className="text-muted-foreground mt-2">{description}</p>
+            <p className="text-muted-foreground tools-text mt-2">
+              {description}
+            </p>
           )}
-          <AdUnit slot="9721370550" format="horizontal" className="my-10" />
+          {/* <AdUnit slot="9721370550" format="horizontal" className="my-10" /> */}
         </div>
 
         <Card>
@@ -449,7 +450,6 @@ export function CaseConverterTool({
               </div>
             </div>
           </CardContent>
-          <MidSectionAd />
         </Card>
 
         <AboutSection

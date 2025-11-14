@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
 import { ToolsPage } from "@/components/tools/tools-page";
 import { toolCategories } from "@/lib/tool-categories";
-import AdUnit from "@/components/ad-unit";
+// import AdUnit from "@/components/ad-unit";
 import ToolSearch from "@/components/toolSearch";
 import { FAQSectionCompact } from "@/components/sections/FAQSection";
 
@@ -112,14 +112,14 @@ export default async function Page({
   return (
     <div className="min-h-screen flex flex-col w-full">
       <ToolSearch toolCategories={toolCategories} />
-      <main className="flex-1 pt-10 mx-auto 2xl:max-w-7xl xl:max-w-5xl lg:max-w-4xl md:max-w-3xl sm:max-w-xl px-4 w-full">
+      <main className="flex-1 pt-10 mx-auto max-w-[1440px] px-4 w-full">
         <div className="grid grid-cols-1 gap-8 container">
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-8 tools-title">
             <ToolsPage category={toolCategory} />
             {toolFAQ && (
               <FAQSectionCompact
                 faqs={toolFAQ.faq}
-                className="container max-w-6xl mx-auto px-4 py-8"
+                className="container mx-auto px-4 py-8"
               />
             )}
             {toolFAQ && (
@@ -149,12 +149,12 @@ export default async function Page({
           /> */}
         </div>
       </main>
-      <AdUnit
+      {/* <AdUnit
         slot="8328397831"
         format="horizontal"
         className="sticky bottom-0 mt-10"
         closeable
-      />
+      /> */}
     </div>
   );
 }

@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { toolCategories } from "@/lib/tool-categories";
 import Link from "next/link";
 import ToolSearch from "@/components/toolSearch";
-import AdUnit from "@/components/ad-unit";
+// import AdUnit from "@/components/ad-unit";
 
 export default function ToolsPage() {
   const getSlug = (name: string) =>
@@ -17,7 +17,7 @@ export default function ToolsPage() {
   return (
     <div className="min-h-screen flex flex-col">
       <ToolSearch toolCategories={toolCategories} />
-      <AdUnit slot="9721370550" format="horizontal" />
+      {/* <AdUnit slot="9721370550" format="horizontal" /> */}
       <main className="flex-1 pt-24">
         <div className="container px-4 md:px-6">
           <div className="space-y-16">
@@ -95,12 +95,12 @@ export default function ToolsPage() {
           </div>
         </div>
       </main>
-      <AdUnit
+      {/* <AdUnit
         slot="8328397831"
         format="horizontal"
         className="sticky bottom-0 mt-12"
         closeable
-      />
+      /> */}
     </div>
   );
 }

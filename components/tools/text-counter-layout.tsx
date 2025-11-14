@@ -6,8 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { TextStatsDisplay } from "@/components/tools/text-stats";
 import { AboutSection } from "@/components/tools/about-section";
 import { TextStats } from "@/types/tools";
-import AdUnit from "../ad-unit";
-import { MidSectionAd } from "../sections/ad-midsection";
+// import AdUnit from "../ad-unit";
 import { Checkbox } from "../ui/checkbox";
 import { Label } from "../ui/label";
 import { Switch } from "../ui/switch";
@@ -206,14 +205,14 @@ export function TextCounterLayout({
   };
 
   return (
-    <div className="container max-w-6xl mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8">
       <div className="space-y-4">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">{title}</h1>
+          <h1 className="font-bold tracking-tight">{title}</h1>
           {description && (
             <p className="text-muted-foreground mt-2">{description}</p>
           )}
-          <AdUnit slot="9721370550" format="horizontal" />
+          {/* <AdUnit slot="9721370550" format="horizontal" /> */}
         </div>
 
         <Card>
@@ -244,7 +243,6 @@ export function TextCounterLayout({
               <TextStatsDisplay stats={textStats} />
             </div>
           </CardContent>
-          <MidSectionAd />
         </Card>
 
         <AboutSection

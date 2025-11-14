@@ -4,7 +4,8 @@ import { Clock, Tag, ArrowLeft, Share2 } from "lucide-react";
 import { getBlogPost, blogPosts } from "@/data/blog-posts";
 import { Metadata } from "next";
 import Image from "next/image";
-import AdUnit from "@/components/ad-unit";
+import BlogShareButton from "@/components/blogShareButton";
+// import AdUnit from "@/components/ad-unit";
 
 export async function generateStaticParams() {
   return blogPosts.map((post) => ({
@@ -102,9 +103,7 @@ export default async function BlogPostPage({
 
           {/* Author */}
           <div className="flex items-center justify-between py-6">
-            <button className="p-2 hover:bg-accent rounded-lg transition-colors">
-              <Share2 className="w-5 h-5 text-muted-foreground" />
-            </button>
+            <BlogShareButton slug={post.slug} />
           </div>
         </div>
 
@@ -133,12 +132,12 @@ export default async function BlogPostPage({
           </div>
         )}
       </article>
-      <AdUnit
+      {/* <AdUnit
         slot="8328397831"
         format="horizontal"
         className="sticky bottom-0 "
         closeable
-      />
+      /> */}
     </div>
   );
 }

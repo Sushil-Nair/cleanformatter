@@ -1,4 +1,4 @@
-import AdUnit from "@/components/ad-unit";
+// import AdUnit from "@/components/ad-unit";
 import { AboutSection } from "@/components/sections/about";
 import { CtaSection } from "@/components/sections/cta";
 import { FeaturesSection } from "@/components/sections/features";
@@ -11,17 +11,17 @@ export default function Home() {
       <ToolSearch toolCategories={toolCategories} />
       <main className="flex-1 w-full mx-auto">
         <HeroSection />
-        <AdUnit slot="9721370550" format="horizontal" closeable />
+        {/* <AdUnit slot="9721370550" format="horizontal" closeable /> */}
         <FeaturesSection />
         <AboutSection />
         <CtaSection />
       </main>
-      <AdUnit
+      {/* <AdUnit
         slot="8328397831"
         format="horizontal"
         closeable
         className="sticky bottom-0"
-      />
+      /> */}
     </div>
   );
 }

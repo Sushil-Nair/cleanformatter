@@ -1,4 +1,4 @@
-import AdUnit from "@/components/ad-unit";
+// import AdUnit from "@/components/ad-unit";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Shield, Eye, Lock, Users, FileText, Mail } from "lucide-react";
@@ -349,12 +349,12 @@ export default function PrivacyPolicyPage() {
           </div>
         </div>
       </main>
-      <AdUnit
+      {/* <AdUnit
         slot="8328397831"
         format="horizontal"
         className="sticky bottom-0 "
         closeable
-      />
+      /> */}
     </div>
   );
 }

@@ -23,8 +23,7 @@ import {
   decodeHTMLEntities,
   HTMLEntitiesOptions,
 } from "@/lib/utils/html-entities";
-import AdUnit from "../ad-unit";
-import { MidSectionAd } from "../sections/ad-midsection";
+// import AdUnit from "../ad-unit";
 
 const aboutContent = (
   <div className="space-y-6">
@@ -229,16 +228,16 @@ export function HTMLEntitiesTool() {
   };
 
   return (
-    <div className="container max-w-6xl mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8">
       <div className="space-y-4">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">
+          <h1 className="font-bold tracking-tight">
             HTML Entities Encoder/Decoder
           </h1>
           <p className="text-muted-foreground mt-2">
             Convert text to and from HTML entities with various encoding options
           </p>
-          <AdUnit slot="9721370550" format="horizontal" />
+          {/* <AdUnit slot="9721370550" format="horizontal" /> */}
         </div>
 
         <Card>
@@ -379,7 +378,6 @@ export function HTMLEntitiesTool() {
               </div>
             </div>
           </CardContent>
-          <MidSectionAd />
         </Card>
 
         <AboutSection
