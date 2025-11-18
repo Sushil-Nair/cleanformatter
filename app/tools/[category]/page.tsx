@@ -3,9 +3,23 @@ import { notFound } from "next/navigation";
 import { ToolsPage } from "@/components/tools/tools-page";
 import { toolCategories } from "@/lib/tool-categories";
 
+// Slugify function to convert names to URL-friendly slugs
+function getSlug(input?: string) {
+  if (!input) return "";
+  try {
+    input = decodeURIComponent(String(input));
+  } catch {}
+  return String(input)
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-") // groups of non-alphanumerics -> hyphen
+    .replace(/-+/g, "-") // collapse multiple hyphens
+    .replace(/^-+|-+$/g, ""); // trim leading/trailing hyphens
+}
+
 export async function generateStaticParams() {
   return toolCategories.map((category) => ({
-    category: category.name.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+    category:
+      (category.slug && String(category.slug)) ?? getSlug(category.name),
   }));
 }
 
@@ -15,10 +29,10 @@ export async function generateMetadata({
   params: Promise<{ category: string }>;
 }): Promise<Metadata> {
   const { category: categoryParam } = await params;
-  const category = toolCategories.find(
-    (cat) =>
-      cat.name.toLowerCase().replace(/[^a-z0-9]+/g, "-") === categoryParam
-  );
+  const category = toolCategories.find((cat) => {
+    const canonical = (cat.slug && String(cat.slug)) ?? getSlug(cat.name);
+    return canonical === categoryParam;
+  });
 
   if (!category) {
     return {
@@ -62,10 +76,10 @@ export default async function Page({
   params: Promise<{ category: string }>;
 }) {
   const { category: categoryParam } = await params;
-  const category = toolCategories.find(
-    (cat) =>
-      cat.name.toLowerCase().replace(/[^a-z0-9]+/g, "-") === categoryParam
-  );
+  const category = toolCategories.find((cat) => {
+    const canonical = (cat.slug && String(cat.slug)) ?? getSlug(cat.name);
+    return canonical === categoryParam;
+  });
 
   if (!category) {
     notFound();

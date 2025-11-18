@@ -1,3 +1,4 @@
+// next.config.js
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
@@ -18,6 +19,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // any additional Next.js config you want
 };
 
 export default nextConfig;

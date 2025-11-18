@@ -125,7 +125,7 @@ export default function ToolsPage({ category }: ToolsPageProps) {
 
   if (!category.tools?.length) {
     return (
-      <div className="container max-w-6xl mx-auto">
+      <div className="container mx-auto">
         <div className="space-y-4">
           <h1 className="text-3xl font-bold tracking-tight">{category.name}</h1>
           <p className="text-muted-foreground">{category.description}</p>

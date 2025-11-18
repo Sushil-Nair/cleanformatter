@@ -27,6 +27,7 @@ export interface ToolFunctions {
 
 export interface Tool {
   name: string;
+  slug?: string;
   description: string;
   detailedDescription: string;
   primaryUseCases: string[];
@@ -42,6 +43,7 @@ export interface Tool {
 
 export interface ToolCategory {
   name: string;
+  slug?: string;
   description: string;
   icon: React.ReactNode;
   tools: Tool[];
@@ -77,11 +79,13 @@ const caseFunctions: ToolFunctions[] = [
 export const toolCategories: ToolCategory[] = [
   {
     name: "Text Editing",
+    slug: "text-editing",
     description: "Essential text editing and manipulation tools",
     icon: <TextSelect className="h-8 w-8" />,
     tools: [
       {
         name: "Case Converter",
+        slug: "case-converter",
         description:
           "From UPPERCASE to camelCase to kebab-case — convert text instantly. Built for writers & devs. No sign-up, no drama.",
         detailedDescription:
@@ -180,11 +184,6 @@ export const toolCategories: ToolCategory[] = [
               "Writers, developers, bloggers, editors, and students who frequently format text for documents, websites, or code can save time and improve consistency using this tool.",
           },
           {
-            question: "Does the case converter work offline?",
-            answer:
-              "Yes. All conversions happen directly in your browser without sending any data to a server, ensuring privacy and fast results even offline.",
-          },
-          {
             question: "Is this tool free to use?",
             answer:
               "Yes, the case converter tool is completely free and doesn't require any registration or login.",
@@ -223,6 +222,7 @@ export const toolCategories: ToolCategory[] = [
       },
       {
         name: "Text Counter",
+        slug: "text-counter",
         description: "Count characters, words, and lines",
         detailedDescription:
           "The Text Counter is an essential online tool for writers, editors, students, SEO professionals, and content creators who need accurate real-time text statistics and word count analysis. This comprehensive character counter and word counting tool instantly calculates multiple text metrics including total word count, character count with and without spaces, sentence count, paragraph count, reading time estimates, and average word length. Perfect for meeting strict content length requirements on social media platforms like Twitter (X) character limits, Instagram caption restrictions, meta description length for SEO optimization, academic essay word counts, and professional document specifications. The tool supports Unicode text across all languages and alphabets, accurately counting emojis, special characters, punctuation marks, and multilingual content. Writers use it to track novel progress and meet publishing requirements, students ensure essays meet assignment specifications, SEO specialists optimize content length for search engine rankings, and social media managers verify posts fit platform constraints. All text analysis happens instantly in your browser with complete privacy protection, requiring no registration, file uploads, or data transmission to external servers.",
@@ -311,11 +311,6 @@ export const toolCategories: ToolCategory[] = [
               "Writers, editors, SEO professionals, and social media creators use a Text Counter to ensure content meets specific length limits — like tweet length, meta description limits, or essay word count requirements.",
           },
           {
-            question: "Does this tool work offline?",
-            answer:
-              "Yes. The Text Counter runs directly in your browser, so no internet connection or data upload is required.",
-          },
-          {
             question: "Is the Text Counter tool free?",
             answer:
               "Yes, it's 100% free and requires no login, signup, or installation.",
@@ -355,6 +350,7 @@ export const toolCategories: ToolCategory[] = [
       },
       {
         name: "Text Diff",
+        slug: "text-diff",
         description: "Compare two texts and find differences",
         detailedDescription:
           "The Text Diff tool is an advanced online comparison utility designed for developers, writers, editors, legal professionals, and content managers who need to identify changes between two versions of text or code. This powerful diff checker performs line-by-line, word-by-word, and character-by-character comparisons to highlight additions, deletions, and modifications with color-coded visual indicators. Perfect for code review processes, document version control, plagiarism detection, contract comparison, manuscript editing, and content revision tracking. The tool supports multiple comparison modes including side-by-side view, inline diff display, and unified diff format commonly used in software development. Developers use it to review pull requests, compare configuration files, and track changes in source code across Git commits. Technical writers rely on it for documentation updates, API specification changes, and policy document revisions. Legal teams compare contract versions to identify modifications in terms and conditions. All text comparison happens client-side in your browser, ensuring sensitive documents and proprietary code remain completely private without server transmission or storage. The tool handles large files efficiently and supports syntax highlighting for popular programming languages.",
@@ -494,11 +490,13 @@ export const toolCategories: ToolCategory[] = [
   },
   {
     name: "Clean & Format",
+    slug: "clean-format",
     description: "Clean and format text for various purposes",
     icon: <Code2 className="h-8 w-8" />,
     tools: [
       {
         name: "Remove Formatting",
+        slug: "remove-formatting",
         description: "Strip HTML and formatting",
         detailedDescription:
           "The Remove Formatting tool is a specialized online text cleaning utility that strips unwanted HTML tags, inline CSS styles, rich text formatting, and hidden code from copied content, converting it to clean plain text. Essential for content publishers, web developers, bloggers, and anyone copying text from websites, Microsoft Word documents, PDFs, or WYSIWYG editors that embed invisible formatting code. When you copy content from formatted sources, hidden HTML markup, style attributes, font specifications, and special characters often come along, causing formatting conflicts when pasted into content management systems, email clients, or text editors. This tool removes all HTML entities, strips style tags, eliminates font declarations, cleans span elements, removes div containers, and converts formatted text to pure ASCII or Unicode text. Perfect for cleaning WordPress posts, preparing email newsletter content, formatting social media captions, creating plain text documentation, and ensuring consistent styling across platforms. The tool preserves paragraph breaks and basic text structure while removing all visual formatting, making content ready for republishing with your preferred styling. All text processing happens instantly in your browser with complete privacy, requiring no file uploads or account registration.",
@@ -614,6 +612,7 @@ export const toolCategories: ToolCategory[] = [
       },
       {
         name: "Fix Spacing",
+        slug: "fix-spacing",
         description: "Fix inconsistent spacing and indentation",
         detailedDescription:
           "The Fix Spacing tool is a comprehensive text and code formatting utility designed to automatically correct inconsistent whitespace, irregular indentation, mixed tabs and spaces, and improper line endings in documents and source code. Essential for software developers, technical writers, content editors, and anyone working with structured text or programming code who needs to maintain professional formatting standards. This tool eliminates common spacing issues including extra spaces between words, inconsistent indentation levels in code blocks, mixed tab and space characters, irregular line breaks, trailing whitespace at line ends, and multiple consecutive blank lines. Perfect for cleaning up code before commits, standardizing documentation formatting, preparing text for publication, normalizing configuration files, and ensuring consistent spacing across collaborative projects. The tool supports conversion between tabs and spaces with configurable indentation width, automatic removal of trailing whitespace, normalization of line endings between Unix (LF), Windows (CRLF), and Mac formats, and intelligent handling of code blocks in multiple programming languages. All processing happens client-side in your browser, ensuring your code and sensitive text remains completely private without server transmission or storage.",
@@ -725,6 +724,7 @@ export const toolCategories: ToolCategory[] = [
       },
       {
         name: "Text Wrapper",
+        slug: "text-wrapper",
         description: "Wrap text to specific width",
         detailedDescription:
           "The Text Wrapper tool is a specialized text formatting utility that automatically adjusts line length by wrapping text to a specified width, ensuring content fits within designated boundaries for improved readability and professional presentation. Essential for developers formatting code comments, technical writers preparing documentation with fixed-width constraints, email composers ensuring compatibility across clients, and content creators optimizing text for various display formats. This tool intelligently breaks lines at word boundaries (word wrap), character positions (hard wrap), or using smart algorithms that balance line lengths for aesthetic appeal. Perfect for formatting plain text emails, creating ASCII art, preparing code documentation, formatting terminal output, ensuring text compatibility with fixed-width displays, and optimizing content for command-line interfaces. The tool supports multiple wrapping modes including word wrap (breaks at word boundaries), character wrap (breaks at exact character position), smart wrap (optimizes for balanced line lengths), and code wrap (respects indentation). Common use cases include formatting Git commit messages to 72 characters, wrapping email text to 78 characters for client compatibility, creating readable README files, and preparing text for legacy systems with width limitations. All text wrapping happens instantly in your browser with complete privacy.",
@@ -807,11 +807,6 @@ export const toolCategories: ToolCategory[] = [
               "Yes, the Text Wrapper tool is free and accessible online with no subscription required.",
           },
           {
-            question: "Can I use the Text Wrapper tool offline?",
-            answer:
-              "Currently, the Text Wrapper tool works online and requires an internet connection to function.",
-          },
-          {
             question:
               "What is the recommended line width for different use cases?",
             answer:
@@ -834,11 +829,13 @@ export const toolCategories: ToolCategory[] = [
   },
   {
     name: "Code Format",
+    slug: "code-format",
     description: "Format text for different programming languages",
     icon: <FileCode className="h-8 w-8" />,
     tools: [
       {
         name: "Code Formatter",
+        slug: "code-formatter",
         description: "Format code in various languages",
         detailedDescription:
           "The Code Formatter is an advanced online code beautification and standardization tool that automatically formats source code in multiple programming languages according to industry-standard style guidelines and best practices. Essential for software developers, development teams, code reviewers, and anyone maintaining codebases who need consistent, readable, and professionally formatted code. This comprehensive formatter supports popular programming languages including JavaScript, TypeScript, HTML, CSS, JSON, Python, and more, applying appropriate indentation, spacing, line breaks, and syntax conventions specific to each language. Perfect for cleaning up minified code, standardizing team code submissions, preparing code for version control commits, beautifying code before sharing or publishing, and ensuring consistent formatting across large projects with multiple contributors. The tool automatically handles indentation levels, spaces around operators, bracket placement, line length limits, comment formatting, and adherence to language-specific style guides like PEP 8 for Python or Airbnb style for JavaScript. Advanced features include code minification (opposite of formatting), custom rule configuration, and support for framework-specific conventions. All code formatting happens client-side in your browser, ensuring your proprietary source code remains completely private without server transmission.",
@@ -953,11 +950,13 @@ export const toolCategories: ToolCategory[] = [
   },
   {
     name: "Unicode",
+    slug: "unicode",
     description: "Work with Unicode text and special characters",
     icon: <Binary className="h-8 w-8" />,
     tools: [
       {
         name: "Unicode Converter",
+        slug: "unicode-converter",
         description: "Convert text to and from Unicode",
         detailedDescription:
           "The Unicode Converter is a specialized text encoding and decoding tool that transforms text between various Unicode formats including Code Points, UTF-8, UTF-16, UTF-32, and normalized forms (NFC, NFD, NFKC, NFKD) for ensuring cross-platform text compatibility and proper character rendering. Essential for software developers working with internationalization, web developers handling multilingual content, data analysts processing text from various sources, and anyone dealing with special characters, emojis, or non-Latin scripts. This comprehensive converter handles the complete Unicode standard with support for over 140,000 characters across all modern and historical writing systems. Perfect for encoding text for web applications, converting between different character encoding schemes, analyzing Unicode composition, creating fancy text for social media, debugging encoding issues in databases and APIs, and ensuring proper text representation across different operating systems and applications. The tool displays character code points in hexadecimal and decimal formats, shows Unicode block names, identifies character properties, and supports bidirectional text for languages like Arabic and Hebrew. All conversions happen client-side in your browser ensuring complete privacy for sensitive multilingual content.",
@@ -1048,11 +1047,6 @@ export const toolCategories: ToolCategory[] = [
               "Most online Unicode converters are free to use, allowing quick and easy text encoding and decoding without cost.",
           },
           {
-            question: "Can I use the Unicode Converter offline?",
-            answer:
-              "Typically, these tools operate online, but some desktop applications or PWA versions support offline use for convenience.",
-          },
-          {
             question:
               "What is the difference between UTF-8, UTF-16, and UTF-32?",
             answer:
@@ -1072,6 +1066,7 @@ export const toolCategories: ToolCategory[] = [
       },
       {
         name: "Character Finder",
+        slug: "character-finder",
         description: "Find and insert special characters",
         detailedDescription:
           'The Character Finder is an intuitive Unicode character search and insertion tool that helps users quickly discover, preview, and copy special characters, symbols, emojis, mathematical operators, currency signs, and decorative glyphs from the complete Unicode standard. Essential for content creators, designers, writers, developers, and anyone needing special characters beyond the standard keyboard layout. This comprehensive character browser organizes over 140,000 Unicode characters into logical categories including arrows, mathematical symbols, Greek letters, punctuation marks, geometric shapes, emoji collections, currency symbols, and language-specific diacritics. Perfect for adding special characters to documents, inserting emojis into social media posts, finding mathematical notation for academic papers, locating currency symbols for financial content, discovering decorative elements for design work, and accessing technical symbols for programming documentation. The tool features powerful search by character name, category browsing, visual preview of glyphs, click-to-copy functionality, and displays character code points for technical reference. Users can search by description ("arrow", "copyright", "heart emoji"), browse by Unicode block, or filter by category to find exactly the character they need. All character lookup happens instantly in your browser without requiring special fonts or system configuration.',
@@ -1176,6 +1171,7 @@ export const toolCategories: ToolCategory[] = [
       },
       {
         name: "Text Analysis",
+        slug: "text-analysis",
         description: "Analyze Unicode text properties",
         detailedDescription:
           "The Text Analysis tool is a comprehensive Unicode character inspection and diagnostic utility that examines text at the character level to reveal hidden properties, encoding details, invisible characters, script composition, and potential compatibility issues. Essential for developers debugging encoding problems, linguists analyzing multilingual text, security professionals detecting malicious Unicode, and content creators ensuring text displays correctly across platforms. This advanced analyzer provides detailed information about each character including Unicode code points, character names, Unicode blocks, script classifications, general categories (letter, number, punctuation, etc.), bidirectional text properties, combining character sequences, normalization forms, and byte-level encoding representations in UTF-8, UTF-16, and UTF-32. Perfect for identifying invisible characters causing bugs, detecting homograph attacks in domain names, analyzing mixed-script text, understanding emoji composition, troubleshooting database encoding issues, and verifying text normalization. The tool highlights potentially problematic characters including zero-width spaces, direction override characters, deprecated Unicode points, and visually similar characters from different scripts that could be used in phishing attacks. All analysis happens client-side ensuring sensitive text data remains completely private.",
@@ -1288,11 +1284,13 @@ export const toolCategories: ToolCategory[] = [
   },
   {
     name: "Encode & Decode",
+    slug: "encode-decode",
     description: "Encode and decode text in various formats",
     icon: <KeyRound className="h-8 w-8" />,
     tools: [
       {
         name: "Base64",
+        slug: "base64",
         description: "Encode/decode Base64",
         detailedDescription:
           "The Base64 Encoder/Decoder is an essential data encoding conversion tool that transforms binary data and text into ASCII-safe Base64 format and vice versa, enabling safe transmission and storage of binary content in text-only systems. Critical for web developers embedding images in HTML/CSS, API developers sending binary data in JSON, email systems handling attachments, and anyone working with data URIs or encoded credentials. Base64 encoding converts binary data (images, files, encrypted data) into a text representation using only 64 ASCII characters (A-Z, a-z, 0-9, +, /), making it safe for transmission through systems that only handle text, such as JSON APIs, XML files, email protocols, and URLs. While not encryption or security, Base64 ensures data integrity during transmission by avoiding interpretation issues with special characters or binary data. Perfect for creating data URIs for embedded images, encoding API authentication tokens, preparing email attachments, storing binary data in JSON/XML, and converting files for web-safe transmission. The tool supports standard Base64 encoding, URL-safe Base64 variant (using - and _ instead of + and /), and handles large files efficiently with proper chunking. Common applications include embedding small images directly in CSS or HTML, encoding JWT tokens for authentication, transmitting binary files through REST APIs, storing certificates and keys in configuration files, and creating mailto links with encoded attachments. All encoding and decoding happens client-side ensuring complete privacy for sensitive data.",
@@ -1415,6 +1413,7 @@ export const toolCategories: ToolCategory[] = [
       },
       {
         name: "URL Encoding",
+        slug: "url-encoding",
         description: "Encode/decode URLs",
         detailedDescription:
           "The URL Encoding tool is a specialized web development utility that converts special characters, spaces, and reserved symbols in URLs into percent-encoded format (%20, %3A, etc.) ensuring safe transmission and proper interpretation by web servers and browsers. Essential for web developers building APIs, frontend developers handling query parameters, SEO professionals managing URL structures, and anyone working with web links containing special characters. URL encoding (also called percent-encoding or URI encoding) transforms characters that have special meaning in URLs or aren't safe for transmission into a format using % followed by hexadecimal values. Critical for encoding spaces, non-ASCII characters, reserved characters (&, =, ?, #, /), and special symbols in URL paths, query strings, and form data. Perfect for preparing search queries with special characters, encoding international domain names, formatting GET request parameters, creating shareable links with complex data, and ensuring cross-browser URL compatibility. The tool supports both component encoding (encodes everything including /, :, etc.) and URI encoding (preserves URL structure characters), handles bulk URL processing for batch operations, and properly encodes Unicode characters for international URLs. Common use cases include encoding search terms for query strings, formatting data for GET requests, preparing URLs for social media sharing, and ensuring URL validity across different systems and character sets.",
@@ -1498,11 +1497,6 @@ export const toolCategories: ToolCategory[] = [
               "Yes, the URL Encoding tool is free and accessible online without any subscription or registration.",
           },
           {
-            question: "Can I use the URL Encoding tool offline?",
-            answer:
-              "Currently, the URL Encoding tool requires an internet connection as it functions within your web browser.",
-          },
-          {
             question: "What characters need to be URL encoded?",
             answer:
               "Characters that should be encoded include spaces, reserved characters (& = ? # / : @), non-ASCII characters (Chinese, Arabic, emoji), and control characters. Safe characters include letters (A-Z, a-z), numbers (0-9), and a few symbols like - _ . ~",
@@ -1517,6 +1511,7 @@ export const toolCategories: ToolCategory[] = [
       },
       {
         name: "HTML Entities",
+        slug: "html-entities",
         description: "Convert HTML entities",
         detailedDescription:
           "The HTML Entities tool is a comprehensive character conversion utility that encodes special characters into HTML entity codes (named, numeric, or hexadecimal) and decodes them back to original characters, ensuring proper display and preventing XSS security vulnerabilities in web content. Essential for web developers building secure applications, content managers working with CMS platforms, email template designers, and anyone embedding user-generated content in HTML documents. HTML entities are special codes that represent characters with special meaning in HTML (like <, >, &, quotes) or characters not easily typed on keyboards (©, €, ™, accented letters). By converting these characters to entities (&lt; for <, &copy; for ©, &#8364; for €), you ensure they display correctly without being interpreted as HTML markup. Perfect for preventing XSS attacks by escaping user input, displaying code snippets in HTML without execution, rendering special characters and symbols correctly across all browsers, preparing content for XML and RSS feeds, and ensuring email HTML compatibility. The tool supports named entities (&amp;, &lt;, &gt;), decimal numeric entities (&#169;), and hexadecimal entities (&#xA9;), with comprehensive coverage of HTML5 entity specifications including mathematical symbols, Greek letters, arrows, and special punctuation marks. All conversions happen client-side ensuring privacy for sensitive content.",
@@ -1628,11 +1623,13 @@ export const toolCategories: ToolCategory[] = [
 
   {
     name: "Random Generator",
+    slug: "random-generator",
     description: "Generate random text and data",
     icon: <Shuffle className="h-8 w-8" />,
     tools: [
       {
         name: "Text Generator",
+        slug: "text-generator",
         description: "Generate random text",
         detailedDescription:
           "The Text Generator tool is a versatile utility that creates random placeholder text for design mockups, testing, and content generation. It supports various text types including Lorem Ipsum, random words, and complete sentences to suit different project needs. Ideal for designers, developers, and writers needing quick filler text without the hassle of manual creation. The tool generates coherent placeholder text that mimics natural language patterns, making it perfect for visual layouts, UI/UX prototypes, and content testing. Users can customize the length and type of generated text to fit specific requirements. All text generation happens client-side ensuring privacy and security of your data.",
@@ -1713,15 +1710,11 @@ export const toolCategories: ToolCategory[] = [
             answer:
               "Yes, the Text Generator is free and accessible online without requiring any subscription.",
           },
-          {
-            question: "Can I use the Text Generator tool offline?",
-            answer:
-              "Currently, the Text Generator tool operates online and requires an internet connection to function.",
-          },
         ],
       },
       {
         name: "Password Generator",
+        slug: "password-generator",
         description: "Generate secure passwords",
         detailedDescription:
           "The Password Generator tool is a robust utility that creates secure, random passwords to help protect your online accounts from hacking and unauthorized access. It offers various password types including strong complex passwords, memorable phrases, and numeric PINs to cater to different security and usability needs. Ideal for individuals, IT professionals, and organizations looking to enhance their cybersecurity practices by using strong, unique passwords. The tool generates passwords using randomization algorithms that include uppercase and lowercase letters, numbers, and special characters to ensure unpredictability. Users can customize password length and complexity based on their specific requirements. All password generation occurs client-side, ensuring your sensitive data remains private and secure.",
@@ -1803,15 +1796,11 @@ export const toolCategories: ToolCategory[] = [
             answer:
               "Yes, the Password Generator tool is completely free and available online without any subscription or registration.",
           },
-          {
-            question: "Can I use the Password Generator tool offline?",
-            answer:
-              "Currently, the Password Generator tool operates online and requires an internet connection to work.",
-          },
         ],
       },
       {
         name: "UUID Generator",
+        slug: "uuid-generator",
         description: "Generate UUIDs/GUIDs",
         detailedDescription:
           "The UUID Generator tool is a specialized utility that creates universally unique identifiers (UUIDs/GUIDs) used to uniquely identify objects across systems. It supports various UUID versions including v4 (random), v5 (namespace and name-based hashing), and custom versions for specialized use cases. Ideal for developers, database administrators, and system architects who need reliable unique identifiers for distributed systems, databases, and applications. The tool generates UUIDs using cryptographically strong random number generation, timestamps, and hashing methods depending on the version selected. Users can customize the format and version of the UUIDs generated to fit their specific requirements. All UUID generation occurs client-side, ensuring your data remains private and secure.",
@@ -1890,22 +1879,19 @@ export const toolCategories: ToolCategory[] = [
             answer:
               "Yes, the UUID Generator tool is free and accessible online without registration or subscription.",
           },
-          {
-            question: "Can this tool be used offline?",
-            answer:
-              "Currently, the UUID Generator works online and requires an internet connection for use.",
-          },
         ],
       },
     ],
   },
   {
     name: "Font Generator",
+    slug: "font-generator",
     description: "Create stylish text for your social media posts.",
     icon: <Palette className="h-8 w-8" />,
     tools: [
       {
         name: "Font Generators",
+        slug: "font-generators",
         description: "Create stylish text for your social media posts.",
         detailedDescription:
           "The Font Generator tool is a creative utility that allows users to generate stylish and visually appealing text for social media posts, bios, messages, and more. It offers a variety of font styles including fancy, mirror, handwritten, Fortnite, bubble fonts, and many others to help content stand out. Ideal for social media enthusiasts, marketers, influencers, and anyone looking to enhance their digital presence with unique typography. The tool provides real-time font styling with options to customize size and effects, making it easy to create eye-catching text. All font generation happens client-side ensuring privacy for your content.",

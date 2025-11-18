@@ -6,11 +6,25 @@ import { toolCategories } from "@/lib/tool-categories";
 import ToolSearch from "@/components/toolSearch";
 import { FAQSectionCompact } from "@/components/sections/FAQSection";
 
+// Slugify function to convert names to URL-friendly slugs
+function getSlug(input?: string) {
+  if (!input) return "";
+  try {
+    input = decodeURIComponent(String(input));
+  } catch {}
+  return String(input)
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-") // groups of non-alphanumerics -> hyphen
+    .replace(/-+/g, "-") // collapse multiple hyphens
+    .replace(/^-+|-+$/g, ""); // trim leading/trailing hyphens
+}
+
 export async function generateStaticParams() {
   return toolCategories.flatMap((category) =>
     category.tools.map((tool) => ({
-      category: category.name.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
-      tool: tool.name.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+      category:
+        (category.slug && String(category.slug)) ?? getSlug(category.name),
+      tool: (tool.slug && String(tool.slug)) ?? getSlug(tool.name),
     }))
   );
 }
@@ -24,14 +38,15 @@ export async function generateMetadata({
   }>;
 }): Promise<Metadata> {
   const { category: categoryParam, tool: toolParam } = await params;
-  const category = toolCategories.find(
-    (cat) =>
-      cat.name.toLowerCase().replace(/[^a-z0-9]+/g, "-") === categoryParam
-  );
+  const category = toolCategories.find((cat) => {
+    const canonical = (cat.slug && String(cat.slug)) ?? getSlug(cat.name);
+    return canonical === categoryParam;
+  });
 
-  const tool = category?.tools.find(
-    (t) => t.name.toLowerCase().replace(/[^a-z0-9]+/g, "-") === toolParam
-  );
+  const tool = category?.tools.find((t) => {
+    const canonical = (t.slug && String(t.slug)) ?? getSlug(t.name);
+    return canonical === toolParam;
+  });
 
   if (!category || !tool) {
     return {
@@ -83,18 +98,19 @@ export default async function Page({
     redirect("/tools");
   }
 
-  const categories = toolCategories.find(
-    (cat) =>
-      cat.name.toLowerCase().replace(/[^a-z0-9]+/g, "-") === categoryParam
-  );
+  const categories = toolCategories.find((cat) => {
+    const canonical = (cat.slug && String(cat.slug)) ?? getSlug(cat.name);
+    return canonical === categoryParam;
+  });
 
   if (!categories) {
     notFound();
   }
 
-  const tools = categories.tools.find(
-    (t) => t.name.toLowerCase().replace(/[^a-z0-9]+/g, "-") === toolParam
-  );
+  const tools = categories.tools.find((t) => {
+    const canonical = (t.slug && String(t.slug)) ?? getSlug(t.name);
+    return canonical === toolParam;
+  });
 
   if (!tools) {
     notFound();

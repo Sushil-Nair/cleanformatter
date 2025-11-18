@@ -33,7 +33,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import AdUnit from "./ad-unit";
+import Link from "next/link";
+// import AdUnit from "./ad-unit";
 
 interface ToolLayoutProps {
   title: string;
@@ -213,7 +214,7 @@ export function ToolLayout({
   };
 
   return (
-    <div className="container max-w-6xl mx-auto">
+    <div className="container mx-auto">
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <div>
@@ -285,7 +286,7 @@ export function ToolLayout({
 
         <Card>
           <CardContent className="p-6">
-            <AdUnit slot="tool-header" format="horizontal" />
+            {/* <AdUnit slot="tool-header" format="horizontal" /> */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
@@ -395,10 +396,16 @@ export function ToolLayout({
               </div>
             </div>
           </CardContent>
+          <Link
+            href={`/feature-guide#${title.toLowerCase().replace(/\s+/g, "-")}`}
+            className="text-primary hover:underline col-span-2 text-right mt-2 block"
+          >
+            How to Use
+          </Link>
         </Card>
 
         {aboutContent && (
-          <AboutSection title="About Case Converter" content={aboutContent} />
+          <AboutSection title="About Clean Formatter" content={aboutContent} />
         )}
       </div>
     </div>

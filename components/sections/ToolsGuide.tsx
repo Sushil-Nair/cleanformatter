@@ -207,6 +207,7 @@ const ToolsGuidePage: React.FC<ToolsGuidePageProps> = ({ categories }) => {
                 {category.tools.map((tool, toolIndex) => (
                   <Card
                     key={toolIndex}
+                    id={tool.name.toLowerCase().replace(/\s+/g, "-")}
                     className="border-border overflow-hidden"
                   >
                     <CardHeader className="bg-muted/50">

@@ -7,6 +7,8 @@ import Script from "next/script";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/sections/footer";
 import BackToTopButton from "@/components/backToTop";
+import FaviconSwitcher from "@/components/FaviconSwitcher";
+import ServiceWorkerManager from "@/components/ServiceWorkerManager";
 
 export const metadata: Metadata = {
   title: "Online Text & Code Tools - Case Converter, Formatter, Counters",
@@ -31,6 +33,18 @@ export const metadata: Metadata = {
     "writer tools",
     "seo text tools",
     "online code utilities",
+    "JSON formatter",
+    "JavaScript minifier",
+    "CSS beautifier",
+    "HTML formatter",
+    "text analysis",
+    "online converters",
+    "productivity tools",
+    "clean formatter",
+    "Python formatter",
+    "CSS Formatter",
+    "HTML Cleaner",
+    "Text Case Tools",
   ],
 
   authors: [
@@ -79,23 +93,37 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <link id="faviconICO" rel="icon" href="/favicon-light.ico" />
         <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href="/apple-touch-icon.png"
-        />
-        <link
+          id="favicon32"
           rel="icon"
-          type="image/png"
           sizes="32x32"
-          href="/favicon-32x32.png"
+          href="/favicon-light-32x32.png"
         />
         <link
+          id="favicon16"
           rel="icon"
-          type="image/png"
           sizes="16x16"
-          href="/favicon-16x16.png"
+          href="/favicon-light-16x16.png"
         />
+        <link
+          id="appleIcon"
+          rel="apple-touch-icon"
+          href="/apple-touch-icon-light.png"
+        />
+        <link
+          id="android192"
+          rel="icon"
+          sizes="192x192"
+          href="/android-chrome-light-192x192.png"
+        />
+        <link
+          id="android512"
+          rel="icon"
+          sizes="512x512"
+          href="/android-chrome-light-512x512.png"
+        />
+
         <link rel="manifest" href="/site.webmanifest" />
         <Script
           id="google-adsense"
@@ -106,6 +134,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen grid place-content-center">
+        <FaviconSwitcher />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -118,6 +147,7 @@ export default function RootLayout({
           <Footer />
           <Toaster />
         </ThemeProvider>
+        <ServiceWorkerManager />
       </body>
       <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS || ""} />
     </html>

@@ -7,13 +7,20 @@ import Link from "next/link";
 import ToolSearch from "@/components/toolSearch";
 // import AdUnit from "@/components/ad-unit";
 
-export default function ToolsPage() {
-  const getSlug = (name: string) =>
-    name
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, "-") // replace groups of non-alphanumerics with '-'
-      .replace(/^-+|-+$/g, "");
+// Slugify function to convert names to URL-friendly slugs
+function getSlug(input?: string) {
+  if (!input) return "";
+  try {
+    input = decodeURIComponent(String(input));
+  } catch {}
+  return String(input)
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-") // groups of non-alphanumerics -> hyphen
+    .replace(/-+/g, "-") // collapse multiple hyphens
+    .replace(/^-+|-+$/g, ""); // trim leading/trailing hyphens
+}
 
+export default function ToolsPage() {
   return (
     <div className="min-h-screen flex flex-col">
       <ToolSearch toolCategories={toolCategories} />
@@ -47,9 +54,9 @@ export default function ToolsPage() {
                       }}
                     >
                       <Link
-                        href={`/tools/${getSlug(category.name)}/${getSlug(
-                          tool.name
-                        )}`}
+                        href={`/tools/${
+                          category.slug ?? getSlug(category.name)
+                        }/${tool.slug ?? getSlug(tool.name)}`}
                         className="block h-full"
                       >
                         <Card className="group h-full transition-all duration-300 hover:shadow-lg hover:scale-[1.02]">

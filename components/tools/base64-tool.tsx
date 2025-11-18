@@ -12,6 +12,7 @@ import { AboutSection } from "@/components/tools/about-section";
 import { TextStatsDisplay } from "@/components/tools/text-stats";
 import { TextStats } from "@/types/tools";
 import { Copy, Download, RotateCcw, Upload } from "lucide-react";
+import Link from "next/link";
 import {
   Select,
   SelectContent,
@@ -437,6 +438,9 @@ export function Base64Tool() {
               </div>
             </div>
           </CardContent>
+          <Link href="/feature-guide#base64" className="text-primary p-4 block">
+            How to use Base64 Encoder/Decoder Tool
+          </Link>
         </Card>
 
         <AboutSection
