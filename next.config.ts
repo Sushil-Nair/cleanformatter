@@ -17,6 +17,18 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "images.pexels.com",
       },
+      {
+        protocol: "https",
+        hostname: "unsplash.com",
+      },
+      {
+        protocol: "https",
+        hostname: "as1.ftcdn.net",
+      },
+      {
+        protocol: "https",
+        hostname: "as2.ftcdn.net",
+      },
     ],
   },
   // any additional Next.js config you want

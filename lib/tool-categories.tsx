@@ -1069,103 +1069,97 @@ export const toolCategories: ToolCategory[] = [
         slug: "character-finder",
         description: "Find and insert special characters",
         detailedDescription:
-          'The Character Finder is an intuitive Unicode character search and insertion tool that helps users quickly discover, preview, and copy special characters, symbols, emojis, mathematical operators, currency signs, and decorative glyphs from the complete Unicode standard. Essential for content creators, designers, writers, developers, and anyone needing special characters beyond the standard keyboard layout. This comprehensive character browser organizes over 140,000 Unicode characters into logical categories including arrows, mathematical symbols, Greek letters, punctuation marks, geometric shapes, emoji collections, currency symbols, and language-specific diacritics. Perfect for adding special characters to documents, inserting emojis into social media posts, finding mathematical notation for academic papers, locating currency symbols for financial content, discovering decorative elements for design work, and accessing technical symbols for programming documentation. The tool features powerful search by character name, category browsing, visual preview of glyphs, click-to-copy functionality, and displays character code points for technical reference. Users can search by description ("arrow", "copyright", "heart emoji"), browse by Unicode block, or filter by category to find exactly the character they need. All character lookup happens instantly in your browser without requiring special fonts or system configuration.',
+          "The Character Finder Tool is a comprehensive Unicode lookup and analysis utility designed to help developers, designers, linguists, and content creators explore detailed information about any Unicode character. By entering a character or its Unicode code point (U+XXXX), the tool instantly displays its official Unicode name, script, category, block, bidirectional class, and special attributes such as whether it is an emoji, symbol, or mathematical character. It also generates complete encoding representations, including UTF-8, UTF-16, and UTF-32, making it especially valuable for debugging text rendering issues, resolving encoding problems, and ensuring character compatibility across different platforms and programming environments. The Character Finder Tool provides accurate insights into characters from all global scripts, including Latin, Devanagari, Arabic, Chinese, and hundreds more, allowing users to understand exactly how individual characters behave in digital text systems. With its clear layout and instant analysis, the tool functions as a powerful resource for internationalization work, font development, text processing, academic research, and everyday character identification tasks. Whether you are inspecting a single emoji, analyzing a complex symbol, or validating multilingual content, this tool offers fast, reliable, and developer-friendly Unicode analysis that simplifies working with modern text and enhances productivity.",
         primaryUseCases: [
-          "Finding and inserting emoji characters into social media posts, messages, and marketing content when platform native emoji pickers are unavailable",
-          "Locating mathematical symbols and operators (∑, ∫, ≠, √, ∞) for academic papers, scientific documentation, and technical writing",
-          "Discovering currency symbols beyond the dollar sign ($, €, ¥, £, ₹, ₿) for international financial content and e-commerce applications",
-          "Accessing arrow symbols, geometric shapes, and decorative characters for creating visual diagrams, flowcharts, and design elements in plain text",
-          "Finding diacritical marks and accented characters for properly spelling names and words in languages beyond your keyboard's native support",
+          "Identify and analyze Unicode character properties such as name, script, category, and block.",
+          "Debug encoding issues by viewing the character's UTF-8, UTF-16, and UTF-32 representations.",
+          "Verify whether a character is an emoji, symbol, math operator, or belongs to a special Unicode range.",
+          "Check compatibility of characters across platforms, fonts, and internationalized applications.",
+          "Research and explore characters from multilingual scripts for development, design, or academic purposes.",
         ],
         howToUse: [
-          "Browse character categories (Symbols, Emojis, Math Symbols, Currency, etc.) or use the search box to find characters by name or description",
-          "Type keywords in the search field such as 'arrow', 'heart', 'copyright', or 'sum' to filter and display matching characters",
-          "Click or tap on any character in the results to select it, which typically copies it to your clipboard automatically",
-          "Paste the copied character into your document, social media post, design file, or application using Ctrl+V (Cmd+V on Mac)",
-          "View additional information such as character name, Unicode code point, and HTML entity if you need technical reference details",
+          "Enter a single character or its Unicode code point (U+XXXX) into the search field.",
+          "Click the Search button to generate a detailed Unicode analysis for the selected character.",
+          "Review the displayed properties, including name, script, category, encoding formats, and special attributes.",
+          "Use the Copy button to quickly copy the character for use in documents, code, or design work.",
+          "Scroll through the properties and encoding tables to understand how the character behaves across different Unicode systems.",
         ],
         popularTools: ["Symbols", "Emojis", "Math Symbols", "Currency Symbols"],
         advancedTips: [
-          "Bookmark frequently used characters or create a personal collection in a text file for quick access without searching each time",
-          "Use the Unicode code point information to create keyboard shortcuts or text replacement rules in your operating system for characters you use regularly",
-          "Combine the Character Finder with your design software's glyph panel to ensure the character you found is supported by your chosen font",
-          "When searching, try multiple related terms if your first search doesn't find the character (e.g., try 'check', 'tick', 'checkmark', and 'approval')",
-          "For emoji variations (skin tones, gender), look for the base emoji first, then check if modifier options are available in the character details",
+          "Use Unicode code point search (U+XXXX) for characters that cannot be typed directly from your keyboard.",
+          "Analyze characters from different scripts to verify correct rendering and font support across platforms.",
+          "Check UTF-8, UTF-16, and UTF-32 byte sequences to debug encoding issues in APIs, databases, or file processing.",
+          "Use the character’s block and category information to organize or filter characters in custom applications or datasets.",
+          "Inspect emoji and symbol properties to ensure proper compatibility in mobile apps, websites, and cross-platform interfaces.",
         ],
         troubleshooting: [
           {
             issue:
-              "Character displays as a box or question mark after copying and pasting into my document",
+              "The tool is not showing any character details after I click Search.",
             solution:
-              "The font you're using doesn't contain that character. Switch to a Unicode-compliant font with broad character support like Arial Unicode MS, Noto Sans, Segoe UI Symbol, or a specialized emoji font like Noto Color Emoji. In web applications, ensure your CSS includes appropriate fallback fonts. Some very rare Unicode characters may not be supported by any installed fonts—you may need to download a font that specifically includes that Unicode block.",
+              "Ensure you entered either a single character or a valid Unicode code point in the format U+XXXX. The tool cannot analyze multiple characters at once or invalid code point formats.",
           },
           {
             issue:
-              "Emoji appears in color in the Character Finder but displays as black-and-white in my application",
+              "Some special characters or emojis are not rendering properly in the preview box.",
             solution:
-              "Your application or system doesn't support color emoji (emoji fonts with embedded color data). This is common in older applications or certain operating systems. The emoji is still technically correct but renders as a monochrome glyph. To see color emoji, use a modern application with emoji support or ensure your system has color emoji fonts installed (like Apple Color Emoji on Mac, Segoe UI Emoji on Windows, or Noto Color Emoji on Linux).",
+              "Your device or browser may not support the font required to display that character. Try updating your browser, switching to a different device, or installing a font with wider Unicode support.",
           },
           {
             issue:
-              "Multiple similar characters appear in search results and I don't know which one to use",
+              "UTF-8 or UTF-16 values look empty or incorrect for certain characters.",
             solution:
-              "Check the character descriptions and Unicode code points to understand the differences. For example, there are multiple dash characters: hyphen (-), en dash (–), em dash (—), and minus sign (−), each with specific typographic uses. Review the character name and intended use case. For technical writing, prefer the semantically correct character; for casual use, the most common variant is usually fine. Hovering over or clicking characters often reveals additional details to help you choose.",
+              "This may happen if the input character is a surrogate pair, private-use character, or falls in a restricted Unicode range. These characters can have non-standard encoding behavior, so ensure the entered code point is valid and supported.",
           },
         ],
         detailedExamples: [
-          "A marketing manager creates social media posts and wants to add visual interest with emoji without using their phone's emoji keyboard. They open the Character Finder, search for 'star' and find various star symbols (★, ⭐, ✨). They click the glittering stars emoji ✨, which copies to clipboard, then paste it into their desktop social media scheduling tool. The emoji appears correctly, making their posts more engaging and visually appealing without needing to switch devices.",
-          "A mathematics professor writes lecture notes in LaTeX and needs to insert the summation symbol ∑. Rather than looking up LaTeX commands, they use the Character Finder, search for 'sum', and find the summation symbol Σ (uppercase sigma) and ∑ (n-ary summation). They copy the correct n-ary summation symbol and paste it into their word processor for quick note-taking, later converting to proper LaTeX syntax for the final document.",
-          "An e-commerce developer builds a multi-currency website and needs to display prices in various currencies. Using the Character Finder, they search 'currency' and discover symbols they weren't aware of: Indian Rupee (₹), Bitcoin (₿), Turkish Lira (₺). They copy the relevant currency code points and implement them in their website's CSS and JavaScript, ensuring proper currency symbol display for international customers.",
+          "A front-end developer is debugging a rendering issue where certain characters in a multilingual interface appear as blank boxes. They paste the problematic character into the Character Finder and instantly see that it belongs to the Ethiopic script, which their current font does not support. By checking the script, block, and encoding details, they identify the missing font dependency and update their CSS to include a fallback font. The characters now render correctly across all browsers, solving the issue quickly and efficiently.",
+          "A technical writer preparing documentation needs the correct Unicode version of the checkmark symbol to ensure compatibility across platforms. They search for 'checkmark' by entering ✓ directly into the Character Finder and review its Unicode name, block, and UTF-8 encoding. After confirming it is the standard character U+2713 and not a private-use symbol, they copy it using the built-in button and paste it into their documentation tool with confidence that it will display consistently.",
+          "A game developer working with dialogue text notices certain emoji break during JSON parsing. They take one example emoji and paste it into the Character Finder, which displays its UTF-16 surrogate pair values. Understanding that the emoji requires surrogate-safe handling, the developer updates their string encoding process to handle code points above U+FFFF. After the fix, the game correctly loads all emojis without errors.",
         ],
         link: "https://cleanformatter.com/tools/unicode/character-finder",
         faq: [
           {
-            question: "What is the Character Finder tool?",
+            question: "What is the Character Finder Tool?",
             answer:
-              "The Character Finder tool helps you find and insert special characters, symbols, emojis, and math symbols into your text quickly and easily.",
+              "The Character Finder Tool is an online Unicode lookup utility that lets you enter any character or code point to instantly view its official Unicode name, script, category, block, encoding formats, and special attributes such as emoji or symbol classification.",
           },
           {
-            question: "What popular character types can I find with this tool?",
+            question: "How do I search for a character or Unicode code point?",
             answer:
-              "You can find a wide range of characters including symbols, emojis, and math symbols, making it useful for writing, programming, and creative projects.",
+              "Simply type a single character or its Unicode code point in the format U+XXXX into the search field. Then click the Search button to generate a complete Unicode analysis of that character.",
           },
           {
-            question: "How does the Character Finder tool work?",
+            question: "Can this tool identify emojis and special symbols?",
             answer:
-              "You can search for characters by name, category, or browse through the lists, then click to copy and insert them into your text or document.",
+              "Yes. The tool detects emojis, mathematical symbols, punctuation marks, private-use characters, and many other Unicode character types, making it ideal for any kind of symbol identification.",
           },
           {
-            question: "Why should I use the Character Finder tool?",
+            question: "Why are UTF-8, UTF-16, and UTF-32 encodings displayed?",
             answer:
-              "The tool saves time when searching for uncommon or special characters, helping ensure accurate and easy insertion without memorizing codes.",
-          },
-          {
-            question: "Is the Character Finder tool free?",
-            answer:
-              "Yes, the Character Finder tool is free and accessible online without any subscription needed.",
-          },
-          {
-            question: "Can I use the Character Finder tool on mobile devices?",
-            answer:
-              "Yes, the Character Finder tool is designed to be mobile-friendly and works well across desktop and mobile browsers.",
+              "Different programming languages, file formats, and platforms use different encoding standards. Showing all three helps you debug encoding issues, ensure compatibility, and understand how characters are stored internally.",
           },
           {
             question:
-              "How many characters are available in the Character Finder?",
+              "What should I do if a character does not render properly in the preview?",
             answer:
-              "The Character Finder provides access to thousands of Unicode characters including the complete emoji set, mathematical symbols, arrows, geometric shapes, currency symbols, and characters from dozens of world languages and historical scripts.",
+              "If a character appears as a blank box or question mark, your device or browser may not support the required font. Try switching devices, updating your browser, or installing a font with broader Unicode coverage.",
+          },
+          {
+            question: "Can I copy the character once I find it?",
+            answer:
+              "Yes. The tool includes a Copy button that instantly copies the selected character to your clipboard, allowing you to use it in documents, design tools, code editors, or social media posts.",
           },
           {
             question:
-              "Can I search for characters by description instead of name?",
+              "Is this tool useful for multilingual or international applications?",
             answer:
-              "Yes, most Character Finders support descriptive searches. For example, searching 'happy face' will show various smiley emoji, and 'check' will show checkmark symbols. Try different related terms if your first search doesn't find what you need.",
+              "Absolutely. Developers use it to analyze scripts, verify character usage, debug internationalization issues, and ensure proper rendering of multilingual text in web and software applications.",
           },
           {
-            question:
-              "What's the difference between similar-looking characters?",
+            question: "Who can benefit from using the Character Finder Tool?",
             answer:
-              "Unicode includes many visually similar characters with different semantic meanings. For example, there are multiple dash types (hyphen, en dash, em dash, minus sign) and different space widths. The Character Finder usually displays character names and code points to help you distinguish between them and choose the appropriate one for your use case.",
+              "This tool is valuable for developers, content creators, UI designers, typographers, linguists, educators, and anyone who needs accurate Unicode information for characters, emojis, or symbols.",
           },
         ],
       },
@@ -1174,109 +1168,111 @@ export const toolCategories: ToolCategory[] = [
         slug: "text-analysis",
         description: "Analyze Unicode text properties",
         detailedDescription:
-          "The Text Analysis tool is a comprehensive Unicode character inspection and diagnostic utility that examines text at the character level to reveal hidden properties, encoding details, invisible characters, script composition, and potential compatibility issues. Essential for developers debugging encoding problems, linguists analyzing multilingual text, security professionals detecting malicious Unicode, and content creators ensuring text displays correctly across platforms. This advanced analyzer provides detailed information about each character including Unicode code points, character names, Unicode blocks, script classifications, general categories (letter, number, punctuation, etc.), bidirectional text properties, combining character sequences, normalization forms, and byte-level encoding representations in UTF-8, UTF-16, and UTF-32. Perfect for identifying invisible characters causing bugs, detecting homograph attacks in domain names, analyzing mixed-script text, understanding emoji composition, troubleshooting database encoding issues, and verifying text normalization. The tool highlights potentially problematic characters including zero-width spaces, direction override characters, deprecated Unicode points, and visually similar characters from different scripts that could be used in phishing attacks. All analysis happens client-side ensuring sensitive text data remains completely private.",
+          "The Text Analysis Tool is a comprehensive Unicode text inspection utility that analyzes input at the character level to reveal script composition, Unicode categories, character frequency, unique characters, surrogate pairs, private-use symbols, and non-characters. This tool is ideal for developers working with multilingual applications, linguists studying text structure, and content creators ensuring proper rendering across platforms. By processing the entire text client-side, it provides detailed counts of scripts, blocks, and general categories such as letters, numbers, symbols, and punctuation. The tool also generates word, sentence, and paragraph statistics, helping users better understand the structure and complexity of their text. Built for debugging and understanding Unicode-rich content, the Text Analysis Tool makes it easy to identify mixed-script usage, uncommon character groups, or segments containing potential rendering issues. While it does not display per-character encoding values or security-related diagnostics, its broad Unicode inspection capabilities make it a reliable solution for text processing, internationalization workflows, and character-level analysis.",
         primaryUseCases: [
-          "Detecting invisible or zero-width characters in text that cause unexpected behavior in applications, search functions, or string comparisons",
-          "Analyzing mixed-script text to identify characters from different writing systems that might indicate security issues like homograph attacks in URLs",
-          "Troubleshooting text encoding issues by examining byte-level UTF-8/UTF-16/UTF-32 representations to identify corruption or incorrect encoding",
-          "Understanding emoji composition by revealing base characters, skin tone modifiers, gender variants, and zero-width joiners used in complex emoji sequences",
-          "Validating text normalization by comparing NFC, NFD, NFKC, and NFKD forms to ensure consistent character representation for database storage and comparison",
+          "Analyze large text blocks to identify which Unicode scripts are present, such as Latin, Arabic, Devanagari, or mixed-script usage.",
+          "Detect unusual or uncommon characters by reviewing counts of private-use characters, surrogate pairs, and non-characters.",
+          "Understand the structure of text using detailed word, sentence, character, and paragraph statistics.",
+          "Perform character-level breakdowns for multilingual content to assist in localization, internationalization, or format validation.",
+          "Identify distribution of Unicode general categories such as letters, numbers, punctuation, symbols, and separators to better understand text composition.",
         ],
         howToUse: [
-          "Paste or type text containing characters you want to analyze into the Text Analysis tool's input area",
-          "View the detailed character-by-character breakdown showing each character's name, code point, category, and script in the analysis results",
-          "Review encoding information displayed for each character, including UTF-8 byte sequences and alternative Unicode representations",
-          "Check for warnings about invisible characters, direction overrides, deprecated code points, or mixed scripts that might cause problems",
-          "Use the export or copy function to save the analysis results for documentation, bug reports, or sharing with team members",
+          "Enter or paste any text into the input box to begin the analysis.",
+          "Review the real-time text statistics to see word count, sentence count, character count, and paragraph count.",
+          "Check the detailed analysis tables to understand script distribution, Unicode category distribution, and character-level properties such as private-use or non-character counts.",
+          "Use the Copy button to export a full text analysis report directly to your clipboard.",
+          "Use the Download button to save the complete analysis as a text file for documentation, debugging, or further processing.",
         ],
         popularTools: ["Character Info", "Encoding Info", "Script Info"],
         advancedTips: [
-          "Use the tool to create Unicode character whitelists for input validation by analyzing legitimate text samples and noting their character categories and scripts",
-          "Compare analysis results before and after text normalization to understand how NFC/NFD transformations affect character composition in your data",
-          "Leverage script detection to implement language-specific text processing rules, font selection, or input validation based on writing system",
-          "Analyze problematic user input that passes validation but causes display issues by examining for invisible characters, direction overrides, or encoding corruption",
-          "Document Unicode character usage patterns in your application by analyzing sample text and creating a character inventory for font selection and testing",
+          "Use the tool to inspect mixed-script text and identify when characters from different writing systems unintentionally appear together, which is helpful for debugging multilingual applications.",
+          "Analyze private-use characters and surrogate pairs to detect characters that may not render consistently across platforms or may require specialized font support.",
+          "Use the category distribution table to verify whether your content contains hidden symbols, unexpected punctuation, or non-letter characters that could affect search indexing or data processing.",
+          "Leverage script and block analysis to detect OCR errors, text sanitization issues, or copy-paste artifacts introduced from PDFs or external sources.",
+          "Review non-character and special code point counts to identify problematic or invalid characters before inserting text into databases, APIs, or user-facing applications.",
         ],
         troubleshooting: [
           {
             issue:
-              "Text appears normal but search or comparison functions fail to match identical-looking strings",
+              "The tool is not showing any analysis results after entering text.",
             solution:
-              "Use the Text Analysis tool to examine both strings character-by-character. Look for differences in Unicode normalization forms (NFC vs NFD), invisible characters (zero-width spaces, zero-width joiners), or visually identical characters from different scripts (homoglyphs). The analyzer will reveal these hidden differences. Normalize both strings to the same form (NFC or NFD) before comparison, or use Unicode-aware comparison functions that handle these variations automatically.",
+              "Make sure you have entered valid text into the input area. The analysis only runs when the text field is not empty. If you pasted formatted content, try removing hidden control characters or line breaks that may interfere with processing.",
           },
           {
             issue:
-              "Text displays incorrectly with unexpected characters or garbled output after database storage or API transmission",
+              "Some characters are counted as private-use or non-characters unexpectedly.",
             solution:
-              "Analyze the corrupted text to see how characters are being represented. Common issues include UTF-8 data treated as Latin-1 (producing mojibake like 'Ã©' for 'é'), truncated multi-byte sequences, or double-encoding. The tool's encoding information shows expected vs actual byte sequences. Fix by ensuring consistent UTF-8 encoding throughout your data pipeline: database columns should be UTF-8, API content-type headers should specify UTF-8, and file operations should use UTF-8 encoding explicitly.",
+              "This can happen if your text contains hidden symbols, copy-paste artifacts, or characters generated from OCR or external editors. Review the text source and remove or replace unsupported Unicode characters before further processing.",
           },
           {
             issue:
-              "Security warnings appear about suspicious characters but the text looks normal to users",
+              "The script or category counts seem incorrect for certain languages.",
             solution:
-              "The Text Analysis tool may have detected homograph attacks (visually similar characters from different scripts, like Cyrillic 'а' vs Latin 'a'), invisible direction override characters, or other Unicode security issues. These are invisible to users but can be exploited for phishing or bypassing filters. Review the character details to understand which specific characters are flagged. Implement input validation that restricts text to expected scripts, rejects invisible formatting characters in contexts where they're inappropriate, and normalizes text before display or comparison.",
+              "Mixed-script text, decomposed characters, or combined diacritics may cause classification differences. Ensure your input text is normalized, or verify the script assignment of each character using a detailed Unicode inspection tool like the Character Finder.",
           },
         ],
         detailedExamples: [
-          "A web developer receives bug reports that users can't log in even though they're entering the correct username. Using the Text Analysis tool, they analyze a failing username and discover it contains a zero-width space character (U+200B) invisible to users but treated as part of the username. The developer implements input sanitization that removes invisible characters during registration and login, fixing the issue and preventing similar problems with email addresses and other user input.",
-          "A security engineer analyzes a suspicious domain name that looks like 'paypal.com' but doesn't match the legitimate site. The Text Analysis tool reveals several characters are actually Cyrillic letters that look identical to Latin letters (а, е, о are Cyrillic, not Latin). This is a homograph attack attempting to phish users. The engineer documents the specific Unicode characters used and implements detection logic that checks for mixed-script domain names and warns users about potential phishing attempts.",
-          "A database administrator migrates text data from an old system and notices some customer names display incorrectly. Using the Text Analysis tool, they analyze affected names and discover they're stored in NFD normalization (decomposed form with separate combining characters) but the new system expects NFC (precomposed characters). For example, 'José' is stored as 'J', 'o', 's', 'e', combining acute accent instead of 'J', 'o', 's', 'é'. They run a normalization script to convert all text to NFC before migration, ensuring consistent display and comparison in the new database.",
+          "A localization engineer is reviewing user-generated content that mixes English and Arabic text. They paste the entire block into the Text Analysis Tool and immediately see that multiple scripts are present. The script distribution table reveals unexpected Cyrillic characters hidden inside the English words, likely introduced through a copy-paste error. With this insight, they clean the text and ensure the localization pipeline handles the content correctly.",
+          "A security analyst is inspecting a suspicious message that may contain hidden Unicode characters used in phishing attempts. They run the message through the Text Analysis Tool and notice several private-use characters and surrogate pairs. The category and script breakdown helps them identify zero-width control characters that were previously invisible in the text editor. They remove the malicious characters and report the manipulated message as a security risk.",
+          "A content creator preparing a multilingual blog post wants to ensure all characters render correctly across platforms. They paste their draft into the Text Analysis Tool and discover that a few characters belong to an unexpected block, indicating a font mismatch. The tool's Unicode category and script counts help them identify problematic punctuation copied from a PDF. After replacing the incompatible characters, they publish the article safely with consistent formatting.",
+          "A developer working on a text-processing feature needs to debug why their database is rejecting certain user inputs. By analyzing the text with the Text Analysis Tool, they find that some inputs contain non-characters and private-use symbols that the database encoding does not support. Armed with the analysis results, they update their validation logic to filter or sanitize these characters before saving user data.",
+          "A linguistics student analyzing code-switched conversations pastes an entire transcript into the Text Analysis Tool. The script distribution instantly shows how frequently each writing system appears, helping them quantify shifts between languages. The category breakdown also reveals how emoticons, emoji, and punctuation patterns differ between speakers, supporting their research with clear and measurable Unicode data.",
         ],
         link: "https://cleanformatter.com/tools/unicode/text-analysis",
         faq: [
           {
-            question: "What is the Text Analysis tool?",
+            question: "What does the Text Analysis Tool do?",
             answer:
-              "The Text Analysis tool allows you to analyze Unicode text properties such as character details, encoding information, and script types for comprehensive text insights.",
+              "The Text Analysis Tool examines any text you paste and breaks it down by Unicode scripts, categories, blocks, unique characters, surrogate pairs, private-use characters, and non-characters. It provides a detailed overview of the composition and structure of your text.",
+          },
+          {
+            question: "What type of text can I analyze?",
+            answer:
+              "You can analyze any type of text including multilingual paragraphs, emoji-rich messages, code snippets, symbols, and content copied from PDFs or external editors. The tool supports the full range of Unicode characters.",
+          },
+          {
+            question: "How is this tool helpful for developers?",
+            answer:
+              "Developers use the tool to debug encoding issues, detect mixed-script text, find invalid Unicode characters, and verify that text will render correctly across browsers, databases, and programming environments.",
           },
           {
             question:
-              "What popular features are included in the Text Analysis tool?",
+              "Can this tool detect hidden or unusual characters in my text?",
             answer:
-              "The tool includes popular features like Character Info, Encoding Info, and Script Info to give you detailed understanding of your text content.",
+              "Yes. The tool highlights private-use characters, surrogate pairs, and non-characters that may indicate copy-paste artifacts, OCR errors, or unexpected Unicode sequences.",
           },
           {
-            question: "How does the Text Analysis tool work?",
+            question: "Does the tool show Unicode details for every character?",
             answer:
-              "It examines your Unicode text to reveal the underlying code points, character encodings, and the scripts or writing systems used, helping you interpret and troubleshoot text data.",
+              "The tool provides aggregate statistics such as script counts and category breakdowns, but it does not display per-character names, code points, or encoding values. For those details, the Character Finder Tool is recommended.",
           },
           {
-            question: "Why should I use the Text Analysis tool?",
+            question: "Is my text data stored or sent to any server?",
             answer:
-              "This tool helps developers, linguists, and content creators ensure proper text encoding, identify hidden characters, and understand the composition of complex Unicode text.",
-          },
-          {
-            question:
-              "Can the Text Analysis tool detect invisible or special Unicode characters?",
-            answer:
-              "Yes, it can detect invisible characters, control codes, and special Unicode symbols that might affect text processing or display.",
-          },
-          {
-            question: "Is the Text Analysis tool free to use?",
-            answer:
-              "Yes, the Text Analysis tool is free and accessible online for quick Unicode text property analysis.",
+              "No. All analysis is processed entirely client-side in your browser. Your text never leaves your device, making the tool safe for sensitive or private content.",
           },
           {
             question:
-              "Can I analyze text in multiple languages with the Text Analysis tool?",
+              "Why do script or category counts look different from what I expected?",
             answer:
-              "Yes, the tool supports multilingual Unicode text, making it effective for text analysis across diverse languages and scripts.",
+              "Unicode classification varies across scripts and combining characters. Some symbols may belong to unexpected categories or blocks. Normalization differences or decomposed text may also affect counts.",
+          },
+          {
+            question: "Can this tool help with SEO or content quality?",
+            answer:
+              "Yes. By analyzing punctuation, symbols, and Unicode categories, you can detect incompatible characters and ensure your text renders consistently across all platforms, improving content reliability and readability.",
           },
           {
             question:
-              "What are homograph attacks and how does the tool detect them?",
+              "Why are private-use or non-character values appearing in my text?",
             answer:
-              "Homograph attacks use visually similar characters from different scripts (like Cyrillic 'а' vs Latin 'a') to create deceptive text, often in phishing URLs. The Text Analysis tool detects these by showing the actual Unicode code point and script for each character, revealing when visually identical characters are actually from different writing systems.",
+              "These characters often come from PDFs, OCR output, or copy-pasting from formatted sources. They may cause rendering or database issues, so identifying them helps clean and sanitize the text.",
           },
           {
-            question: "What are zero-width characters and why do they matter?",
+            question:
+              "Is this tool suitable for multilingual or international projects?",
             answer:
-              "Zero-width characters like zero-width space (U+200B), zero-width joiner (U+200D), and zero-width non-joiner (U+200C) are invisible but can affect text processing, search, and comparison. The Text Analysis tool makes these visible by displaying their presence and properties, helping you identify why strings that look identical don't match or why text behaves unexpectedly.",
-          },
-          {
-            question: "How can I use the tool to fix mojibake (garbled text)?",
-            answer:
-              "Mojibake occurs when text encoded in one character set is incorrectly interpreted as another. The Text Analysis tool shows you the actual bytes and Unicode code points, helping identify the encoding mismatch. Common patterns like 'Ã©' for 'é' indicate UTF-8 interpreted as Latin-1. Use the analysis to determine the correct source encoding, then re-decode the data properly.",
+              "Absolutely. The tool provides clear script and category analysis, making it ideal for localization workflows, international text validation, and detecting mixed-script usage in global content.",
           },
         ],
       },
@@ -1293,20 +1289,20 @@ export const toolCategories: ToolCategory[] = [
         slug: "base64",
         description: "Encode/decode Base64",
         detailedDescription:
-          "The Base64 Encoder/Decoder is an essential data encoding conversion tool that transforms binary data and text into ASCII-safe Base64 format and vice versa, enabling safe transmission and storage of binary content in text-only systems. Critical for web developers embedding images in HTML/CSS, API developers sending binary data in JSON, email systems handling attachments, and anyone working with data URIs or encoded credentials. Base64 encoding converts binary data (images, files, encrypted data) into a text representation using only 64 ASCII characters (A-Z, a-z, 0-9, +, /), making it safe for transmission through systems that only handle text, such as JSON APIs, XML files, email protocols, and URLs. While not encryption or security, Base64 ensures data integrity during transmission by avoiding interpretation issues with special characters or binary data. Perfect for creating data URIs for embedded images, encoding API authentication tokens, preparing email attachments, storing binary data in JSON/XML, and converting files for web-safe transmission. The tool supports standard Base64 encoding, URL-safe Base64 variant (using - and _ instead of + and /), and handles large files efficiently with proper chunking. Common applications include embedding small images directly in CSS or HTML, encoding JWT tokens for authentication, transmitting binary files through REST APIs, storing certificates and keys in configuration files, and creating mailto links with encoded attachments. All encoding and decoding happens client-side ensuring complete privacy for sensitive data.",
+          "The Advanced Base64 Encoder/Decoder is a powerful, developer-grade tool designed to convert text and files to and from Base64 with precision, security, and deep inspection features. Unlike basic Base64 utilities, this tool supports full binary-safe encoding, automatic file type detection, Base64URL conversion, padding control, line wrapping, escape modes (JSON, URL, HTML), and instant error diagnostics. It can handle plain text, images, PDFs, audio files, and binary data with high accuracy, providing detailed output views including decoded text, hexadecimal representation, raw binary bytes, and live file previews for supported formats. Developers can upload or drag-and-drop files, generate Data URLs, decode Base64 back to original files, examine byte sizes before and after encoding, and even generate QR codes directly from encoded content. The tool also includes smart features such as auto-detecting Base64 on paste, URL-safe toggling, and full UTF-8 support for emojis and multilingual text. Built for web developers, cybersecurity analysts, data engineers, and power users, this advanced utility is ideal for debugging encoding issues, inspecting binary structures, embedding images in HTML/CSS, handling JWT/Base64URL data, and safely processing encoded payloads in APIs or web apps—all with complete client-side processing to ensure data privacy.",
         primaryUseCases: [
-          "Embedding small images (icons, logos) directly into HTML or CSS files as data URIs to reduce HTTP requests and improve page load times",
-          "Encoding API authentication tokens (like JWTs) for secure transmission in HTTP headers or URL query parameters",
-          "Preparing email attachments by encoding binary files into Base64 format for inclusion in MIME email messages",
-          "Storing binary data (images, documents) in JSON or XML files by converting them to Base64 strings for text-only storage systems",
-          "Converting files (images, documents, binaries) to Base64 for safe transmission over text-based protocols like HTTP, WebSockets, or form submissions",
+          "Encode text, files, and binary data into Base64 for embedding images, fonts, and assets directly into HTML, CSS, JSON, or API payloads.",
+          "Decode Base64 strings back into readable text or original files while inspecting their underlying binary and hex structure for debugging or reverse-engineering.",
+          "Analyze uploaded files by detecting MIME types, previewing images, PDFs, and audio, and converting them to Data URLs for web development or frontend prototyping.",
+          "Convert between standard Base64 and Base64URL formats for JWT tokens, OAuth flows, Firebase keys, and other web security or authentication workflows.",
+          "Debug corrupted or malformed Base64 data using the tool’s error diagnostics, missing padding detection, whitespace cleanup, and escape/unescape modes.",
         ],
         howToUse: [
-          "For encoding: Paste your text or upload a file (image, document, binary data) into the Base64 encoder input area",
-          "Click the 'Encode to Base64' button to convert your data into Base64 ASCII-safe text format",
-          "Copy the Base64 encoded string from the output area for use in your HTML, API calls, configuration files, or data storage",
-          "For decoding: Paste the Base64 encoded string into the decoder input area",
-          "Click 'Decode from Base64' to convert back to original text or download the decoded binary file (for images, documents, etc.)",
+          "Choose whether you want to Encode or Decode using the mode selector at the top of the tool.",
+          "Enter your text manually into the input box, paste Base64 to auto-detect decode mode, or upload/drag-and-drop a file to process it automatically.",
+          "Adjust advanced options such as URL-safe mode, padding, line wrapping, or escape formats (JSON, URL, HTML) based on your output requirements.",
+          "Use the output view tabs to inspect the result as decoded text, hexadecimal bytes, raw binary, or view a live preview if the decoded data is an image, PDF, or audio file.",
+          "Copy the result, download the output, convert to Base64URL, generate a Data URL, or decode the Base64 directly back into the original file using the available action buttons.",
         ],
         popularTools: [
           "Standard Base64",
@@ -1315,11 +1311,14 @@ export const toolCategories: ToolCategory[] = [
           "ISO-8859-1",
         ],
         advancedTips: [
-          "Use URL-safe Base64 encoding (replacing + with - and / with _) when the encoded string will be used in URLs or filenames to avoid character encoding issues",
-          "For large files, be aware that Base64 encoding increases size by approximately 33%, so consider alternatives like direct binary transmission for very large files",
-          "When embedding Base64 images in CSS or HTML, include the appropriate data URI scheme (data:image/png;base64, or data:image/jpeg;base64,) before the encoded string",
-          "Cache Base64 encoded data when possible since encoding large files can be CPU-intensive, especially in browsers with performance limitations",
-          "Verify Base64 string integrity by checking that the length is a multiple of 4 characters (padding with = is used to achieve this)",
+          "Enable URL-safe mode when working with JWT tokens, OAuth signatures, or API parameters to prevent Base64 characters like '+' and '/' from breaking URLs.",
+          "Use the Hex and Binary tabs to debug corrupted files, inspect byte-level data, or verify whether your decoded output contains hidden markers, magic bytes, or embedded metadata.",
+          "Switch to HTML or JSON escape mode when embedding Base64 output inside scripts, attributes, or JSON payloads to avoid syntax breaking characters like quotes or angle brackets.",
+          "Preview the decoded output in the Preview tab to instantly verify images, PDFs, and audio without downloading the file, especially useful when debugging API responses or file uploads.",
+          "Use the line wrap option when generating Base64 for email attachments, MIME content, or systems that require fixed line lengths (e.g., 76 characters per line).",
+          "Convert between standard Base64 and Base64URL using the built-in buttons to ensure compatibility with systems like Firebase, WebCrypto, or JWT-based authentication flows.",
+          "Generate QR codes from short Base64 or text outputs to quickly transfer small payloads between devices or test mobile workflows without manually copying data.",
+          "Check the Size Info panel to understand Base64 expansion percentage and identify whether your payload requires compression, chunking, or alternative encoding methods.",
         ],
         troubleshooting: [
           {

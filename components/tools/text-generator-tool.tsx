@@ -22,81 +22,6 @@ import {
 import { generateText, TextGeneratorOptions } from "@/lib/utils/text-generator";
 // import AdUnit from "../ad-unit";
 
-const aboutContent = (
-  <div className="space-y-6">
-    <p>
-      Generate random text with our <strong>Text Generator Tool</strong>. Create
-      Lorem Ipsum, random words, or sentences in multiple languages.
-    </p>
-
-    <hr />
-
-    <h3 className="text-xl font-bold">Features</h3>
-    <div className="space-y-4">
-      <div>
-        <h4 className="font-semibold">🔄 Generation Options</h4>
-        <ul className="list-disc pl-6 space-y-2">
-          <li>
-            <strong>Lorem Ipsum:</strong> Classic placeholder text
-          </li>
-          <li>
-            <strong>Random Words:</strong> Generate word sequences
-          </li>
-          <li>
-            <strong>Random Sentences:</strong> Create coherent sentences
-          </li>
-          <li>
-            <strong>Multiple Languages:</strong> English, Spanish, Arabic
-          </li>
-        </ul>
-      </div>
-
-      <div>
-        <h4 className="font-semibold">⚡ Advanced Features</h4>
-        <ul className="list-disc pl-6 space-y-2">
-          <li>
-            <strong>Word Count Control:</strong> Specify total number of words
-          </li>
-          <li>
-            <strong>Format Options:</strong> Plain text or HTML
-          </li>
-          <li>
-            <strong>Real-time Preview:</strong> See changes instantly
-          </li>
-          <li>
-            <strong>Copy & Download:</strong> Export generated text
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <hr />
-
-    <h3 className="text-xl font-bold">Use Cases</h3>
-    <div className="space-y-4">
-      <div>
-        <h4 className="font-semibold">💻 Development</h4>
-        <ul className="list-disc pl-6 space-y-2">
-          <li>Create placeholder content</li>
-          <li>Test text layouts</li>
-          <li>Generate sample data</li>
-          <li>Mock content for testing</li>
-        </ul>
-      </div>
-
-      <div>
-        <h4 className="font-semibold">📝 Design</h4>
-        <ul className="list-disc pl-6 space-y-2">
-          <li>Fill design mockups</li>
-          <li>Test typography</li>
-          <li>Create layout examples</li>
-          <li>Generate realistic content</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-);
-
 export function TextGeneratorTool() {
   const [outputText, setOutputText] = React.useState("");
   const [options, setOptions] = React.useState<TextGeneratorOptions>({
@@ -330,8 +255,6 @@ export function TextGeneratorTool() {
             </div>
           </CardContent>
         </Card>
-
-        <AboutSection title="About Text Generator" content={aboutContent} />
       </div>
     </div>
   );

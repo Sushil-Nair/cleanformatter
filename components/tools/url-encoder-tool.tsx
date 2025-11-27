@@ -21,80 +21,6 @@ import {
 import { encodeURL, decodeURL, URLEncoderOptions } from "@/lib/utils/url";
 // import AdUnit from "../ad-unit";
 
-const aboutContent = (
-  <div className="space-y-6">
-    <p>
-      Encode and decode URLs with our <strong>URL Encoder/Decoder Tool</strong>.
-      Handle special characters, spaces, and Unicode in URLs safely and
-      efficiently.
-    </p>
-
-    <hr />
-
-    <h3 className="text-xl font-bold">Features</h3>
-    <div className="space-y-4">
-      <div>
-        <h4 className="font-semibold">🔄 Conversion Options</h4>
-        <ul className="list-disc pl-6 space-y-2">
-          <li>
-            <strong>URI Encoding:</strong> Full URL encoding (encodeURI)
-          </li>
-          <li>
-            <strong>Component Encoding:</strong> Parameter encoding
-            (encodeURIComponent)
-          </li>
-          <li>
-            <strong>Space Handling:</strong> Choose between %20 and + for spaces
-          </li>
-          <li>
-            <strong>Full Encoding:</strong> Encode all characters, including
-            reserved ones
-          </li>
-        </ul>
-      </div>
-
-      <div>
-        <h4 className="font-semibold">⚡ Advanced Features</h4>
-        <ul className="list-disc pl-6 space-y-2">
-          <li>
-            <strong>Bulk Processing:</strong> Handle multiple URLs
-          </li>
-          <li>
-            <strong>Smart Detection:</strong> Skip already encoded sequences
-          </li>
-          <li>
-            <strong>Unicode Support:</strong> Handle international characters
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <hr />
-
-    <h3 className="text-xl font-bold">Use Cases</h3>
-    <div className="space-y-4">
-      <div>
-        <h4 className="font-semibold">💻 Development</h4>
-        <ul className="list-disc pl-6 space-y-2">
-          <li>Prepare URLs for API requests</li>
-          <li>Handle query parameters</li>
-          <li>Process form submissions</li>
-          <li>Create safe file paths</li>
-        </ul>
-      </div>
-
-      <div>
-        <h4 className="font-semibold">🔒 Security</h4>
-        <ul className="list-disc pl-6 space-y-2">
-          <li>Sanitize user input</li>
-          <li>Prevent URL injection</li>
-          <li>Handle special characters safely</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-);
-
 export function URLEncoderTool() {
   const [inputText, setInputText] = React.useState("");
   const [outputText, setOutputText] = React.useState("");
@@ -364,11 +290,6 @@ export function URLEncoderTool() {
             </div>
           </CardContent>
         </Card>
-
-        <AboutSection
-          title="About URL Encoder/Decoder"
-          content={aboutContent}
-        />
       </div>
     </div>
   );

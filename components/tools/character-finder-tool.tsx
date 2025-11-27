@@ -6,10 +6,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { AboutSection } from "@/components/tools/about-section";
-import { getCharacterInfo } from "@/lib/utils/unicode/character-info";
-import { getEncodingInfo } from "@/lib/utils/unicode/encoding-info";
-import { getScriptInfo } from "@/lib/utils/unicode/script-info";
 import { Copy } from "lucide-react";
+
 import {
   Table,
   TableBody,
@@ -18,149 +16,143 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-// import AdUnit from "../ad-unit";
 
-const aboutContent = (
-  <div className="space-y-6">
-    <p>
-      Explore Unicode characters with our <strong>Character Finder Tool</strong>
-      . Get detailed information about any character including its properties,
-      encoding, and script details.
-    </p>
+import { getCharacterInfo } from "@/lib/utils/unicode/character-info";
+import { getEncodingInfo } from "@/lib/utils/unicode/encoding-info";
+import { getScriptInfo } from "@/lib/utils/unicode/script-info";
 
-    <hr />
+/* -------------------------------------------------------------------------- */
+/*  Utility Helpers                                                           */
+/* -------------------------------------------------------------------------- */
 
-    <h3 className="text-xl font-bold">Features</h3>
-    <div className="space-y-4">
-      <div>
-        <h4 className="font-semibold">🔍 Character Information</h4>
-        <ul className="list-disc pl-6 space-y-2">
-          <li>
-            <strong>Unicode Properties:</strong> Code point, name, category
-          </li>
-          <li>
-            <strong>Script Details:</strong> Writing system, direction
-          </li>
-          <li>
-            <strong>Encoding:</strong> UTF-8, UTF-16, UTF-32 representations
-          </li>
-          <li>
-            <strong>Special Properties:</strong> Emoji, math, symbols
-          </li>
-        </ul>
-      </div>
+// debounce hook
+const useDebounce = (value: string, delay = 300) => {
+  const [debounced, setDebounced] = React.useState(value);
+  React.useEffect(() => {
+    const t = setTimeout(() => setDebounced(value), delay);
+    return () => clearTimeout(t);
+  }, [value, delay]);
+  return debounced;
+};
 
-      <div>
-        <h4 className="font-semibold">⚡ Quick Access</h4>
-        <ul className="list-disc pl-6 space-y-2">
-          <li>
-            <strong>Search:</strong> Find characters by name or code point
-          </li>
-          <li>
-            <strong>Copy:</strong> One-click character copying
-          </li>
-          <li>
-            <strong>Details:</strong> Comprehensive character analysis
-          </li>
-        </ul>
-      </div>
-    </div>
+// hex formatter
+const hex = (num: number, size = 4) =>
+  num.toString(16).toUpperCase().padStart(size, "0");
 
-    <hr />
+// parse user input ("A", "😊", "U+1F600", "1F600")
+function parseCharInput(query: string): string | null {
+  const q = query.trim();
 
-    <h3 className="text-xl font-bold">Use Cases</h3>
-    <div className="space-y-4">
-      <div>
-        <h4 className="font-semibold">💻 Development</h4>
-        <ul className="list-disc pl-6 space-y-2">
-          <li>Debug Unicode-related issues</li>
-          <li>Find special characters</li>
-          <li>Analyze character properties</li>
-          <li>Check encoding details</li>
-        </ul>
-      </div>
+  // U+XXXX format
+  if (/^U\+[0-9A-F]{1,6}$/i.test(q)) {
+    const codePoint = parseInt(q.slice(2), 16);
+    if (codePoint >= 0xd800 && codePoint <= 0xdfff) return null; // invalid surrogate
+    return String.fromCodePoint(codePoint);
+  }
 
-      <div>
-        <h4 className="font-semibold">📝 Content Creation</h4>
-        <ul className="list-disc pl-6 space-y-2">
-          <li>Find symbols and emojis</li>
-          <li>Check character compatibility</li>
-          <li>Verify text directionality</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-);
+  // pure hex code point
+  if (/^[0-9A-F]{2,6}$/i.test(q)) {
+    const codePoint = parseInt(q, 16);
+    if (codePoint >= 0xd800 && codePoint <= 0xdfff) return null;
+    return String.fromCodePoint(codePoint);
+  }
 
-interface CharacterDetails {
-  char: string;
-  info: ReturnType<typeof getCharacterInfo>;
-  encoding: ReturnType<typeof getEncodingInfo>;
-  script: ReturnType<typeof getScriptInfo>;
+  // single character (including surrogate pair)
+  const chars = [...q];
+  if (chars.length === 1) {
+    return chars[0];
+  }
+
+  return null;
 }
+
+/* -------------------------------------------------------------------------- */
+/*  Main Component                                                            */
+/* -------------------------------------------------------------------------- */
 
 export function CharacterFinderTool() {
   const [searchQuery, setSearchQuery] = React.useState("");
-  const [selectedChar, setSelectedChar] =
-    React.useState<CharacterDetails | null>(null);
+  const [charInput, setCharInput] = React.useState<string | null>(null);
+  const debouncedQuery = useDebounce(searchQuery, 250);
+
   const { toast } = useToast();
 
-  const handleSearch = () => {
-    if (!searchQuery) return;
+  /* -------------------------------------------------------------------------- */
+  /*  Search Logic                                                              */
+  /* -------------------------------------------------------------------------- */
 
-    try {
-      let char: string;
-      let codePoint: number;
+  React.useEffect(() => {
+    if (!debouncedQuery) {
+      setCharInput(null);
+      return;
+    }
 
-      if (searchQuery.startsWith("U+") || searchQuery.startsWith("u+")) {
-        codePoint = parseInt(searchQuery.slice(2), 16);
-        char = String.fromCodePoint(codePoint);
-      } else if (searchQuery.length === 1) {
-        char = searchQuery;
-        codePoint = char.codePointAt(0) || 0;
-      } else {
-        toast({
-          title: "Invalid Input",
-          description:
-            "Please enter a single character or Unicode code point (U+XXXX)",
-          variant: "destructive",
-        });
-        return;
-      }
+    const parsed = parseCharInput(debouncedQuery);
 
-      const info = getCharacterInfo(codePoint);
-      const encoding = getEncodingInfo(codePoint);
-      const script = getScriptInfo(codePoint);
-
-      setSelectedChar({ char, info, encoding, script });
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (error) {
+    if (!parsed) {
+      setCharInput(null);
       toast({
-        title: "Error",
-        description: "Failed to get character information",
+        title: "Invalid Input",
+        description:
+          "Enter a single character or a valid Unicode code point (U+XXXX)",
         variant: "destructive",
       });
+      return;
     }
-  };
 
+    setCharInput(parsed);
+  }, [debouncedQuery, toast]);
+
+  /* -------------------------------------------------------------------------- */
+  /*  Heavy Unicode Info Computation                                            */
+  /* -------------------------------------------------------------------------- */
+
+  const details = React.useMemo(() => {
+    if (!charInput) return null;
+
+    const codePoint = charInput.codePointAt(0);
+    if (!codePoint) return null;
+
+    try {
+      return {
+        char: charInput,
+        info: getCharacterInfo(codePoint),
+        encoding: getEncodingInfo(codePoint),
+        script: getScriptInfo(codePoint),
+      };
+    } catch {
+      toast({
+        title: "Error",
+        description: "Failed to compute Unicode details.",
+        variant: "destructive",
+      });
+      return null;
+    }
+  }, [charInput, toast]);
+
+  /* -------------------------------------------------------------------------- */
+  /*  Copy Handler                                                              */
+  /* -------------------------------------------------------------------------- */
   const handleCopy = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text);
       toast({
-        title: "Copied to clipboard",
-        description: "Character has been copied to your clipboard",
+        title: "Copied!",
+        description: "Copied to clipboard.",
         duration: 2000,
       });
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (error) {
+    } catch {
       toast({
-        title: "Failed to copy",
-        description: "Please try again or copy manually",
+        title: "Copy Failed",
+        description: "Clipboard blocked. Try manually.",
         variant: "destructive",
-        duration: 3000,
       });
     }
   };
+
+  /* -------------------------------------------------------------------------- */
+  /*  UI                                                                        */
+  /* -------------------------------------------------------------------------- */
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -168,168 +160,151 @@ export function CharacterFinderTool() {
         <div>
           <h1 className="font-bold tracking-tight">Character Finder</h1>
           <p className="text-muted-foreground mt-2">
-            Find and analyze Unicode characters and their properties
+            Analyze Unicode characters and inspect their full properties.
           </p>
-          {/* <AdUnit slot="9721370550" format="horizontal" /> */}
         </div>
 
         <Card>
-          <CardContent className="p-6">
-            <div id="toolArea" className="space-y-6">
-              <div className="flex gap-4">
-                <Input
-                  placeholder="Enter a character or code point (U+XXXX)"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="max-w-md"
-                />
-                <Button onClick={handleSearch}>Search</Button>
-              </div>
-
-              {selectedChar && (
-                <div className="space-y-6">
-                  <div className="flex items-center gap-4">
-                    <div className="text-6xl min-w-[4rem] h-16 flex items-center justify-center border rounded-lg">
-                      {selectedChar.char}
-                    </div>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => handleCopy(selectedChar.char)}
-                    >
-                      <Copy className="h-4 w-4 mr-2" />
-                      Copy Character
-                    </Button>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <Table>
-                      <TableHeader>
-                        <TableRow>
-                          <TableHead colSpan={2}>
-                            Character Properties
-                          </TableHead>
-                        </TableRow>
-                      </TableHeader>
-                      <TableBody>
-                        <TableRow>
-                          <TableCell className="font-medium">
-                            Code Point
-                          </TableCell>
-                          <TableCell>
-                            U+
-                            {selectedChar.info.codePoint
-                              .toString(16)
-                              .toUpperCase()
-                              .padStart(4, "0")}
-                          </TableCell>
-                        </TableRow>
-                        <TableRow>
-                          <TableCell className="font-medium">Name</TableCell>
-                          <TableCell>
-                            {selectedChar.info.name || "Unknown"}
-                          </TableCell>
-                        </TableRow>
-                        <TableRow>
-                          <TableCell className="font-medium">
-                            Category
-                          </TableCell>
-                          <TableCell>{selectedChar.info.category}</TableCell>
-                        </TableRow>
-                        <TableRow>
-                          <TableCell className="font-medium">Script</TableCell>
-                          <TableCell>{selectedChar.info.script}</TableCell>
-                        </TableRow>
-                        <TableRow>
-                          <TableCell className="font-medium">Block</TableCell>
-                          <TableCell>{selectedChar.info.block}</TableCell>
-                        </TableRow>
-                        <TableRow>
-                          <TableCell className="font-medium">
-                            Bidirectional
-                          </TableCell>
-                          <TableCell>{selectedChar.info.bidiClass}</TableCell>
-                        </TableRow>
-                        <TableRow>
-                          <TableCell className="font-medium">
-                            Properties
-                          </TableCell>
-                          <TableCell>
-                            {[
-                              selectedChar.info.isEmoji && "Emoji",
-                              selectedChar.info.isMath && "Math",
-                              selectedChar.info.isSymbol && "Symbol",
-                            ]
-                              .filter(Boolean)
-                              .join(", ") || "None"}
-                          </TableCell>
-                        </TableRow>
-                      </TableBody>
-                    </Table>
-
-                    <Table>
-                      <TableHeader>
-                        <TableRow>
-                          <TableHead colSpan={2}>
-                            Encoding Information
-                          </TableHead>
-                        </TableRow>
-                      </TableHeader>
-                      <TableBody>
-                        <TableRow>
-                          <TableCell className="font-medium">UTF-8</TableCell>
-                          <TableCell>
-                            {selectedChar.encoding.utf8
-                              .map((b) =>
-                                b.toString(16).toUpperCase().padStart(2, "0")
-                              )
-                              .join(" ")}
-                          </TableCell>
-                        </TableRow>
-                        <TableRow>
-                          <TableCell className="font-medium">UTF-16</TableCell>
-                          <TableCell>
-                            {selectedChar.encoding.utf16
-                              .map((b) =>
-                                b.toString(16).toUpperCase().padStart(4, "0")
-                              )
-                              .join(" ")}
-                          </TableCell>
-                        </TableRow>
-                        <TableRow>
-                          <TableCell className="font-medium">UTF-32</TableCell>
-                          <TableCell>
-                            {selectedChar.encoding.utf32
-                              .map((b) =>
-                                b.toString(16).toUpperCase().padStart(8, "0")
-                              )
-                              .join(" ")}
-                          </TableCell>
-                        </TableRow>
-                        <TableRow>
-                          <TableCell className="font-medium">Special</TableCell>
-                          <TableCell>
-                            {[
-                              selectedChar.encoding.isSurrogate && "Surrogate",
-                              selectedChar.encoding.isNonCharacter &&
-                                "Non-Character",
-                              selectedChar.encoding.isPrivateUse &&
-                                "Private Use",
-                            ]
-                              .filter(Boolean)
-                              .join(", ") || "None"}
-                          </TableCell>
-                        </TableRow>
-                      </TableBody>
-                    </Table>
-                  </div>
-                </div>
-              )}
+          <CardContent className="p-6 space-y-6">
+            {/* Search Bar */}
+            <div className="flex gap-4">
+              <Input
+                placeholder="Enter a character or U+XXXX"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={(e) =>
+                  e.key === "Enter" && setSearchQuery(e.currentTarget.value)
+                }
+                className="max-w-md"
+              />
             </div>
+
+            {/* Output Section */}
+            {details && (
+              <div className="space-y-6">
+                {/* Character Display */}
+                <div className="flex items-center gap-4">
+                  <div className="text-7xl min-w-[4rem] h-20 flex items-center justify-center border rounded-lg">
+                    {details.char}
+                  </div>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => handleCopy(details.char)}
+                  >
+                    <Copy className="h-4 w-4 mr-2" />
+                    Copy Character
+                  </Button>
+                </div>
+
+                {/* Tables */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Character Properties */}
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead colSpan={2}>Character Properties</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      <TableRow>
+                        <TableCell className="font-medium">
+                          Code Point
+                        </TableCell>
+                        <TableCell>
+                          U+{hex(details.info.codePoint, 4)}
+                        </TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell className="font-medium">Name</TableCell>
+                        <TableCell>{details.info.name || "Unknown"}</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell className="font-medium">Category</TableCell>
+                        <TableCell>{details.info.category}</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell className="font-medium">Script</TableCell>
+                        <TableCell>{details.info.script}</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell className="font-medium">Block</TableCell>
+                        <TableCell>{details.info.block}</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell className="font-medium">
+                          Bidi Class
+                        </TableCell>
+                        <TableCell>{details.info.bidiClass}</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell className="font-medium">
+                          Properties
+                        </TableCell>
+                        <TableCell>
+                          {[
+                            details.info.isEmoji && "Emoji",
+                            details.info.isMath && "Math",
+                            details.info.isSymbol && "Symbol",
+                          ]
+                            .filter(Boolean)
+                            .join(", ") || "None"}
+                        </TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+
+                  {/* Encodings */}
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead colSpan={2}>Encoding Information</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      <TableRow>
+                        <TableCell className="font-medium">UTF-8</TableCell>
+                        <TableCell>
+                          {details.encoding.utf8
+                            .map((b) => hex(b, 2))
+                            .join(" ")}
+                        </TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell className="font-medium">UTF-16</TableCell>
+                        <TableCell>
+                          {details.encoding.utf16
+                            .map((b) => hex(b, 4))
+                            .join(" ")}
+                        </TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell className="font-medium">UTF-32</TableCell>
+                        <TableCell>
+                          {details.encoding.utf32
+                            .map((b) => hex(b, 8))
+                            .join(" ")}
+                        </TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell className="font-medium">Special</TableCell>
+                        <TableCell>
+                          {[
+                            details.encoding.isSurrogate && "Surrogate",
+                            details.encoding.isNonCharacter && "Non-Character",
+                            details.encoding.isPrivateUse && "Private Use",
+                          ]
+                            .filter(Boolean)
+                            .join(", ") || "None"}
+                        </TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </div>
+              </div>
+            )}
           </CardContent>
         </Card>
-
-        <AboutSection title="About Character Finder" content={aboutContent} />
       </div>
     </div>
   );

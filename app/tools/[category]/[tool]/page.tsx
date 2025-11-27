@@ -5,6 +5,7 @@ import { toolCategories } from "@/lib/tool-categories";
 // import AdUnit from "@/components/ad-unit";
 import ToolSearch from "@/components/toolSearch";
 import { FAQSectionCompact } from "@/components/sections/FAQSection";
+import { ToolPageGuide } from "@/components/sections/toolPageGuide";
 
 // Slugify function to convert names to URL-friendly slugs
 function getSlug(input?: string) {
@@ -116,9 +117,7 @@ export default async function Page({
     notFound();
   }
 
-  const toolFAQ = toolCategories
-    .flatMap((cat) => cat.tools)
-    .find((t) => t.name.toLowerCase().replace(/\s+/g, "-") === toolParam);
+  const toolFAQ = tools.faq;
 
   const toolCategory = {
     ...categories,
@@ -132,9 +131,12 @@ export default async function Page({
         <div className="grid grid-cols-1 gap-8 container">
           <div className="flex flex-col gap-8 tools-title">
             <ToolsPage category={toolCategory} />
+
+            <ToolPageGuide category={toolCategory} />
+
             {toolFAQ && (
               <FAQSectionCompact
-                faqs={toolFAQ.faq}
+                faqs={toolFAQ}
                 className="container mx-auto px-4 py-8"
               />
             )}
@@ -145,7 +147,7 @@ export default async function Page({
                   __html: JSON.stringify({
                     "@context": "https://schema.org",
                     "@type": "FAQPage",
-                    mainEntity: toolFAQ.faq.map((item) => ({
+                    mainEntity: toolFAQ.map((item) => ({
                       "@type": "Question",
                       name: item.question,
                       acceptedAnswer: {

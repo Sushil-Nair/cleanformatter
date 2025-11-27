@@ -24,7 +24,6 @@ export default function ToolsPage() {
   return (
     <div className="min-h-screen flex flex-col">
       <ToolSearch toolCategories={toolCategories} />
-      {/* <AdUnit slot="9721370550" format="horizontal" /> */}
       <main className="flex-1 pt-24">
         <div className="container px-4 md:px-6">
           <div className="space-y-16">

@@ -29,99 +29,6 @@ interface WrapOptions {
   preserveLines: boolean;
 }
 
-const aboutContent = (
-  <div className="space-y-6">
-    <p>
-      Format and structure your text with precision using our{" "}
-      <strong>Text Wrapper Tool</strong>. Control line length, preserve
-      formatting, and ensure readability across different platforms.
-    </p>
-
-    <hr />
-
-    <h3 className="text-xl font-bold">Features</h3>
-    <div className="space-y-4">
-      <div>
-        <h4 className="font-semibold">🔧 Wrapping Modes</h4>
-        <ul className="list-disc pl-6 space-y-2">
-          <li>
-            <strong>Word Wrap:</strong> Break lines at word boundaries
-          </li>
-          <li>
-            <strong>Character Wrap:</strong> Split at exact character positions
-          </li>
-          <li>
-            <strong>Smart Wrap:</strong> Intelligent wrapping with line length
-            optimization
-          </li>
-          <li>
-            <strong>Code Wrap:</strong> Format code with proper indentation
-          </li>
-        </ul>
-      </div>
-
-      <div>
-        <h4 className="font-semibold">⚡ Advanced Options</h4>
-        <ul className="list-disc pl-6 space-y-2">
-          <li>
-            <strong>Width Control:</strong> Set exact line length (20-200
-            characters)
-          </li>
-          <li>
-            <strong>Hyphenation:</strong> Smart word breaks for better
-            readability
-          </li>
-          <li>
-            <strong>Line Preservation:</strong> Keep existing line breaks
-          </li>
-          <li>
-            <strong>Real-time Preview:</strong> See changes as you type
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <hr />
-
-    <h3 className="text-xl font-bold">Use Cases</h3>
-    <div className="space-y-4">
-      <div>
-        <h4 className="font-semibold">📝 Content Formatting</h4>
-        <ul className="list-disc pl-6 space-y-2">
-          <li>Format text for email clients</li>
-          <li>Prepare content for different screen sizes</li>
-          <li>Create properly formatted documentation</li>
-          <li>Structure code comments and documentation</li>
-        </ul>
-      </div>
-
-      <div>
-        <h4 className="font-semibold">💻 Code Formatting</h4>
-        <ul className="list-disc pl-6 space-y-2">
-          <li>Format comments and documentation strings</li>
-          <li>Wrap long lines of code</li>
-          <li>Maintain consistent code style</li>
-        </ul>
-      </div>
-    </div>
-
-    <hr />
-
-    <h3 className="text-xl font-bold">Tips</h3>
-    <div className="space-y-4">
-      <div>
-        <h4 className="font-semibold">🎯 Best Practices</h4>
-        <ul className="list-disc pl-6 space-y-2">
-          <li>Use Word Wrap for general text</li>
-          <li>Enable hyphenation for narrow columns</li>
-          <li>Use Code Wrap for source code</li>
-          <li>Preview at different widths for responsive content</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-);
-
 export function TextWrapperTool() {
   const [inputText, setInputText] = React.useState("");
   const [outputText, setOutputText] = React.useState("");
@@ -375,8 +282,6 @@ export function TextWrapperTool() {
             </div>
           </CardContent>
         </Card>
-
-        <AboutSection title="About Text Wrapper" content={aboutContent} />
       </div>
     </div>
   );

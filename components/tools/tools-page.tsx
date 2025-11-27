@@ -72,7 +72,7 @@ function ToolsPageContent() {
                         href={`/tools/${getSlug(category.name)}/${getSlug(
                           tool.name
                         )}`}
-                        className="block h-full"
+                        className="block h-full mt-4"
                       >
                         <Card className="group h-full transition-all duration-300 hover:shadow-lg hover:scale-[1.02]">
                           <CardContent className="p-6">

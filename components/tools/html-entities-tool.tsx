@@ -25,81 +25,6 @@ import {
 } from "@/lib/utils/html-entities";
 // import AdUnit from "../ad-unit";
 
-const aboutContent = (
-  <div className="space-y-6">
-    <p>
-      Convert text to and from HTML entities with our{" "}
-      <strong>HTML Entities Encoder/Decoder Tool</strong>. Handle special
-      characters, symbols, and international text safely in HTML documents.
-    </p>
-
-    <hr />
-
-    <h3 className="text-xl font-bold">Features</h3>
-    <div className="space-y-4">
-      <div>
-        <h4 className="font-semibold">🔄 Conversion Options</h4>
-        <ul className="list-disc pl-6 space-y-2">
-          <li>
-            <strong>Named Entities:</strong> Use standard HTML entity names
-            (&amp;lt;, &amp;gt;)
-          </li>
-          <li>
-            <strong>Numeric Entities:</strong> Use decimal references
-            (&#38;#60;)
-          </li>
-          <li>
-            <strong>Hexadecimal:</strong> Use hex references (&#38;#x3C;)
-          </li>
-          <li>
-            <strong>Smart Encoding:</strong> Skip already encoded text
-          </li>
-        </ul>
-      </div>
-
-      <div>
-        <h4 className="font-semibold">⚡ Advanced Features</h4>
-        <ul className="list-disc pl-6 space-y-2">
-          <li>
-            <strong>Full Encoding:</strong> Convert all characters to entities
-          </li>
-          <li>
-            <strong>Quote Handling:</strong> Special handling for quotes
-          </li>
-          <li>
-            <strong>Bulk Processing:</strong> Handle large text blocks
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <hr />
-
-    <h3 className="text-xl font-bold">Use Cases</h3>
-    <div className="space-y-4">
-      <div>
-        <h4 className="font-semibold">💻 Development</h4>
-        <ul className="list-disc pl-6 space-y-2">
-          <li>Prepare text for HTML documents</li>
-          <li>Handle special characters safely</li>
-          <li>Process user input for web pages</li>
-          <li>Create email templates</li>
-        </ul>
-      </div>
-
-      <div>
-        <h4 className="font-semibold">🔒 Security</h4>
-        <ul className="list-disc pl-6 space-y-2">
-          <li>Prevent XSS attacks</li>
-          <li>Sanitize user input</li>
-          <li>Escape special characters</li>
-          <li>Handle international text</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-);
-
 export function HTMLEntitiesTool() {
   const [inputText, setInputText] = React.useState("");
   const [outputText, setOutputText] = React.useState("");
@@ -379,11 +304,6 @@ export function HTMLEntitiesTool() {
             </div>
           </CardContent>
         </Card>
-
-        <AboutSection
-          title="About HTML Entities Encoder/Decoder"
-          content={aboutContent}
-        />
       </div>
     </div>
   );

@@ -99,43 +99,6 @@ function tryFixJson(input: string): { fixed: string; warnings: string[] } {
   return { fixed: s, warnings };
 }
 
-/** About content (kept concise here; you can reuse your previous aboutContent) */
-const aboutContent = (
-  <div className="space-y-6">
-    <p>
-      Transform your code with our <strong>Code Formatter Tool</strong>. Format
-      and beautify code in multiple languages with customizable options.
-    </p>
-
-    <hr />
-
-    <h3 className="text-xl font-bold">Features</h3>
-    <div className="space-y-4">
-      <div>
-        <h4 className="font-semibold">🔧 Supported Languages</h4>
-        <ul className="list-disc pl-6 space-y-2">
-          <li>
-            <strong>Python:</strong> Format using Black code formatter
-          </li>
-          <li>
-            <strong>JavaScript/TypeScript:</strong> Format modern JS/TS code
-          </li>
-          <li>
-            <strong>HTML:</strong> Clean and organize HTML markup
-          </li>
-          <li>
-            <strong>CSS:</strong> Format stylesheets with proper indentation
-          </li>
-          <li>
-            <strong>JSON:</strong> Pretty print and validate JSON data (with
-            optional auto-fix)
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-);
-
 export function CodeFormatterTool() {
   const [inputCode, setInputCode] = React.useState("");
   const [outputCode, setOutputCode] = React.useState("");
@@ -516,8 +479,6 @@ export function CodeFormatterTool() {
             </div>
           </CardContent>
         </Card>
-
-        <AboutSection title="About Code Formatter" content={aboutContent} />
       </div>
     </div>
   );

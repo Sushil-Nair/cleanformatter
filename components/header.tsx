@@ -75,7 +75,7 @@ export function Header() {
             Blog
           </Link>
           <Link
-            href="/#about"
+            href="/about"
             className="text-sm font-medium hover:text-primary transition-colors"
           >
             About

@@ -19,82 +19,6 @@ import { motion } from "framer-motion";
 // import AdUnit from "../ad-unit";
 import { Textarea } from "../ui/textarea";
 
-const aboutContent = (
-  <div className="space-y-6">
-    <p>
-      Create secure passwords with our <strong>Password Generator Tool</strong>.
-      Generate strong, random passwords with customizable options for maximum
-      security.
-    </p>
-
-    <hr />
-
-    <h3 className="text-xl font-bold">Features</h3>
-    <div className="space-y-4">
-      <div>
-        <h4 className="font-semibold">🔒 Password Options</h4>
-        <ul className="list-disc pl-6 space-y-2">
-          <li>
-            <strong>Character Types:</strong> Uppercase, lowercase, numbers,
-            symbols
-          </li>
-          <li>
-            <strong>Length Control:</strong> Choose password length (8-128
-            characters)
-          </li>
-          <li>
-            <strong>Exclusions:</strong> Avoid similar/ambiguous characters
-          </li>
-          <li>
-            <strong>Memorable Mode:</strong> Generate pronounceable passwords
-          </li>
-          <li>
-            <strong>Pattern Mode:</strong> Create passwords matching specific
-            patterns
-          </li>
-        </ul>
-      </div>
-
-      <div>
-        <h4 className="font-semibold">⚡ Advanced Features</h4>
-        <ul className="list-disc pl-6 space-y-2">
-          <li>
-            <strong>Strength Meter:</strong> Real-time password strength
-            analysis
-          </li>
-          <li>
-            <strong>One-Click Copy:</strong> Copy passwords to clipboard
-          </li>
-          <li>
-            <strong>Secure Generation:</strong> Cryptographically secure random
-            numbers
-          </li>
-          <li>
-            <strong>Multiple Formats:</strong> Various password styles and
-            patterns
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <hr />
-
-    <h3 className="text-xl font-bold">Security Tips</h3>
-    <div className="space-y-4">
-      <div>
-        <h4 className="font-semibold">🛡️ Best Practices</h4>
-        <ul className="list-disc pl-6 space-y-2">
-          <li>Use unique passwords for each account</li>
-          <li>Enable two-factor authentication when possible</li>
-          <li>Store passwords securely in a password manager</li>
-          <li>Regularly update critical passwords</li>
-          <li>Never share passwords via unsecured channels</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-);
-
 export function PasswordGeneratorTool() {
   const [password, setPassword] = React.useState("");
   const [options, setOptions] = React.useState<PasswordOptions>({
@@ -440,8 +364,6 @@ export function PasswordGeneratorTool() {
             </div>
           </CardContent>
         </Card>
-
-        <AboutSection title="About Password Generator" content={aboutContent} />
       </div>
     </div>
   );

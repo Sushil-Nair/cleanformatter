@@ -23,78 +23,6 @@ interface SpacingOptions {
   removeEmptyLines: boolean;
 }
 
-const aboutContent = (
-  <div className="space-y-6">
-    <p>
-      Perfect your text formatting with our <strong>Fix Spacing Tool</strong>.
-      Normalize whitespace, indentation, and line endings for clean, consistent
-      text.
-    </p>
-
-    <hr />
-
-    <h3 className="text-xl font-bold">Features</h3>
-    <div className="space-y-4">
-      <div>
-        <h4 className="font-semibold">🔧 Spacing Options</h4>
-        <ul className="list-disc pl-6 space-y-2">
-          <li>
-            <strong>Remove Extra Whitespace:</strong> Collapse multiple spaces
-            into single spaces
-          </li>
-          <li>
-            <strong>Normalize Punctuation:</strong> Fix spacing around
-            punctuation marks
-          </li>
-          <li>
-            <strong>Convert Tabs:</strong> Transform tabs to spaces or vice
-            versa
-          </li>
-          <li>
-            <strong>Line Endings:</strong> Standardize line endings (CRLF/LF)
-          </li>
-          <li>
-            <strong>Trim Lines:</strong> Remove leading/trailing whitespace from
-            each line
-          </li>
-          <li>
-            <strong>Empty Lines:</strong> Remove or normalize empty lines
-          </li>
-        </ul>
-      </div>
-
-      <div>
-        <h4 className="font-semibold">💡 Use Cases</h4>
-        <ul className="list-disc pl-6 space-y-2">
-          <li>Clean up copied text from various sources</li>
-          <li>Format code for consistent indentation</li>
-          <li>Prepare text for data processing</li>
-          <li>Standardize document formatting</li>
-        </ul>
-      </div>
-    </div>
-
-    <hr />
-
-    <h3 className="text-xl font-bold">Tips</h3>
-    <div className="space-y-4">
-      <div>
-        <h4 className="font-semibold">🎯 Best Practices</h4>
-        <ul className="list-disc pl-6 space-y-2">
-          <li>
-            Use &quot;Remove Extra Whitespace&quot; for general text cleanup
-          </li>
-          <li>
-            Enable &quot;Normalize Punctuation&quot; for professional documents
-          </li>
-          <li>Convert tabs to spaces for consistent code formatting</li>
-          <li>Trim lines to remove unwanted spacing</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-);
-
 export function FixSpacingTool() {
   const [inputText, setInputText] = React.useState("");
   const [outputText, setOutputText] = React.useState("");
@@ -359,8 +287,6 @@ export function FixSpacingTool() {
             </div>
           </CardContent>
         </Card>
-
-        <AboutSection title="About Fix Spacing Tool" content={aboutContent} />
       </div>
     </div>
   );

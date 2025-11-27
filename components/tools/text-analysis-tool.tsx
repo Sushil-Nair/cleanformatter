@@ -20,80 +20,6 @@ import {
 } from "@/components/ui/table";
 // import AdUnit from "../ad-unit";
 
-const aboutContent = (
-  <div className="space-y-6">
-    <p>
-      Analyze text properties and statistics with our{" "}
-      <strong>Text Analysis Tool</strong>. Get detailed insights about character
-      usage, scripts, and Unicode properties.
-    </p>
-
-    <hr />
-
-    <h3 className="text-xl font-bold">Features</h3>
-    <div className="space-y-4">
-      <div>
-        <h4 className="font-semibold">📊 Analysis Features</h4>
-        <ul className="list-disc pl-6 space-y-2">
-          <li>
-            <strong>Character Statistics:</strong> Total, unique, and special
-            characters
-          </li>
-          <li>
-            <strong>Script Analysis:</strong> Writing systems used in text
-          </li>
-          <li>
-            <strong>Unicode Blocks:</strong> Character block distribution
-          </li>
-          <li>
-            <strong>Categories:</strong> Unicode category breakdown
-          </li>
-        </ul>
-      </div>
-
-      <div>
-        <h4 className="font-semibold">🔍 Detailed Insights</h4>
-        <ul className="list-disc pl-6 space-y-2">
-          <li>
-            <strong>Special Characters:</strong> Surrogate pairs, non-characters
-          </li>
-          <li>
-            <strong>Script Coverage:</strong> Percentage of each writing system
-          </li>
-          <li>
-            <strong>Category Distribution:</strong> Character type breakdown
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <hr />
-
-    <h3 className="text-xl font-bold">Use Cases</h3>
-    <div className="space-y-4">
-      <div>
-        <h4 className="font-semibold">💻 Development</h4>
-        <ul className="list-disc pl-6 space-y-2">
-          <li>Analyze text encoding requirements</li>
-          <li>Debug Unicode-related issues</li>
-          <li>Validate text content</li>
-          <li>Check character set coverage</li>
-        </ul>
-      </div>
-
-      <div>
-        <h4 className="font-semibold">📝 Content Analysis</h4>
-        <ul className="list-disc pl-6 space-y-2">
-          <li>Analyze multilingual text</li>
-          <li>Check script compatibility</li>
-          <li>Verify character usage</li>
-          <li>Generate text statistics</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-);
-
 export function TextAnalysisTool() {
   const [inputText, setInputText] = React.useState("");
   const [analysis, setAnalysis] = React.useState<ReturnType<
@@ -386,8 +312,6 @@ export function TextAnalysisTool() {
             </div>
           </CardContent>
         </Card>
-
-        <AboutSection title="About Text Analysis" content={aboutContent} />
       </div>
     </div>
   );

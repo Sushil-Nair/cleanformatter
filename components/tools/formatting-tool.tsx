@@ -32,69 +32,6 @@ interface FormatOptions {
   specialChars: boolean;
 }
 
-const aboutContent = (
-  <div className="space-y-6">
-    <p>
-      Clean and format your text with our powerful{" "}
-      <strong>Remove Formatting Tool</strong>. Strip away unwanted formatting
-      while preserving the content you need.
-    </p>
-
-    <hr />
-
-    <h3 className="text-xl font-bold">Features</h3>
-    <div className="space-y-4">
-      <div>
-        <h4 className="font-semibold">🧹 Cleaning Options</h4>
-        <ul className="list-disc pl-6 space-y-2">
-          <li>
-            <strong>Strip HTML:</strong> Remove HTML tags while keeping content
-          </li>
-          <li>
-            <strong>Remove Markdown:</strong> Clean Markdown syntax
-          </li>
-          <li>
-            <strong>Plain Text:</strong> Convert to clean, readable text
-          </li>
-          <li>
-            <strong>Remove Styles:</strong> Strip inline formatting
-          </li>
-          <li>
-            <strong>Clean Links:</strong> Remove hyperlinks, keep text
-          </li>
-          <li>
-            <strong>Fix Spacing:</strong> Normalize whitespace and indentation
-          </li>
-        </ul>
-      </div>
-
-      <div>
-        <h4 className="font-semibold">💡 Use Cases</h4>
-        <ul className="list-disc pl-6 space-y-2">
-          <li>Clean text copied from web pages</li>
-          <li>Convert formatted documents to plain text</li>
-          <li>Prepare content for different platforms</li>
-          <li>Remove unwanted formatting from code</li>
-        </ul>
-      </div>
-    </div>
-
-    <hr />
-
-    <h3 className="text-xl font-bold">Tips</h3>
-    <div className="space-y-4">
-      <div>
-        <h4 className="font-semibold">🎯 Best Practices</h4>
-        <ul className="list-disc pl-6 space-y-2">
-          <li>Preview changes before copying</li>
-          <li>Use specific options for targeted cleaning</li>
-          <li>Combine options for thorough formatting removal</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-);
-
 export function FormattingTool() {
   const [inputText, setInputText] = React.useState("");
   const [outputText, setOutputText] = React.useState("");
@@ -378,11 +315,6 @@ export function FormattingTool() {
             </div>
           </CardContent>
         </Card>
-
-        <AboutSection
-          title="About Formatting Remover Tool"
-          content={aboutContent}
-        />
       </div>
     </div>
   );

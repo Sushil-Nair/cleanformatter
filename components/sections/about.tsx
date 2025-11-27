@@ -59,11 +59,11 @@ export function AboutSection() {
             </div>
             <div className="flex flex-col sm:flex-row gap-3">
               <Button className="rounded-full px-8">
-                <a href="#tools">Get Started</a>
+                <a href="/tools">Get Started</a>
               </Button>
-              {/* <Button variant="outline" className="rounded-full px-8">
-                View Documentation
-              </Button> */}
+              <Button variant="outline" className="rounded-full px-8">
+                <a href="/about">Learn More</a>
+              </Button>
             </div>
           </div>
           <div className="relative mt-8 lg:mt-0 rounded-xl overflow-hidden aspect-video shadow-xl">

@@ -19,104 +19,6 @@ import { motion } from "framer-motion";
 import { Textarea } from "../ui/textarea";
 // import AdUnit from "../ad-unit";
 
-const aboutContent = (
-  <div className="space-y-6">
-    <p>
-      Generate UUIDs (Universally Unique Identifiers) with our{" "}
-      <strong>UUID Generator Tool</strong>. Create RFC 4122 compliant UUIDs for
-      your applications and databases.
-    </p>
-
-    <hr />
-
-    <h3 className="text-xl font-bold">Features</h3>
-    <div className="space-y-4">
-      <div>
-        <h4 className="font-semibold">🔑 UUID Versions</h4>
-        <ul className="list-disc pl-6 space-y-2">
-          <li>
-            <strong>Version 4:</strong> Random UUID generation
-          </li>
-          <li>
-            <strong>Version 5:</strong> Name-based UUID using SHA-1 hash
-          </li>
-          <li>
-            <strong>Format Options:</strong> Standard, uppercase, or no dashes
-          </li>
-          <li>
-            <strong>Bulk Generation:</strong> Generate multiple UUIDs at once
-          </li>
-        </ul>
-      </div>
-
-      <div>
-        <h4 className="font-semibold">⚡ Key Features</h4>
-        <ul className="list-disc pl-6 space-y-2">
-          <li>
-            <strong>RFC 4122 Compliant:</strong> Standards-based UUID generation
-          </li>
-          <li>
-            <strong>Cryptographic Security:</strong> Uses secure random number
-            generation
-          </li>
-          <li>
-            <strong>Format Options:</strong> Multiple output formats
-          </li>
-          <li>
-            <strong>Validation:</strong> Verify UUID format and version
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <hr />
-
-    <h3 className="text-xl font-bold">Use Cases</h3>
-    <div className="space-y-4">
-      <div>
-        <h4 className="font-semibold">💻 Development</h4>
-        <ul className="list-disc pl-6 space-y-2">
-          <li>Generate unique database keys</li>
-          <li>Create session identifiers</li>
-          <li>Generate request IDs</li>
-          <li>Create unique file names</li>
-        </ul>
-      </div>
-
-      <div>
-        <h4 className="font-semibold">🔧 System Design</h4>
-        <ul className="list-disc pl-6 space-y-2">
-          <li>Distributed systems</li>
-          <li>Microservices architecture</li>
-          <li>Content addressing</li>
-          <li>Event correlation</li>
-        </ul>
-      </div>
-    </div>
-
-    <hr />
-
-    <h3 className="text-xl font-bold">UUID Versions</h3>
-    <div className="space-y-4">
-      <div>
-        <h4 className="font-semibold">Version 4 (Random)</h4>
-        <p>
-          Uses random or pseudo-random numbers to generate UUIDs. This is the
-          most common version for general use.
-        </p>
-      </div>
-
-      <div>
-        <h4 className="font-semibold">Version 5 (Name-based)</h4>
-        <p>
-          Generates UUIDs based on a namespace UUID and a name using SHA-1
-          hashing. Useful for generating consistent UUIDs from the same input.
-        </p>
-      </div>
-    </div>
-  </div>
-);
-
 export function UUIDGeneratorTool() {
   const [uuid, setUUID] = React.useState("");
   const [options, setOptions] = React.useState<UUIDOptions>({
@@ -307,8 +209,6 @@ export function UUIDGeneratorTool() {
             </div>
           </CardContent>
         </Card>
-
-        <AboutSection title="About UUID Generator" content={aboutContent} />
       </div>
     </div>
   );
