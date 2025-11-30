@@ -8,36 +8,48 @@ import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
 import { useToast } from "@/hooks/use-toast";
-import { AboutSection } from "@/components/tools/about-section";
 import { TextStatsDisplay } from "@/components/tools/text-stats";
 import { TextStats } from "@/types/tools";
 import { Copy, Download, RotateCcw, RefreshCw } from "lucide-react";
 import {
   Select,
+  SelectTrigger,
   SelectContent,
   SelectItem,
-  SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { generateText, TextGeneratorOptions } from "@/lib/utils/text-generator";
-// import AdUnit from "../ad-unit";
+
+import {
+  generateText,
+  TextGeneratorOptions,
+  wordLists,
+} from "@/lib/utils/text-generator";
 
 export function TextGeneratorTool() {
+  const { toast } = useToast();
+
   const [outputText, setOutputText] = React.useState("");
-  const [options, setOptions] = React.useState<TextGeneratorOptions>({
-    type: "lorem",
-    language: "english",
-    wordsPerParagraph: 100,
-    format: "plain",
-  });
   const [textStats, setTextStats] = React.useState<TextStats>({
     words: 0,
     sentences: 0,
     characters: 0,
     paragraphs: 0,
   });
-  const { toast } = useToast();
 
+  // ⭐ NEW: Multi-paragraph support
+  const [options, setOptions] = React.useState<
+    TextGeneratorOptions & { paragraphs: number }
+  >({
+    type: "lorem",
+    language: "english",
+    wordsPerParagraph: 100,
+    paragraphs: 1,
+    format: "plain",
+  });
+
+  // ---------------------------------------
+  // TEXT STATS CALCULATION
+  // ---------------------------------------
   const calculateStats = (text: string) => {
     const words = text.trim().split(/\s+/).filter(Boolean).length;
     const sentences = text.split(/[.!?]+/).filter(Boolean).length;
@@ -52,16 +64,32 @@ export function TextGeneratorTool() {
     });
   };
 
+  // ---------------------------------------
+  // GENERATE TEXT
+  // ---------------------------------------
   const generateNewText = React.useCallback(() => {
     try {
-      const text = generateText(options);
-      setOutputText(text);
-      calculateStats(text);
+      let finalOutput = "";
+
+      // Generate multiple paragraphs using backend engine
+      const items: string[] = [];
+      for (let i = 0; i < options.paragraphs; i++) {
+        items.push(generateText(options));
+      }
+
+      // Join paragraphs correctly depending on format
+      finalOutput =
+        options.format === "html"
+          ? items.join("\n") // already wrapped by <p> inside TS generator
+          : items.join("\n\n");
+
+      setOutputText(finalOutput);
+      calculateStats(finalOutput);
     } catch (error) {
       toast({
         title: "Failed to generate text",
         description:
-          error instanceof Error ? error.message : "An error occurred",
+          error instanceof Error ? error.message : "Something went wrong",
         variant: "destructive",
       });
     }
@@ -71,6 +99,9 @@ export function TextGeneratorTool() {
     generateNewText();
   }, [options, generateNewText]);
 
+  // ---------------------------------------
+  // Copy
+  // ---------------------------------------
   const handleCopy = async () => {
     if (!outputText) return;
 
@@ -78,47 +109,53 @@ export function TextGeneratorTool() {
       await navigator.clipboard.writeText(outputText);
       toast({
         title: "Copied to clipboard",
-        description: "Text has been copied to your clipboard",
+        description: "Generated text has been copied.",
         duration: 2000,
       });
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (error) {
+    } catch {
       toast({
         title: "Failed to copy",
-        description: "Please try again or copy manually",
+        description: "Try again or copy manually.",
         variant: "destructive",
-        duration: 3000,
       });
     }
   };
 
+  // ---------------------------------------
+  // Download
+  // ---------------------------------------
   const handleDownload = () => {
     if (!outputText) return;
 
     const blob = new Blob([outputText], { type: "text/plain" });
     const url = URL.createObjectURL(blob);
+
     const a = document.createElement("a");
     a.href = url;
     a.download = "generated-text.txt";
-    document.body.appendChild(a);
     a.click();
-    document.body.removeChild(a);
+
     URL.revokeObjectURL(url);
 
     toast({
       title: "Downloaded successfully",
-      description: "Your text has been downloaded",
+      description: "Your text file has been saved.",
       duration: 2000,
     });
   };
 
+  // ---------------------------------------
+  // Reset
+  // ---------------------------------------
   const handleReset = () => {
     setOptions({
       type: "lorem",
       language: "english",
       wordsPerParagraph: 100,
+      paragraphs: 1,
       format: "plain",
     });
+
     setOutputText("");
     setTextStats({
       words: 0,
@@ -128,15 +165,18 @@ export function TextGeneratorTool() {
     });
   };
 
+  // ---------------------------------------
+  // UI RENDER
+  // ---------------------------------------
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="space-y-4">
         <div>
           <h1 className="font-bold tracking-tight">Text Generator</h1>
           <p className="text-muted-foreground mt-2">
-            Generate random text in multiple languages and formats
+            Generate random text in multiple languages, formats, and paragraph
+            counts.
           </p>
-          {/* <AdUnit slot="9721370550" format="horizontal" /> */}
         </div>
 
         <Card>
@@ -145,12 +185,17 @@ export function TextGeneratorTool() {
               id="toolArea"
               className="grid grid-cols-1 lg:grid-cols-2 gap-6"
             >
-              <div className="space-y-4">
+              {/* LEFT SIDE — OPTIONS */}
+              <div className="space-y-4 flex flex-col gap-1">
+                {/* Type + Language */}
                 <div className="grid grid-cols-2 gap-4">
                   <Select
                     value={options.type}
-                    onValueChange={(value: TextGeneratorOptions["type"]) =>
-                      setOptions((prev) => ({ ...prev, type: value }))
+                    onValueChange={(value) =>
+                      setOptions((prev) => ({
+                        ...prev,
+                        type: value as TextGeneratorOptions["type"],
+                      }))
                     }
                   >
                     <SelectTrigger>
@@ -167,26 +212,36 @@ export function TextGeneratorTool() {
 
                   <Select
                     value={options.language}
-                    onValueChange={(value: TextGeneratorOptions["language"]) =>
-                      setOptions((prev) => ({ ...prev, language: value }))
+                    disabled={options.type === "lorem"}
+                    onValueChange={(value) =>
+                      setOptions((prev) => ({
+                        ...prev,
+                        language: value as TextGeneratorOptions["language"],
+                      }))
                     }
                   >
                     <SelectTrigger>
                       <SelectValue placeholder="Select language" />
                     </SelectTrigger>
+
                     <SelectContent>
-                      <SelectItem value="english">English</SelectItem>
-                      <SelectItem value="spanish">Spanish</SelectItem>
-                      <SelectItem value="arabic">Arabic</SelectItem>
+                      {Object.keys(wordLists).map((lang) => (
+                        <SelectItem key={lang} value={lang}>
+                          {lang.charAt(0).toUpperCase() + lang.slice(1)}
+                        </SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
                 </div>
 
-                <div className="space-y-2">
-                  <Label>Word Count ({options.wordsPerParagraph})</Label>
+                {/* Words per paragraph */}
+                <div className="flex flex-col gap-1 space-y-2">
+                  <Label>
+                    Words per Paragraph ({options.wordsPerParagraph})
+                  </Label>
                   <Slider
                     value={[options.wordsPerParagraph]}
-                    min={10}
+                    min={20}
                     max={500}
                     step={10}
                     onValueChange={([value]) =>
@@ -198,11 +253,29 @@ export function TextGeneratorTool() {
                   />
                 </div>
 
+                {/* NEW: Number of paragraphs */}
+                <div className="flex flex-col gap-1 space-y-2">
+                  <Label>Paragraphs ({options.paragraphs})</Label>
+                  <Slider
+                    value={[options.paragraphs]}
+                    min={1}
+                    max={10}
+                    step={1}
+                    onValueChange={([value]) =>
+                      setOptions((prev) => ({
+                        ...prev,
+                        paragraphs: value,
+                      }))
+                    }
+                  />
+                </div>
+
+                {/* HTML Format */}
                 <div className="flex items-center space-x-2">
                   <Switch
                     id="html-format"
                     checked={options.format === "html"}
-                    onCheckedChange={(checked) =>
+                    onCheckedChange={(checked: boolean) =>
                       setOptions((prev) => ({
                         ...prev,
                         format: checked ? "html" : "plain",
@@ -212,7 +285,8 @@ export function TextGeneratorTool() {
                   <Label htmlFor="html-format">HTML Format</Label>
                 </div>
 
-                <div className="flex justify-between">
+                {/* Buttons */}
+                <div className="flex flex-wrap justify-between gap-2">
                   <Button variant="outline" onClick={generateNewText}>
                     <RefreshCw className="h-4 w-4 mr-2" />
                     Regenerate
@@ -243,6 +317,7 @@ export function TextGeneratorTool() {
                 </div>
               </div>
 
+              {/* RIGHT SIDE — OUTPUT */}
               <div className="space-y-4">
                 <Textarea
                   readOnly

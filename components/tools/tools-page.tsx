@@ -5,10 +5,8 @@ import { Header } from "@/components/header";
 import { Card, CardContent } from "@/components/ui/card";
 import { toolCategories } from "@/lib/tool-categories";
 import { ToolCategory } from "@/types/tools";
-import { ToolLayout } from "@/components/tool-layout";
-import { TextCounterLayout } from "@/components/tools/text-counter-layout";
+import TextCounterLayout from "@/components/tools/text-counter-layout";
 import { TextDiffLayout } from "@/components/tools/text-diff-layout";
-// import { FindReplaceLayout } from "@/components/tools/find-replace-layout";
 import { CaseConverterTool } from "@/components/tools/case-converter-tool";
 import { FormattingTool } from "@/components/tools/formatting-tool";
 import { FixSpacingTool } from "@/components/tools/fix-spacing-tool";
@@ -199,130 +197,6 @@ export default function ToolsPage({ category }: ToolsPageProps) {
       return <UUIDGeneratorTool />;
     case "Font Generators":
       return <FontGenerator />;
-    default:
-      return (
-        <ToolLayout
-          title={currentTool.name}
-          description={currentTool.description}
-          functions={currentTool.functions || []}
-          onProcess={(text, functionName) => {
-            if (!text || !functionName) return text;
-
-            switch (functionName) {
-              case "UPPERCASE":
-                return text.toUpperCase();
-              case "lowercase":
-                return text.toLowerCase();
-              case "Sentence case":
-                return text
-                  .toLowerCase()
-                  .replace(/(^\s*\w|[.!?]\s+\w)/g, (letter) =>
-                    letter.toUpperCase()
-                  );
-              case "Title Case":
-                return text
-                  .toLowerCase()
-                  .replace(
-                    /\b\w+/g,
-                    (word) => word.charAt(0).toUpperCase() + word.slice(1)
-                  );
-              case "camelCase":
-                return text
-                  .replace(/[^a-zA-Z0-9\s]/g, " ")
-                  .toLowerCase()
-                  .replace(/\s+/g, " ")
-                  .trim()
-                  .replace(/\s(.)/g, (_, char) => char.toUpperCase());
-              case "PascalCase":
-                return text
-                  .replace(/[^a-zA-Z0-9\s]/g, " ")
-                  .toLowerCase()
-                  .replace(/\s+/g, " ")
-                  .trim()
-                  .replace(/\s(.)/g, (_, char) => char.toUpperCase())
-                  .replace(/^[a-z]/, (char) => char.toUpperCase());
-              case "snake_case":
-                return text
-                  .replace(/[^a-zA-Z0-9\s]/g, " ")
-                  .toLowerCase()
-                  .replace(/\s+/g, " ")
-                  .trim()
-                  .replace(/\s/g, "_");
-              case "SCREAMING_SNAKE_CASE":
-                return text
-                  .replace(/[^a-zA-Z0-9\s]/g, " ")
-                  .toUpperCase()
-                  .replace(/\s+/g, " ")
-                  .trim()
-                  .replace(/\s/g, "_");
-              case "kebab-case":
-                return text
-                  .replace(/[^a-zA-Z0-9\s]/g, " ")
-                  .toLowerCase()
-                  .replace(/\s+/g, " ")
-                  .trim()
-                  .replace(/\s/g, "-");
-              case "dot.case":
-                return text
-                  .replace(/[^a-zA-Z0-9\s]/g, " ")
-                  .toLowerCase()
-                  .replace(/\s+/g, " ")
-                  .trim()
-                  .replace(/\s/g, ".");
-              case "path/case":
-                return text
-                  .replace(/[^a-zA-Z0-9\s]/g, " ")
-                  .toLowerCase()
-                  .replace(/\s+/g, " ")
-                  .trim()
-                  .replace(/\s/g, "/");
-              case "tOGGLE cASE":
-                return text
-                  .split("")
-                  .map((char) =>
-                    char === char.toUpperCase()
-                      ? char.toLowerCase()
-                      : char.toUpperCase()
-                  )
-                  .join("");
-              case "RaNdOm CaSe":
-                return text
-                  .split("")
-                  .map((char) =>
-                    Math.random() > 0.5
-                      ? char.toUpperCase()
-                      : char.toLowerCase()
-                  )
-                  .join("");
-              case "Trim Whitespace":
-                return text.trim().replace(/\s+/g, " ");
-              case "Remove Duplicate Lines":
-                return Array.from(new Set(text.split("\n")))
-                  .filter((line) => line.trim())
-                  .join("\n");
-              case "Remove Empty Lines":
-                return text
-                  .split("\n")
-                  .filter((line) => line.trim())
-                  .join("\n");
-              case "Sort Lines (A-Z)":
-                return text
-                  .split("\n")
-                  .filter((line) => line.trim())
-                  .sort((a, b) => a.localeCompare(b))
-                  .join("\n");
-              case "Sort Lines (Z-A)":
-                return text
-                  .split("\n")
-                  .filter((line) => line.trim())
-                  .sort((a, b) => b.localeCompare(a))
-                  .join("\n");
-              default:
-                return text;
-            }
-          }}
-        />
-      );
   }
 }
 

@@ -12,20 +12,25 @@ interface ToolSearchProps {
   getToolHref?: (toolName: string, categoryName: string) => string;
 }
 
+function getSlug(input?: string) {
+  if (!input) return "";
+  try {
+    input = decodeURIComponent(String(input));
+  } catch {}
+  return String(input)
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-") // groups of non-alphanumerics -> hyphen
+    .replace(/-+/g, "-") // collapse multiple hyphens
+    .replace(/^-+|-+$/g, ""); // trim leading/trailing hyphens
+}
+
 export default function ToolSearch({
   toolCategories,
   placeholder = "Search tools...",
   className = "",
   getToolHref = (toolName, categoryName) => {
-    // Default URL generator - converts to "/tools/text-editing/case-converter"
-    const categorySlug = categoryName
-      .toLowerCase()
-      .replace(/\s+/g, "-")
-      .replace(/[^a-z0-9-]/g, "");
-    const toolSlug = toolName
-      .toLowerCase()
-      .replace(/\s+/g, "-")
-      .replace(/[^a-z0-9-]/g, "");
+    const categorySlug = getSlug(categoryName);
+    const toolSlug = getSlug(toolName);
     return `/tools/${categorySlug}/${toolSlug}`;
   },
 }: ToolSearchProps) {

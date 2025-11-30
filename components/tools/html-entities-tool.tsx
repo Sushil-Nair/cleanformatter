@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { AboutSection } from "@/components/tools/about-section";
 import { TextStatsDisplay } from "@/components/tools/text-stats";
 import { TextStats } from "@/types/tools";
 import { Copy, Download, RotateCcw } from "lucide-react";
@@ -19,69 +18,92 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import {
+  encodeHTMLEntitiesDebounced,
+  decodeHTMLEntitiesDebounced,
   encodeHTMLEntities,
   decodeHTMLEntities,
   HTMLEntitiesOptions,
 } from "@/lib/utils/html-entities";
-// import AdUnit from "../ad-unit";
 
 export function HTMLEntitiesTool() {
   const [inputText, setInputText] = React.useState("");
   const [outputText, setOutputText] = React.useState("");
   const [mode, setMode] = React.useState<"encode" | "decode">("encode");
+
   const [options, setOptions] = React.useState<HTMLEntitiesOptions>({
     mode: "named",
     encodeAll: false,
     encodeQuotes: true,
     skipEncoded: true,
   });
+
   const [textStats, setTextStats] = React.useState<TextStats>({
     words: 0,
     sentences: 0,
     characters: 0,
     paragraphs: 0,
   });
+
   const { toast } = useToast();
 
+  /* ------------------------------------------
+   * Calculate text stats
+   * ------------------------------------------ */
   const calculateStats = (text: string) => {
-    const words = text.trim().split(/\s+/).filter(Boolean).length;
-    const sentences = text.split(/[.!?]+/).filter(Boolean).length;
-    const characters = text.length;
-    const paragraphs = text.split(/\n\s*\n/).filter(Boolean).length;
-
     setTextStats({
-      words,
-      sentences,
-      characters,
-      paragraphs,
+      words: text.trim().split(/\s+/).filter(Boolean).length,
+      sentences: text.split(/[.!?]+/).filter(Boolean).length,
+      characters: text.length,
+      paragraphs: text.split(/\n\s*\n/).filter(Boolean).length,
     });
   };
 
+  /* ------------------------------------------
+   * Auto-detect decode mode if user pastes entities
+   * ------------------------------------------ */
+  const detectEntities = (value: string) =>
+    /&(?:[A-Za-z]+|#[0-9]+|#x[0-9A-Fa-f]+);/.test(value);
+
+  /* ------------------------------------------
+   * Input Handler
+   * ------------------------------------------ */
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const newText = e.target.value;
-    setInputText(newText);
-    calculateStats(newText);
-    processText(newText);
+    const val = e.target.value;
+    setInputText(val);
+    calculateStats(val);
+
+    // Auto-switch to decode mode if needed
+    if (val && detectEntities(val) && mode === "encode") {
+      setMode("decode");
+    }
+
+    processText(val);
   };
 
+  /* ------------------------------------------
+   * Core Processing Logic
+   * ------------------------------------------ */
   const processText = React.useCallback(
-    (text: string) => {
-      if (!text) {
+    (value: string) => {
+      if (!value) {
         setOutputText("");
         return;
       }
 
       try {
-        const result =
-          mode === "encode"
-            ? encodeHTMLEntities(text, options)
-            : decodeHTMLEntities(text);
-        setOutputText(result);
-      } catch (error) {
+        if (mode === "encode") {
+          encodeHTMLEntitiesDebounced.cancel();
+          const result = encodeHTMLEntities(value, options);
+          setOutputText(result);
+        } else {
+          decodeHTMLEntitiesDebounced.cancel();
+          const result = decodeHTMLEntities(value);
+          setOutputText(result);
+        }
+      } catch (err) {
         toast({
           title: `Failed to ${mode} text`,
-          description:
-            error instanceof Error ? error.message : "An error occurred",
+          description: err instanceof Error ? err.message : "An error occurred",
           variant: "destructive",
         });
       }
@@ -93,44 +115,39 @@ export function HTMLEntitiesTool() {
     processText(inputText);
   }, [inputText, mode, options, processText]);
 
+  /* ------------------------------------------
+   * Copy / Download / Reset Handlers
+   * ------------------------------------------ */
   const handleCopy = async () => {
     if (!outputText) return;
-
     try {
       await navigator.clipboard.writeText(outputText);
       toast({
-        title: "Copied to clipboard",
-        description: "Text has been copied to your clipboard",
-        duration: 2000,
+        title: "Copied",
+        description: "Output copied to clipboard",
       });
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (error) {
+    } catch {
       toast({
-        title: "Failed to copy",
-        description: "Please try again or copy manually",
+        title: "Copy failed",
         variant: "destructive",
-        duration: 3000,
       });
     }
   };
 
   const handleDownload = () => {
     if (!outputText) return;
-
     const blob = new Blob([outputText], { type: "text/plain" });
     const url = URL.createObjectURL(blob);
+
     const a = document.createElement("a");
     a.href = url;
-    a.download = `${mode}d-html-entities.txt`;
-    document.body.appendChild(a);
+    a.download = `${mode}-html-entities.txt`;
     a.click();
-    document.body.removeChild(a);
     URL.revokeObjectURL(url);
 
     toast({
-      title: "Downloaded successfully",
-      description: "Your text has been downloaded",
-      duration: 2000,
+      title: "Downloaded",
+      description: "Output file saved",
     });
   };
 
@@ -160,9 +177,9 @@ export function HTMLEntitiesTool() {
             HTML Entities Encoder/Decoder
           </h1>
           <p className="text-muted-foreground mt-2">
-            Convert text to and from HTML entities with various encoding options
+            Convert text to named, numeric, or hexadecimal HTML entities — or
+            decode them back.
           </p>
-          {/* <AdUnit slot="9721370550" format="horizontal" /> */}
         </div>
 
         <Card>
@@ -171,13 +188,12 @@ export function HTMLEntitiesTool() {
               id="toolArea"
               className="grid grid-cols-1 lg:grid-cols-2 gap-6"
             >
+              {/* LEFT SIDE */}
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <Select
                     value={mode}
-                    onValueChange={(value: "encode" | "decode") =>
-                      setMode(value)
-                    }
+                    onValueChange={(val: "encode" | "decode") => setMode(val)}
                   >
                     <SelectTrigger className="w-[200px]">
                       <SelectValue placeholder="Select mode" />
@@ -192,77 +208,67 @@ export function HTMLEntitiesTool() {
                 <Textarea
                   placeholder={
                     mode === "encode"
-                      ? "Enter text to encode..."
-                      : "Enter HTML entities to decode..."
+                      ? "Enter text to convert into HTML entities..."
+                      : "Enter HTML entities to decode back into text..."
                   }
                   value={inputText}
                   onChange={handleInputChange}
                   className="min-h-[400px] font-mono"
                 />
+
                 <TextStatsDisplay stats={textStats} />
               </div>
 
+              {/* RIGHT SIDE */}
               <div className="space-y-4">
                 {mode === "encode" && (
                   <div className="grid grid-cols-2 gap-4">
                     <Select
                       value={options.mode}
-                      onValueChange={(value: HTMLEntitiesOptions["mode"]) =>
-                        setOptions((prev) => ({ ...prev, mode: value }))
+                      onValueChange={(v: HTMLEntitiesOptions["mode"]) =>
+                        setOptions((o) => ({ ...o, mode: v }))
                       }
                     >
                       <SelectTrigger>
-                        <SelectValue placeholder="Select encoding" />
+                        <SelectValue placeholder="Select encoding type" />
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="named">Named Entities</SelectItem>
                         <SelectItem value="numeric">
                           Numeric Entities
                         </SelectItem>
-                        <SelectItem value="hex">
-                          Hexadecimal Entities
-                        </SelectItem>
+                        <SelectItem value="hex">Hex Entities</SelectItem>
                       </SelectContent>
                     </Select>
 
                     <div className="flex items-center space-x-2">
                       <Switch
-                        id="encode-all"
                         checked={options.encodeAll}
                         onCheckedChange={(checked) =>
-                          setOptions((prev) => ({
-                            ...prev,
-                            encodeAll: checked,
-                          }))
+                          setOptions((o) => ({ ...o, encodeAll: checked }))
                         }
                       />
-                      <Label htmlFor="encode-all">Encode All Characters</Label>
+                      <Label>Encode All Characters</Label>
                     </div>
+
                     <div className="flex items-center space-x-2">
                       <Switch
-                        id="encode-quotes"
                         checked={options.encodeQuotes}
                         onCheckedChange={(checked) =>
-                          setOptions((prev) => ({
-                            ...prev,
-                            encodeQuotes: checked,
-                          }))
+                          setOptions((o) => ({ ...o, encodeQuotes: checked }))
                         }
                       />
-                      <Label htmlFor="encode-quotes">Encode Quotes</Label>
+                      <Label>Encode Quotes</Label>
                     </div>
+
                     <div className="flex items-center space-x-2">
                       <Switch
-                        id="skip-encoded"
                         checked={options.skipEncoded}
                         onCheckedChange={(checked) =>
-                          setOptions((prev) => ({
-                            ...prev,
-                            skipEncoded: checked,
-                          }))
+                          setOptions((o) => ({ ...o, skipEncoded: checked }))
                         }
                       />
-                      <Label htmlFor="skip-encoded">Skip Encoded Parts</Label>
+                      <Label>Skip Already Encoded</Label>
                     </div>
                   </div>
                 )}
@@ -276,6 +282,7 @@ export function HTMLEntitiesTool() {
                   >
                     <Copy className="h-4 w-4" />
                   </Button>
+
                   <Button
                     variant="outline"
                     size="icon"
@@ -284,6 +291,7 @@ export function HTMLEntitiesTool() {
                   >
                     <Download className="h-4 w-4" />
                   </Button>
+
                   <Button variant="outline" onClick={handleReset}>
                     <RotateCcw className="h-4 w-4 mr-2" />
                     Reset

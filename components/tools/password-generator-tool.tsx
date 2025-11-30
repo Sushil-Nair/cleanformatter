@@ -7,17 +7,17 @@ import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
 import { useToast } from "@/hooks/use-toast";
-import { AboutSection } from "@/components/tools/about-section";
 import {
   generatePassword,
   calculatePasswordStrength,
+  estimatePasswordEntropy,
   PasswordOptions,
 } from "@/lib/utils/password";
 import { Copy, RefreshCw, Shield } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { motion } from "framer-motion";
-// import AdUnit from "../ad-unit";
-import { Textarea } from "../ui/textarea";
+import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
 
 export function PasswordGeneratorTool() {
   const [password, setPassword] = React.useState("");
@@ -31,29 +31,36 @@ export function PasswordGeneratorTool() {
     ambiguous: false,
     memorable: false,
     pattern: "",
+    customSymbols: "",
   });
   const [strength, setStrength] = React.useState(0);
+  const [entropy, setEntropy] = React.useState(0);
   const { toast } = useToast();
 
-  const getStrengthLabel = (strength: number) => {
-    if (strength < 25) return "Weak";
-    if (strength < 50) return "Fair";
-    if (strength < 75) return "Strong";
+  // ---------- Strength Helpers ----------
+
+  const getStrengthLabel = (value: number) => {
+    if (value < 25) return "Very Weak";
+    if (value < 50) return "Weak";
+    if (value < 75) return "Strong";
     return "Very Strong";
   };
 
-  const getStrengthColor = (strength: number) => {
-    if (strength < 25) return "bg-red-500";
-    if (strength < 50) return "bg-yellow-500";
-    if (strength < 75) return "bg-green-500";
+  const getStrengthColor = (value: number) => {
+    if (value < 25) return "bg-red-500";
+    if (value < 50) return "bg-yellow-500";
+    if (value < 75) return "bg-green-500";
     return "bg-emerald-500";
   };
+
+  // ---------- Generation Logic ----------
 
   const generateNewPassword = React.useCallback(() => {
     try {
       const newPassword = generatePassword(options);
       setPassword(newPassword);
       setStrength(calculatePasswordStrength(newPassword));
+      setEntropy(estimatePasswordEntropy(newPassword));
     } catch (error) {
       toast({
         title: "Failed to generate password",
@@ -64,17 +71,11 @@ export function PasswordGeneratorTool() {
     }
   }, [options, toast]);
 
-  const regenerateDebounced = React.useCallback(() => {
-    let timeout: NodeJS.Timeout;
-    return () => {
-      clearTimeout(timeout);
-      timeout = setTimeout(generateNewPassword, 200);
-    };
-  }, [generateNewPassword]);
-
   React.useEffect(() => {
     generateNewPassword();
   }, [options, generateNewPassword]);
+
+  // ---------- Actions ----------
 
   const handleCopy = async () => {
     if (!password) return;
@@ -86,8 +87,7 @@ export function PasswordGeneratorTool() {
         description: "Password has been copied to your clipboard",
         duration: 2000,
       });
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (error) {
+    } catch {
       toast({
         title: "Failed to copy",
         description: "Please try again or copy manually",
@@ -101,25 +101,49 @@ export function PasswordGeneratorTool() {
     setOptions((prev) => ({ ...prev, length }));
   };
 
+  const handleReset = () => {
+    setOptions({
+      length: 16,
+      uppercase: true,
+      lowercase: true,
+      numbers: true,
+      symbols: true,
+      similar: false,
+      ambiguous: false,
+      memorable: false,
+      pattern: "",
+      customSymbols: "",
+    });
+    setPassword("");
+    setStrength(0);
+    setEntropy(0);
+  };
+
+  const patternModeActive = options.pattern.trim().length > 0;
+  const memorableModeActive = options.memorable;
+
+  // ---------- UI ----------
+
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="space-y-4">
+        {/* Header */}
         <div className="flex items-center gap-3">
           <Shield className="h-8 w-8 text-primary" />
           <div>
             <h1 className="font-bold tracking-tight">Password Generator</h1>
             <p className="text-muted-foreground mt-2">
-              Generate secure, random passwords with customizable options
+              Generate secure, random passwords with advanced control over
+              length, character sets, patterns, and memorability.
             </p>
-            {/* <AdUnit slot="9721370550" format="horizontal" /> */}
           </div>
         </div>
 
         <Card>
           <CardContent className="p-6">
             <div id="toolArea" className="space-y-8">
-              {/* Password Output Section */}
-              <div className="flex flex-col items-center gap-2 w-full">
+              {/* Output Section */}
+              <div className="flex flex-col items-center gap-3 w-full">
                 <motion.div
                   className="flex flex-col sm:flex-row flex-grow w-full items-center justify-center gap-4"
                   animate={{ scale: [1, 1.02, 1] }}
@@ -145,7 +169,7 @@ export function PasswordGeneratorTool() {
                     <Button
                       variant="ghost"
                       size="sm"
-                      onClick={regenerateDebounced()}
+                      onClick={generateNewPassword}
                       className="h-12 flex items-center"
                     >
                       <RefreshCw className="h-4 w-4 mr-2" />
@@ -154,12 +178,14 @@ export function PasswordGeneratorTool() {
                   </div>
                 </motion.div>
 
-                <div className="space-y-2 w-full">
-                  <div className="flex items-center justify-between text-sm">
+                <div className="space-y-1 w-full">
+                  <div className="flex items-center justify-between text-xs sm:text-sm">
                     <span className="font-medium">
-                      Password Strength: {getStrengthLabel(strength)}
+                      Strength: {getStrengthLabel(strength)}
                     </span>
-                    <span>{strength}%</span>
+                    <span>
+                      {strength}% · {entropy} bits entropy
+                    </span>
                   </div>
                   <Progress
                     value={strength}
@@ -168,15 +194,16 @@ export function PasswordGeneratorTool() {
                 </div>
               </div>
 
-              {/* Core Controls Section */}
+              {/* Controls */}
               <div className="space-y-6">
+                {/* Length + presets */}
                 <div className="space-y-4">
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between gap-4 flex-wrap">
                     <Label className="text-base">
                       Password Length: {options.length} characters
                     </Label>
                     <div className="flex gap-2">
-                      {[8, 16, 32].map((preset) => (
+                      {[8, 12, 16, 24, 32].map((preset) => (
                         <Button
                           key={preset}
                           variant={
@@ -203,12 +230,14 @@ export function PasswordGeneratorTool() {
                   />
                 </div>
 
+                {/* Character Types + Advanced */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {/* Character Types */}
                   <Card className="p-4 space-y-4">
                     <h3 className="font-medium">Character Types</h3>
-                    <div className="space-y-3">
+                    <div className="space-y-3 text-sm">
                       <div className="flex items-center justify-between">
-                        <Label htmlFor="uppercase">Uppercase (A-Z)</Label>
+                        <Label htmlFor="uppercase">Uppercase (A–Z)</Label>
                         <Switch
                           id="uppercase"
                           checked={options.uppercase}
@@ -218,10 +247,11 @@ export function PasswordGeneratorTool() {
                               uppercase: checked,
                             }))
                           }
+                          disabled={memorableModeActive}
                         />
                       </div>
                       <div className="flex items-center justify-between">
-                        <Label htmlFor="lowercase">Lowercase (a-z)</Label>
+                        <Label htmlFor="lowercase">Lowercase (a–z)</Label>
                         <Switch
                           id="lowercase"
                           checked={options.lowercase}
@@ -231,10 +261,11 @@ export function PasswordGeneratorTool() {
                               lowercase: checked,
                             }))
                           }
+                          disabled={memorableModeActive}
                         />
                       </div>
                       <div className="flex items-center justify-between">
-                        <Label htmlFor="numbers">Numbers (0-9)</Label>
+                        <Label htmlFor="numbers">Numbers (0–9)</Label>
                         <Switch
                           id="numbers"
                           checked={options.numbers}
@@ -244,10 +275,11 @@ export function PasswordGeneratorTool() {
                               numbers: checked,
                             }))
                           }
+                          disabled={memorableModeActive}
                         />
                       </div>
                       <div className="flex items-center justify-between">
-                        <Label htmlFor="symbols">Symbols (!@#$%^&*)</Label>
+                        <Label htmlFor="symbols">Symbols (!@#$…)</Label>
                         <Switch
                           id="symbols"
                           checked={options.symbols}
@@ -257,16 +289,18 @@ export function PasswordGeneratorTool() {
                               symbols: checked,
                             }))
                           }
+                          disabled={memorableModeActive}
                         />
                       </div>
                     </div>
                   </Card>
 
+                  {/* Advanced Options */}
                   <Card className="p-4 space-y-4">
                     <h3 className="font-medium">Advanced Options</h3>
-                    <div className="space-y-3">
+                    <div className="space-y-3 text-sm">
                       <div className="flex items-center justify-between">
-                        <Label htmlFor="memorable">Memorable Password</Label>
+                        <Label htmlFor="memorable">Memorable password</Label>
                         <Switch
                           id="memorable"
                           checked={options.memorable}
@@ -274,14 +308,15 @@ export function PasswordGeneratorTool() {
                             setOptions((prev) => ({
                               ...prev,
                               memorable: checked,
-                              pattern: "",
+                              // pattern off when memorable on
+                              pattern: checked ? "" : prev.pattern,
                             }))
                           }
                         />
                       </div>
                       <div className="flex items-center justify-between">
                         <Label htmlFor="similar">
-                          Allow Similar Characters
+                          Allow similar characters (i, l, 1, o, 0)
                         </Label>
                         <Switch
                           id="similar"
@@ -292,11 +327,13 @@ export function PasswordGeneratorTool() {
                               similar: checked,
                             }))
                           }
+                          disabled={memorableModeActive}
                         />
                       </div>
                       <div className="flex items-center justify-between">
                         <Label htmlFor="ambiguous">
-                          Allow Ambiguous Characters
+                          Allow ambiguous characters (
+                          {`{ } [ ] ( ) / ' " ~ , ; : . < >`})
                         </Label>
                         <Switch
                           id="ambiguous"
@@ -307,60 +344,136 @@ export function PasswordGeneratorTool() {
                               ambiguous: checked,
                             }))
                           }
+                          disabled={memorableModeActive}
                         />
+                      </div>
+                      <div className="space-y-1">
+                        <Label htmlFor="customSymbols">Custom symbols</Label>
+                        <Input
+                          id="customSymbols"
+                          placeholder="e.g. _-#@"
+                          value={options.customSymbols || ""}
+                          onChange={(e) =>
+                            setOptions((prev) => ({
+                              ...prev,
+                              customSymbols: e.target.value,
+                            }))
+                          }
+                          disabled={memorableModeActive}
+                        />
+                        <p className="text-xs text-muted-foreground">
+                          These characters will be added to the symbol pool.
+                        </p>
                       </div>
                     </div>
                   </Card>
                 </div>
-              </div>
 
-              {/* Requirements Checklist */}
-              <Card className="p-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
-                  <div
-                    className={
-                      options.uppercase ? "text-green-500" : "text-red-500"
-                    }
-                  >
-                    {options.uppercase ? "✓" : "✗"} Includes uppercase letters
+                {/* Pattern Mode */}
+                <Card className="p-4 space-y-3">
+                  <h3 className="font-medium">Pattern Mode</h3>
+                  <div className="space-y-2">
+                    <Input
+                      placeholder='Example: "Aa0!-Aa0!"'
+                      value={options.pattern}
+                      onChange={(e) =>
+                        setOptions((prev) => ({
+                          ...prev,
+                          pattern: e.target.value,
+                          // turning on pattern implicitly disables memorable
+                          memorable:
+                            e.target.value.trim().length > 0
+                              ? false
+                              : prev.memorable,
+                        }))
+                      }
+                    />
+                    <p className="text-xs text-muted-foreground">
+                      Tokens: <strong>A</strong> = uppercase, <strong>a</strong>{" "}
+                      = lowercase, <strong>0</strong> = digit,{" "}
+                      <strong>!</strong> = symbol/custom, <strong>x</strong> =
+                      any from selected character pool. Any other character is
+                      used as-is.
+                    </p>
+                    {patternModeActive && (
+                      <p className="text-xs text-amber-600">
+                        Pattern overrides all other options except character
+                        pools. Make sure at least one character type is enabled
+                        if you use <code>x</code>.
+                      </p>
+                    )}
                   </div>
-                  <div
-                    className={
-                      options.lowercase ? "text-green-500" : "text-red-500"
-                    }
-                  >
-                    {options.lowercase ? "✓" : "✗"} Includes lowercase letters
+                </Card>
+
+                {/* Requirements Checklist */}
+                <Card className="p-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
+                    <div
+                      className={
+                        options.uppercase ? "text-green-500" : "text-red-500"
+                      }
+                    >
+                      {options.uppercase ? "✓" : "✗"} Includes uppercase letters
+                    </div>
+                    <div
+                      className={
+                        options.lowercase ? "text-green-500" : "text-red-500"
+                      }
+                    >
+                      {options.lowercase ? "✓" : "✗"} Includes lowercase letters
+                    </div>
+                    <div
+                      className={
+                        options.numbers ? "text-green-500" : "text-red-500"
+                      }
+                    >
+                      {options.numbers ? "✓" : "✗"} Includes numbers
+                    </div>
+                    <div
+                      className={
+                        options.symbols || (options.customSymbols || "").length
+                          ? "text-green-500"
+                          : "text-red-500"
+                      }
+                    >
+                      {options.symbols || (options.customSymbols || "").length
+                        ? "✓"
+                        : "✗"}{" "}
+                      Includes symbols
+                    </div>
+                    <div
+                      className={
+                        options.length >= 12 ? "text-green-500" : "text-red-500"
+                      }
+                    >
+                      {options.length >= 12 ? "✓" : "✗"} Length ≥ 12 characters
+                    </div>
+                    <div
+                      className={
+                        !options.ambiguous ? "text-green-500" : "text-red-500"
+                      }
+                    >
+                      {!options.ambiguous ? "✓" : "✗"} No ambiguous characters
+                    </div>
                   </div>
-                  <div
-                    className={
-                      options.numbers ? "text-green-500" : "text-red-500"
-                    }
-                  >
-                    {options.numbers ? "✓" : "✗"} Includes numbers
+
+                  <div className="mt-4 flex flex-wrap gap-4 justify-between text-xs text-muted-foreground">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={handleReset}
+                    >
+                      Reset options
+                    </Button>
+                    <span>
+                      Tip: For serious accounts, aim for{" "}
+                      <strong>≥ 16 chars</strong> and{" "}
+                      <strong>≥ 70 strength</strong>.
+                    </span>
                   </div>
-                  <div
-                    className={
-                      options.symbols ? "text-green-500" : "text-red-500"
-                    }
-                  >
-                    {options.symbols ? "✓" : "✗"} Includes symbols
-                  </div>
-                  <div
-                    className={
-                      options.length >= 12 ? "text-green-500" : "text-red-500"
-                    }
-                  >
-                    {options.length >= 12 ? "✓" : "✗"} Length ≥ 12 characters
-                  </div>
-                  <div
-                    className={
-                      !options.ambiguous ? "text-green-500" : "text-red-500"
-                    }
-                  >
-                    {!options.ambiguous ? "✓" : "✗"} No ambiguous characters
-                  </div>
-                </div>
-              </Card>
+                </Card>
+              </div>
             </div>
           </CardContent>
         </Card>

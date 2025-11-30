@@ -56,7 +56,15 @@ const caseFunctions: ToolFunctions[] = [
     name: "Sentence case",
     description: "Capitalize first letter of each sentence",
   },
-  { name: "Title Case", description: "Capitalize first letter of each word" },
+  {
+    name: "Title Case",
+    description:
+      "Capitalizes the first letter of major words while keeping small connecting words (like “and,” “of,” “the”) lowercase, following standard headline–style capitalization used by writers, editors, and publishers.",
+  },
+  {
+    name: "Capitalization Case",
+    description: "Capitalize first letter of text",
+  },
   { name: "camelCase", description: "Convert to camelCase" },
   { name: "PascalCase", description: "Convert to PascalCase" },
   { name: "snake_case", description: "Convert to snake_case" },
@@ -69,11 +77,6 @@ const caseFunctions: ToolFunctions[] = [
   { name: "path/case", description: "Convert to path/case" },
   { name: "tOGGLE cASE", description: "Toggle character case" },
   { name: "RaNdOm CaSe", description: "Randomize character case" },
-  { name: "Trim Whitespace", description: "Remove extra whitespace" },
-  { name: "Remove Duplicate Lines", description: "Remove duplicate lines" },
-  { name: "Remove Empty Lines", description: "Remove empty lines" },
-  { name: "Sort Lines (A-Z)", description: "Sort lines alphabetically" },
-  { name: "Sort Lines (Z-A)", description: "Sort lines in reverse" },
 ];
 
 export const toolCategories: ToolCategory[] = [
@@ -87,206 +90,167 @@ export const toolCategories: ToolCategory[] = [
         name: "Case Converter",
         slug: "case-converter",
         description:
-          "From UPPERCASE to camelCase to kebab-case — convert text instantly. Built for writers & devs. No sign-up, no drama.",
+          "A professional-grade, Smart Case Converter that transforms text into 15+ editorial, programming, and SEO-friendly case formats with ignore-word protection, brand-safe casing, acronym preservation, and smart punctuation handling.",
         detailedDescription:
-          "The Case Converter is a powerful online text transformation tool designed to streamline text formatting for developers, content creators, and professional writers. Whether you need to convert text to UPPERCASE, lowercase, Title Case, camelCase, snake_case, kebab-case, or any other popular case format, this free tool handles all conversions instantly in your browser. Perfect for programming variable names, API endpoints, documentation, social media content, and professional documents, the Case Converter supports over 18 different case styles including SCREAMING_SNAKE_CASE, PascalCase, dot.case, and path/case. The tool also includes advanced text manipulation features like trimming whitespace, removing duplicate lines, sorting lines alphabetically, and toggling character cases. All processing happens client-side, ensuring complete privacy and data security without requiring registration or file uploads. Ideal for software developers working with multiple programming languages, technical writers formatting documentation, content managers preparing blog posts, and students organizing academic papers, this case converter tool eliminates manual formatting errors and saves valuable time in text preprocessing workflows.",
+          "The Smart Case Converter by CleanFormatter is a next-generation text transformation tool designed for writers, developers, bloggers, editors, and content creators who need precise and reliable case formatting. Unlike traditional case converters that merely flip text to upper or lower case, this tool uses a PRO-level engine that understands protected words, industry acronyms, brand-specific casing, and user-defined ignore lists. This ensures that critical terms such as NASA, API, ChatGPT, JavaScript, or custom brand names remain unaffected by formatting rules. With support for 15+ powerful case formats—including Title Case, Capitalization Case, Sentence case, camelCase, PascalCase, snake_case, SCREAMING_SNAKE_CASE, kebab-case, and path/case—the tool adapts to both editorial and development workflows. The built-in linguistic engine respects grammar rules, avoids over-capitalization, handles small-word exceptions, processes hyphenated words, and intelligently reconstructs multi-word phrases. <p></p>The tool also includes quality-of-life features such as whitespace cleanup, duplicate line removal, line sorting, code-friendly formatting, and a fully customizable ignore-word system. Whether you're preparing blog content, writing documentation, formatting product descriptions, optimizing SEO titles, or generating programming identifiers, the Smart Case Converter ensures accuracy, consistency, and readability across every output. With its clean UI, instant output, and highly tuned transformation engine, this tool becomes an essential part of any writer or developer’s productivity toolkit.",
         primaryUseCases: [
-          "Converting variable names between programming case conventions (camelCase, snake_case, PascalCase) for different coding standards and languages",
-          "Formatting social media content, blog headlines, and marketing copy with proper Title Case or sentence case capitalization",
-          "Preparing API endpoint URLs and route paths using kebab-case or dot.case notation for web development projects",
-          "Standardizing document headings, titles, and section names to consistent casing styles for professional reports and academic papers",
-          "Converting file names and folder structures to consistent naming conventions across development projects and documentation systems",
+          "Convert text into standard editorial formats like Sentence case, Title Case, and Capitalization Case.",
+          "Generate programmer-friendly identifiers such as camelCase, PascalCase, snake_case, and kebab-case.",
+          "Prepare polished SEO titles, headings, and metadata with brand-safe capitalization.",
+          "Normalize messy text, fix punctuation casing, and remove formatting inconsistencies.",
+          "Protect brand names, acronyms, and technical words from unwanted transformations.",
+          "Format multi-line content for documentation, code comments, scripts, and product descriptions.",
         ],
+
         howToUse: [
-          "Paste or type your text into the input text area at the top of the case converter interface",
-          "Select your desired case conversion style from the dropdown menu or function buttons (e.g., UPPERCASE, camelCase, snake_case)",
-          "View the instantly converted text in the output area below, with real-time transformation as you type",
-          "Copy the converted text with a single click or download it as a text file for use in your projects and documents",
+          "Enter or paste your text into the main input box. You can add multiple lines, paragraphs, lists, or code snippets.",
+          "Choose the desired case format from the dropdown menu—options include editorial cases, dev-style cases, SEO-friendly cases, and more.",
+          "If needed, add words to the Ignore Words box. These words will retain their original casing across all transformations.",
+          "Use the Trim Whitespace toggle to clean extra spaces while preserving bullet formats and code blocks.",
+          "Enable Remove Empty Lines or Remove Duplicate Lines for polishing multi-line content or datasets.",
+          "Use the Sort Lines option (A–Z or Z–A) when dealing with lists, inventory, datasets, or documentation.",
+          "The output updates instantly on the right side. Copy it using the Copy button or download it as a .txt file.",
+          "Reset the tool anytime to clear input, output, and all toggles back to default.",
         ],
+
         popularTools: [
-          "UPPERCASE",
-          "lowercase",
-          "Sentence case",
-          "Title Case",
-          "camelCase",
-          "PascalCase",
-          "snake_case",
-          "SCREAMING_SNAKE_CASE",
-          "kebab-case",
-          "dot.case",
-          "path/case",
-          "tOGGLE cASE",
-          "RaNdOm CaSe",
-          "Trim Whitespace",
-          "Remove Duplicate Lines",
-          "Remove Empty Lines",
-          "Sort Lines (A-Z)",
-          "Sort Lines (Z-A)",
+          "Title Case Converter",
+          "Sentence Case Converter",
+          "PascalCase Generator",
+          "snake_case Converter",
+          "kebab-case Formatter",
+          "Text Formatter and Cleaner",
         ],
         functions: caseFunctions,
         advancedTips: [
-          "Chain multiple case conversions together by first converting to lowercase, then applying your target case style for more predictable results with mixed-case input",
-          "Use the sort lines feature before removing duplicates to group similar entries together and make manual review easier for large datasets",
-          "Use trim whitespace with remove empty lines to clean up copied text from PDFs or formatted documents that contain irregular spacing and then use Case Converter to format it",
-          "Leverage keyboard shortcuts by bookmarking the tool and using browser extensions to quickly access case conversion without leaving your development environment",
-          "When converting code variables, verify that reserved keywords in your programming language are handled correctly after case conversion to avoid syntax errors",
+          "Add product names (e.g., CleanFormatter, iPhone, ChatGPT) to the ignore list to ensure branding stays intact.",
+          "When working with code identifiers, combine camelCase or snake_case with line sorting to organize variable lists.",
+          "Use Title Case for SEO headlines but Capitalization Case for social media captions.",
+          "Enable Trim Whitespace when pasting text from PDFs or emails to clean invisible spacing issues.",
+          "For technical documentation, combine SCREAMING_SNAKE_CASE with protected acronyms like API, HTTP, TCP to maintain readability.",
+          "Use path/case when building URL structures, routing templates, or folder architectures.",
         ],
+
         troubleshooting: [
           {
             issue:
-              "Converted text remains unchanged or does not match the selected case style",
+              "Ignore words are not being preserved in certain case modes.",
             solution:
-              "Ensure the input text is free of hidden formatting or special characters by first cleaning it using a formatting removal tool. Also, refresh the page or try a different browser to fix any JavaScript execution errors.",
+              "Ensure the words are added in the Ignore Words box without trailing spaces. The engine matches whole words exactly in lowercase form.",
           },
           {
             issue:
-              "Copy or download buttons do not work after text conversion.",
+              "Unexpected lowercase or uppercase letters in Title Case or Sentence case output.",
             solution:
-              "Verify the site is accessed over HTTPS and that browser permissions allow clipboard access and downloads. Clear browser cache or disable interfering extensions, and make sure there is valid output text before using these features.",
+              "Check if the word is a small word (like 'and', 'of', 'to'). These follow linguistic rules and stay lowercase unless at the start of a sentence.",
           },
           {
-            issue:
-              "camelCase or PascalCase conversion doesn't handle abbreviations or acronyms correctly",
+            issue: "Whitespace or extra spacing appears after converting text.",
             solution:
-              "Acronyms and abbreviations may require manual adjustment after conversion. For best results, convert to lowercase first, then manually correct acronyms before applying camelCase or PascalCase. Consider using snake_case or kebab-case for text containing multiple acronyms, as these formats handle abbreviations more predictably.",
+              "Enable Trim Whitespace to automatically clean irregular spaces, line breaks, and tabbed formatting.",
           },
           {
-            issue: "Performance slows down with very large input texts.",
+            issue: "Protected acronyms like NASA or API are changing case.",
             solution:
-              "For extremely large texts (over 100,000 characters), consider breaking the input into smaller chunks and processing them separately. Close other browser tabs to free up memory, or use a modern browser with better performance optimization like Chrome or Firefox.",
+              "Make sure they exist in the custom ignore words list if you need non-standard preservation, or verify that built-in acronyms weren’t misspelled.",
           },
         ],
+
         detailedExamples: [
-          "A software developer working on a Node.js project receives variable names in Title Case from documentation (e.g., 'User Profile Data') and needs to convert them to camelCase ('userProfileData') for JavaScript code. Using the case converter, they paste the entire list of variable names, select camelCase conversion, and instantly get properly formatted code-ready variables that follow JavaScript naming conventions.",
-          "A content manager preparing blog post headlines needs to ensure consistent Title Case formatting across 50 article titles copied from various sources with inconsistent capitalization. They paste all titles into the case converter, select Title Case, and immediately receive properly capitalized headlines ready for publication, saving hours of manual editing work.",
-          "A database administrator needs to convert table column names from snake_case (e.g., 'user_profile_id') to kebab-case for use in REST API endpoints (e.g., 'user-profile-id'). They use the case converter to transform an entire schema documentation file at once, ensuring consistent API route naming across their microservices architecture.",
+          "Input: 'nasa collaborated with the fbi and ChatGPT on satellite research.' — Sentence Case Output: 'Nasa collaborated with the FBI and ChatGPT on satellite research.'",
+          "Input: 'Java Script case converter tool' — PascalCase: 'JavaScriptCaseConverterTool' (brand casing preserved)",
+          "Input: 'API endpoint caching system' — SCREAMING_SNAKE_CASE: 'API_ENDPOINT_CACHING_SYSTEM' (API preserved)",
+          "Input: 'clean formatter productivity tools' — kebab-case: 'clean-formatter-productivity-tools'",
+          "Input: 'user profile image uploader' — camelCase: 'userProfileImageUploader'",
         ],
-        link: "https://cleanformatter.com/tools/text-editing/case-converter",
+
         faq: [
           {
-            question: "What is a case converter tool?",
+            question:
+              "Can I protect brand names or technical terms from being converted?",
             answer:
-              "A case converter tool automatically changes text between different letter cases such as uppercase, lowercase, title case, camelCase, snake_case, and more — useful for writers, developers, and designers.",
+              "Yes. Add any term into the Ignore Words box, and the converter will preserve it exactly as typed across all case modes.",
           },
           {
-            question: "How do I use the case converter tool?",
+            question: "Does the tool support programming-related case formats?",
             answer:
-              "Simply paste or type your text into the input box, select your desired case style from the dropdown (like uppercase or snake_case), and the converted text will appear instantly in the output box.",
+              "Absolutely. Formats like camelCase, PascalCase, snake_case, SCREAMING_SNAKE_CASE, kebab-case, and path/case are fully supported and optimized for developers.",
           },
           {
-            question: "What are the different case styles supported?",
+            question:
+              "Does the tool change abbreviations like NASA, HTTP, or API?",
             answer:
-              "The case converter supports UPPERCASE, lowercase, Sentence case, Title Case, camelCase, PascalCase, snake_case, SCREAMING_SNAKE_CASE, kebab-case, dot.case, path/case, tOGGLE cASE, RaNdOm CaSe, Trim Whitespace, Remove Duplicate Lines, Remove Empty Lines, Sort Lines (A-Z), and Sort Lines (Z-A).",
+              "No. The engine contains built-in protection for common acronyms. You can also add any additional words you want preserved.",
           },
           {
-            question: "Who can benefit from using a case converter?",
+            question: "Why does Title Case keep some words lowercase?",
             answer:
-              "Writers, developers, bloggers, editors, and students who frequently format text for documents, websites, or code can save time and improve consistency using this tool.",
+              "The engine follows modern editorial rules, where conjunctions and prepositions stay lowercase unless they appear at the beginning of the title.",
           },
           {
-            question: "Is this tool free to use?",
+            question: "Is the output safe for SEO titles and metadata?",
             answer:
-              "Yes, the case converter tool is completely free and doesn't require any registration or login.",
-          },
-          {
-            question: "Can I copy or download the converted text?",
-            answer:
-              "Yes. After conversion, you can easily copy the output with one click or download it as a text file.",
-          },
-          {
-            question: "Is there a character limit for input?",
-            answer:
-              "No strict limit is enforced, but for extremely large inputs, performance may vary slightly depending on your browser and device.",
-          },
-          {
-            question: "Can I convert multiple paragraphs or code blocks?",
-            answer:
-              "Yes. The tool processes multiline text and preserves formatting, making it suitable for articles, scripts, or code snippets.",
-          },
-          {
-            question: "Is my text data stored or tracked?",
-            answer:
-              "No. The tool runs entirely client-side — meaning your text never leaves your browser or gets stored anywhere.",
-          },
-          {
-            question: "What's the difference between camelCase and PascalCase?",
-            answer:
-              "camelCase starts with a lowercase letter (e.g., 'firstName'), while PascalCase starts with an uppercase letter (e.g., 'FirstName'). Both are commonly used in programming for variable and class naming conventions.",
-          },
-          {
-            question: "Can the case converter handle special characters?",
-            answer:
-              "Yes. The tool preserves all special characters, numbers, punctuation marks, and Unicode characters during case conversion, ensuring your text integrity remains intact.",
+              "Yes. The Smart Case Converter produces clean, brand-safe, search-optimized titles and headings suitable for SEO and content marketing.",
           },
         ],
+        link: "https://cleanformatter.com/tools/text-editing/case-converter",
       },
       {
         name: "Text Counter",
         slug: "text-counter",
-        description: "Count characters, words, and lines",
+        description:
+          "A professional text statistics analyzer that instantly calculates word count, character count, sentences, paragraphs, reading time, speaking time, and more. Perfect for writers, students, marketers, and content creators.",
         detailedDescription:
-          "The Text Counter is an essential online tool for writers, editors, students, SEO professionals, and content creators who need accurate real-time text statistics and word count analysis. This comprehensive character counter and word counting tool instantly calculates multiple text metrics including total word count, character count with and without spaces, sentence count, paragraph count, reading time estimates, and average word length. Perfect for meeting strict content length requirements on social media platforms like Twitter (X) character limits, Instagram caption restrictions, meta description length for SEO optimization, academic essay word counts, and professional document specifications. The tool supports Unicode text across all languages and alphabets, accurately counting emojis, special characters, punctuation marks, and multilingual content. Writers use it to track novel progress and meet publishing requirements, students ensure essays meet assignment specifications, SEO specialists optimize content length for search engine rankings, and social media managers verify posts fit platform constraints. All text analysis happens instantly in your browser with complete privacy protection, requiring no registration, file uploads, or data transmission to external servers.",
+          "The Text Counter is a powerful real-time text statistics tool designed for writers, students, marketers, developers, content creators, and anyone who works with text. Unlike basic word counters, this upgraded version provides an in-depth breakdown of your text including words, characters (with and without spaces), sentences, paragraphs, lines, average word length, longest word, estimated reading time, and estimated speaking time. This makes the tool ideal for blog writing, SEO optimization, academic assignments, speech preparation, social media content, and professional communication.\n\nThe engine is built using an optimized text analysis model that normalizes line breaks, detects multiple paragraph styles, and provides highly accurate counts even for large inputs. With features like sample text insertion, copy text, paste from clipboard, copy statistics, and one-click reset, the tool delivers an efficient workflow perfect for both casual and professional use. The interface is powered by Next.js, Tailwind CSS, and ShadCN UI, ensuring a clean, fast, and responsive user experience across all devices.\n\nWhether you're optimizing content for SEO limits, preparing a speech, ensuring academic accuracy, or analyzing long-form writing, the Text Counter gives you the precision and insights you need. It is built to be lightweight, fast, user-friendly, and highly reliable for all types of content analysis tasks.",
         primaryUseCases: [
-          "Verifying blog posts and articles meet SEO-recommended word count ranges (typically 1,500-2,500 words) for better search engine rankings and content performance",
-          "Ensuring social media posts stay within platform character limits: Twitter/X (280 characters), Instagram captions (2,200 characters), and LinkedIn posts (3,000 characters)",
-          "Tracking academic essay and research paper word counts to meet university assignment requirements and thesis length specifications",
-          "Optimizing meta descriptions for SEO by keeping them between 150-160 characters for proper display in Google search results",
-          "Monitoring novel and manuscript progress by tracking daily word count goals and overall chapter length for fiction and non-fiction writing projects",
+          "Counting words and characters for SEO content, blogs, and articles",
+          "Tracking reading and speaking time for podcasts, speeches, and scripts",
+          "Analyzing academic writing including essays and assignments",
+          "Checking text length limits for social media platforms",
+          "Identifying longest words and average word length for linguistic analysis",
+          "Reviewing overall text structure via sentence, line, and paragraph counts",
         ],
         howToUse: [
-          "Paste or type your text directly into the text counter input area, or upload a document file if supported",
-          "View real-time statistics automatically displayed below the input area, showing word count, character count, and other metrics",
-          "Toggle between 'with spaces' and 'without spaces' character counts to meet specific formatting requirements for different platforms",
-          "Review additional metrics like sentence count and paragraph count",
-          "Use the reset button to reset the counter and start fresh, or copy your statistics for reporting and documentation purposes",
+          "Type or paste your text inside the main input box.",
+          "Use the action buttons below the input to copy, paste, insert sample text, or reset.",
+          "Toggle character mode to switch between 'with spaces' and 'without spaces'.",
+          "View primary stats (words, characters, reading time) instantly reflected below.",
+          "Scroll down to view advanced stats like sentences, paragraphs, lines, longest word, and more.",
+          "Copy all statistics with a single click using the 'Copy Stats' button.",
         ],
-        popularTools: ["Word Count", "Character Count", "Line Count"],
+        popularTools: [
+          "Word Count",
+          "Character Count",
+          "Sentence Count",
+          "Paragraph Count",
+          "Reading Time Calculator",
+          "Speaking Time Calculator",
+        ],
         advancedTips: [
-          "Use the text counter during the writing process by keeping it open in a separate browser tab to monitor progress in real-time without disrupting your workflow",
-          "Set custom word count goals by noting your starting count and calculating your target endpoint, helping maintain consistent writing productivity",
-          "Compare character counts with and without spaces when optimizing for SMS messaging or platforms that count spaces differently",
-          "Leverage the reading time estimate to gauge article length appropriateness for your target audience's attention span and engagement patterns",
-          "Combine with word processing software's built-in counter to cross-verify accuracy for critical submissions like journal publications or legal documents",
+          "Use the character mode toggle to check both SEO limits and social media platform limits.",
+          "Paste long-form content to estimate reading time for newsletters and blog posts.",
+          "Use sample text to quickly test UI behavior without writing manually.",
+          "Measure speaking time before recording videos, lectures, or podcasts.",
+          "Analyze longest words to identify complex or technical terminology in your content.",
         ],
         troubleshooting: [
           {
-            issue:
-              "Word count differs from Microsoft Word or Google Docs count by a few words",
+            issue: "Paragraph count seems incorrect.",
             solution:
-              "Different tools use slightly different algorithms for defining word boundaries, especially with hyphenated words, contractions, and special characters. The text counter follows standard Unicode word boundary detection. For critical submissions, use the same tool consistently for accurate tracking, and verify requirements with your institution or publisher regarding which counting method they prefer.",
+              "The tool detects paragraphs based on blank line separation. Make sure each paragraph is separated by at least one empty line.",
           },
           {
-            issue: "Character count seems off when pasting formatted text.",
-            solution: (
-              <>
-                When pasting text from rich text editors or formatted documents,
-                hidden characters or formatting codes may be included that
-                affect the character count. To ensure accurate counting, first
-                paste the text into the{" "}
-                <Link
-                  href="https://cleanformatter.com/tools/clean-format/remove-formatting"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-medium text-primary underline"
-                >
-                  Remove Formatting tool
-                </Link>{" "}
-                to strip formatting, then copy it from there into the text
-                counter tool.
-              </>
-            ),
-          },
-          {
-            issue:
-              "Emojis and special Unicode characters are counted incorrectly or cause unexpected results",
+            issue: "Pasting is blocked by the browser.",
             solution:
-              "Modern text counters should handle Unicode properly, but some emojis are composed of multiple Unicode characters. If you notice discrepancies, try pasting the same text into multiple online counters to identify the most accurate one. For professional work requiring precise emoji counts, consider using specialized Unicode analyzers alongside the standard text counter.",
+              "Some browsers require permission for clipboard access. Grant permission or manually paste using Ctrl+V.",
           },
         ],
         detailedExamples: [
-          "A freelance content writer receives an assignment to write a 2,000-word blog post about digital marketing trends. They use the text counter throughout the writing process to monitor progress, checking periodically to ensure they're on track. When they reach 1,850 words, they realize they need one more section to meet the requirement, adjusting their outline accordingly before final submission.",
-          "An SEO specialist optimizes website meta descriptions for 50 product pages, needing each description to be between 150-160 characters for optimal Google search result display. Using the text counter, they paste each description, verify the character count with spaces, and edit accordingly to maximize information while staying within the limit. This ensures all meta descriptions display completely without truncation in search results.",
-          "A university student writing a 3,500-word research paper uses the text counter to track daily writing progress toward their deadline. They paste their work-in-progress each evening, noting they've written 800 words on day one, 1,200 words by day two, and calculate they need 500 words daily for the remaining three days to complete the assignment on time with buffer for editing.",
+          "A blogger preparing a 1,200-word article pastes the draft into the Text Counter to check reading time. The tool shows a 5-minute estimate, helping them decide the post is perfect for SEO and audience retention.",
+          "A student writing an academic essay uses the Text Counter to track paragraph structure. After noticing uneven paragraph lengths and inconsistent sentence counts, they revise the essay for better clarity and flow.",
+          "A public speaker uploads a speech script to estimate speaking duration. The tool shows an 8-minute speaking time, letting them adjust the script to fit a strict 5-minute presentation slot.",
+          "A social media manager checks character limits before posting on platforms like X (Twitter). By toggling between 'with spaces' and 'without spaces,' they ensure the content stays within platform restrictions.",
+          "A novelist drafts a chapter and uses the Text Counter to analyze writing patterns. They discover unusually long words and sentences, prompting edits to improve readability and pacing.",
         ],
         link: "https://cleanformatter.com/tools/text-editing/text-counter",
         faq: [
@@ -303,7 +267,12 @@ export const toolCategories: ToolCategory[] = [
           {
             question: "What metrics does the Text Counter display?",
             answer:
-              "It shows the total number of words, characters (with and without spaces), sentences, and paragraphs. Some advanced versions also show reading time and average word length.",
+              "The Text Counter provides detailed text statistics including word count, character count (with and without spaces), sentence count, paragraph count, line count, average word length, longest word, estimated reading time, and estimated speaking time.",
+          },
+          {
+            question: "How accurate is the reading time estimate?",
+            answer:
+              "Reading time is calculated using an industry-standard average of 230 words per minute, which is accurate for general online content.",
           },
           {
             question: "Why should I use a Text Counter tool?",
@@ -351,140 +320,108 @@ export const toolCategories: ToolCategory[] = [
       {
         name: "Text Diff",
         slug: "text-diff",
-        description: "Compare two texts and find differences",
+        description:
+          "A professional-grade Text Difference Checker that highlights additions, deletions, and modifications between two text versions using character, word, and line-level diff modes. Perfect for writers, editors, coders, bloggers, and content creators who need fast and accurate version comparison.",
         detailedDescription:
-          "The Text Diff tool is an advanced online comparison utility designed for developers, writers, editors, legal professionals, and content managers who need to identify changes between two versions of text or code. This powerful diff checker performs line-by-line, word-by-word, and character-by-character comparisons to highlight additions, deletions, and modifications with color-coded visual indicators. Perfect for code review processes, document version control, plagiarism detection, contract comparison, manuscript editing, and content revision tracking. The tool supports multiple comparison modes including side-by-side view, inline diff display, and unified diff format commonly used in software development. Developers use it to review pull requests, compare configuration files, and track changes in source code across Git commits. Technical writers rely on it for documentation updates, API specification changes, and policy document revisions. Legal teams compare contract versions to identify modifications in terms and conditions. All text comparison happens client-side in your browser, ensuring sensitive documents and proprietary code remain completely private without server transmission or storage. The tool handles large files efficiently and supports syntax highlighting for popular programming languages.",
+          "The Text Difference Checker is a powerful tool designed to compare two versions of text and visually highlight the exact differences between them. Whether you're a writer editing a draft, a developer reviewing code, or a student revising an assignment, this tool helps you instantly see what changed and why. The tool supports character-level, word-level, and line-level comparison modes, giving you full control over how deeply you want to analyze the differences. It displays additions in green, deletions in red, and unchanged content in neutral tones for easy reading. With advanced features like tri-sync scrolling, line number toggling, and real-time diff processing, the tool provides a smooth, professional-grade diffing experience similar to GitHub or Diffchecker. It also comes with detailed statistics such as characters added or removed, words added or removed, and line-level changes. A convenient toolbar gives you options to swap texts, copy diff output, clear content, and toggle line numbers. Thanks to the upgraded diff engine, the tool now handles complex writing patterns, Unicode characters, emojis, whitespace sensitivity, and large paragraphs without breaking. It is optimized for bloggers, editors, SEO writers, programmers, legal professionals, and teams collaborating on content. Whether you’re comparing two versions of a blog post, analyzing revisions in a script, checking differences between two code snippets, or reviewing document updates before publishing, the Text Difference Checker makes it effortless, accurate, and fast.",
         primaryUseCases: [
-          "Comparing two versions of source code to review changes in pull requests, code commits, and feature branches during software development workflows",
-          "Tracking document revisions and edits in contracts, legal agreements, technical specifications, and policy documents to identify what content was modified",
-          "Detecting plagiarism or unauthorized copying by comparing original content against potentially copied or paraphrased text from external sources",
-          "Reviewing article and blog post edits by comparing draft versions against published content to verify editorial changes and fact-checking corrections",
-          "Analyzing configuration file differences between development, staging, and production environments to prevent deployment errors and maintain consistency",
+          "Compare two versions of a blog post or article",
+          "Review code changes between two snippets",
+          "Track revisions made by editors or collaborators",
+          "Analyze differences in essays, assignments, or research drafts",
+          "Detect accidental changes or formatting issues in documents",
         ],
         howToUse: [
-          "Paste or type your original text (baseline version) into the left-side text area labeled as 'Original Text'",
-          "Paste or type the modified text (comparison version) into the right-side text area labeled as 'Modified Text'",
-          "Review the highlighted changes where additions are typically shown in green and deletions in red",
-          "Toggle between different view modes (side-by-side, inline, unified) to analyze differences in the format that works best for your task",
+          "Open the tool and enter text into both the Original Text and Modified Text boxes",
+          "Select a diff mode — Character, Word, or Line — based on your analysis needs",
+          "Toggle Show Line Numbers for easier tracking of structural edits",
+          "Review highlighted differences where green shows additions, red shows deletions",
+          "Scroll through any panel to automatically sync scroll positions across all panels",
+          "Use Copy buttons to export the original, modified, or diff output",
+          "Use Swap Texts if you need to reverse the comparison order",
+          "Clear all text fields using the Clear button to start a new comparison",
         ],
-        popularTools: ["Side by Side", "Inline Diff", "Word Diff"],
+        popularTools: [
+          "Character diff mode",
+          "Word diff mode",
+          "Line diff mode",
+          "Copy diff output",
+          "Swap texts",
+        ],
         advancedTips: [
-          <>
-            Utilize the <code>'remove whitespace'</code> option available in the{" "}
-            <Link
-              href="https://cleanformatter.com/tools/clean-format/fix-spacing"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-medium text-primary underline"
-            >
-              Fix Spacing tool
-            </Link>{" "}
-            prior to comparing your code. This approach ensures that your
-            analysis focuses solely on substantive code changes, excluding
-            variations due to indentation or formatting that do not impact
-            functionality.
-          </>,
-          "Enable line number display for easier reference when discussing changes with team members or documenting specific modifications in code review comments",
+          "Use Line diff mode when comparing large documents or paragraphs for structural edits",
+          "Use Word diff mode for article rewrites and SEO optimization checks",
+          "Enable tri-sync scroll to align all three panels for professional editing workflows",
+          "Use Copy Diff Output to share revision summaries with clients or teammates",
+          "Compare code using Line mode and enable line numbers for a GitHub-style experience",
         ],
         troubleshooting: [
           {
-            issue:
-              "The diff tool shows too many irrelevant formatting or whitespace changes obscuring actual content differences",
-            solution: (
-              <>
-                First use the{" "}
-                <Link
-                  href="https://cleanformatter.com/tools/clean-format/fix-spacing"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-medium text-primary underline"
-                >
-                  Fix Spacing
-                </Link>{" "}
-                or{" "}
-                <Link
-                  href="https://cleanformatter.com/tools/clean-format/remove-formatting"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-medium text-primary underline"
-                >
-                  Remove Formatting
-                </Link>{" "}
-                tool to clean up your text. Then use the diff tool to compare.
-                Enable the 'ignore whitespace changes' or 'ignore blank lines'
-                options. This filters out insignificant formatting differences
-                and highlights only meaningful content changes. For code
-                comparison, also enable 'normalize line endings' to prevent
-                Unix/Windows line ending differences from showing as changes.
-              </>
-            ),
+            issue: "Diff shows incorrect line changes",
+            solution:
+              "Ensure your text contains actual newline characters (\\n). The engine counts only real line breaks, not visual wrap lines.",
           },
           {
-            issue:
-              "Large files cause the browser to slow down or freeze during comparison",
+            issue: "Emojis or special symbols appear broken",
             solution:
-              "For very large files (over 10,000 lines), consider splitting them into smaller sections and comparing incrementally. Close other browser tabs to free up memory, or try using the tool in a modern browser with better performance optimization like Chrome or Firefox.",
+              "Switch to Word mode. Word diff handles Unicode characters more cleanly than Character mode.",
+          },
+          {
+            issue: "Large documents lag while typing",
+            solution:
+              "Paste the text first and then apply the diff mode. Avoid typing extremely long content directly into the box.",
+          },
+          {
+            issue: "Scroll sync not working",
+            solution:
+              "Make sure both text areas and the diff panel are scrollable. Very short text may not activate scroll events.",
+          },
+          {
+            issue: "Blank diff output",
+            solution:
+              "Check if both text boxes contain identical text. If yes, the tool will show no highlighted changes.",
           },
         ],
         detailedExamples: [
-          "A software developer reviews a colleague's pull request containing changes to a JavaScript React component. Using the text diff tool, they paste the original component code (main branch) and the modified code (feature branch) side-by-side. The comparison reveals that error handling was added (shown in green), a deprecated API call was removed (shown in red), and variable naming was improved (shown as deletion + addition). The developer uses this analysis to provide specific feedback on code quality and approve the merge.",
-          "A technical writer updates API documentation after new features were added to version 2.0 of a REST API. They use the text diff tool to compare the previous version 1.0 documentation with the draft 2.0 version. The inline diff view shows which endpoints were added, which parameters changed, and where examples were updated. This helps ensure all changes are intentional and no information was accidentally removed during the documentation update process.",
-          "A legal professional compares two versions of a commercial contract to identify changes made during negotiation. They paste both versions into the diff tool, which highlights that the payment terms section was modified (payment deadline extended from 30 to 45 days), a new confidentiality clause was added, and a liability limitation was adjusted. This allows them to quickly brief their client on what changed without manually reading both contracts word-by-word.",
+          "A blogger rewriting a long-form article pastes the draft into the Original box and the edited version into the Modified box. Word diff mode shows rewritten sentences, added keywords, and removed filler phrases, helping them optimize the article for SEO without manually checking each paragraph.",
+          "A developer comparing two JavaScript functions uses Line diff mode to spot missing conditions and newly added return statements, making debugging and documentation updates much easier.",
+          "A student revising a college essay uses the diff tool to ensure that all changes improve clarity. They notice that certain sentences were unintentionally removed in the new version and restore them confidently before submission.",
+          "A content editor reviewing a client’s blog update instantly sees where tone, clarity, and structure improved. Using the Copy Diff feature, they send the client a clean summary of exactly what changed.",
+          "A project manager comparing two versions of a proposal identifies subtle wording changes that could impact agreement terms. The tool exposes these differences clearly, ensuring no unauthorized edits slip through.",
         ],
-        link: "https://cleanformatter.com/tools/text-editing/text-diff",
         faq: [
           {
-            question: "What is a Text Diff tool?",
+            question: "What does the Text Difference Checker do?",
             answer:
-              "A Text Diff tool compares two blocks of text and highlights the differences between them. It shows added, removed, or modified words, characters, or lines to help users quickly identify changes.",
+              "It compares two versions of text and highlights additions, deletions, and unchanged parts using character, word, or line-level analysis.",
           },
           {
-            question: "How does a Text Diff tool work?",
+            question: "Which diff mode should I use?",
             answer:
-              "The Text Diff tool uses a line-by-line or character-by-character comparison algorithm to detect differences between two text inputs. It then marks the changes using colors or highlights for easy visualization.",
+              "Use Character mode for code, Word mode for article rewrites, and Line mode for large documents or paragraph-level changes.",
           },
           {
-            question: "Can I use the Text Diff tool for code comparison?",
+            question: "Can I copy the diff output?",
             answer:
-              "Yes. The Text Diff tool works perfectly for comparing code snippets, configuration files, or any text-based content. It helps developers identify what has been changed between two versions of code.",
+              "Yes. Use the Copy Diff button to export a clean summary of all changes.",
           },
           {
-            question: "Is my data safe when using the Text Diff tool?",
+            question: "How does tri-sync scroll help?",
             answer:
-              "Yes. All comparisons happen locally in your browser. No text or file is uploaded to any server, ensuring complete privacy and data security.",
+              "Scrolling any of the three panels automatically scrolls the others, making it easy to compare long content side-by-side like GitHub.",
           },
           {
-            question: "What file types can I compare using the Text Diff tool?",
+            question: "Does it support emojis and Unicode characters?",
             answer:
-              "You can compare plain text, source code, or any text-based files such as .txt, .html, .css, .js, or .json. Simply copy and paste or upload the content to see the differences.",
+              "Yes, the upgraded diff engine handles emojis, symbols, and multilingual text accurately.",
           },
           {
-            question: "Can I compare large text files?",
+            question: "Will it work for very large documents?",
             answer:
-              "Yes, the Text Diff tool can handle large files, but extremely large comparisons may slow down the browser depending on your device's memory and performance.",
-          },
-          {
-            question: "Why should I use a Text Diff tool?",
-            answer:
-              "It's an efficient way to track revisions, detect plagiarism, review code changes, and ensure document consistency without manually checking every line.",
-          },
-          {
-            question: "What do the different colors in the diff view mean?",
-            answer:
-              "Typically, green highlights indicate additions (new content), red highlights indicate deletions (removed content), and yellow or blue highlights indicate modifications (changed content). Color schemes may vary between different diff tools.",
-          },
-          {
-            question: "Can I export or save the diff comparison results?",
-            answer:
-              "Many text diff tools allow you to copy the comparison results, export as HTML, or generate unified diff format (patch files) that can be used with version control systems like Git.",
-          },
-          {
-            question:
-              "Does the Text Diff tool support syntax highlighting for code?",
-            answer:
-              "Advanced text diff tools often include syntax highlighting for popular programming languages, making it easier to read and understand code changes within the context of the language's syntax structure.",
+              "Yes. For extremely long text, paste the content first and then apply a diff mode for best performance.",
           },
         ],
+        link: "https://cleanformatter.com/tools/text-editing/text-diff",
       },
     ],
   },
@@ -1415,96 +1352,129 @@ export const toolCategories: ToolCategory[] = [
         slug: "url-encoding",
         description: "Encode/decode URLs",
         detailedDescription:
-          "The URL Encoding tool is a specialized web development utility that converts special characters, spaces, and reserved symbols in URLs into percent-encoded format (%20, %3A, etc.) ensuring safe transmission and proper interpretation by web servers and browsers. Essential for web developers building APIs, frontend developers handling query parameters, SEO professionals managing URL structures, and anyone working with web links containing special characters. URL encoding (also called percent-encoding or URI encoding) transforms characters that have special meaning in URLs or aren't safe for transmission into a format using % followed by hexadecimal values. Critical for encoding spaces, non-ASCII characters, reserved characters (&, =, ?, #, /), and special symbols in URL paths, query strings, and form data. Perfect for preparing search queries with special characters, encoding international domain names, formatting GET request parameters, creating shareable links with complex data, and ensuring cross-browser URL compatibility. The tool supports both component encoding (encodes everything including /, :, etc.) and URI encoding (preserves URL structure characters), handles bulk URL processing for batch operations, and properly encodes Unicode characters for international URLs. Common use cases include encoding search terms for query strings, formatting data for GET requests, preparing URLs for social media sharing, and ensuring URL validity across different systems and character sets.",
+          "The URL Encoder/Decoder tool is a powerful, developer-friendly utility designed to accurately convert URLs, query parameters, and text strings between encoded and decoded formats using modern web-safe standards. It supports multiple encoding modes including URI, URL component, form encoding, and RFC3986 strict compliance, ensuring compatibility with browsers, APIs, and server-side applications. With advanced features like auto-detection, skip-encoded protection, encode-all mode, space handling options (+, %20, preserve), batch processing, and intelligent error recovery, this tool makes it easy to sanitize, debug, or prepare URLs for web development, SEO, data processing, and API integrations. Whether you're fixing malformed URLs, encoding parameters for secure transmission, or analyzing full query strings, this tool delivers precision, clarity, and developer-grade reliability.",
         primaryUseCases: [
-          "Encoding search queries and form data for GET request URLs, converting spaces to %20 and special characters to percent-encoded equivalents",
-          "Preparing URLs with international characters (Chinese, Arabic, emoji) for cross-browser compatibility and proper server interpretation",
-          "Formatting query string parameters containing special characters (&, =, ?) that would otherwise break URL parsing",
-          "Creating shareable links with encoded data in URL parameters for email campaigns, social media posts, and marketing materials",
-          "Encoding redirect URLs and callback parameters in OAuth flows and authentication systems where URLs are passed as parameters",
+          "Encode URLs before sending them through APIs, webhooks, or third-party integrations to prevent parsing errors.",
+          "Decode complex query strings from marketing trackers, analytics tools, and redirect URLs for cleaner analysis.",
+          "Clean and normalize malformed URLs copied from emails, old databases, or broken web pages.",
+          "Prepare URL parameters for OAuth, payment gateways, and authentication flows that require strict encoding.",
+          "Convert form submissions where spaces need to be encoded as plus signs for compatibility with legacy systems.",
+          "Batch-encode multiple URLs at once when working with bulk spreadsheets or CSV imports.",
+          "Fix double-encoded or partially encoded URLs using the skip-encoded feature to avoid corrupt output.",
+          "Decode long tracking URLs from ad platforms to view clean, human-readable parameter values.",
         ],
         howToUse: [
-          "Paste or type your URL or text containing special characters into the URL encoding tool's input field",
-          "Select encoding type: Component Encoding (encodes all special characters) or URI Encoding (preserves URL structure like :// and /)",
-          "Click 'Encode URL' to convert special characters to percent-encoded format (%20 for space, %2F for /, etc.)",
-          "For decoding: Paste a percent-encoded URL and click 'Decode URL' to convert back to readable format with original characters",
-          "Copy the encoded or decoded URL for use in your web applications, APIs, HTML links, or browser address bar",
+          "Enter any URL, encoded string, or text into the input box to automatically process it based on your selected mode.",
+          "Choose between Encode or Decode mode depending on whether you want to convert text into a safe URL format or make an encoded URL readable.",
+          "Select URI or Component encoding to control how strictly characters like ?, &, and = are handled during processing.",
+          "Turn on 'Use + for spaces' if you need form-style encoding for legacy systems or PHP-based servers.",
+          "Enable RFC3986 strict mode when APIs or authentication systems require characters like ! ' ( ) * to be percent-encoded.",
+          "Switch on skip-encoded mode to avoid double-encoding URLs that already contain %XX sequences.",
+          "Use encode-all mode to convert every character—including emojis and Unicode—into percent-encoded UTF-8 bytes.",
+          "Paste multiple URLs or lines of text to use the batch encoder, which processes each line independently.",
+          "Click Copy to save the output to your clipboard or Download to export it as a text file.",
+          "Use the Reset button to clear all fields and restore default options for fresh input.",
         ],
         popularTools: ["URI Encoding", "Component Encoding", "Bulk Processing"],
         advancedTips: [
-          "Use encodeURIComponent() in JavaScript for encoding individual parameter values, and encodeURI() for encoding complete URLs while preserving URL structure",
-          "When building query strings manually, encode parameter values individually before concatenating with & and = to avoid double-encoding issues",
-          "Be aware that some characters like spaces can be encoded as both %20 and + depending on context (+ is common in form data, %20 in paths)",
-          "For international URLs (non-ASCII), ensure your server and application properly handle UTF-8 encoded URLs throughout the entire request pipeline",
-          "When decoding URLs, apply decoding only once—multiple decoding passes can cause errors or security vulnerabilities with specially crafted inputs",
+          "Use RFC3986 strict mode when working with AWS, OAuth, or APIs that reject characters like exclamation marks or parentheses unless explicitly encoded.",
+          "Enable skip-encoded mode when handling URLs that already contain percent-encoded segments to prevent double encoding.",
+          "Switch to component encoding to safely encode only query parameters while leaving the base URL intact.",
+          "Use encode-all mode when preparing raw text for cryptographic signing, URL hashing, or systems that require every character to be percent-encoded.",
+          "Turn on space-as-plus mode when working with legacy form submissions or PHP-based servers that expect '+' instead of '%20'.",
+          "Enable preserve-spaces mode when you want formatting readability but still need partial encoding for other characters.",
+          "Use batch mode to process entire lists of URLs pasted from spreadsheets, email campaigns, or analytics reports.",
+          "If your decoded output looks broken, switch off skip-encoded mode temporarily to repair outdated or mixed-encoding input.",
         ],
         troubleshooting: [
           {
-            issue:
-              "Encoded URL doesn't work or returns 404 errors when accessed",
+            issue: "The encoded output still contains unencoded characters.",
             solution:
-              "Verify you encoded only the parts that need encoding (query parameters, path segments) and not the entire URL including protocol (https://) and domain. Use URI encoding for full URLs (preserves structure) and component encoding only for individual parameters. Also check that your server properly decodes URLs—some servers require specific configuration for UTF-8 URL support.",
+              "Switch to component encoding or enable RFC3986 strict mode to ensure characters like ! ' ( ) * are properly encoded.",
           },
           {
-            issue:
-              "Special characters appear as %XX codes in the browser address bar or links",
+            issue: "Some parts of the URL are getting double-encoded.",
             solution:
-              "This is normal and expected—browsers display percent-encoded URLs in the address bar but automatically decode them when displaying page content. Modern browsers show human-readable versions in the UI but use encoded versions when transmitting. If you need human-readable URLs everywhere, consider using URL slugs with hyphens instead of special characters in your URL design.",
+              "Turn on skip-encoded mode to prevent existing %XX sequences from being re-encoded.",
           },
           {
-            issue: "Plus signs (+) in URLs are decoded as spaces or vice versa",
+            issue: "Spaces are showing as %20 instead of +.",
             solution:
-              "The + character has special meaning in query strings (application/x-www-form-urlencoded format) where it represents a space, but in other contexts it should be encoded as %2B. When encoding spaces, use %20 in URL paths and either %20 or + in query strings depending on your server's expectations. Be consistent throughout your application and test with your specific server environment.",
+              "Enable the 'Use + for spaces' option to encode spaces using legacy form-encoding standards.",
+          },
+          {
+            issue: "Decoded output has broken or unreadable characters.",
+            solution:
+              "Disable skip-encoded mode or let the smart fallback decoder repair malformed percent sequences.",
+          },
+          {
+            issue: "The tool throws 'Failed to decode URL'.",
+            solution:
+              "Check for invalid percent sequences like %, %2, or %ZZ and fix them manually before decoding.",
+          },
+          {
+            issue: "Query parameters are difficult to read after decoding.",
+            solution:
+              "Use the query formatting or beautifier features to convert parameters into a clean key-value display.",
+          },
+          {
+            issue: "Output is empty even though input is provided.",
+            solution:
+              "Ensure encode-all mode or RFC strict mode is not conflicting with preserve-spaces settings.",
           },
         ],
         detailedExamples: [
-          "A developer builds a search feature where users can search for phrases containing special characters. A user searches for 'Rock & Roll' which contains an ampersand that would break the URL query string. The developer uses URL encoding to convert the search term to 'Rock%20%26%20Roll' before appending it to the search URL: /search?q=Rock%20%26%20Roll. The server receives the encoded URL, decodes it properly, and returns search results for the complete phrase including the ampersand.",
-          "An e-commerce site needs to create shareable product links for social media that include the product name in the URL for SEO purposes. A product named 'Coffee Table (48\"x24\")' contains parentheses and quotes that aren't URL-safe. The developer encodes the product name to 'Coffee%20Table%20%2848%22x24%22%29' creating a valid URL: /products/Coffee%20Table%20%2848%22x24%22%29 that works across all platforms and browsers without breaking link parsing.",
-          "A web application implements OAuth authentication where the callback URL must be passed as a parameter to the authorization server. The callback URL itself is 'https://myapp.com/auth/callback?session=abc123' which contains special characters. The developer encodes the entire callback URL using component encoding, resulting in 'https%3A%2F%2Fmyapp.com%2Fauth%2Fcallback%3Fsession%3Dabc123' and passes it as: authorize?redirect_uri=https%3A%2F%2Fmyapp.com%2Fauth%2Fcallback%3Fsession%3Dabc123. This prevents the authorization server from misinterpreting the callback URL's query parameters.",
+          "A digital marketer receives a long tracking URL from an ad platform and uses the decoder to reveal clean, readable query parameters, helping her understand exactly what data is being passed.",
+          "A developer integrating OAuth authentication runs into rejected requests because of unencoded characters, so he switches to RFC3986 strict mode to generate a compliant URL that the API finally accepts.",
+          "A backend engineer debugging a redirect loop decodes a double-encoded URL, enabling him to locate the incorrect %252F path that caused the server to misroute users.",
+          "A content creator preparing UTM links for a campaign batch-encodes multiple URLs at once to ensure none of the source or medium parameters break when pasted into analytics tools.",
+          "A student working on a browser extension tests how URLs behave when encoded using component mode, helping her understand how query values are safely transmitted across different environments.",
+          "A support engineer receives a corrupted URL with broken percent sequences and uses the tool’s repair-friendly decode mode to recover as much readable data as possible.",
+          "A mobile app developer needs to send user-input text through an API and enables encode-all mode to convert every emoji and special symbol into safe UTF-8 percent sequences.",
+          "A data analyst reviewing thousands of URL parameters pastes them into batch mode to quickly normalize the formatting and remove inconsistencies between encoded and unencoded characters.",
         ],
         link: "https://cleanformatter.com/tools/encode-decode/url-encoding",
         faq: [
           {
-            question: "What is the URL Encoding tool?",
-            answer:
-              "The URL Encoding tool helps you encode and decode URLs, converting special characters into a format that can be safely transmitted over the internet.",
-          },
-          {
             question:
-              "What is the difference between URI Encoding and Component Encoding?",
+              "What is the difference between URI encoding and Component encoding?",
             answer:
-              "URI Encoding encodes a complete URI, preserving characters used in the URL structure, while Component Encoding encodes individual URI components, including reserved characters that may cause issues in URLs.",
+              "URI encoding leaves reserved characters like ? and & untouched, while Component encoding encodes them for use inside query parameters or standalone values.",
           },
           {
-            question: "What popular encoding features does the tool support?",
+            question: "When should I use space-as-plus encoding?",
             answer:
-              "The tool supports URI Encoding, Component Encoding, and Bulk Processing for encoding or decoding multiple URLs at once.",
+              "Use it when handling legacy form submissions, PHP servers, or systems that follow the application/x-www-form-urlencoded standard.",
           },
           {
-            question: "Why is URL Encoding important?",
+            question: "What does skip-encoded mode do?",
             answer:
-              "URL Encoding ensures special characters like spaces, punctuation, and control characters are correctly interpreted by browsers and web servers, preventing errors or misinterpretation.",
+              "It prevents already encoded sequences like %20 or %2F from being re-encoded, which avoids corrupting valid URLs.",
           },
           {
-            question: "Can the tool handle bulk URL encoding or decoding?",
+            question: "Is encode-all mode safe for normal URLs?",
             answer:
-              "Yes, the tool can process multiple URLs at once, making it efficient for batch operations in data preparation or development workflows.",
+              "No — encode-all is meant for cryptographic signing, hashing, or systems requiring every character to be percent-encoded, not for everyday URLs.",
           },
           {
-            question: "Is the URL Encoding tool free to use?",
+            question: "Why does decode fail on certain URLs?",
             answer:
-              "Yes, the URL Encoding tool is free and accessible online without any subscription or registration.",
+              "Some URLs contain malformed or incomplete percent sequences. The tool attempts repair, but severely broken strings may still fail.",
           },
           {
-            question: "What characters need to be URL encoded?",
+            question: "Can this tool handle emojis and non-English characters?",
             answer:
-              "Characters that should be encoded include spaces, reserved characters (& = ? # / : @), non-ASCII characters (Chinese, Arabic, emoji), and control characters. Safe characters include letters (A-Z, a-z), numbers (0-9), and a few symbols like - _ . ~",
+              "Yes, it uses UTF-8 percent encoding to correctly encode emojis, accented letters, and full Unicode text.",
           },
           {
-            question:
-              "Can I encode international domain names (IDN) with this tool?",
+            question: "Does the tool support batch processing?",
             answer:
-              "Yes, the URL Encoding tool can encode international characters in URLs. However, full IDN support requires Punycode encoding for domain names themselves, which is a different process from percent-encoding paths and parameters.",
+              "Yes, you can encode or decode multiple lines at once, making it perfect for spreadsheets or bulk URL lists.",
+          },
+          {
+            question: "How do I decode query parameters into readable form?",
+            answer:
+              "Use the query beautifier mode to convert encoded URLs into a clean key-value layout that’s easy to read.",
           },
         ],
       },
@@ -1513,107 +1483,97 @@ export const toolCategories: ToolCategory[] = [
         slug: "html-entities",
         description: "Convert HTML entities",
         detailedDescription:
-          "The HTML Entities tool is a comprehensive character conversion utility that encodes special characters into HTML entity codes (named, numeric, or hexadecimal) and decodes them back to original characters, ensuring proper display and preventing XSS security vulnerabilities in web content. Essential for web developers building secure applications, content managers working with CMS platforms, email template designers, and anyone embedding user-generated content in HTML documents. HTML entities are special codes that represent characters with special meaning in HTML (like <, >, &, quotes) or characters not easily typed on keyboards (©, €, ™, accented letters). By converting these characters to entities (&lt; for <, &copy; for ©, &#8364; for €), you ensure they display correctly without being interpreted as HTML markup. Perfect for preventing XSS attacks by escaping user input, displaying code snippets in HTML without execution, rendering special characters and symbols correctly across all browsers, preparing content for XML and RSS feeds, and ensuring email HTML compatibility. The tool supports named entities (&amp;, &lt;, &gt;), decimal numeric entities (&#169;), and hexadecimal entities (&#xA9;), with comprehensive coverage of HTML5 entity specifications including mathematical symbols, Greek letters, arrows, and special punctuation marks. All conversions happen client-side ensuring privacy for sensitive content.",
+          "The HTML Entities Encoder/Decoder is a powerful utility designed for developers, content editors, and security-focused teams who need precise control over encoding and decoding HTML entities. Supporting named, numeric, and hexadecimal entity formats, the tool ensures accurate representation of special characters, Unicode symbols, HTML-sensitive characters, and multilingual text. With advanced features such as selective encoding, skip-encoded protection, smart quote handling, full ASCII+Unicode coverage, and a fast decoding engine with browser-grade fallback, this tool prevents HTML injection issues, broken markup, rendering errors, and data loss caused by incorrectly processed entities. Whether you're sanitizing user-generated content, preparing text for CMS systems, working with APIs, or debugging corrupted HTML, this tool delivers reliable, standards-compliant, and high-fidelity text transformation.",
         primaryUseCases: [
-          "Escaping user-generated content before displaying in HTML to prevent cross-site scripting (XSS) attacks and injection vulnerabilities",
-          "Displaying HTML code examples and snippets on web pages without the browser interpreting them as actual markup",
-          "Converting special characters and symbols (©, ®, ™, €, mathematical symbols) to HTML entities for reliable cross-browser display",
-          "Preparing content for XML, RSS feeds, and email HTML where certain characters must be encoded to prevent parsing errors",
-          "Ensuring proper display of multilingual content with accented characters and diacritics in older browsers or limited character set environments",
+          "Sanitizing user-generated content before inserting it into HTML pages or CMS editors.",
+          "Converting special characters, emojis, and multilingual text into safe HTML entities for reliable rendering.",
+          "Decoding and repairing broken or inconsistently encoded text received from APIs or databases.",
+          "Cleaning or normalizing legacy content exported from CMS systems, emails, XML files, or old blogs.",
+          "Preventing HTML injection and XSS exploits by safely encoding characters that could break markup.",
         ],
         howToUse: [
-          "For encoding: Paste text containing special characters (< > & \" ') or symbols (© € ™) into the HTML Entities encoder input",
-          "Select encoding format: Named Entities (&lt;), Decimal Entities (&#60;), or Hexadecimal Entities (&#x3C;)",
-          "Click 'Encode to HTML Entities' to convert special characters into their entity equivalents for safe use in HTML",
-          "For decoding: Paste HTML containing entity codes into the decoder input area",
-          "Click 'Decode HTML Entities' to convert entity codes back to readable characters for editing or plain text export",
+          "Enter text or HTML into the input box to automatically encode or decode entities based on your selected mode.",
+          "Select Encode if you want to convert characters like <, >, &, quotes, or Unicode symbols into HTML-safe entities.",
+          "Choose Decode to convert HTML entities back into readable characters such as &lt; to < or &#8364; to €.",
+          "Pick between Named, Numeric, or Hex encoding modes depending on whether you want entity names, decimal codes, or hexadecimal codes.",
+          "Turn on Encode All to convert every character—including emojis, symbols, and multilingual text—into entities.",
+          "Enable Encode Quotes to control how single and double quotes are encoded for HTML and JavaScript contexts.",
+          "Use Skip Encoded to prevent double-encoding already existing entities in your input.",
+          "View the output preview instantly and click Copy or Download to export your results.",
+          "Use Reset to clear all fields and restore default encoding preferences.",
         ],
         popularTools: ["Named Entities", "Numeric Entities", "Hex Entities"],
         advancedTips: [
-          "Always encode user input before inserting into HTML to prevent XSS attacks—treat all user data as potentially malicious and encode < > & \" '",
-          "Use named entities (&amp;, &lt;) for common characters when readability of HTML source code matters, numeric entities for less common symbols",
-          "When displaying code snippets, encode the entire code block rather than selectively encoding to avoid missing special characters",
-          "For XML and RSS feeds, encode & < > \" ' as they're the five special characters that must always be escaped in XML",
-          "Modern HTML5 supports many named entities (over 2,000), but for maximum compatibility with older systems, use numeric entities for uncommon symbols",
+          "Use Named encoding mode when working with CMS editors, blog platforms, and WYSIWYG systems that rely on familiar entity names.",
+          "Enable Hex mode when producing markup for XML, XHTML, or systems that require strict hexadecimal entity formatting.",
+          "Turn on Encode All to protect sensitive content in environments where any unexpected character may break rendering.",
+          "Combine Numeric mode with Encode All to reliably encode multilingual text, ensuring consistent rendering across old browsers and email clients.",
+          "Use Skip Encoded mode when processing text multiple times to avoid corrupting sequences like &amp; turning into &amp;amp;.",
+          "Decode first and then re-encode using a different mode to normalize inconsistent or mixed entity formats.",
+          "When handling user-input text in forms or applications, encoding entities prevents XSS and injection vulnerabilities.",
         ],
         troubleshooting: [
           {
-            issue:
-              "HTML entities display as literal text (&lt;div&gt;) instead of rendering as characters (<div>)",
+            issue: "Some characters are not being converted during encode.",
             solution:
-              "This occurs when HTML entities are double-encoded or when displaying HTML in plain text contexts. Verify you're inserting the entity-encoded text into actual HTML (inside .innerHTML or HTML files), not text nodes or text areas. If entities show literally in the browser, check that your HTML isn't being treated as plain text—view page source to confirm. For display in text areas or plain text, decode entities first before insertion.",
+              "Enable Encode All mode to ensure that Unicode, accented, or emoji characters are included in the entity conversion process.",
           },
           {
             issue:
-              "Some special characters still display incorrectly even after encoding to HTML entities",
+              "Already encoded entities are turning into double-encoded output.",
             solution:
-              "Ensure your HTML document has proper character encoding declared with <meta charset='UTF-8'> in the head section. Some symbols may require specific fonts that support those Unicode ranges—verify the font family in your CSS includes glyphs for the characters you're using. For very rare Unicode characters, consider using numeric entities instead of named entities which may not be recognized by all browsers.",
+              "Turn on Skip Encoded mode to prevent &amp; from becoming &amp;amp; during repeated transformations.",
+          },
+          {
+            issue: "Quotes are not being encoded even in encode mode.",
+            solution:
+              "Enable Encode Quotes to force conversion of both single and double quotes into HTML-safe entities.",
+          },
+          {
+            issue: "Decoding seems to miss certain custom or rare entities.",
+            solution:
+              "Switch to full manual decoding by disabling strict mode or convert mixed formats into numeric/hex entities first.",
           },
           {
             issue:
-              "Apostrophes and quotes break JavaScript strings when HTML is inserted dynamically",
+              "Output looks correct but isn’t rendering properly in emails or legacy browsers.",
             solution:
-              "When inserting HTML-entity-encoded content into JavaScript strings, you need both JavaScript escaping and HTML entity encoding. For example, encode quotes as &quot; or &#39; in HTML, and additionally escape them for JavaScript context. Better approach: use DOM methods like createElement and textContent which handle escaping automatically, or use template literals with proper sanitization libraries.",
+              "Use Numeric encoding mode for maximum compatibility across older clients and rendering engines.",
           },
         ],
         detailedExamples: [
-          "A web developer builds a comments section where users can post messages. To prevent XSS attacks, they encode all user input before displaying. When a user posts '<script>alert(\"hacked\")</script>', the developer's code encodes it to '&lt;script&gt;alert(&quot;hacked&quot;)&lt;/script&gt;' before inserting into the page HTML. The browser displays the text literally rather than executing the script, protecting other users from malicious code injection.",
-          'A technical blogger writes tutorials teaching HTML and needs to display code examples in their blog posts. They write a code snippet: <div class="container">Hello World</div>. Using the HTML Entities tool, they encode it to: &lt;div class=&quot;container&quot;&gt;Hello World&lt;/div&gt;, then wrap it in <code> tags. Readers see the actual HTML code as text rather than the browser rendering a div element.',
-          "An e-commerce site displays product descriptions that include special characters like copyright symbols, currency signs, and trademark symbols: 'Price: €99.99 © 2024 Brand™'. To ensure these symbols display correctly across all browsers and email clients, the developer encodes them to: 'Price: &euro;99.99 &copy; 2024 Brand&trade;'. This guarantees consistent display regardless of the user's browser, email client, or device character set support.",
+          "A front-end developer receives user-generated HTML containing broken entity codes and uses the decoder to cleanly restore characters before re-encoding them in a standardized numeric format.",
+          "A content writer pastes multilingual text into a CMS that strips special characters, so she uses the tool to convert accented characters like café into safe HTML entities.",
+          "A software engineer debugging an API response finds double-encoded sequences like &amp;lt; and quickly fixes them using the skip-encoded protection combined with decode mode.",
+          "A security analyst reviewing an input sanitization pipeline encodes all characters, including emojis and foreign-language text, to eliminate the risk of HTML injection.",
+          "An email template designer prepares marketing content for outdated email clients by converting all Unicode characters into decimal HTML entities for maximum compatibility.",
         ],
         link: "https://cleanformatter.com/tools/encode-decode/html-entities",
         faq: [
           {
-            question: "What is the HTML Entities tool?",
+            question: "What is an HTML entity?",
             answer:
-              "The HTML Entities tool converts characters to their corresponding HTML entity codes and vice versa, allowing special characters to display correctly on web pages.",
+              "An HTML entity is a special code used to represent characters that may break HTML markup, such as <, >, &, quotes, emojis, and Unicode symbols.",
           },
           {
-            question: "What types of HTML entities can I convert?",
+            question: "When should I use named vs numeric entities?",
             answer:
-              "You can convert Named Entities (like &amp;copy;), Numeric Entities (decimal format), and Hex Entities (hexadecimal format) for maximum compatibility.",
+              "Named entities are easier to read and preferred for content editing, while numeric entities offer better compatibility across browsers, emails, and XML systems.",
           },
           {
-            question: "Why are HTML entities important for web development?",
+            question: "What does Encode All do?",
             answer:
-              "HTML entities ensure that reserved or special characters in your content, such as <, >, &, and quotes, render correctly without being mistaken for HTML code.",
+              "Encode All forces every character—including letters, emojis, and symbols—to be encoded, ensuring maximum safety and consistency in strict environments.",
           },
           {
-            question: "How does the HTML Entities tool work?",
+            question: "Why are some entities not decoded?",
             answer:
-              "The tool encodes special characters into entity codes or decodes them back into normal characters, helping prevent display issues and XSS vulnerabilities.",
+              "Some non-standard or custom entities may not be supported by browser decoders; switch to manual decoding or convert them into numeric or hex format first.",
           },
           {
-            question:
-              "Can I use the tool to decode HTML entities back to readable text?",
+            question: "Can this tool prevent XSS attacks?",
             answer:
-              "Yes, the tool supports decoding HTML entities into their readable character equivalents for easier editing and review.",
-          },
-          {
-            question: "Is the HTML Entities tool free to use?",
-            answer:
-              "Yes, the HTML Entities tool is free and available online without requiring any subscription.",
-          },
-          {
-            question: "Can this tool handle large blocks of text?",
-            answer:
-              "Yes, the tool efficiently handles large texts, making it suitable for web developers and content editors working on sizable documents.",
-          },
-          {
-            question: "What is XSS and how do HTML entities prevent it?",
-            answer:
-              "XSS (Cross-Site Scripting) is a security vulnerability where attackers inject malicious scripts into web pages. By encoding special characters like < and > as &lt; and &gt;, HTML entities prevent user input from being interpreted as executable code, protecting your site from XSS attacks.",
-          },
-          {
-            question: "Should I encode all special characters or just some?",
-            answer:
-              "At minimum, always encode the five XML-special characters: < > & \" ' (less than, greater than, ampersand, double quote, single quote). These are essential for security and proper HTML parsing. Other characters like © or € can be encoded for compatibility but aren't strictly required in UTF-8 documents.",
-          },
-          {
-            question:
-              "What's the difference between named and numeric entities?",
-            answer:
-              "Named entities (&copy;, &euro;) are memorable and readable in HTML source code but limited in number. Numeric entities (&#169;, &#8364;) can represent any Unicode character and are universally supported. Hexadecimal entities (&#xA9;) are similar to numeric but use base-16 notation. Use named entities for common characters and numeric for everything else.",
+              "Encoding entities helps reduce the risk of HTML injection, but it should be used alongside server-side sanitization for full XSS protection.",
           },
         ],
       },
@@ -1631,83 +1591,96 @@ export const toolCategories: ToolCategory[] = [
         slug: "text-generator",
         description: "Generate random text",
         detailedDescription:
-          "The Text Generator tool is a versatile utility that creates random placeholder text for design mockups, testing, and content generation. It supports various text types including Lorem Ipsum, random words, and complete sentences to suit different project needs. Ideal for designers, developers, and writers needing quick filler text without the hassle of manual creation. The tool generates coherent placeholder text that mimics natural language patterns, making it perfect for visual layouts, UI/UX prototypes, and content testing. Users can customize the length and type of generated text to fit specific requirements. All text generation happens client-side ensuring privacy and security of your data.",
+          "The Text Generator Tool instantly creates high-quality Lorem Ipsum, random sentences, and word-based content across multiple languages including English, Hindi, Spanish, Arabic, Bengali, Chinese, and more. It supports precise word counts, multi-paragraph output, HTML formatting, custom language packs, and smart linguistic patterns that mimic natural writing. Whether you're crafting UX mockups, placeholder content, social posts, language-learning text, or bulk dummy paragraphs for design previews, this generator gives you clean, flexible, and human-readable text in seconds.",
         primaryUseCases: [
-          "Creating Lorem Ipsum placeholder text for website and app design mockups to visualize layouts without real content",
-          "Generating random words or phrases for testing search functionality, autocomplete features, or input fields in applications",
-          "Producing sample sentences for UI/UX prototypes to demonstrate how text will appear in various components like cards, modals, and tooltips",
-          "Filling content gaps in wireframes and prototypes quickly without needing to write actual text",
-          "Assisting writers and content creators by providing random text snippets for brainstorming, idea generation, or overcoming writer's block",
+          "Generate placeholder text for UI/UX designs, mockups, and wireframes with exact word counts and multi-paragraph structures.",
+          "Create sample content for blog layouts, landing pages, and website templates without manually writing filler text.",
+          "Produce multilingual dummy text for testing localization, language support, and international typography.",
+          "Generate random sentences or word sequences for machine learning data, testing, or content experiments.",
+          "Quickly create large blocks of readable text for formatting demos, typography previews, or styling components.",
+          "Test HTML formatting, line breaks, spacing, and content rendering inside web editors or CMS platforms.",
         ],
         howToUse: [
-          "Select the type of text you want to generate: Lorem Ipsum, random words, or sentences",
-          "Specify the desired length or number of words/sentences to generate according to your project needs",
-          "Click the 'Generate Text' button to create the random placeholder text",
-          "Copy the generated text from the output area for use in your design mockups, prototypes, or testing scenarios",
+          "Choose the text type—Lorem Ipsum, Random Words, or Random Sentences—based on the structure you want.",
+          "Select your preferred language from the multilingual pack to customize the text output.",
+          "Use the sliders to set how many words per paragraph and how many paragraphs you need.",
+          "Enable HTML mode if you want your output wrapped in paragraph tags for web usage.",
+          "Click the Regenerate button anytime to refresh the generated text with new variations.",
+          "Copy, download, or reset the output using the action buttons in the tool.",
         ],
         popularTools: ["Lorem Ipsum", "Words", "Sentences"],
         advancedTips: [
-          "Use Lorem Ipsum for traditional placeholder text that resembles natural language structure, ideal for most design mockups",
-          "Choose random words when testing search functionalities or input fields where specific word patterns are not required",
-          "Select complete sentences to visualize how text will appear in UI components like cards, modals, and tooltips",
-          "Adjust the length of generated text to match the expected content size in your design, ensuring accurate layout representation",
-          "Combine different types of generated text (words and sentences) to create varied content for more comprehensive testing scenarios",
+          "Switch to HTML mode when generating text for CMS previews, React components, or design system typography tests.",
+          "Use higher paragraph counts when testing scroll behavior, long-form layouts, or spacing-related UI issues.",
+          "Set smaller word-per-paragraph values when testing mobile UI components, cards, or tight layouts.",
+          "Experiment with different languages to check font fallback behavior and non-Latin character rendering.",
+          "Use random-sentences mode to generate more natural-looking text that better simulates real human writing.",
+          "Combine multiple generations to create mixed-language stress-testing text for internationalized interfaces.",
         ],
         troubleshooting: [
           {
-            issue: "Generated text doesn't fit well in my design layout",
+            issue:
+              "The generated text does not match the exact number of words I selected.",
             solution:
-              "Adjust the length of the generated text to better match the expected content size in your design. Experiment with different types of text (Lorem Ipsum, words, sentences) to find the best fit for your layout requirements.",
+              "Ensure the updated engine with exact word-count enforcement is installed. If using Lorem Ipsum mode, enable precise-word logic in the generator.",
           },
           {
-            issue: "The generated text feels too repetitive or lacks variety",
+            issue: "Language switching does not change the output.",
             solution:
-              "Try generating a larger amount of text or using different generation types to increase variety. If using Lorem Ipsum, consider mixing in random words or sentences to create a more diverse content sample.",
+              "Verify that the selected language exists in the wordLists pack and that your TSX file is correctly reading from wordLists when rendering text.",
+          },
+          {
+            issue: "HTML mode is enabled but text still appears plain.",
+            solution:
+              "Check if your frontend sanitizes HTML output. HTML mode outputs <p> tags which may not render inside a raw textarea.",
           },
           {
             issue:
-              "I need specific types of words or phrases in the generated text",
+              "Paragraph count slider changes but output still shows one block of text.",
             solution:
-              "While the tool generates random text, you can manually edit the output to include specific words or phrases as needed. Alternatively, use the random words option to generate a list of words that you can customize further.",
+              "Ensure your UI loops generateText() multiple times and your joiner uses \n\n for plain mode or <p> wrappers for HTML mode.",
+          },
+          {
+            issue:
+              "Downloaded file shows weird encoding or missing line breaks.",
+            solution:
+              "Save the file as text/plain and use \n\n line breaks for plain mode to preserve formatting.",
           },
         ],
         detailedExamples: [
-          "A UI/UX designer is creating a new mobile app prototype and needs placeholder text to visualize how content will appear in various screens. They use the Text Generator tool to create Lorem Ipsum text that fits the design layout, allowing stakeholders to focus on the visual aspects without being distracted by real content.",
-          "A developer is testing the search functionality of a web application and requires random words to simulate user input. They generate a list of random words using the Text Generator tool, which helps them evaluate how the search algorithm handles different inputs and ensures robust performance.",
-          "A content writer is experiencing writer's block and needs inspiration for new ideas. They use the Text Generator tool to produce random sentences, which sparks creativity and helps them overcome the hurdle by providing fresh text snippets to build upon.",
+          "A UI designer is building a dashboard and needs three paragraphs of clean, readable text to test spacing, so they set the generator to English, Lorem mode, and 150 words per paragraph.",
+          "A developer working on a multilingual landing page wants to preview how Arabic text wraps inside RTL containers, so they switch the language to Arabic and enable HTML mode to test rendering.",
+          "A blogger is designing a new article template and wants placeholder content that feels more natural than Lorem Ipsum, so they choose Random Sentences mode with Spanish selected.",
+          "A QA engineer stress-tests the typography system by generating 10 paragraphs of mixed Chinese and Hindi text to check font fallback behavior across devices.",
+          "A student creating a mock presentation needs quick filler paragraphs, so they select 200 words per paragraph, enable HTML format, and copy the output directly into Notion.",
         ],
         link: "https://cleanformatter.com/tools/random-generator/text-generator",
         faq: [
           {
-            question: "What is the Text Generator tool?",
-            answer:
-              "The Text Generator tool allows you to generate random text for use as placeholder content, testing, or design mockups.",
-          },
-          {
             question:
-              "What popular text generation options does this tool include?",
+              "Does the text generator produce unique content every time?",
             answer:
-              "Popular options include generating Lorem Ipsum text, random words, and complete sentences to fit different content needs.",
+              "Yes, the generator uses randomness in sentence and word selection, producing unique output with every regeneration.",
           },
           {
-            question: "How does the Text Generator work?",
+            question: "Can I generate multi-paragraph text?",
             answer:
-              "It uses predefined word lists and sentence structures to create coherent placeholder text that mimics natural language.",
+              "Yes, the tool includes a paragraph slider that lets you create 1–10 structured paragraphs.",
           },
           {
-            question: "Why should I use a Text Generator tool?",
+            question: "Does the tool support non-English languages?",
             answer:
-              "This tool helps designers, developers, and writers quickly create sample content to test layouts, designs, or workflows without needing real text.",
+              "Absolutely. It supports Hindi, Spanish, Arabic, Chinese, Bengali, Portuguese, Japanese, Russian, and more.",
           },
           {
-            question: "Can I customize the length and type of generated text?",
+            question: "Can I get HTML-formatted text?",
             answer:
-              "Yes, you can specify the amount of text, number of words, sentences, or paragraphs to generate according to your project requirements.",
+              "Yes. Enabling HTML mode wraps each paragraph in <p> tags so you can paste it directly into websites or editors.",
           },
           {
-            question: "Is the Text Generator free to use?",
+            question: "Is the generated text SEO friendly?",
             answer:
-              "Yes, the Text Generator is free and accessible online without requiring any subscription.",
+              "The tool mainly provides dummy placeholder content—not SEO content. It’s designed for layout testing rather than ranking.",
           },
         ],
       },
@@ -1718,82 +1691,95 @@ export const toolCategories: ToolCategory[] = [
         detailedDescription:
           "The Password Generator tool is a robust utility that creates secure, random passwords to help protect your online accounts from hacking and unauthorized access. It offers various password types including strong complex passwords, memorable phrases, and numeric PINs to cater to different security and usability needs. Ideal for individuals, IT professionals, and organizations looking to enhance their cybersecurity practices by using strong, unique passwords. The tool generates passwords using randomization algorithms that include uppercase and lowercase letters, numbers, and special characters to ensure unpredictability. Users can customize password length and complexity based on their specific requirements. All password generation occurs client-side, ensuring your sensitive data remains private and secure.",
         primaryUseCases: [
-          "Creating strong, complex passwords for online accounts to enhance security against brute-force attacks and unauthorized access",
-          "Generating memorable passwords using phrases that are easier to recall while still maintaining a good level of security",
-          "Producing numeric PINs for devices, banking apps, or two-factor authentication systems where numeric codes are required",
-          "Assisting IT professionals and organizations in implementing robust password policies by providing unique, random passwords for employees",
-          "Helping individuals avoid password reuse by generating different passwords for each account, reducing the risk of credential stuffing attacks",
+          "Generate high-security passwords for online accounts, applications, and enterprise systems.",
+          "Create custom-format passwords using patterns like Aa0!-Aa0! for structured credential formats.",
+          "Produce memorable, pronounceable passwords that are easier to recall without sacrificing strength.",
+          "Generate multiple long, secure passwords for developer tools, SSH keys, databases, and APIs.",
+          "Create passwords with strict rule-based requirements for corporate or compliance environments.",
         ],
         howToUse: [
-          "Select the type of password you want to generate: Strong complex password, memorable phrase, or numeric PIN",
-          "Specify the desired length and complexity options (e.g., inclusion of uppercase letters, numbers, special characters) based on your security needs",
-          "Copy the generated password from the output area for use in your online accounts, applications, or devices",
+          "Choose the desired password length using the slider or quick-select preset buttons.",
+          "Enable or disable character types such as uppercase, lowercase, numbers, symbols, or custom symbols.",
+          "Use Pattern Mode to generate structured passwords using tokens like A, a, 0, !, and x.",
+          "Enable Memorable Mode to produce human-friendly, syllable-based passwords.",
+          "Click the Generate or Refresh button to produce a new password instantly.",
+          "Copy the generated password with one click or download it as a text file.",
+          "Check the strength and entropy indicators to confirm password security.",
         ],
         popularTools: ["Strong", "Memorable", "PIN"],
         advancedTips: [
-          "Use strong complex passwords that combine uppercase and lowercase letters, numbers, and special characters for maximum security",
-          "Choose memorable phrases that are easy to recall but still contain a mix of character types to balance usability and security",
-          "For numeric PINs, select a length of at least 6 digits to reduce the risk of guessing attacks",
-          "Avoid using common words or patterns in passwords, as these can be easily cracked by attackers using dictionary attacks",
-          "Regularly update your passwords and avoid reusing them across multiple accounts to minimize the impact of potential breaches",
+          "Use pattern mode when you need passwords that follow a format, such as Aaaa00!! or ID-aa00-xx.",
+          "Disable ambiguous characters ({ } [ ] ( ) / ' \" ~ , ; : . < >) for systems that reject them.",
+          "For maximum security, combine long lengths (24+) with mixed character sets.",
+          "Memorable mode is great for passwords you need to type often—combine syllables with digits for better security.",
+          "Use custom symbols to include industry-specific characters required by corporate policies.",
+          "Check entropy to evaluate the mathematical unpredictability of your password.",
         ],
         troubleshooting: [
           {
-            issue: "Generated passwords are too weak or predictable",
+            issue: "Password strength is too low.",
             solution:
-              "Ensure you select the appropriate complexity options when generating passwords. Use a mix of character types (uppercase, lowercase, numbers, special characters) and choose a longer length for stronger security.",
+              "Increase the length, enable more character types, or avoid repetitive characters.",
           },
           {
-            issue: "I have trouble remembering the generated passwords",
+            issue: "Generated password does not include symbols or numbers.",
             solution:
-              "Consider using the memorable phrase option, which creates passwords that are easier to recall. You can also use password managers to securely store and manage your passwords, allowing you to use strong, unique passwords without needing to remember them all.",
+              "Ensure symbols/numbers are enabled and no conflicting pattern rules are applied.",
           },
           {
-            issue:
-              "I need passwords that comply with specific organizational policies",
+            issue: "Pattern mode is not producing the expected format.",
             solution:
-              "Customize the password generation settings to meet your organization's requirements, such as minimum length and character type inclusion. If necessary, generate multiple passwords and select those that best fit the policy criteria.",
+              "Verify you’re using valid pattern tokens (A, a, 0, !, x) and no unsupported characters.",
+          },
+          {
+            issue: "Memorable mode ignores character type settings.",
+            solution:
+              "This is expected — memorable mode overrides standard character pool rules to generate syllable-based output.",
+          },
+          {
+            issue: "Password is rejected by a website.",
+            solution:
+              "Disable ambiguous characters or limit special characters to match that website’s password policy.",
           },
         ],
         detailedExamples: [
-          "An individual is creating a new online account and wants to ensure their password is secure. They use the Password Generator tool to create a strong complex password that includes a mix of uppercase letters, lowercase letters, numbers, and special characters. This helps protect their account from potential hacking attempts.",
-          "A company IT administrator needs to set up new user accounts for employees and wants to enforce strong password policies. They utilize the Password Generator tool to generate unique, random passwords for each employee, ensuring that all passwords meet the organization's security standards.",
-          "A user wants to set up two-factor authentication on their banking app, which requires a numeric PIN. They use the Password Generator tool to create a secure 6-digit PIN that is difficult to guess, enhancing the security of their financial information.",
+          "A DevOps engineer generating a 32-character high-entropy password before deploying a new Kubernetes cluster to prevent credential leaks during CI/CD automation.",
+          "A freelancer creating unique, pattern-based passwords like Aa0!Aa0! for each client’s hosting panel to avoid accidental reuse across projects.",
+          "A startup founder generating memorable but strong passwords for quick mobile logins while switching between multiple SaaS dashboards throughout the day.",
+          "A security-conscious user turning off ambiguous characters to create passwords that are easier to type on mobile without mistaking O, 0, or l for each other.",
+          "A backend developer using the custom symbol set to meet strict password policies on legacy systems that only allow specific special characters.",
+          "A QA tester using the tool to stress-test authentication flows by generating thousands of unique passwords for automated login scripts.",
+          "A team lead creating a password template like Aaaa00!! to ensure consistent formatting for internal service accounts used across multiple team members.",
+          "A system administrator enabling maximum length and full character set to generate a 64-character password for securing a cloud VM root access.",
+          "An IT auditor generating high-entropy sample passwords to demonstrate how weak default-password policies can be exploited during a security review.",
+          "A crypto investor generating a long, secure passphrase for encrypting a hardware wallet, mixing memorable syllables with digits for extra strength.",
         ],
         link: "https://cleanformatter.com/tools/random-generator/password-generator",
         faq: [
           {
-            question: "What is the Password Generator tool?",
+            question: "Does the generator use secure randomness?",
             answer:
-              "The Password Generator tool creates secure, random passwords to help protect your online accounts from hacking and unauthorized access.",
+              "Yes. It uses Web Crypto API (crypto.getRandomValues) for cryptographically secure randomization.",
           },
           {
-            question: "What types of passwords can I generate with this tool?",
+            question: "What does entropy mean?",
             answer:
-              "You can generate strong complex passwords, memorable passwords using phrases, and numeric PINs, catering to different security and usability needs.",
+              "Entropy measures mathematical unpredictability. Higher entropy means a password is exponentially harder to crack.",
           },
           {
-            question:
-              "How does the Password Generator create strong passwords?",
+            question: "What is Pattern Mode?",
             answer:
-              "It uses randomization algorithms that include uppercase and lowercase letters, numbers, and special characters to produce unpredictable, unique passwords.",
+              "Pattern Mode lets you create structured passwords using tokens like A (uppercase), a (lowercase), 0 (number), ! (symbol), and x (any character).",
           },
           {
-            question:
-              "Why should I use a Password Generator instead of creating my own passwords?",
+            question: "Is the password stored anywhere?",
             answer:
-              "Randomly generated passwords are far more secure than user-created ones, reducing the risk of easy guessing, brute-force attacks, and password reuse.",
+              "No. Everything is generated locally in the browser and never sent to a server.",
           },
           {
-            question:
-              "Can I customize the length and complexity of passwords generated?",
+            question: "What are similar characters and why disable them?",
             answer:
-              "Yes, you can specify desired password length and choose which character types to include, such as symbols, numbers, and letter case.",
-          },
-          {
-            question: "Is the Password Generator tool free to use?",
-            answer:
-              "Yes, the Password Generator tool is completely free and available online without any subscription or registration.",
+              "Similar characters include i, l, 1, o, 0, O. Disabling them improves readability and reduces typing errors.",
           },
         ],
       },
@@ -1802,81 +1788,98 @@ export const toolCategories: ToolCategory[] = [
         slug: "uuid-generator",
         description: "Generate UUIDs/GUIDs",
         detailedDescription:
-          "The UUID Generator tool is a specialized utility that creates universally unique identifiers (UUIDs/GUIDs) used to uniquely identify objects across systems. It supports various UUID versions including v4 (random), v5 (namespace and name-based hashing), and custom versions for specialized use cases. Ideal for developers, database administrators, and system architects who need reliable unique identifiers for distributed systems, databases, and applications. The tool generates UUIDs using cryptographically strong random number generation, timestamps, and hashing methods depending on the version selected. Users can customize the format and version of the UUIDs generated to fit their specific requirements. All UUID generation occurs client-side, ensuring your data remains private and secure.",
+          "The UUID Generator Tool is a reliable, developer-friendly utility designed to instantly create RFC 4122–compliant unique identifiers for databases, APIs, authentication flows, distributed systems, and large-scale backend architectures. It supports both random UUID v4 generation and deterministic UUID v5 generation using custom names and namespaces, making it ideal for everything from idempotent API design to entity mapping in microservices. With options for standard, uppercase, and no-dashes formatting, this tool helps developers generate clean, consistent, collision-resistant identifiers that work flawlessly across modern tech stacks. Whether you're seeding test data, building production-grade services, integrating with legacy systems, or ensuring consistency across multiple environments, this UUID generator offers speed, accuracy, and flexibility without compromising security or compliance.",
         primaryUseCases: [
-          "Generating unique identifiers for database records to ensure data integrity and prevent collisions in distributed databases",
-          "Creating unique session IDs for web applications to track user sessions securely without risk of duplication",
-          "Producing unique keys for distributed systems and microservices architectures where multiple components need to generate IDs independently",
-          "Assisting developers in creating unique identifiers for objects in programming languages that require UUIDs for object tracking and management",
-          "Facilitating testing and development by providing a quick way to generate UUIDs for mock data and simulations",
+          "Generate random v4 UUIDs for database primary keys, API resources, and background jobs.",
+          "Create deterministic v5 UUIDs for the same entity across systems by using a consistent name and namespace.",
+          "Quickly copy valid UUIDs for use in config files, environment variables, and testing fixtures.",
+          "Standardize identifier formats across services using uppercase or no-dashes variants.",
+          "Use the tool as a reference to explain or demo how UUID generation works to junior developers.",
         ],
+
         howToUse: [
-          "Select the version of UUID you want to generate: v4 (random), v5 (namespace and name-based), or custom version",
-          "Specify any additional parameters required for the selected version, such as namespace and name for v5 UUIDs",
-          "Click the 'Generate UUID' button to create the unique identifier",
-          "Copy the generated UUID from the output area for use in your applications, databases, or systems",
+          "Open the UUID Generator Tool and review the default UUID shown in the output box.",
+          "Choose the desired UUID version in the UUID Version dropdown (v4 for random, v5 for name-based).",
+          "If using v5, enter a name and a valid namespace UUID in the corresponding input fields.",
+          "Select your preferred output format under Format Options (standard, uppercase, or no-dashes).",
+          "Click the New button to generate a fresh UUID based on your selected options.",
+          "Use the Copy button to copy the UUID to your clipboard and paste it wherever you need it.",
         ],
         popularTools: ["v4", "v5", "Custom"],
         advancedTips: [
-          "Use v4 UUIDs for general-purpose unique identifiers that require randomness and are easy to generate",
-          "Choose v5 UUIDs when you need deterministic UUIDs based on a namespace and name, ensuring the same input always produces the same UUID",
-          "For custom UUID versions, ensure you understand the specific requirements and structure needed for your application",
-          "In distributed systems, use UUIDs to avoid ID collisions when multiple nodes generate identifiers independently",
-          "Regularly review your UUID generation strategy to ensure it meets the evolving needs of your applications and systems",
+          "Use v5 UUIDs with a stable namespace and meaningful name (such as a URL or composite key) to get repeatable identifiers across multiple systems.",
+          "Combine the no-dashes format with v5 UUIDs when you need deterministic identifiers friendly for systems that dislike special characters.",
+          "Integrate this tool’s engine directly into backend services so you use the same UUID rules in both UI and server code.",
+          "For large-scale systems, reserve different namespaces for different domains (users, orders, sessions) to avoid accidental collisions in deterministic UUIDs.",
+          "Leverage uppercase format when you want UUIDs to be more visually distinct in logs or admin dashboards.",
         ],
+
         troubleshooting: [
           {
-            issue: "Generated UUIDs are not unique",
+            issue:
+              "Selecting UUID v5 but generation fails with an error toast.",
             solution:
-              "Ensure you are using the appropriate version of UUID for your use case. v4 UUIDs are designed to be random and unique, while v5 UUIDs are deterministic based on input. If you need guaranteed uniqueness, consider using v4 or implementing additional checks in your system.",
+              "Make sure both the name and namespace fields are filled and the namespace is a valid UUID string before generating.",
           },
           {
-            issue: "I need UUIDs that comply with specific format requirements",
+            issue: "Copy button does not seem to copy the UUID.",
             solution:
-              "Customize the UUID generation settings to meet your format requirements. If using custom versions, ensure you understand the structure needed for your application. Validate the generated UUIDs against your format specifications.",
+              "Check browser clipboard permissions, try again in a different browser, or manually select and copy the UUID from the output box.",
           },
           {
-            issue: "I need to generate a large number of UUIDs quickly",
+            issue: "UUID looks different from what the backend generates.",
             solution:
-              "The UUID Generator tool is optimized for performance, but if you require bulk generation, consider using a script or library in your programming language that can generate UUIDs in batches for efficiency.",
+              "Verify that the backend is using the same UUID version, namespace, and formatting rules (standard vs uppercase vs no-dashes).",
+          },
+          {
+            issue: "UUID is rejected by an external system as invalid.",
+            solution:
+              "Confirm that the external system actually supports standard RFC 4122 UUIDs and that you did not accidentally strip or add extra characters.",
+          },
+          {
+            issue: "Frequent error messages when switching to v5.",
+            solution:
+              "Fill in the name and namespace fields immediately after switching to v5 to avoid validation errors, or switch back to v4 for simple random UUIDs.",
           },
         ],
         detailedExamples: [
-          "A developer is building a distributed application that requires unique identifiers for user sessions. They use the UUID Generator tool to create v4 UUIDs, ensuring that each session ID is unique and random, preventing any potential collisions across multiple servers.",
-          "A database administrator needs to assign unique IDs to new records in a distributed database system. They utilize the UUID Generator tool to produce v5 UUIDs based on a specific namespace and name, ensuring that the same input consistently generates the same UUID for data integrity.",
-          "A software engineer is testing a new application and requires a large number of unique identifiers for mock data. They use the UUID Generator tool to quickly generate multiple UUIDs, facilitating efficient testing and development without the risk of ID duplication.",
+          "A backend engineer is migrating a monolithic application into multiple microservices and needs stable identifiers for existing customers. They switch to UUID v5 with a dedicated customer namespace and use each customer's email as the name, ensuring every service generates the same identifier without additional database lookups.",
+          "A frontend developer is building an internal admin dashboard and needs repeatable test data. They use the tool to quickly generate UUID v4 values, copying them directly into JSON fixtures for staging environments without worrying about collisions.",
+          "A data engineer is designing a new analytics pipeline and wants consistent identifiers for event types across multiple products. By assigning a shared namespace and using event names as the v5 input, the entire analytics ecosystem—from ETL scripts to dashboards—uses the same deterministic UUIDs.",
+          "A QA tester debugging an inconsistent API response needs precise identifiers for testing edge cases. They generate UUIDs in the no-dashes format to match the requirements of an older legacy service that doesn't support hyphenated IDs.",
+          "A tech lead is hosting a knowledge-sharing session for junior developers and uses the tool live to demonstrate the difference between v4 random UUIDs and deterministic v5 UUIDs. They show how modifying the name or namespace instantly changes the output while keeping it reproducible.",
+          "A SaaS company needs globally unique identifiers for users, subscriptions, and invoices. They rely on UUID v4 generation from this tool to avoid collisions across database shards, ensuring safe scaling without coordination between nodes.",
+          "An e-commerce platform generates consistent product identifiers across services. By feeding SKU codes and a shared namespace into UUID v5, they ensure identical IDs appear in the inventory database, search index, checkout system, and analytics warehouse.",
+          "A fintech startup wants deterministic partner IDs so that the same partner always resolves to the same identifier across onboarding, billing, and compliance systems. They convert partner domain names into v5 UUIDs using a dedicated namespace.",
+          "A DevOps engineer is setting up temporary environments and needs unique but readable resource names. They use the tool to generate UUIDs for Kubernetes labels, annotations, and config maps, ensuring each resource is traceable and conflict-free.",
+          "A game development team uses uppercase, no-dash UUIDs to generate session IDs for their multiplayer matchmaking service. The format makes logs easier to scan during live debugging while keeping everything RFC 4122 compliant.",
         ],
         link: "https://cleanformatter.com/tools/random-generator/uuid-generator",
         faq: [
           {
-            question: "What is the UUID Generator tool?",
+            question: "What is the difference between UUID v4 and v5?",
             answer:
-              "The UUID Generator tool creates universally unique identifiers (UUIDs/GUIDs) that are 128-bit labels used to uniquely identify objects across systems.",
+              "UUID v4 is randomly generated for each call, while UUID v5 is deterministic and generated from a combination of a name and a namespace using SHA-1.",
           },
           {
-            question: "What UUID versions does this tool support?",
+            question: "When should I use a v5 UUID instead of v4?",
             answer:
-              "The tool supports popular UUID versions including v4 (random), v5 (namespace and name-based hashing), and custom versions for specialized use cases.",
+              "Use v5 when you want the same input (name plus namespace) to always produce the same UUID, which is useful for idempotent operations or cross-system identifiers.",
           },
           {
-            question: "How does the UUID Generator ensure uniqueness?",
+            question: "Are the generated UUIDs RFC 4122 compliant?",
             answer:
-              "It uses cryptographically strong random number generation, timestamps, and hashing methods depending on the UUID version to minimize the risk of duplication.",
+              "Yes, both v4 and v5 UUIDs generated by this tool follow RFC 4122 guidelines for structure and bit layout.",
           },
           {
-            question: "Why use UUIDs generated by this tool?",
+            question: "Can I customize the namespace for v5 UUIDs?",
             answer:
-              "UUIDs provide globally unique strings without centralized coordination, ideal for database keys, session identifiers, and distributed systems.",
+              "Yes, you can enter any valid UUID as the namespace, allowing you to define your own logical domains for deterministic ID generation.",
           },
           {
-            question: "Can I generate multiple UUIDs at once with this tool?",
+            question: "Is it safe to use these UUIDs in production?",
             answer:
-              "Yes, the tool supports bulk generation of UUIDs to facilitate testing, development, and large-scale system requirements.",
-          },
-          {
-            question: "Is the UUID Generator free to use?",
-            answer:
-              "Yes, the UUID Generator tool is free and accessible online without registration or subscription.",
+              "The underlying UUID library is widely used and reliable, but like any tool, you should test it within your stack and ensure versioning and formatting match your system requirements.",
           },
         ],
       },
@@ -1893,92 +1896,146 @@ export const toolCategories: ToolCategory[] = [
         slug: "font-generators",
         description: "Create stylish text for your social media posts.",
         detailedDescription:
-          "The Font Generator tool is a creative utility that allows users to generate stylish and visually appealing text for social media posts, bios, messages, and more. It offers a variety of font styles including fancy, mirror, handwritten, Fortnite, bubble fonts, and many others to help content stand out. Ideal for social media enthusiasts, marketers, influencers, and anyone looking to enhance their digital presence with unique typography. The tool provides real-time font styling with options to customize size and effects, making it easy to create eye-catching text. All font generation happens client-side ensuring privacy for your content.",
+          "The Fancy Font Generator transforms ordinary text into stylish, eye-catching Unicode fonts that you can copy and paste anywhere, including Instagram bios, TikTok captions, WhatsApp statuses, Discord usernames, YouTube descriptions, and more. Instantly generate unique text styles such as bold, italic, script, cursive, monospace, fraktur, circled, squared, underlined, strikethrough, reversed, upside-down, and glitch Zalgo effects—no apps, no downloads, and no images required. Each style uses real Unicode characters, ensuring full compatibility across all platforms and devices. With live preview, adjustable font size, one-click copy, and the ability to save your favorite styles, this tool makes it effortless to create aesthetic text, decorate your social media profiles, design creative posts, and stand out online. Whether you want cool text for gaming nicknames, attractive captions, or uniquely formatted messages, this free font generator delivers fast, high-quality results that work everywhere.",
         primaryUseCases: [
-          "Creating unique and attractive text styles for social media bios, posts, and stories to increase engagement and visibility",
-          "Designing eye-catching marketing content with stylish fonts that capture attention and convey brand personality",
-          "Enhancing personal messages and chat communications with fun and creative font styles",
-          "Customizing text for blogs, websites, and digital content to improve aesthetics and readability",
-          "Experimenting with different font styles for creative projects, graphic design, and digital art",
+          "Generate stylish and aesthetic text for Instagram bios, TikTok captions, and social media posts.",
+          "Create unique and eye-catching usernames, gamer tags, and online identities.",
+          "Design decorative text for WhatsApp statuses, Facebook posts, and creative messaging.",
+          "Enhance content creation with bold, italic, cursive, and other fancy Unicode fonts.",
+          "Produce reversed, upside-down, circled, squared, and glitch-styled text for memes and fun messages.",
+          "Copy and paste Unicode text styles directly into any app, platform, or website with full compatibility.",
+          "Customize text appearance for branding, digital art, and personal profile design.",
+          "Use aesthetic fonts to make chat messages, comments, and forum posts stand out instantly.",
         ],
         howToUse: [
-          "Select the desired font style from the available options (fancy, mirror, handwritten, etc.)",
-          "Enter the text you want to style in the input area",
-          "Adjust font size and effects using the provided sliders or options",
-          "Copy the generated stylish text from the output area for use in your social media posts, messages, or digital content",
+          "Enter your text into the input box to instantly generate multiple fancy font styles.",
+          "Scroll through the list of font variations to preview how your text looks in each Unicode style.",
+          "Click the copy button next to any font style to copy the formatted text to your clipboard.",
+          "Paste the copied stylish text into Instagram, TikTok, WhatsApp, Discord, or any app of your choice.",
+          "Use the font size control to adjust the preview for easier readability.",
+          "Save frequently used styles to your favorites for quick access in future sessions.",
+          "Experiment with different styles like bold, cursive, script, and glitch to find your desired look.",
+          "Refresh or update your text anytime to instantly regenerate all font style previews.",
         ],
         popularTools: ["Facebook", "Instagram", "Twitter"],
         advancedTips: [
-          "Experiment with different font styles to find the one that best matches your brand or personal aesthetic",
-          "Use larger font sizes for headlines and important messages to make them stand out",
-          "Combine multiple font styles in a single post for a dynamic and engaging look",
-          "Consider the readability of the font style when using it for longer text blocks",
-          "Regularly update your font styles to keep your content fresh and appealing to your audience",
+          "Combine multiple Unicode styles such as bold, underline, and strikethrough to create more unique text effects.",
+          "Use shorter phrases or keywords to make fancy fonts more readable across social media platforms.",
+          "Experiment with script, fraktur, and monospace styles to match different aesthetic themes.",
+          "Use reversed or upside-down text sparingly to maintain clarity while adding creative flair.",
+          "Pair Zalgo glitch text with bold or circled variants to create dramatic visual designs for memes and edits.",
+          "Save your frequently used styles to favorites for faster access during content creation.",
+          "Adjust the font size slider to preview how your styled text will appear on different device screens.",
+          "Use fancy fonts consistently in your bio or username to strengthen personal branding and recognition.",
         ],
         troubleshooting: [
           {
             issue:
-              "Generated fonts do not display correctly on certain platforms",
+              "Some fancy fonts are not displaying correctly on certain apps or devices.",
             solution:
-              "Ensure that the platform you are using supports Unicode characters, as some stylish fonts rely on special Unicode symbols. If issues persist, try using a different font style that is more widely supported.",
+              "This can happen if the platform does not fully support specific Unicode characters; try using simpler styles like bold, italic, or sans-serif for maximum compatibility.",
+          },
+          {
+            issue: "Copy button does not work on mobile browsers.",
+            solution:
+              "Some mobile browsers restrict clipboard access; tap and hold the generated text to copy it manually.",
+          },
+          {
+            issue: "Generated text looks broken or misaligned.",
+            solution:
+              "This may occur with glitch or Zalgo styles due to combining characters; switch to script, cursive, or bold fonts for cleaner output.",
           },
           {
             issue:
-              "The stylish text is difficult to read due to font complexity",
+              "Upside-down or reversed text appears normal when pasted into certain apps.",
             solution:
-              "Choose simpler font styles for longer text blocks or important messages. Adjust the font size to improve readability, and consider using bold or italic effects to enhance visibility.",
+              "Some apps automatically normalize text direction; consider using alternate styles like circled or squared fonts.",
+          },
+          {
+            issue: "Font preview size appears too small or too large.",
+            solution:
+              "Use the font size control to adjust the preview to your preference.",
+          },
+          {
+            issue: "Favorites are not saved after refreshing the page.",
+            solution:
+              "Ensure your browser allows localStorage; if using incognito mode, switch to a regular tab to persist data.",
           },
           {
             issue:
-              "I need to generate fonts for a specific social media platform",
+              "Certain emojis or symbols do not convert into styled fonts.",
             solution:
-              "Select the font style that is optimized for the platform you are targeting. Some platforms may have specific font styles that work better, so experiment with different options to find the best fit.",
+              "Most fancy font styles only support standard alphanumeric characters; emojis remain unchanged by design.",
+          },
+          {
+            issue: "The generator feels slow when typing long text.",
+            solution:
+              "Reduce text length or remove complex styles like Zalgo, which use numerous combining characters and can impact performance.",
           },
         ],
         detailedExamples: [
-          "A social media influencer wants to create a unique bio for their Instagram profile. They use the Font Generator tool to select a fancy font style and customize the size, resulting in an eye-catching bio that attracts more followers.",
-          "A marketer is designing a promotional post for Facebook and needs stylish text to make the message stand out. They utilize the Font Generator tool to create bold and colorful text that captures attention and increases engagement with the post.",
-          "A user wants to send a fun message to friends in a chat application. They use the Font Generator tool to create mirror-style text, adding a playful touch to their message that makes it more memorable and entertaining.",
+          "A fashion influencer uses the fancy font generator to transform her Instagram bio into a stylish, script-style introduction that instantly makes her profile stand out.",
+          "A gamer preparing for a tournament updates his Discord username with bold and fraktur text to give his in-game identity a more aggressive and memorable look.",
+          "A content creator writing inspirational quotes for TikTok converts her plain captions into cursive and calligraphy styles to match the aesthetic of her videos.",
+          "A student designing a school project uses monospace and double-struck fonts to separate headings, add emphasis, and create a cleaner visual structure.",
+          "A small business owner updates her WhatsApp business profile by converting promotional messages into circled and squared text to highlight offers and announcements.",
+          "A meme creator uses upside-down and reversed text to add playful, chaotic humor to his posts, making them instantly more shareable.",
+          "An RPG player customizes his character’s lore page using gothic and medieval text styles to perfectly match the fantasy theme of his game.",
+          "A digital artist preparing a poster uses underlined and strikethrough styles to create layered typography effects without needing design software.",
+          "A YouTuber crafting a channel description uses bold, sans-serif, and script styles to highlight different parts of the text and improve readability.",
+          "A social media manager schedules posts with bubble and circled fonts to attract attention in crowded feeds and increase engagement rates.",
         ],
         link: "https://cleanformatter.com/tools/font-generator/font-generators",
         faq: [
           {
-            question: "What is the Font Generator tool?",
+            question: "What is a fancy font generator?",
             answer:
-              "The Font Generator tool helps you create stylish, visually appealing text for your social media posts, blogs, and messages using various font styles and effects.",
+              "A fancy font generator converts normal text into stylish Unicode fonts that can be copied and pasted into social media profiles, messages, and online content.",
           },
           {
-            question:
-              "What popular font styles are available in the Font Generator?",
+            question: "Do these fancy fonts work on all platforms?",
             answer:
-              "Popular styles include creative fonts like fancy, mirror, handwritten, Fortnite, bubble fonts, and many more to make your content stand out.",
+              "Most platforms like Instagram, TikTok, WhatsApp, Discord, Twitter, and YouTube support Unicode fonts, but some older devices or apps may not display certain styles correctly.",
           },
           {
-            question:
-              "How does the Font Generator enhance my social media presence?",
+            question: "Are these styled fonts safe to use?",
             answer:
-              "Using unique and attractive fonts can catch attention, increase engagement, and help establish a recognizable brand identity across platforms like Instagram, Facebook, and Twitter.",
+              "Yes, all fonts are generated using standard Unicode characters, making them safe and compatible with modern browsers and devices.",
           },
           {
-            question: "Can I customize the font styles and sizes?",
+            question: "Why do some fonts not copy correctly?",
             answer:
-              "Yes, the tool offers a variety of styles and supports real-time font resizing with sliders, allowing you to tailor the appearance to your needs.",
+              "Clipboard restrictions on certain browsers or mobile devices can prevent automatic copying; in such cases, you can manually select and copy the text.",
           },
           {
-            question: "Is the Font Generator tool free?",
+            question: "Why do some characters not change style?",
             answer:
-              "Yes, it's a free online tool that allows you to generate stylish text without any cost or registration.",
+              "Fancy fonts only support letters and numbers; emojis, punctuation, and special characters usually remain unchanged.",
           },
           {
-            question:
-              "Can I upload documents or convert entire files with this tool?",
+            question: "Can I use these fonts for Instagram bios and captions?",
             answer:
-              "Some advanced font generators support file uploads in formats like DOC and DOCX for styling entire documents easily.",
+              "Absolutely. Most users rely on this tool specifically to style their Instagram bios, captions, reels text, and story highlights.",
           },
           {
-            question: "Where can I use the styled text generated by this tool?",
+            question: "How do favorites work?",
             answer:
-              "You can copy and paste the styled text into social media bios, posts, stories, chat messages, blogs, or marketing content to enhance visual appeal.",
+              "Favorites are saved locally on your device using localStorage, allowing you to quickly access your preferred styles without needing an account.",
+          },
+          {
+            question: "Is the font generator free to use?",
+            answer:
+              "Yes, the tool is completely free, requires no registration, and works instantly in your browser.",
+          },
+          {
+            question: "Do I need to download any fonts or apps?",
+            answer:
+              "No downloads are required. The generator uses Unicode characters, which work natively across devices without installing custom fonts.",
+          },
+          {
+            question: "Can I generate fonts for gaming names or tags?",
+            answer:
+              "Yes, you can create unique gamer tags and ign usernames for platforms like Steam, PlayStation, Xbox, and mobile games.",
           },
         ],
       },

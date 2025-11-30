@@ -1,4 +1,5 @@
-import { debounce } from 'lodash';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { debounce } from "lodash";
 
 export interface PasswordOptions {
   length: number;
@@ -6,10 +7,11 @@ export interface PasswordOptions {
   lowercase: boolean;
   numbers: boolean;
   symbols: boolean;
-  similar: boolean;
-  ambiguous: boolean;
-  memorable: boolean;
-  pattern: string;
+  similar: boolean; // allow similar-looking chars (iIlL1 oO0)
+  ambiguous: boolean; // allow ambiguous chars ({}[]()/\'"`~,;:.<>)
+  memorable: boolean; // syllable-style passwords
+  pattern: string; // pattern-templated password e.g. "Aa0!-Aa0!"
+  customSymbols?: string; // extra symbol chars added by user
 }
 
 const defaultOptions: PasswordOptions = {
@@ -21,131 +23,207 @@ const defaultOptions: PasswordOptions = {
   similar: false,
   ambiguous: false,
   memorable: false,
-  pattern: ''
+  pattern: "",
+  customSymbols: "",
 };
 
 const charSets = {
-  uppercase: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-  lowercase: 'abcdefghijklmnopqrstuvwxyz',
-  numbers: '0123456789',
-  symbols: '!@#$%^&*()_+-=[]{}|;:,.<>?',
-  similar: 'iIlL1oO0',
-  ambiguous: '{}[]()/\'"`~,;:.<>',
-  vowels: 'aeiouAEIOU',
-  consonants: 'bcdfghjklmnpqrstvwxyzBCDFGHJKLMNPQRSTVWXYZ'
+  uppercase: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+  lowercase: "abcdefghijklmnopqrstuvwxyz",
+  numbers: "0123456789",
+  symbols: "!@#$%^&*()_+-=[]{}|;:,.<>?",
+  similar: "iIlL1oO0",
+  ambiguous: "{}[]()/'\"`~,;:.<>",
+  vowels: "aeiou",
+  consonants: "bcdfghjklmnpqrstvwxyz",
 };
 
+// ---------- RANDOM HELPERS ----------
+
+function getSecureRandomInt(max: number): number {
+  if (max <= 0) return 0;
+
+  if (typeof crypto !== "undefined" && "getRandomValues" in crypto) {
+    const array = new Uint32Array(1);
+    crypto.getRandomValues(array);
+    return array[0] % max;
+  }
+
+  return Math.floor(Math.random() * max);
+}
+
+function pickRandom(str: string): string {
+  if (!str) return "";
+  return str[getSecureRandomInt(str.length)];
+}
+
+// ---------- POOL BUILDER ----------
+
 function getCharacterPool(options: PasswordOptions): string {
-  let pool = '';
+  let pool = "";
 
   if (options.uppercase) pool += charSets.uppercase;
   if (options.lowercase) pool += charSets.lowercase;
   if (options.numbers) pool += charSets.numbers;
   if (options.symbols) pool += charSets.symbols;
+  if (options.customSymbols) pool += options.customSymbols;
 
+  // Remove similar-looking chars if NOT allowed
   if (!options.similar) {
-    pool = pool.split('').filter(char => !charSets.similar.includes(char)).join('');
+    pool = pool
+      .split("")
+      .filter((ch) => !charSets.similar.includes(ch))
+      .join("");
   }
 
+  // Remove ambiguous chars if NOT allowed
   if (!options.ambiguous) {
-    pool = pool.split('').filter(char => !charSets.ambiguous.includes(char)).join('');
+    pool = pool
+      .split("")
+      .filter((ch) => !charSets.ambiguous.includes(ch))
+      .join("");
   }
+
+  // Deduplicate
+  pool = Array.from(new Set(pool.split(""))).join("");
 
   return pool;
 }
 
-function generateMemorablePassword(length: number): string {
-  const syllables = [
-    'ba', 'be', 'bi', 'bo', 'bu', 'ca', 'ce', 'ci', 'co', 'cu',
-    'da', 'de', 'di', 'do', 'du', 'fa', 'fe', 'fi', 'fo', 'fu',
-    'ga', 'ge', 'gi', 'go', 'gu', 'ha', 'he', 'hi', 'ho', 'hu'
-  ];
+// ---------- MEMORABLE MODE ----------
 
-  let password = '';
+function generateMemorablePassword(length: number): string {
+  const vowels = charSets.vowels;
+  const consonants = charSets.consonants;
+
+  let password = "";
+
   while (password.length < length) {
-    const syllable = syllables[Math.floor(Math.random() * syllables.length)];
-    if (Math.random() > 0.5) {
-      password += syllable.charAt(0).toUpperCase() + syllable.slice(1);
-    } else {
-      password += syllable;
-    }
+    const c = consonants[getSecureRandomInt(consonants.length)];
+    const v = vowels[getSecureRandomInt(vowels.length)];
+    const syllable =
+      Math.random() > 0.5 ? c.toUpperCase() + v : c + v.toLowerCase();
+
+    password += syllable;
+
+    // sprinkle digits sometimes
     if (Math.random() > 0.7) {
-      password += Math.floor(Math.random() * 10);
+      password += String(getSecureRandomInt(10));
     }
   }
 
   return password.slice(0, length);
 }
 
-function generatePatternPassword(pattern: string, options: PasswordOptions): string {
+// ---------- PATTERN MODE ----------
+// Pattern tokens:
+//  - 'A' → random uppercase
+//  - 'a' → random lowercase
+//  - '0' → random digit
+//  - '!' → random symbol/custom symbol
+//  - 'x' → random from full pool
+//  - any other char = literal (kept as-is)
+function generatePatternPassword(
+  pattern: string,
+  options: PasswordOptions
+): string {
   const pool = getCharacterPool(options);
-  let password = '';
+  const hasPool = pool.length > 0;
 
-  for (const char of pattern) {
-    switch (char) {
-      case 'A':
-        password += charSets.uppercase[Math.floor(Math.random() * charSets.uppercase.length)];
+  let password = "";
+
+  for (const token of pattern) {
+    switch (token) {
+      case "A":
+        password += pickRandom(charSets.uppercase);
         break;
-      case 'a':
-        password += charSets.lowercase[Math.floor(Math.random() * charSets.lowercase.length)];
+      case "a":
+        password += pickRandom(charSets.lowercase);
         break;
-      case '0':
-        password += charSets.numbers[Math.floor(Math.random() * charSets.numbers.length)];
+      case "0":
+        password += pickRandom(charSets.numbers);
         break;
-      case '!':
-        password += charSets.symbols[Math.floor(Math.random() * charSets.symbols.length)];
+      case "!": {
+        const symbolsSource = (options.customSymbols || "") + charSets.symbols;
+        password += pickRandom(symbolsSource);
         break;
-      case 'x':
-        password += pool[Math.floor(Math.random() * pool.length)];
+      }
+      case "x":
+        if (!hasPool) {
+          throw new Error(
+            "Pattern uses 'x', but no characters are available. Enable at least one character type."
+          );
+        }
+        password += pickRandom(pool);
         break;
       default:
-        password += char;
+        password += token; // literal
+        break;
     }
   }
 
   return password;
 }
 
-export function generatePassword(options: PasswordOptions = defaultOptions): string {
-  if (!options.uppercase && !options.lowercase && !options.numbers && !options.symbols) {
-    throw new Error('At least one character type must be selected');
+// ---------- CORE GENERATOR ----------
+
+export function generatePassword(
+  options: PasswordOptions = defaultOptions
+): string {
+  const hasCharTypes =
+    options.uppercase ||
+    options.lowercase ||
+    options.numbers ||
+    options.symbols ||
+    (!!options.customSymbols && options.customSymbols.length > 0);
+
+  if (!options.pattern && !options.memorable && !hasCharTypes) {
+    throw new Error("Select at least one character type.");
   }
 
-  if (options.pattern) {
-    return generatePatternPassword(options.pattern, options);
+  // Pattern mode wins if pattern is non-empty
+  if (options.pattern.trim()) {
+    return generatePatternPassword(options.pattern.trim(), options);
   }
 
+  // Memorable mode
   if (options.memorable) {
     return generateMemorablePassword(options.length);
   }
 
+  // Standard random password
   const pool = getCharacterPool(options);
   if (!pool) {
-    throw new Error('No characters available with current options');
+    throw new Error(
+      "No characters available with current options. Adjust your character set."
+    );
   }
 
-  let password = '';
+  let password = "";
   for (let i = 0; i < options.length; i++) {
-    password += pool[Math.floor(Math.random() * pool.length)];
+    password += pickRandom(pool);
   }
 
-  // Ensure at least one character from each selected type
-  const types: Array<keyof typeof charSets> = [];
-  if (options.uppercase) types.push('uppercase');
-  if (options.lowercase) types.push('lowercase');
-  if (options.numbers) types.push('numbers');
-  if (options.symbols) types.push('symbols');
+  // Ensure at least one char from each selected type (for standard mode)
+  const ensureTypes: Array<keyof typeof charSets> = [];
+  if (options.uppercase) ensureTypes.push("uppercase");
+  if (options.lowercase) ensureTypes.push("lowercase");
+  if (options.numbers) ensureTypes.push("numbers");
+  if (options.symbols) ensureTypes.push("symbols");
 
-  for (const type of types) {
-    if (!password.split('').some(char => charSets[type].includes(char))) {
-      const pos = Math.floor(Math.random() * password.length);
-      const char = charSets[type][Math.floor(Math.random() * charSets[type].length)];
-      password = password.slice(0, pos) + char + password.slice(pos + 1);
+  const chars = password.split("");
+
+  for (const type of ensureTypes) {
+    if (!chars.some((ch) => charSets[type].includes(ch))) {
+      const pos = getSecureRandomInt(chars.length);
+      chars[pos] = pickRandom(charSets[type]);
     }
   }
 
-  return password;
+  return chars.join("");
 }
+
+// ---------- STRENGTH + ENTROPY ----------
 
 export function calculatePasswordStrength(password: string): number {
   if (!password) return 0;
@@ -153,21 +231,37 @@ export function calculatePasswordStrength(password: string): number {
   let strength = 0;
   const length = password.length;
 
-  // Length contribution (up to 40 points)
+  // Length contribution (0–40)
   strength += Math.min(length * 2, 40);
 
-  // Character type contribution (up to 40 points)
+  // Character set diversity (0–40)
   if (/[A-Z]/.test(password)) strength += 10;
   if (/[a-z]/.test(password)) strength += 10;
   if (/[0-9]/.test(password)) strength += 10;
   if (/[^A-Za-z0-9]/.test(password)) strength += 10;
 
-  // Complexity contribution (up to 20 points)
-  const uniqueChars = new Set(password).size;
-  strength += Math.min((uniqueChars / length) * 20, 20);
+  // Uniqueness / repetition (0–20)
+  const unique = new Set(password).size;
+  strength += Math.min((unique / length) * 20, 20);
 
-  return Math.min(strength, 100);
+  return Math.min(Math.round(strength), 100);
 }
 
-// Debounced version for real-time preview
-export const generatePasswordDebounced = debounce(generatePassword, 300);
+export function estimatePasswordEntropy(password: string): number {
+  if (!password) return 0;
+
+  let charsetSize = 0;
+  if (/[a-z]/.test(password)) charsetSize += 26;
+  if (/[A-Z]/.test(password)) charsetSize += 26;
+  if (/[0-9]/.test(password)) charsetSize += 10;
+  if (/[^A-Za-z0-9]/.test(password)) charsetSize += 32; // rough symbol space
+
+  if (charsetSize === 0) return 0;
+
+  // bits of entropy ≈ length * log2(charsetSize)
+  const entropy = password.length * (Math.log(charsetSize) / Math.log(2));
+  return Math.round(entropy);
+}
+
+// Debounced generator for potential live previews
+export const generatePasswordDebounced = debounce(generatePassword, 250);

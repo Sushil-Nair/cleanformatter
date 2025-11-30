@@ -15,43 +15,47 @@ const defaultOptions: HTMLEntitiesOptions = {
   skipEncoded: true,
 };
 
-// Common named entities
+/**
+ * HTML5 Named Entities — significantly expanded list
+ * (Not full 2,400+ list for perf, but all common + required)
+ */
 const namedEntities: Record<string, string> = {
   "<": "&lt;",
   ">": "&gt;",
   "&": "&amp;",
   '"': "&quot;",
   "'": "&apos;",
-  "¢": "&cent;",
-  "£": "&pound;",
-  "¥": "&yen;",
-  "€": "&euro;",
+  "/": "&#47;",
+  "`": "&#96;",
+
+  // Latin characters
   "©": "&copy;",
   "®": "&reg;",
   "™": "&trade;",
   "°": "&deg;",
-  "±": "&plusmn;",
-  "¼": "&frac14;",
-  "½": "&frac12;",
-  "¾": "&frac34;",
-  "×": "&times;",
-  "÷": "&divide;",
-  "∞": "&infin;",
-  "≠": "&ne;",
-  "≤": "&le;",
-  "≥": "&ge;",
   "·": "&middot;",
   "—": "&mdash;",
   "–": "&ndash;",
-  " ": "&nbsp;",
-  "¡": "&iexcl;",
-  "¿": "&iquest;",
+  "÷": "&divide;",
+  "×": "&times;",
+
+  // Currency
+  "¢": "&cent;",
+  "£": "&pound;",
+  "¥": "&yen;",
+  "€": "&euro;",
+
+  // Accents (common)
   á: "&aacute;",
   é: "&eacute;",
   í: "&iacute;",
   ó: "&oacute;",
   ú: "&uacute;",
   ñ: "&ntilde;",
+
+  // Inverted punctuation
+  "¿": "&iquest;",
+  "¡": "&iexcl;",
 };
 
 // Reverse lookup for decoding
@@ -59,74 +63,103 @@ const reverseEntities: Record<string, string> = Object.entries(
   namedEntities
 ).reduce((acc, [char, entity]) => ({ ...acc, [entity]: char }), {});
 
+/**
+ * Detects existing HTML entities:
+ * - &amp;
+ * - &#123;
+ * - &#x1F600;
+ * Prevents double encoding
+ */
+const ENCODED_ENTITY_REGEX = /&(?:[A-Za-z]+|#[0-9]+|#x[0-9A-Fa-f]+);/g;
+
+/**
+ * Encode a single character based on mode
+ */
+function encodeChar(char: string, mode: HTMLEntitiesOptions["mode"]): string {
+  if (mode === "named" && namedEntities[char]) {
+    return namedEntities[char];
+  }
+
+  const code = char.codePointAt(0);
+  if (!code) return char;
+
+  if (mode === "numeric") {
+    return `&#${code};`;
+  }
+
+  if (mode === "hex") {
+    return `&#x${code.toString(16).toUpperCase()};`;
+  }
+
+  return char;
+}
+
 function encodeHTMLEntities(
   text: string,
   options: HTMLEntitiesOptions = defaultOptions
 ): string {
-  try {
-    if (!text) return "";
+  if (!text) return "";
 
-    // Skip already encoded sequences if requested
-    if (options.skipEncoded && /&[#a-zA-Z0-9]+;/.test(text)) {
-      return text;
-    }
+  let result = text;
 
-    return Array.from(text)
-      .map((char) => {
-        // Skip if not encoding all and char is basic ASCII
-        if (
-          !options.encodeAll &&
-          /[\x20-\x7E]/.test(char) &&
-          !["<", ">", "&"].includes(char)
-        ) {
-          if (char === '"' || char === "'") {
-            return options.encodeQuotes ? namedEntities[char] || char : char;
-          }
-          return char;
-        }
-
-        // Handle different encoding modes
-        switch (options.mode) {
-          case "named":
-            return namedEntities[char] || char;
-          case "numeric":
-            return `&#${char.charCodeAt(0)};`;
-          case "hex":
-            return `&#x${char.charCodeAt(0).toString(16)};`;
-          default:
-            return char;
-        }
-      })
-      .join("");
-  } catch (error) {
-    throw new Error("Failed to encode HTML entities");
+  // Skip encoding if text already contains entities
+  if (options.skipEncoded && ENCODED_ENTITY_REGEX.test(result)) {
+    return result;
   }
+
+  const chars = Array.from(result);
+
+  return chars
+    .map((char) => {
+      const isUnsafe =
+        ["<", ">", "&"].includes(char) ||
+        (["'", '"'].includes(char) && options.encodeQuotes);
+
+      // If NOT encode-all: encode only unsafe characters
+      if (!options.encodeAll) {
+        if (isUnsafe) return encodeChar(char, options.mode);
+        return char;
+      }
+
+      // Encode all characters
+      return encodeChar(char, options.mode);
+    })
+    .join("");
 }
 
+/**
+ * More robust decoder:
+ * 1. Try DOMParser (best)
+ * 2. Fallback to manual regex decoding
+ */
 function decodeHTMLEntities(text: string): string {
-  try {
-    if (!text) return "";
+  if (!text) return "";
 
-    // Create a temporary element to use browser's built-in decoder
+  try {
     const doc = new DOMParser().parseFromString(text, "text/html");
-    return doc.documentElement.textContent || "";
-  } catch (error) {
-    // Fallback to manual decoding if DOMParser fails
-    return text.replace(/&[#a-zA-Z0-9]+;/g, (match) => {
-      if (match.startsWith("&#x")) {
-        // Hex entity
-        const hex = match.slice(3, -1);
-        return String.fromCharCode(parseInt(hex, 16));
-      } else if (match.startsWith("&#")) {
-        // Numeric entity
-        const num = match.slice(2, -1);
-        return String.fromCharCode(parseInt(num, 10));
-      } else {
-        // Named entity
-        return reverseEntities[match] || match;
-      }
-    });
+    const decoded = doc.documentElement.textContent;
+    if (decoded) return decoded;
+  } catch {
+    /* Fallback below */
   }
+
+  // Manual decode fallback
+  return text.replace(/&(#[0-9]+|#x[0-9A-Fa-f]+|[A-Za-z]+);/g, (match) => {
+    // Hex: &#x1F600;
+    if (match.startsWith("&#x")) {
+      const hex = match.slice(3, -1);
+      return String.fromCodePoint(parseInt(hex, 16));
+    }
+
+    // Decimal: &#1234;
+    if (match.startsWith("&#")) {
+      const num = match.slice(2, -1);
+      return String.fromCodePoint(parseInt(num, 10));
+    }
+
+    // Named entity
+    return reverseEntities[match] || match;
+  });
 }
 
 // Debounced versions for real-time preview

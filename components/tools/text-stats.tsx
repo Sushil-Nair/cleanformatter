@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { TextStats } from "@/types/tools"
+import { TextStats } from "@/types/tools";
 
 interface TextStatsProps {
-  stats: TextStats
+  stats: TextStats;
 }
 
 export function TextStatsDisplay({ stats }: TextStatsProps) {
@@ -24,5 +24,5 @@ export function TextStatsDisplay({ stats }: TextStatsProps) {
         </div>
       </div>
     </div>
-  )
+  );
 }

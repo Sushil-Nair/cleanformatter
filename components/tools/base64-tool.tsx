@@ -798,7 +798,7 @@ export function Base64Tool() {
                 </div>
 
                 {/* View Tabs */}
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col md:flex-row items-center justify-between gap-4">
                   <div className="flex gap-2 text-xs">
                     <Button
                       variant={viewTab === "text" ? "default" : "outline"}
