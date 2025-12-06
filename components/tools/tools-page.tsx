@@ -10,7 +10,7 @@ import { TextDiffLayout } from "@/components/tools/text-diff-layout";
 import { CaseConverterTool } from "@/components/tools/case-converter-tool";
 import { FormattingTool } from "@/components/tools/formatting-tool";
 import { FixSpacingTool } from "@/components/tools/fix-spacing-tool";
-import { TextWrapperTool } from "@/components/tools/text-wrapper-tool";
+import TextWrapperTool from "@/components/tools/text-wrapper-tool";
 import { CodeFormatterTool } from "@/components/tools/code-formatter-tool";
 import { UnicodeConverterTool } from "@/components/tools/unicode-converter-tool";
 import { CharacterFinderTool } from "@/components/tools/character-finder-tool";

@@ -12,56 +12,79 @@ export interface TextStats {
 }
 
 export interface ComputeTextStatsOptions {
-  countSpaces?: boolean; // UI toggle selects which character count to show as primary
+  /**
+   * Optional UI toggle:
+   * If true → tools may display charactersWithSpaces as "primary"
+   * If false → tools may display charactersWithoutSpaces as "primary"
+   */
+  countSpaces?: boolean;
 }
 
 export function computeTextStats(
   text: string,
   options: ComputeTextStatsOptions = {}
 ): TextStats {
-  const normalized = text.replace(/\r\n/g, "\n"); // normalize line endings
+  // Normalize line endings to \n
+  const normalized = text.replace(/\r\n/g, "\n");
 
-  // Character counts
+  // -------------------------------
+  // CHARACTER COUNTS
+  // -------------------------------
   const charactersWithSpaces = normalized.length;
   const charactersWithoutSpaces = normalized.replace(/\s/g, "").length;
 
-  // Words
-  const rawWords = normalized.trim().split(/\s+/).filter(Boolean);
+  // -------------------------------
+  // WORD SPLIT (Improved Unicode handling)
+  // Using a more robust regex than /\s+/
+  // -------------------------------
 
-  const words = rawWords.length;
+  // Match sequences of letters/numbers/apostrophes across languages
+  const wordMatches = normalized.match(/[\p{L}\p{N}']+/gu) || [];
+  const words = wordMatches.length;
 
-  // Sentences (very simplified heuristic, but works well for general English text)
-  const sentences = normalized
-    .split(/[\.\!\?]+/)
-    .map((s) => s.trim())
-    .filter((s) => s.length > 0).length;
+  // -------------------------------
+  // SENTENCE COUNT (More robust)
+  // Handles ellipses, abbreviations, multiple punctuation
+  // -------------------------------
+  const sentenceMatches =
+    normalized.replace(/\s+/g, " ").match(/[^.!?]+[.!?]+(\s|$)/g) || [];
 
-  // Paragraphs: split by ANY number of blank lines
+  const sentences = sentenceMatches.length;
+
+  // -------------------------------
+  // PARAGRAPHS — any 2+ newline-separated blocks
+  // -------------------------------
   const paragraphs = normalized
-    .split(/\n{2,}/) // 2+ consecutive newlines = new paragraph
+    .split(/\n{2,}/)
     .map((p) => p.trim())
     .filter((p) => p.length > 0).length;
 
-  // Line count: even empty lines count as lines
-  const lines = normalized.split("\n").length;
+  // -------------------------------
+  // LINES — even empty lines count
+  // -------------------------------
+  const lines = normalized === "" ? 0 : normalized.split("\n").length;
 
-  // Avg word length
-  const avgWordLength =
-    words > 0 ? rawWords.reduce((sum, w) => sum + w.length, 0) / words : 0;
+  // -------------------------------
+  // AVERAGE WORD LENGTH
+  // -------------------------------
+  const totalCharsInWords = wordMatches.reduce((sum, w) => sum + w.length, 0);
+  const avgWordLength = words > 0 ? totalCharsInWords / words : 0;
 
-  // Longest word
+  // -------------------------------
+  // LONGEST WORD
+  // -------------------------------
   const longestWord =
     words > 0
-      ? rawWords.reduce((longest, w) =>
+      ? wordMatches.reduce((longest, w) =>
           w.length > longest.length ? w : longest
         )
       : null;
 
-  // Time estimates
-  // Avg reading speed: ~230 wpm
-  // Avg speaking speed: ~150 wpm
-  const readingTimeSeconds = Math.round((words / 230) * 60);
-  const speakingTimeSeconds = Math.round((words / 150) * 60);
+  // -------------------------------
+  // TIME ESTIMATES
+  // -------------------------------
+  const readingTimeSeconds = Math.round((words / 230) * 60); // ~230 WPM average reading speed
+  const speakingTimeSeconds = Math.round((words / 150) * 60); // ~150 WPM average speaking speed
 
   return {
     words,

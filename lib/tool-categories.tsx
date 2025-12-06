@@ -120,6 +120,17 @@ export const toolCategories: ToolCategory[] = [
           "snake_case Converter",
           "kebab-case Formatter",
           "Text Formatter and Cleaner",
+          "Uppercase Converter",
+          "Lowercase Converter",
+          "Whitespace Trimmer",
+          "Capitalization Case Converter",
+          "Duplicate Line Remover",
+          "Remove Empty Lines",
+          "dot.case Converter",
+          "path/case Converter",
+          "Toggle Case Converter",
+          "Random Case Converter",
+          "Screaming Snake Case Converter",
         ],
         functions: caseFunctions,
         advancedTips: [
@@ -434,333 +445,324 @@ export const toolCategories: ToolCategory[] = [
       {
         name: "Remove Formatting",
         slug: "remove-formatting",
-        description: "Strip HTML and formatting",
+        description:
+          "Clean any text by removing HTML, Markdown, links, scripts, inline styles, whitespace issues, and hidden formatting to produce ready-to-use plain text.",
         detailedDescription:
-          "The Remove Formatting tool is a specialized online text cleaning utility that strips unwanted HTML tags, inline CSS styles, rich text formatting, and hidden code from copied content, converting it to clean plain text. Essential for content publishers, web developers, bloggers, and anyone copying text from websites, Microsoft Word documents, PDFs, or WYSIWYG editors that embed invisible formatting code. When you copy content from formatted sources, hidden HTML markup, style attributes, font specifications, and special characters often come along, causing formatting conflicts when pasted into content management systems, email clients, or text editors. This tool removes all HTML entities, strips style tags, eliminates font declarations, cleans span elements, removes div containers, and converts formatted text to pure ASCII or Unicode text. Perfect for cleaning WordPress posts, preparing email newsletter content, formatting social media captions, creating plain text documentation, and ensuring consistent styling across platforms. The tool preserves paragraph breaks and basic text structure while removing all visual formatting, making content ready for republishing with your preferred styling. All text processing happens instantly in your browser with complete privacy, requiring no file uploads or account registration.",
+          "The Remove Formatting Tool is a professional-grade text cleaning utility designed to strip away HTML tags, Markdown syntax, inline styles, scripts, tracking attributes, hyperlinks, indentation, zero-width characters, and unnecessary whitespace. Whether your text comes from a website copy, email export, Google Docs, Word, CMS editors, or AI-generated content, this tool transforms messy formatting into clean, readable, plain text instantly. It provides multiple cleaning presets including Soft Clean, Deep Clean, and Ultra Clean, each tailored for different levels of formatting removal. Users can take full manual control with a Custom configuration that enables or disables specific cleanup operations such as entity normalization, link preservation, whitespace normalization, or aggressive special character filtering. The upgraded dual-pane interface offers side-by-side input and output text areas on desktop while automatically adapting to a vertical stack for mobile users. Real-time statistics provide quick insight into word count, character count, sentence count, and paragraph count before and after cleaning. A shared toolbar lets users copy, download, swap, or reset text effortlessly. The tool is built with modern Next.js, Tailwind CSS, and ShadCN UI components for exceptional performance and usability. Whether you are preparing content for SEO, removing unwanted formatting for documentation, pasting content into CMS systems, or sanitizing text for code or AI prompts, the Remove Formatting Tool ensures your output is clean, consistent, and production-ready every time.",
         primaryUseCases: [
-          "Cleaning text copied from Microsoft Word or Google Docs before pasting into WordPress, Medium, or other CMS platforms to avoid formatting conflicts and hidden code",
-          "Removing HTML tags and inline styles from website content when repurposing articles or migrating content between different content management systems",
-          "Stripping formatting from email content copied from Outlook or Gmail to ensure plain text compatibility and prevent rendering issues in email clients",
-          "Converting rich text formatted documents to plain text for use in command-line tools, code editors, or systems that don't support styled text",
-          "Preparing clean text for social media posts by removing unwanted formatting, links, and special characters that may not display correctly on platforms like Twitter or LinkedIn",
+          "Convert HTML-rich content into clean plain text for blogs or SEO",
+          "Remove formatting from emails, documents, or AI-generated responses",
+          "Prepare text for CMS, editors, or code environments",
+          "Sanitize text for web development or database input",
+          "Clean transcription output before editing or publishing",
         ],
         howToUse: [
-          "Copy the formatted text from your source (Word document, website, PDF, or email) using Ctrl+C (Cmd+C on Mac)",
-          "Paste the text into the Remove Formatting tool's input area using Ctrl+V (Cmd+V on Mac) — the tool will accept rich formatted text",
-          "The text will be automatically processed to strip all HTML tags, styles, and formatting codes. The cleaned result will be displayed immediately in the output section",
-          "Review the cleaned plain text output to verify formatting has been removed while preserving content structure",
-          "Copy the cleaned text with one click and paste it into your target application or document with confidence that no hidden formatting will interfere",
-        ],
-        popularTools: [
-          "Strip HTML",
-          "Remove Markdown",
-          "Plain Text",
-          "Clean Links",
-          "Filter Special Characters",
-          "Remove Styles",
-          "Fix Spacing",
+          "Paste or type text into the input textarea",
+          "Choose a preset such as Soft Clean, Deep Clean, or Ultra Clean",
+          "Enable or disable individual cleanup options using the mini-cards",
+          "Review the cleaned output in the right pane",
+          "Copy or download the cleaned text using the toolbar",
         ],
         advancedTips: [
-          "Process text through the tool before pasting into email clients to ensure consistent formatting across different email platforms and prevent layout breaking",
-          "Use the tool as a preprocessing step before running text through other formatters or converters to ensure clean input without interference from hidden markup",
-          "Create a browser bookmark or hotkey to quickly access the formatting remover when frequently copying content from various sources during research or content curation",
-          "Combine with other text tools in sequence: first remove formatting, then apply case conversion or trim whitespace for comprehensive text preparation",
-          "When migrating large amounts of content, paste articles in batches through the tool rather than one by one to streamline the cleaning workflow",
+          "Use Deep Clean for content pasted from Google Docs or email clients, where hidden formatting is common",
+          "Ultra Clean is ideal for removing all structural elements when preparing text for machine processing",
+          "Enable whitespace normalization to flatten unpredictable spacing from PDF extractions",
+          "Use the swap feature to chain multiple cleaning operations without manual copying",
+          "Turn on tracking attribute removal when cleaning HTML exported from CMS systems",
         ],
         troubleshooting: [
           {
-            issue:
-              "Line breaks and paragraph structure are removed along with formatting, creating one large block of text",
+            issue: "Output text contains unexpected symbols",
             solution:
-              "The tool should preserve paragraph breaks by default. If this isn't happening, check if the 'Filter Special Character' option is enabled and disable it. Also, ensure that the source text uses standard line break characters (LF or CRLF). If the issue persists, try pasting the text into a plain text editor first to normalize line endings before using the Remove Formatting tool.",
+              "Enable entity normalization and disable special character filtering to avoid removing unicode characters unintentionally.",
           },
           {
-            issue:
-              "Special characters or accented letters are being removed or converted incorrectly",
+            issue: "Markdown elements are still visible in the cleaned output",
             solution:
-              "The formatting remover preserve all Unicode characters including accents, umlauts, and special symbols. If this isn't happening, check if the 'Filter Special Character' option is enabled and disable it. If characters are still being corrupted, try using a different browser or check if your source text is encoded properly. Ensure your browser is set to use UTF-8 encoding for best compatibility with diverse character sets.",
+              "Activate the Remove Markdown toggle or switch to Deep Clean mode.",
           },
           {
-            issue:
-              "Hyperlinks are completely removed when I need to keep the URL text",
+            issue: "Whitespace remains inconsistent after cleaning",
             solution:
-              "Make sure the 'Clean Link' option is turned off, this will keep the actual URL text. The tool removes HTML anchor tags but preserves the visible link text. If you want to keep the URL itself, ensure you're copying the full link text from the source before pasting it into the tool.",
+              "Turn on whitespace normalization and remove indentation together for best results.",
+          },
+          {
+            issue: "Links are not removed completely",
+            solution:
+              "Enable the Clean Hyperlinks option or use Deep Clean for stricter cleaning rules.",
+          },
+          {
+            issue: "Output area scroll jumps after cleaning",
+            solution:
+              "Scroll preservation is enabled automatically; if issues persist, avoid manual DOM modifications.",
           },
         ],
         detailedExamples: [
-          "A blogger copies an interesting article section from a news website to reference in their own blog post. The copied text includes hidden HTML tags, inline CSS styling, and tracking links. They paste it into the Remove Formatting tool, which strips all the HTML markup and styling code, leaving clean plain text. They can now paste this into their WordPress editor and apply their own blog's consistent styling without formatting conflicts or broken layouts.",
-          "A marketing manager receives a newsletter draft from their designer as a formatted Word document with custom fonts, colors, and embedded images. To prepare it for their email service provider (Mailchimp), which requires clean HTML, they first paste the text content into the Remove Formatting tool to strip Word's proprietary formatting codes. The cleaned text is then pasted into Mailchimp's editor, where they apply the email template's proper styling, ensuring consistent rendering across all email clients.",
-          "A student researching a paper copies content from multiple PDF academic journals that contain complex formatting, headers, footers, and page numbers. Each copy-paste brings unwanted formatting that disrupts their research notes document. They use the Remove Formatting tool to clean each copied section, removing all PDF artifacts and formatting codes, before pasting into their notes. This creates a clean, uniform document where they can focus on content without distraction from inconsistent formatting.",
+          "A content editor pastes HTML-rich blog content exported from WordPress. Soft Clean removes inline styles and tags while preserving readable text, allowing them to paste clean content into a CMS.",
+          "A developer copies error logs from a styled email, full of indentation and unnecessary markup. Deep Clean instantly flattens all formatting, producing clean text ready for debugging.",
+          "A student copies text from a PDF and ends up with broken spacing and invisible characters. Ultra Clean removes zero-width characters, fixes spacing, and normalizes sentences for easy reading.",
+          "A marketing intern receives messy chat transcripts with Markdown bullets and links. The tool removes the formatting and prepares the text for internal documentation.",
         ],
-        link: "https://cleanformatter.com/tools/clean-format/remove-formatting",
         faq: [
           {
-            question: "What is the Remove Formatting tool?",
+            question: "Does this tool remove all HTML tags?",
             answer:
-              "The Remove Formatting tool quickly strips unwanted styles, HTML tags, and extra formatting from your text, leaving only clean and plain content.",
+              "Yes, when Strip HTML is enabled. Deep Clean and Ultra Clean modes remove all tags and inline formatting.",
           },
           {
-            question: "How does the Remove Formatting tool work?",
+            question: "Can I keep links but remove their formatting?",
             answer:
-              "It scans your text for HTML tags, inline styles, and non-text elements, then removes them while keeping the readable content intact. You get a plain text version ready for reuse.",
+              "Yes, disable Clean Hyperlinks to preserve URLs or enable it to keep only the visible text.",
           },
           {
-            question: "Why should I remove formatting from text?",
+            question: "Does the tool support very large text?",
             answer:
-              "Removing formatting helps when pasting text from Word, websites, or PDFs to ensure consistency and prevent broken styles or hidden HTML when publishing online.",
+              "Yes, the engine is optimized for large inputs. Processing may take slightly longer for extremely large pastes.",
           },
           {
-            question: "Can I use this tool to clean HTML code?",
+            question: "Why does my output still show spaces or odd characters?",
             answer:
-              "Yes. The tool removes HTML tags and converts formatted text into plain text, perfect for cleaning copy-pasted website content or WYSIWYG editor output.",
+              "Enable whitespace normalization and zero-width character removal to eliminate hidden formatting from PDFs or copy-pastes.",
           },
           {
-            question: "Is the Remove Formatting tool safe to use?",
+            question: "Can I customize the cleaning process?",
             answer:
-              "Absolutely. All processing happens locally in your browser—your data never leaves your device or gets stored on any server.",
+              "Absolutely. Switch to Custom mode and toggle any individual cleanup operation you prefer.",
           },
           {
-            question: "Does it support batch or large text cleaning?",
+            question: "Is the output textarea editable?",
             answer:
-              "Yes. The tool can process large chunks of text efficiently, though performance may vary based on your browser and system memory.",
+              "No, the output is read-only to preserve the integrity of the cleaned text. Use Swap to move output back to input for additional editing.",
           },
-          {
-            question:
-              "Can I paste the cleaned text directly into my website or document?",
-            answer:
-              "Yes. After removing formatting, you can safely copy and paste the cleaned text into CMS editors, emails, or documents without worrying about hidden code.",
-          },
-          {
-            question: "Will the tool remove images and embedded media?",
-            answer:
-              "Yes. The Remove Formatting tool strips all non-text elements including images, videos, and embedded objects, leaving only the text content. If you need to preserve images, save them separately before cleaning the text.",
-          },
-          {
-            question: "Does it work with text from PDF files?",
-            answer:
-              "Yes. Text copied from PDFs often contains unusual formatting, line breaks, and hidden characters. The Remove Formatting tool effectively cleans PDF text, making it ready for use in other documents or online platforms.",
-          },
-          {
-            question: "Can I undo the formatting removal if needed?",
-            answer:
-              "The Remove Formatting tool permanently removes formatting from the processed text. To preserve your original formatted text, copy it to a safe location before cleaning, or keep your source document open so you can return to it if needed.",
-          },
+        ],
+        link: "https://cleanformatter.com/tools/clean-format/remove-formatting",
+        popularTools: [
+          "HTML Remover",
+          "Strip HTML Tags",
+          "Clean HTML",
+          "Markdown Remover",
+          "Remove Markdown Formatting",
+          "Remove Formatting",
+          "Plain Text Converter",
+          "Text Cleaner",
+          "Special Character Remover",
+          "Zero-Width Character Remover",
+          "Whitespace Normalizer",
+          "Remove Inline Styles",
+          "Hyperlink Text Extractor",
+          "Tracking Attribute Remover",
         ],
       },
       {
         name: "Fix Spacing",
         slug: "fix-spacing",
-        description: "Fix inconsistent spacing and indentation",
+        description:
+          "Clean up messy spacing, tabs, blank lines, punctuation gaps, and PDF spacing issues instantly.",
         detailedDescription:
-          "The Fix Spacing tool is a comprehensive text and code formatting utility designed to automatically correct inconsistent whitespace, irregular indentation, mixed tabs and spaces, and improper line endings in documents and source code. Essential for software developers, technical writers, content editors, and anyone working with structured text or programming code who needs to maintain professional formatting standards. This tool eliminates common spacing issues including extra spaces between words, inconsistent indentation levels in code blocks, mixed tab and space characters, irregular line breaks, trailing whitespace at line ends, and multiple consecutive blank lines. Perfect for cleaning up code before commits, standardizing documentation formatting, preparing text for publication, normalizing configuration files, and ensuring consistent spacing across collaborative projects. The tool supports conversion between tabs and spaces with configurable indentation width, automatic removal of trailing whitespace, normalization of line endings between Unix (LF), Windows (CRLF), and Mac formats, and intelligent handling of code blocks in multiple programming languages. All processing happens client-side in your browser, ensuring your code and sensitive text remains completely private without server transmission or storage.",
+          "The Fix Spacing Tool is designed to intelligently repair every common spacing issue that appears in real-world text. Whether your content comes from PDFs, websites, emails, OCR scans, AI-generated text, or messy copy-paste sources, this tool restores perfect readability with a single click. It removes unnecessary spaces, normalizes line breaks, collapses blank lines, fixes punctuation gaps, removes indentation, converts tabs to spaces, corrects bracket spacing, and even repairs broken PDF text artifacts such as character-level spacing and fragmented lines. Advanced options allow you to control sentence spacing rules, preserve or remove indentation, fix unicode whitespace, and protect code-like blocks to avoid breaking programming syntax. Built on a high-performance spacing engine optimized for large text, it processes thousands of lines instantly without lag. The tool is ideal for writers, developers, students, editors, marketers, and anyone who works with unstructured text on a daily basis.",
         primaryUseCases: [
-          "Standardizing code indentation across team projects by converting tabs to spaces (or vice versa) and ensuring consistent indentation levels throughout source files",
-          "Cleaning up text copied from PDFs or web pages that contains irregular spacing, extra blank lines, and inconsistent paragraph breaks",
-          "Preparing code for version control commits by removing trailing whitespace and normalizing line endings to prevent unnecessary diff conflicts",
-          "Fixing formatting in configuration files (JSON, YAML, XML) where inconsistent indentation can cause parsing errors or reduce readability",
-          "Normalizing whitespace in documentation, markdown files, and technical specifications to ensure professional presentation and consistent formatting standards",
+          "Clean spacing in text copied from PDFs or scanned documents",
+          "Fix irregular spacing in website or email content",
+          "Repair messy whitespace in AI-generated drafts",
+          "Normalize text before publishing, editing, or formatting",
+          "Remove indentation, tabs, and extra blank lines from large documents",
         ],
         howToUse: [
-          "Paste or type your text or code containing spacing issues into the Fix Spacing tool's input text area",
-          "Select your desired spacing options such as 'Remove Extra Spaces', 'Convert Tabs to Spaces', 'Normalize Indentation', or 'Fix Line Endings'",
-          "Review the formatted output with properly aligned indentation and consistent spacing, then copy or download the corrected text for use in your projects",
+          "Paste your messy text into the input box.",
+          "Choose a preset: Soft Fix, Strong Fix, or Ultra Fix.",
+          "Adjust advanced spacing options if needed.",
+          "View the cleaned output instantly in the output box.",
+          "Copy or download the cleaned text.",
         ],
         popularTools: [
-          "Remove Extra Whitespace",
-          "Convert Tabs to Spaces",
-          "Normalize Punctuation",
-          "Normalize Line Endings",
-          "Remove Empty Lines",
-          "Trim Lines",
+          "spacing normalizer",
+          "extra spaces remover",
+          "line break cleaner",
+          "pdf spacing fixer",
+          "unicode space remover",
+          "text spacing corrector",
+          "tab to spaces converter",
+          "double space remover",
         ],
         advancedTips: [
-          "Configure your code editor to match the Fix Spacing tool's settings (tab width, space indentation) to maintain consistency when making future edits to formatted files",
-          "Use the tool as part of your pre-commit workflow by running all code through it before pushing changes to version control, preventing whitespace-related merge conflicts",
-          "Combine Fix Spacing with syntax validators for your programming language to ensure both formatting and code correctness before deployment",
-          "For large codebases, process files individually or in small batches rather than the entire project at once to avoid browser performance issues with very large text inputs",
+          "Enable PDF Spacing Fixer to repair broken words, T e x t spacing, and hyphenated lines.",
+          "Use sentence spacing mode to force professional single or double sentence spacing.",
+          "Turn on Unicode space normalization when working with content copied from websites and documents.",
+          "Preserve code-like blocks to prevent breaking programming syntax and markdown code fences.",
+          "Combine indentation removal with blank line cleanup for perfectly flattened text.",
         ],
         troubleshooting: [
           {
-            issue:
-              "Code functionality breaks after fixing spacing, especially in Python or YAML files",
+            issue: "Output text still contains weird spacing",
             solution:
-              "Some languages like Python and YAML are whitespace-sensitive where indentation affects code execution. If your code breaks after spacing fixes, verify that the tool preserved indentation hierarchy correctly. Check that nested blocks maintain proper relative indentation levels and that mixed tabs/spaces weren't partially converted. For YAML, ensure consistent indentation (usually 2 spaces) throughout. You may need to manually verify critical sections after automated formatting.",
+              "Enable Unicode space normalization and PDF spacing fixer, as these handle invisible characters and PDF artifacts.",
+          },
+          {
+            issue: "Tool removes indentation from code",
+            solution:
+              "Turn on Preserve Code-Like Blocks to protect code formatting.",
+          },
+          {
+            issue: "Tabs are not converting correctly",
+            solution:
+              "Ensure Convert Tabs To Spaces is enabled and Tab Size is set to the desired number.",
+          },
+          {
+            issue: "Blank lines are not being removed",
+            solution:
+              "Enable Remove Extra Blank Lines under Line Cleanup settings.",
+          },
+          {
+            issue: "Sentence spacing looks incorrect",
+            solution:
+              "Check Sentence Spacing Mode and select either Single, Double, or Preserve depending on your formatting style.",
           },
         ],
         detailedExamples: [
-          "A development team receives code contributions from multiple developers who use different editors with varying tab/space preferences. One developer uses 4-space indentation, another uses tabs, and a third uses 2-space indentation. The code maintainer pastes the contributed code into the Fix Spacing tool, selects 'Convert Tabs to Spaces' with 2-space indentation (matching their project standard), and clicks fix. The tool standardizes all indentation to 2 spaces, removes trailing whitespace, and normalizes line endings to LF, making the code ready for merging into the main branch without formatting conflicts.",
-          "A technical writer copies documentation from an old PDF specification that contains irregular spacing—some sections have double spaces after periods, inconsistent indentation in code examples, and extra blank lines between paragraphs. They paste the entire document into the Fix Spacing tool, enable 'Remove Extra Whitespace' and 'Normalize Punctuation' options. The tool removes double spaces, standardizes paragraph spacing, and cleans up the code example indentation, resulting in professionally formatted documentation ready for publishing on their company's website.",
-          "A DevOps engineer works with YAML configuration files for Kubernetes deployments. After manually editing several files, they notice inconsistent indentation—some sections use 2 spaces, others have tabs, and there's trailing whitespace causing YAML parsing warnings. They use the Fix Spacing tool to normalize all YAML files: converting tabs to 2 spaces, removing trailing whitespace, and ensuring consistent indentation depth. After fixing, the YAML files parse correctly without warnings and deploy successfully to the cluster.",
+          'You receive a contract extracted from a PDF and the text looks like: "T h i s   i s   a   c o n t r a c t". Running it through the Fix Spacing Tool instantly converts it to: "This is a contract" with clean spacing and no artifacts.',
+          "You paste content from a website and it contains random blank lines and indentation. After using Strong Fix mode, the extra blank lines collapse and indentation is removed, giving you a clean block of text ready for editing.",
+          'An email copied from Outlook comes with broken line breaks like "Hello\\nworld this\\nlooks bad". Ultra Fix mode repairs these mid-sentence line breaks and normalizes the entire document.',
+          "You paste AI-generated text that contains inconsistent spacing after punctuation. The punctuation spacing fixer applies uniform spacing rules and improves readability instantly.",
+          "You are editing documentation and want clean sentence spacing. Switching Sentence Spacing Mode to Double ensures every sentence ends with two spaces, following traditional typesetting rules.",
         ],
-        link: "https://cleanformatter.com/tools/clean-format/fix-spacing",
         faq: [
           {
-            question: "What is the Fix Spacing tool?",
+            question: "Does this tool remove all blank lines?",
             answer:
-              "The Fix Spacing tool automatically corrects inconsistent spaces, indentation, and tabs in your text or code, making it clean and properly formatted. It works seamlessly with popular formatting utilities like Fix Whitespace, Fix Indentation, and Remove Tabs.",
+              "No. It only collapses multiple blank lines into a single blank line unless you completely disable that option.",
           },
           {
-            question: "How does the Fix Spacing tool work?",
+            question: "Will it break my code formatting?",
             answer:
-              "It scans your text or code for irregular spacing, tabs, and indentation, then adjusts them uniformly according to standard formatting rules. This ensures consistent, readable text and code.",
+              "No, as long as Preserve Code-Like Blocks is enabled. This protects indentation and code-like patterns.",
           },
           {
-            question: "Who can benefit from using the Fix Spacing tool?",
+            question: "Can it fix text extracted from PDFs?",
             answer:
-              "Developers, writers, content editors, and anyone working with structured text or code can use it to save time and ensure proper spacing and indentation. It complements related tools like Fix Whitespace and Remove Tabs for enhanced formatting control.",
+              "Yes. The PDF spacing fixer repairs spaced-out words, accidental line breaks, and hyphenated lines.",
           },
           {
-            question:
-              "Does the Fix Spacing tool fix tabs and extra spaces automatically?",
+            question: "Does it support very large text files?",
             answer:
-              "Yes. It removes extra spaces, aligns indentation, and can convert tabs to spaces or vice versa. Popular tools like Fix Indentation and Fix Whitespace handle similar tasks to provide full formatting control.",
+              "Absolutely. The engine was designed for high performance and can clean large documents without lag.",
           },
           {
-            question: "Can I use this tool for code formatting?",
+            question: "Does it change punctuation or meaning?",
             answer:
-              "Absolutely. Fix Spacing works with programming code, scripts, and markup to ensure proper indentation and spacing without affecting code functionality.",
+              "Only if the corresponding options are enabled. The tool focuses on spacing, not rewriting content.",
           },
           {
-            question: "Is my data safe when using Fix Spacing?",
+            question: "Can I customize spacing rules?",
             answer:
-              "Yes. All processing happens locally in your browser, and your text or code is never sent to any server, ensuring full privacy.",
-          },
-          {
-            question: "Is the Fix Spacing tool free to use?",
-            answer:
-              "Yes, it's completely free and requires no login, signup, or download.",
-          },
-          {
-            question: "Does it support large text or code formatting?",
-            answer:
-              "Yes. You can format large text blocks or entire code snippets efficiently, though performance may vary depending on your device and browser.",
-          },
-          {
-            question:
-              "Can I copy or download the formatted text after using the tool?",
-            answer:
-              "Yes. After processing, you can easily copy or download the cleaned text for further use.",
-          },
-          {
-            question: "What are the related or popular tools?",
-            answer:
-              "Popular tools included with Fix Spacing are Fix Whitespace, Fix Indentation, and Remove Tabs, which provide additional text and code formatting utilities.",
-          },
-          {
-            question:
-              "Can the Fix Spacing tool handle different programming languages?",
-            answer:
-              "Yes. The tool works with all text-based programming languages including JavaScript, Python, Java, C++, HTML, CSS, and more. It applies consistent spacing rules that work across different syntax styles.",
-          },
-          {
-            question: "What's the difference between tabs and spaces?",
-            answer:
-              "Tabs are single characters that editors render as indentation (width varies by editor settings), while spaces are fixed-width characters. Many coding standards prefer spaces (typically 2 or 4) for consistency across different editors and platforms. The Fix Spacing tool can convert between them based on your preference.",
+              "Yes. You can adjust sentence spacing, indentation, line cleanup, and individual spacing toggles in Custom mode.",
           },
         ],
+        link: "https://cleanformatter.com/tools/clean-format/fix-spacing",
       },
       {
         name: "Text Wrapper",
         slug: "text-wrapper",
-        description: "Wrap text to specific width",
+        description:
+          "Wrap text cleanly using word, character, smart, or code wrapping modes with optional unwrapping and indentation controls.",
         detailedDescription:
-          "The Text Wrapper tool is a specialized text formatting utility that automatically adjusts line length by wrapping text to a specified width, ensuring content fits within designated boundaries for improved readability and professional presentation. Essential for developers formatting code comments, technical writers preparing documentation with fixed-width constraints, email composers ensuring compatibility across clients, and content creators optimizing text for various display formats. This tool intelligently breaks lines at word boundaries (word wrap), character positions (hard wrap), or using smart algorithms that balance line lengths for aesthetic appeal. Perfect for formatting plain text emails, creating ASCII art, preparing code documentation, formatting terminal output, ensuring text compatibility with fixed-width displays, and optimizing content for command-line interfaces. The tool supports multiple wrapping modes including word wrap (breaks at word boundaries), character wrap (breaks at exact character position), smart wrap (optimizes for balanced line lengths), and code wrap (respects indentation). Common use cases include formatting Git commit messages to 72 characters, wrapping email text to 78 characters for client compatibility, creating readable README files, and preparing text for legacy systems with width limitations. All text wrapping happens instantly in your browser with complete privacy.",
+          "The Text Wrapper Tool automatically formats long text into clean, readable lines using multiple wrapping strategies such as word wrap, character wrap, smart wrap, and code wrap. It is designed to handle messy input text including email-quoted text, PDF-extracted lines, text with inconsistent line breaks, indentation issues, or paragraphs broken into multiple lines. The tool offers optional unwrapping, width presets, indentation preservation, hyphenation controls, and long-word safety handling. With its fully modular engine and CleanFormatter UI design, users can wrap large text documents while preserving readability and structure. The tool is ideal for writers, developers, content creators, and technical professionals who need predictable line width control or platform-friendly formatting for Markdown, email clients, publishing systems, documentation platforms, and code editors.",
         primaryUseCases: [
-          "Formatting Git commit messages and code comments to standard line length limits (typically 72-80 characters) for better readability in version control tools",
-          "Wrapping plain text email content to 78 characters per line to ensure proper display across different email clients and prevent horizontal scrolling",
-          "Creating properly formatted README files and documentation with consistent line lengths for better readability on GitHub and code repositories",
-          "Preparing text for display in command-line interfaces, terminal applications, and fixed-width console outputs where line length is constrained",
-          "Formatting long strings and text content in programming code to meet linting rules and coding standards that enforce maximum line length",
+          "Reformatting long text for email clients using fixed-width formatting",
+          "Preparing Markdown content with consistent line widths",
+          "Cleaning and rewrapping text extracted from PDFs or OCR",
+          "Developers formatting code comments or documentation blocks",
+          "Writers preparing readable paragraphs for blogs or publishing platforms",
         ],
         howToUse: [
-          "Paste or type your text content into the Text Wrapper tool's input text area, regardless of current line lengths or formatting",
-          "Specify your desired line width in characters (common values are 72, 78, or 80 characters) using the width input field or slider",
-          "Select your preferred wrapping mode: word wrap (breaks at spaces), character wrap (breaks at exact position), or smart wrap (balanced lines)",
-          "Copy the wrapped text output and paste it into your target application, document, or code editor where width constraints apply",
+          "Paste your text into the input box on the left.",
+          "Select a wrapping mode such as Word, Character, Smart, or Code.",
+          "Adjust the width slider or tap a width preset like Email 72 or Markdown 80.",
+          "Enable options like Unwrap First or Preserve Indentation if needed.",
+          "Copy or download the wrapped text using the toolbar buttons.",
         ],
         popularTools: [
-          "Word Wrap",
-          "Character Wrap",
-          "Smart Wrap",
-          "Code Wrap",
+          "text formatter",
+          "text wrapper online",
+          "word wrap tool",
+          "character wrap converter",
+          "line length formatter",
+          "markdown wrap utility",
         ],
         advancedTips: [
-          "Use word wrap mode for natural language text to maintain readability and prevent breaking words mid-syllable, especially important for emails and documentation",
-          "Enable smart wrap for paragraphs where you want balanced line lengths rather than filling each line to maximum width, creating more aesthetically pleasing text blocks",
-          "For code comments, use wrap settings that account for indentation by subtracting indent width from total line length (e.g., 72 characters minus 4-space indent = 68 character wrap)",
-          "When wrapping text for emails, use 78 characters as the standard to ensure compatibility with the widest range of email clients without triggering horizontal scrollbars",
-          "Combine text wrapping with other formatting tools in sequence: first fix spacing and remove formatting, then apply wrapping for comprehensive text preparation",
+          "Use Smart Wrap for the most natural paragraph flow when writing long-form text.",
+          "Enable Unwrap First when dealing with email chains, PDF text, or copied text with irregular hard breaks.",
+          "Use Code Wrap mode when formatting code comments or documentation blocks to retain indentation.",
+          "Force Break Long Words is ideal when dealing with unbroken URLs, tokens, or identifiers longer than your wrap width.",
+          "Use Preserve Lines if you want to wrap only within individual lines while keeping manual paragraph breaks intact.",
         ],
         troubleshooting: [
           {
-            issue:
-              "Wrapped text appears correct in the tool but displays incorrectly when pasted into email or documents",
+            issue: "Wrapped text looks uneven or jagged.",
             solution:
-              "The target application may be using proportional fonts (where characters have varying widths) while the wrapper assumes monospace fonts (fixed character widths). Ensure both the wrapper tool and your target application use the same font type. For emails, some clients automatically re-flow text, overriding manual wrapping. In such cases, use HTML email formatting instead of plain text wrapping.",
+              "Try switching to Smart Wrap or increase the width for smoother distribution.",
           },
           {
-            issue:
-              "Indented text or code loses indentation structure after wrapping",
+            issue: "Text appears merged together after wrapping.",
             solution:
-              "Standard text wrappers may not preserve indentation in subsequent wrapped lines. Use Code Formatter tool to fix the indentation issue. This tool will maintain indent levels on continuation lines.",
+              "Disable Unwrap First or enable Preserve Lines to maintain the original spacing.",
+          },
+          {
+            issue: "Very long URLs are overflowing beyond the wrap width.",
+            solution:
+              "Enable Force Break Long Words so the engine can break long tokens safely.",
+          },
+          {
+            issue: "Code indentation is being lost.",
+            solution:
+              "Enable Preserve Indentation or switch to Code Wrap mode for indentation-aware formatting.",
+          },
+          {
+            issue: "Output looks too narrow or too wide.",
+            solution:
+              "Adjust the width slider or pick a preset such as Email 72 or Markdown 80 for better balance.",
           },
         ],
         detailedExamples: [
-          "A developer writes a detailed Git commit message explaining a complex code change. The message is several paragraphs long with no line breaks, making it difficult to read in Git logs and GitHub interfaces. They paste the message into the Text Wrapper tool, set the width to 72 characters (Git standard), select word wrap mode, and click wrap. The tool intelligently breaks the commit message into multiple lines at word boundaries, creating a properly formatted commit message that displays beautifully in all Git interfaces without requiring horizontal scrolling.",
-          "A technical writer prepares a plain text README file for an open-source project. The documentation includes long paragraphs explaining installation procedures and usage examples. To ensure the README displays correctly on GitHub and in terminal viewers, they paste the content into the Text Wrapper, set it to 80 characters width with smart wrap enabled. The tool creates balanced line lengths that look professional and are easily readable in both GitHub's web interface and command-line text viewers like 'less' or 'cat'.",
-          "An email marketer composes a plain text newsletter for subscribers who prefer non-HTML emails. The draft contains long paragraphs that would display poorly in some email clients, potentially with horizontal scrolling. They use the Text Wrapper set to 78 characters with word wrap to format the entire newsletter. The wrapped text ensures compatibility with older email clients like Outlook and webmail interfaces, providing a consistent reading experience regardless of the subscriber's email software or screen width.",
+          "A writer preparing a long blog post pastes raw text with inconsistent line breaks and applies Smart Wrap at 80 columns, resulting in perfectly even paragraphs ready for Markdown export.",
+          "A developer documents an API and uses Code Wrap with a 100-column width to maintain indentation and readability across all comment blocks.",
+          "A student pastes text copied from a PDF, enables Unwrap First, then applies Word Wrap at 72 columns to make the material more readable for study notes.",
+          "A content creator formats an email newsletter by selecting Email 72 and Smart Wrap, ensuring consistent wrapping across all email clients.",
+          "A researcher extracts text from a scientific article, removes broken lines using Unwrap First, then wraps at 80 columns for better citation formatting.",
         ],
-        link: "https://cleanformatter.com/tools/clean-format/text-wrapper",
         faq: [
           {
-            question: "What is the Text Wrapper tool?",
-            answer:
-              "The Text Wrapper tool helps you wrap text to a specific width, ensuring your content fits neatly within designated boundaries for better readability.",
-          },
-          {
             question:
-              "What popular features are included in the Text Wrapper tool?",
+              "What is the difference between Smart Wrap and Word Wrap?",
             answer:
-              "The Text Wrapper tool includes popular options such as Word Wrap, Character Wrap, and Smart Wrap to give you flexible control over how your text is formatted.",
+              "Smart Wrap analyzes punctuation and spacing to create more natural line breaks, while Word Wrap simply breaks at the nearest word boundary.",
           },
           {
-            question: "How does the Text Wrapper tool work?",
+            question: "When should I use Unwrap First?",
             answer:
-              "It automatically adjusts the placement of words or characters by wrapping text lines to fit within the specified width, preventing overflow and improving layout.",
+              "Use it when text comes from PDFs, emails, OCR, or any source that has unnatural or inconsistent hard line breaks.",
           },
           {
-            question: "Why should I use the Text Wrapper tool?",
+            question: "Does this tool modify paragraph spacing?",
             answer:
-              "Using Text Wrapper improves the presentation and readability of your content by preventing horizontal scrolling and ensuring text stays within viewable areas.",
+              "No, paragraph breaks are preserved exactly unless you enable options that explicitly modify them.",
           },
           {
-            question: "Can the Text Wrapper tool handle different wrap styles?",
+            question: "Can this tool format code?",
             answer:
-              "Yes, the tool supports various wrapping styles including wrapping by words, characters, or smart algorithms that balance line lengths for better aesthetics.",
+              "Yes, Code Wrap mode preserves indentation and avoids breaking inside common code tokens where possible.",
           },
           {
-            question: "Is the Text Wrapper tool free to use?",
+            question: "Why do long URLs break the layout?",
             answer:
-              "Yes, the Text Wrapper tool is free and accessible online with no subscription required.",
+              "Many URLs exceed the chosen wrap width; enable Force Break Long Words to split them safely.",
           },
           {
-            question:
-              "What is the recommended line width for different use cases?",
+            question: "Is the wrapping deterministic?",
             answer:
-              "Common standards include 72-80 characters for code comments and Git commits, 78 characters for email compatibility, 100-120 characters for modern documentation, and 60-65 characters for optimal reading comfort in plain text.",
-          },
-          {
-            question:
-              "Does text wrapping affect the actual content or just display?",
-            answer:
-              "Text wrapping inserts actual line break characters into your text at the specified width. The wrapped text becomes the permanent format unless you unwrap or reformat it again. This differs from soft wrapping in text editors which only affects visual display.",
-          },
-          {
-            question: "Can I unwrap text that has already been wrapped?",
-            answer:
-              "While the Text Wrapper tool focuses on wrapping, you can unwrap text by removing line breaks and creating one continuous line, then re-wrapping to a different width if needed. Some advanced text tools offer dedicated unwrap functions for this purpose.",
+              "Yes, the engine follows strict, predictable rules and produces identical output for identical input and settings.",
           },
         ],
+        link: "https://cleanformatter.com/tools/clean-format/text-wrapper",
       },
     ],
   },

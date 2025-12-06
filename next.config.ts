@@ -31,6 +31,16 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.cleanformatter.com" }],
+        destination: "https://cleanformatter.com/:path*",
+        permanent: true,
+      },
+    ];
+  },
   // any additional Next.js config you want
 };
 

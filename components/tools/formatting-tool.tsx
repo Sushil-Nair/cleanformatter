@@ -3,319 +3,220 @@
 import * as React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
-import { Switch } from "@/components/ui/switch";
-import { Label } from "@/components/ui/label";
-import { AboutSection } from "@/components/tools/about-section";
-import { useToast } from "@/hooks/use-toast";
-import { TextStatsDisplay } from "@/components/tools/text-stats";
-import { TextStats } from "@/types/tools";
-import { Copy, Download, RotateCcw } from "lucide-react";
-import {
-  cleanHTML,
-  removeMarkdown,
-  convertToPlainText,
-  removeInlineStyles,
-  removeHyperlinks,
-  removeIndentation,
-  filterSpecialCharacters,
-} from "@/lib/utils/formatting";
-// import AdUnit from "../ad-unit";
 
-interface FormatOptions {
-  stripHtml: boolean;
-  removeMarkdown: boolean;
-  plainText: boolean;
-  inlineStyles: boolean;
-  hyperlinks: boolean;
-  indentation: boolean;
-  specialChars: boolean;
-}
+import { useRemoveFormattingTool } from "@/hooks/use-remove-formatting-tool";
+import { PresetSelector } from "@/components/tools/remove-formatting/preset-selector";
+import { RemoveFormattingOptionsPanel } from "@/components/tools/remove-formatting/options-panel";
+import { CleaningSummary } from "@/components/tools/remove-formatting/cleaning-summary";
+import { FormattingToolbar } from "@/components/tools/remove-formatting/formatting-toolbar";
+import { TextStats } from "@/lib/utils/computeTextStats";
 
 export function FormattingTool() {
-  const [inputText, setInputText] = React.useState("");
-  const [outputText, setOutputText] = React.useState("");
-  const [formatOptions, setFormatOptions] = React.useState<FormatOptions>({
-    stripHtml: false,
-    removeMarkdown: false,
-    plainText: false,
-    inlineStyles: false,
-    hyperlinks: false,
-    indentation: false,
-    specialChars: false,
-  });
-  const [textStatsInput, setTextStatsInput] = React.useState<TextStats>({
-    words: 0,
-    sentences: 0,
-    characters: 0,
-    paragraphs: 0,
-  });
-  const [textStatsOutput, setTextStatsOutput] = React.useState<TextStats>({
-    words: 0,
-    sentences: 0,
-    characters: 0,
-    paragraphs: 0,
-  });
-  const { toast } = useToast();
+  const {
+    inputText,
+    outputText,
+    inputStats,
+    outputStats,
+    options,
+    mode,
+    cleaningResult,
+    isProcessing,
+    setInputText,
+    setMode,
+    updateOption,
+    resetAll,
+    swapInputOutput,
+  } = useRemoveFormattingTool();
 
-  const calculateStats = (text: string): TextStats => {
-    const words = text.trim().split(/\s+/).filter(Boolean).length;
-    const sentences = text.split(/[.!?]+/).filter(Boolean).length;
-    const characters = text.length;
-    const paragraphs = text.split(/\n\s*\n/).filter(Boolean).length;
+  // Preserve scroll position of output textarea when text changes
+  const outputRef = React.useRef<HTMLTextAreaElement | null>(null);
+  const outputScrollTopRef = React.useRef(0);
 
-    return {
-      words,
-      sentences,
-      characters,
-      paragraphs,
-    };
+  const handleOutputScroll = (e: React.UIEvent<HTMLTextAreaElement>) => {
+    outputScrollTopRef.current = e.currentTarget.scrollTop;
   };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const newText = e.target.value;
-    setInputText(newText);
-    setTextStatsInput(calculateStats(newText));
-    processText(newText, formatOptions);
-  };
-
-  const processText = React.useCallback(
-    (text: string, options: FormatOptions) => {
-      let processedText = text;
-
-      if (options.stripHtml) {
-        processedText = cleanHTML(processedText);
-      }
-      if (options.removeMarkdown) {
-        processedText = removeMarkdown(processedText);
-      }
-      if (options.inlineStyles) {
-        processedText = removeInlineStyles(processedText);
-      }
-      if (options.hyperlinks) {
-        processedText = removeHyperlinks(processedText);
-      }
-      if (options.indentation) {
-        processedText = removeIndentation(processedText);
-      }
-      if (options.specialChars) {
-        processedText = filterSpecialCharacters(processedText);
-      }
-      if (options.plainText) {
-        processedText = convertToPlainText(processedText);
-      }
-
-      setOutputText(processedText);
-      setTextStatsOutput(calculateStats(processedText));
-    },
-    []
-  );
 
   React.useEffect(() => {
-    processText(inputText, formatOptions);
-  }, [inputText, formatOptions, processText]);
+    const el = outputRef.current;
+    if (!el) return;
 
-  const handleOptionChange = (option: keyof FormatOptions) => {
-    setFormatOptions((prev) => {
-      const newOptions = { ...prev, [option]: !prev[option] };
-      processText(inputText, newOptions);
-      return newOptions;
+    // Restore scroll after React paints new content
+    requestAnimationFrame(() => {
+      el.scrollTop = outputScrollTopRef.current;
     });
-  };
-
-  const handleCopy = async () => {
-    if (!outputText) return;
-
-    try {
-      await navigator.clipboard.writeText(outputText);
-      toast({
-        title: "Copied to clipboard",
-        description: "Text has been copied to your clipboard",
-        duration: 2000,
-      });
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (error) {
-      toast({
-        title: "Failed to copy",
-        description: "Please try again or copy manually",
-        variant: "destructive",
-        duration: 3000,
-      });
-    }
-  };
-
-  const handleDownload = () => {
-    if (!outputText) return;
-
-    const blob = new Blob([outputText], { type: "text/plain" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "cleaned-text.txt";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-
-    toast({
-      title: "Downloaded successfully",
-      description: "Your text has been downloaded",
-      duration: 2000,
-    });
-  };
-
-  const handleReset = () => {
-    setInputText("");
-    setOutputText("");
-    setFormatOptions({
-      stripHtml: false,
-      removeMarkdown: false,
-      plainText: false,
-      inlineStyles: false,
-      hyperlinks: false,
-      indentation: false,
-      specialChars: false,
-    });
-    setTextStatsInput({
-      words: 0,
-      sentences: 0,
-      characters: 0,
-      paragraphs: 0,
-    });
-    setTextStatsOutput({
-      words: 0,
-      sentences: 0,
-      characters: 0,
-      paragraphs: 0,
-    });
-  };
+  }, [outputText]);
 
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="space-y-4">
+        {/* Header */}
         <div>
           <h1 className="font-bold tracking-tight">Remove Formatting</h1>
           <p className="text-muted-foreground mt-2">
-            Clean and format text by removing unwanted formatting elements.
+            Strip HTML, Markdown, links, and hidden formatting to get clean,
+            ready-to-use text.
           </p>
-          {/* <AdUnit slot="9721370550" format="horizontal" /> */}
         </div>
 
         <Card>
-          <CardContent className="p-6">
-            <div
-              id="toolArea"
-              className="grid grid-cols-1 lg:grid-cols-5 gap-6"
-            >
-              <div className="lg:col-span-2 space-y-4">
+          <CardContent className="p-6 space-y-6">
+            {/* MAIN WORK AREA */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* INPUT COLUMN */}
+              <div className="flex flex-col">
+                <p className="text-xs font-semibold text-muted-foreground mb-1">
+                  Input
+                </p>
                 <Textarea
-                  placeholder="Enter text here..."
+                  placeholder="Paste your formatted text here..."
                   value={inputText}
-                  onChange={handleInputChange}
+                  onChange={(e) => setInputText(e.target.value)}
                   className="min-h-[400px] font-mono"
                 />
-                <TextStatsDisplay stats={textStatsInput} />
+                <CompactStatsRow stats={inputStats} />
               </div>
 
-              <div className="lg:col-span-3 space-y-4">
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="flex items-center space-x-2">
-                    <Switch
-                      id="strip-html"
-                      checked={formatOptions.stripHtml}
-                      onCheckedChange={() => handleOptionChange("stripHtml")}
-                    />
-                    <Label htmlFor="strip-html">Strip HTML</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Switch
-                      id="remove-markdown"
-                      checked={formatOptions.removeMarkdown}
-                      onCheckedChange={() =>
-                        handleOptionChange("removeMarkdown")
-                      }
-                    />
-                    <Label htmlFor="remove-markdown">Remove Markdown</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Switch
-                      id="plain-text"
-                      checked={formatOptions.plainText}
-                      onCheckedChange={() => handleOptionChange("plainText")}
-                    />
-                    <Label htmlFor="plain-text">Plain Text</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Switch
-                      id="inline-styles"
-                      checked={formatOptions.inlineStyles}
-                      onCheckedChange={() => handleOptionChange("inlineStyles")}
-                    />
-                    <Label htmlFor="inline-styles">Remove Styles</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Switch
-                      id="hyperlinks"
-                      checked={formatOptions.hyperlinks}
-                      onCheckedChange={() => handleOptionChange("hyperlinks")}
-                    />
-                    <Label htmlFor="hyperlinks">Clean Links</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Switch
-                      id="indentation"
-                      checked={formatOptions.indentation}
-                      onCheckedChange={() => handleOptionChange("indentation")}
-                    />
-                    <Label htmlFor="indentation">Fix Spacing</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Switch
-                      id="special-chars"
-                      checked={formatOptions.specialChars}
-                      onCheckedChange={() => handleOptionChange("specialChars")}
-                    />
-                    <Label htmlFor="special-chars">Filter Special Chars</Label>
-                  </div>
-                </div>
-
-                <div className="flex justify-between">
-                  <div className="flex gap-2">
-                    <Button
-                      variant="outline"
-                      size="icon"
-                      onClick={handleCopy}
-                      disabled={!outputText}
-                    >
-                      <Copy className="h-4 w-4" />
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="icon"
-                      onClick={handleDownload}
-                      disabled={!outputText}
-                    >
-                      <Download className="h-4 w-4" />
-                    </Button>
-                  </div>
-                  <Button variant="outline" onClick={handleReset}>
-                    <RotateCcw className="h-4 w-4 mr-2" />
-                    Reset
-                  </Button>
-                </div>
-
+              {/* OUTPUT COLUMN */}
+              <div className="flex flex-col">
+                <p className="text-xs font-semibold text-muted-foreground mb-1">
+                  Output
+                </p>
                 <Textarea
+                  ref={outputRef}
                   readOnly
+                  onScroll={handleOutputScroll}
                   value={outputText}
                   className="min-h-[400px] font-mono bg-secondary/20"
-                  placeholder="Output will appear here..."
+                  placeholder={
+                    isProcessing
+                      ? "Cleaning your text..."
+                      : "Cleaned text will appear here..."
+                  }
                 />
-                <TextStatsDisplay stats={textStatsOutput} />
+                <CompactStatsRow stats={outputStats} />
               </div>
+            </div>
+
+            {/* TOOLBAR - below output, right aligned on desktop, 2x2 grid on mobile */}
+            <div className="flex justify-end">
+              <div className="w-full sm:w-auto">
+                <ToolbarResponsiveWrapper
+                  outputText={outputText}
+                  onReset={resetAll}
+                  onSwap={swapInputOutput}
+                />
+              </div>
+            </div>
+
+            {/* OPTIONS PANEL - horizontal mini-cards on desktop, stacked on mobile */}
+            <div className="space-y-4">
+              <div className="flex flex-col lg:flex-row gap-4">
+                {/* Presets card */}
+                <MiniCard title="Presets">
+                  <PresetSelector mode={mode} onChange={setMode} />
+                </MiniCard>
+
+                {/* HTML Cleaning card */}
+                <MiniCard title="HTML Cleaning">
+                  <RemoveFormattingOptionsPanel
+                    options={options}
+                    onOptionChange={updateOption}
+                  />
+                </MiniCard>
+              </div>
+
+              {/* Cleaning summary under options */}
+              <CleaningSummary result={cleaningResult} />
             </div>
           </CardContent>
         </Card>
       </div>
+    </div>
+  );
+}
+
+/**
+ * Compact stats row showing only:
+ * - Words
+ * - Characters (with spaces)
+ * - Sentences
+ * - Paragraphs
+ */
+function CompactStatsRow({ stats }: { stats: TextStats }) {
+  return (
+    <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted-foreground">
+      <span>
+        Words: <span className="font-mono">{stats.words}</span>
+      </span>
+      <span>
+        Characters:{" "}
+        <span className="font-mono">{stats.charactersWithSpaces}</span>
+      </span>
+      <span>
+        Sentences: <span className="font-mono">{stats.sentences}</span>
+      </span>
+      <span>
+        Paragraphs: <span className="font-mono">{stats.paragraphs}</span>
+      </span>
+    </div>
+  );
+}
+
+/**
+ * Wrapper that makes the toolbar:
+ * - 2x2 grid on small screens
+ * - Right-aligned row on desktop
+ */
+function ToolbarResponsiveWrapper(props: {
+  outputText: string;
+  onReset: () => void;
+  onSwap: () => void;
+}) {
+  // We'll reuse your existing FormattingToolbar but control layout around it
+  // The toolbar itself already has Copy / Download / Swap / Reset
+  return (
+    <div className="w-full">
+      {/* Mobile: 2x2 grid */}
+      <div className="block md:hidden">
+        <div className="grid grid-cols-2 gap-2">
+          {/* We re-use FormattingToolbar and let its internal flex handle button order.
+              If you want stricter control, you can split buttons into separate props. */}
+          <FormattingToolbar
+            outputText={props.outputText}
+            onReset={props.onReset}
+            onSwap={props.onSwap}
+          />
+        </div>
+      </div>
+
+      {/* Desktop: right-aligned horizontal toolbar */}
+      <div className="hidden md:block">
+        <FormattingToolbar
+          outputText={props.outputText}
+          onReset={props.onReset}
+          onSwap={props.onSwap}
+        />
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Simple mini-card wrapper for options / presets
+ */
+function MiniCard({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="flex-1 min-w-[220px] rounded-md border px-3 py-3 space-y-2">
+      <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+        {title}
+      </p>
+      {children}
     </div>
   );
 }
