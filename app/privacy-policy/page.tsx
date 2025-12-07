@@ -1,7 +1,16 @@
 // import AdUnit from "@/components/ad-unit";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { generatePageMetadata } from "@/lib/seo-metadata";
 import { Shield, Eye, Lock, Users, FileText, Mail } from "lucide-react";
+
+export const metadata = generatePageMetadata({
+  title: "Privacy Policy | Clean Formatter",
+  description:
+    "Review the Clean Formatter Privacy Policy to understand how we handle data, protect user information, and ensure a secure, privacy-first experience across all text and code tools.",
+  canonical: "https://cleanformatter.com/privacy-policy",
+  type: "website",
+});
 
 export default function PrivacyPolicyPage() {
   return (

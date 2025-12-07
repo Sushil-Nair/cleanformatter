@@ -17,6 +17,22 @@ import { useToast } from "@/hooks/use-toast";
 import ToolSearch from "@/components/toolSearch";
 import { toolCategories } from "@/lib/tool-categories";
 import Link from "next/link";
+import { generatePageMetadata } from "@/lib/seo-metadata";
+
+export const metadata = generatePageMetadata({
+  title: "Contact Us | Clean Formatter",
+  description:
+    "Get in touch with Clean Formatter for feedback, support, business inquiries, or suggestions. We're here to help you with all your text and code formatting needs.",
+  keywords: [
+    "contact clean formatter",
+    "clean formatter support",
+    "clean formatter help",
+    "contact developer tools website",
+    "clean formatter inquiries",
+  ],
+  canonical: "https://cleanformatter.com/contact",
+  type: "website",
+});
 
 export default function ContactPage() {
   const GOOGLE_SCRIPT_URL =

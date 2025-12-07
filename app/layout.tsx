@@ -7,7 +7,6 @@ import Script from "next/script";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/sections/footer";
 import BackToTopButton from "@/components/backToTop";
-import FaviconSwitcher from "@/components/FaviconSwitcher";
 import ServiceWorkerManager from "@/components/ServiceWorkerManager";
 
 export const metadata: Metadata = {
@@ -61,7 +60,7 @@ export const metadata: Metadata = {
     siteName: "Clean Formatter",
     images: [
       {
-        url: "/og-image.png",
+        url: "https://cleanformatter.com/og-image.png",
         width: 1200,
         height: 630,
         alt: "Online text and code tools banner",
@@ -77,12 +76,21 @@ export const metadata: Metadata = {
     description:
       "Fast, intuitive online tools for text transformation and code formatting.",
     creator: "@CFormatter",
-    images: ["/twitter-card.png"],
+    images: ["https://cleanformatter.com/twitter-card.png"],
   },
   alternates: {
     canonical: "https://cleanformatter.com",
   },
   metadataBase: new URL("https://cleanformatter.com"),
+  robots: {
+    index: true,
+    follow: true,
+    nocache: false,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
 };
 
 export default function RootLayout({
@@ -91,40 +99,76 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className="dark" suppressHydrationWarning>
       <head>
-        <link id="faviconICO" rel="icon" href="/favicon-light.ico" />
-        <link
-          id="favicon32"
-          rel="icon"
-          sizes="32x32"
-          href="/favicon-light-32x32.png"
-        />
-        <link
-          id="favicon16"
-          rel="icon"
-          sizes="16x16"
-          href="/favicon-light-16x16.png"
-        />
-        <link
-          id="appleIcon"
-          rel="apple-touch-icon"
-          href="/apple-touch-icon-light.png"
-        />
-        <link
-          id="android192"
-          rel="icon"
-          sizes="192x192"
-          href="/android-chrome-light-192x192.png"
-        />
-        <link
-          id="android512"
-          rel="icon"
-          sizes="512x512"
-          href="/android-chrome-light-512x512.png"
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Clean Formatter",
+              url: "https://cleanformatter.com",
+              logo: "https://cleanformatter.com/logo.png",
+            }),
+          }}
         />
 
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "Clean Formatter",
+              url: "https://cleanformatter.com",
+              potentialAction: {
+                "@type": "SearchAction",
+                target:
+                  "https://cleanformatter.com/search?q={search_term_string}",
+                "query-input": "required name=search_term_string",
+              },
+            }),
+          }}
+        />
+
+        {/* Primary Favicon */}
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+
+        {/* PNG Icons */}
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon-16x16.png"
+        />
+
+        {/* Apple Touch Icon */}
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+        {/* Android / PWA Icons */}
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="192x192"
+          href="/android-chrome-192x192.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="512x512"
+          href="/android-chrome-512x512.png"
+        />
+
+        {/* Manifest */}
         <link rel="manifest" href="/site.webmanifest" />
+
         <Script
           id="google-adsense"
           strategy="afterInteractive"
@@ -133,12 +177,11 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
       </head>
-      <body className="min-h-screen grid place-content-center">
-        <FaviconSwitcher />
+      <body className="min-h-screen grid">
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="dark"
+          enableSystem={false}
           disableTransitionOnChange
         >
           <Header />

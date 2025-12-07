@@ -6,6 +6,7 @@ import { toolCategories } from "@/lib/tool-categories";
 import ToolSearch from "@/components/toolSearch";
 import { FAQSectionCompact } from "@/components/sections/FAQSection";
 import { ToolPageGuide } from "@/components/sections/toolPageGuide";
+import BreadcrumbAuto from "@/components/BreadcrumbAuto";
 
 // Slugify function to convert names to URL-friendly slugs
 function getSlug(input?: string) {
@@ -57,7 +58,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${tool.name} - Free Online Text & Code Tools | Clean Formatter`,
+    title: `${tool.name} - Free Online ${tool.name} Tool | Clean Formatter`,
     description: `${tool.description}. Boost productivity with fast online tools for text conversion, code formatting, word counting, and more.`,
     keywords: [
       tool.name.toLowerCase(),
@@ -77,11 +78,27 @@ export async function generateMetadata({
       title: `${tool.name} - Free Online Text & Code Tools`,
       description: tool.description,
       type: "website",
+      url: `https://cleanformatter.com/tools/${categoryParam}/${toolParam}`,
+      images: [
+        {
+          url: "https://cleanformatter.com/og-image.png",
+          width: 1200,
+          height: 630,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title: `${tool.name} - Free Online Text & Code Tools`,
       description: tool.description,
+      images: ["https://cleanformatter.com/twitter-card.png"],
+    },
+    alternates: {
+      canonical: `https://cleanformatter.com/tools/${categoryParam}/${toolParam}`,
+    },
+    robots: {
+      index: true,
+      follow: true,
     },
   };
 }
@@ -124,8 +141,11 @@ export default async function Page({
     tools: [tools],
   };
 
+  const pathname = `/tools/${categoryParam}/${toolParam}`;
+
   return (
-    <div className="min-h-screen flex flex-col w-full">
+    <div className="min-h-screen flex flex-col w-full mx-auto max-w-7xl">
+      <BreadcrumbAuto pathname={pathname} />
       <ToolSearch toolCategories={toolCategories} />
       <main className="flex-1 pt-10 mx-auto max-w-[1440px] px-4 w-full">
         <div className="grid grid-cols-1 gap-8 container">

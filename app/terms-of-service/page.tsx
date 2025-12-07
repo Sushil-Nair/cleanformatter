@@ -1,7 +1,16 @@
 // import AdUnit from "@/components/ad-unit";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { generatePageMetadata } from "@/lib/seo-metadata";
 import { FileText, Gavel, Users, Mail, ShieldCheck } from "lucide-react";
+
+export const metadata = generatePageMetadata({
+  title: "Terms of Service | Clean Formatter",
+  description:
+    "Read the Clean Formatter Terms of Service to learn the rules, responsibilities, and acceptable use policies that govern your access to our text and code formatting tools.",
+  canonical: "https://cleanformatter.com/terms-of-service",
+  type: "website",
+});
 
 export default function TermsOfServicePage() {
   return (

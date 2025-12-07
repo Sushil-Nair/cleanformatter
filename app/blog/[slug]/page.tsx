@@ -14,6 +14,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { generatePageMetadata } from "@/lib/seo-metadata";
 // import AdUnit from "@/components/ad-unit";
 
 export async function generateStaticParams() {
@@ -24,26 +25,29 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
-}): Promise<Metadata> {
-  const { slug: slugParam } = await params;
-  const post = getBlogPost(slugParam);
+  params: { slug: string };
+}) {
+  const post = getBlogPost(params.slug);
 
   if (!post) {
-    return {
+    return generatePageMetadata({
       title: "Post Not Found",
-    };
+      description: "The requested blog post does not exist.",
+      canonical: `https://cleanformatter.com/blog/${params.slug}`,
+      type: "article",
+    });
   }
 
-  return {
+  return generatePageMetadata({
     title: post.title,
     description: post.description,
-    openGraph: {
-      title: post.title,
-      description: post.description,
-      images: post.image ? [post.image] : [],
-    },
-  };
+    keywords: [],
+    canonical: `https://cleanformatter.com/blog/${post.slug}`,
+    ogImage: post.image || "https://cleanformatter.com/og-image.png",
+    altOgImage: post.title,
+    twitterImage: post.image || "https://cleanformatter.com/twitter-card.png",
+    type: "article",
+  });
 }
 
 export default async function BlogPostPage({
