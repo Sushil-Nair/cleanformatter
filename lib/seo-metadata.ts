@@ -36,7 +36,7 @@ export function generatePageMetadata(options: SEOOptions): Metadata {
       title: title,
       description: description,
       url: canonical,
-      type: type,
+      type: type ?? "website",
       siteName: "Clean Formatter",
       locale: "en_US",
       images: [
