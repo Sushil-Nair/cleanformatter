@@ -1,4 +1,5 @@
 // import AdUnit from "@/components/ad-unit";
+import BreadcrumbAuto from "@/components/BreadcrumbAuto";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { generatePageMetadata } from "@/lib/seo-metadata";
@@ -15,6 +16,7 @@ export const metadata = generatePageMetadata({
 export default function TermsOfServicePage() {
   return (
     <div className="min-h-screen flex flex-col">
+      <BreadcrumbAuto pathname="/terms-of-service" />
       <main className="flex-1 pt-24 pb-16">
         <div className="container max-w-4xl mx-auto px-4 md:px-6">
           <div className="space-y-8">

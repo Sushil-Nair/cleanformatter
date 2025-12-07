@@ -6,6 +6,7 @@ import { toolCategories } from "@/lib/tool-categories";
 import { generatePageMetadata } from "@/lib/seo-metadata";
 import ContactFormComponent from "@/components/sections/ContactForm.tsx";
 import Link from "next/link";
+import BreadcrumbAuto from "@/components/BreadcrumbAuto";
 
 export const metadata = generatePageMetadata({
   title: "Contact Us | Clean Formatter",
@@ -35,6 +36,7 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <BreadcrumbAuto pathname="/contact" />
       <ToolSearch toolCategories={toolCategories} />
       <main className="flex-1 pt-24">
         <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">

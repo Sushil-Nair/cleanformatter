@@ -21,6 +21,7 @@ import {
 import { Search, X, ChevronRight } from "lucide-react";
 import { Tool, ToolCategory } from "@/lib/tool-categories";
 import { ScrollArea, ScrollBar } from "../ui/scroll-area";
+import BreadcrumbAuto from "../BreadcrumbAuto";
 
 interface TroubleshootingItem {
   issue: string;
@@ -87,6 +88,7 @@ const ToolsGuidePage: React.FC<ToolsGuidePageProps> = ({ categories }) => {
   return (
     <div className="container mx-auto px-4 py-8 mt-20 max-w-7xl">
       {/* Page Header */}
+      <BreadcrumbAuto pathname="/feature-guide" />
       <div className="mb-8 text-center space-y-4">
         <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
           Complete Tools Guide

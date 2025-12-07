@@ -15,6 +15,9 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { generatePageMetadata } from "@/lib/seo-metadata";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
+import BreadcrumbAuto from "@/components/BreadcrumbAuto";
+import path from "path";
 // import AdUnit from "@/components/ad-unit";
 
 export async function generateStaticParams() {
@@ -62,8 +65,11 @@ export default async function BlogPostPage({
     notFound();
   }
 
+  const pathname = `/blog/${slug}`;
+
   return (
     <div className="min-h-screen">
+      <BreadcrumbAuto pathname={pathname} />
       {/* Header / Back Link */}
       <div>
         <div className="px-4 py-4 relative pt-24 pb-8 md:pt-32 md:pb-12 max-w-4xl">

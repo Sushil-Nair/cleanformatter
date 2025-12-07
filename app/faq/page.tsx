@@ -1,5 +1,6 @@
 // app/faq/page.tsx
 // import AdUnit from "@/components/ad-unit";
+import BreadcrumbAuto from "@/components/BreadcrumbAuto";
 import FAQStructuredData from "@/components/FAQStructuredData";
 import GeneralFAQ from "@/components/GeneralFAQ";
 
@@ -48,6 +49,7 @@ export const metadata: Metadata = {
 export default function FAQPage() {
   return (
     <div>
+      <BreadcrumbAuto pathname="/faq" />
       <h1 className="sr-only">Frequently Asked Questions – Clean Formatter</h1>
       <FAQStructuredData />
       <main className="tools-title w-full relative min-h-[80vh] mx-auto px-4 py-8 flex flex-col gap-4 p-60 max-w-7xl mt-24">

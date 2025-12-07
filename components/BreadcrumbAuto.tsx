@@ -37,7 +37,7 @@ export default function BreadcrumbAuto({ pathname }: { pathname: string }) {
       if (category) {
         items.push({
           name: category.name,
-          href: `/tools/${categorySlug}`,
+          href: `/tools`,
         });
 
         if (toolSlug) {
@@ -89,10 +89,10 @@ export default function BreadcrumbAuto({ pathname }: { pathname: string }) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
 
-      <nav className="text-sm text-gray-400 mb-6">
+      <nav className="text-sm text-muted-foreground mb-6 mt-24 ml-2">
         {items.map((item, idx) => (
           <span key={item.href}>
-            <Link href={item.href} className="hover:underline text-gray-300">
+            <Link href={item.href} className="hover:underline">
               {item.name}
             </Link>
             {idx < items.length - 1 && <span className="mx-2">/</span>}

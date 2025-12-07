@@ -9,6 +9,7 @@ import {
   getPostsByCategory,
 } from "@/data/blog-posts";
 import { Search } from "lucide-react";
+import BreadcrumbAuto from "./BreadcrumbAuto";
 
 export default function BlogPageComponent() {
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -23,10 +24,13 @@ export default function BlogPageComponent() {
     );
   });
 
+  const pathname = "/blog";
+
   return (
     <div className="min-h-screen">
+      <BreadcrumbAuto pathname={pathname} />
       {/* Hero Section */}
-      <section className="relative bg-accent pt-24 pb-16 md:pt-32 md:pb-24">
+      <section className="relative pt-24 pb-16 md:pt-32 md:pb-24">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl text-foreground font-bold mb-4">
