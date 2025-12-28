@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import Link from "next/link";
 import {
@@ -60,7 +58,7 @@ export function ToolPageGuide({ category }: ToolPageGuideProps) {
                     href={tool.link}
                     className="hover:text-primary transition-colors inline-flex items-center gap-2 group"
                   >
-                    About {tool.name}
+                    <h2>About {tool.name}</h2>
                     <ChevronRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </CardTitle>

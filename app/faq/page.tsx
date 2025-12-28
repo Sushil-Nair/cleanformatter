@@ -50,12 +50,14 @@ export default function FAQPage() {
   return (
     <div>
       <BreadcrumbAuto pathname="/faq" />
-      <h1 className="sr-only">Frequently Asked Questions – Clean Formatter</h1>
       <FAQStructuredData />
-      <main className="tools-title w-full relative min-h-[80vh] mx-auto px-4 py-8 flex flex-col gap-4 p-60 max-w-7xl mt-24">
-        <h1 className="font-semibold text-center mb-10">
-          Frequently Asked Questions – Clean Formatter
+      <main className="tools-title w-full relative min-h-[80vh] mx-auto px-4 py-8 flex flex-col gap-4 max-w-7xl mt-12">
+        <h1 className="font-bold text-center mb-4">
+          Frequently Asked Questions
         </h1>
+        <p className="text-center text-muted-foreground mb-8">
+          Everything you need to know about using Clean Formatter for text and code.
+        </p>
         <GeneralFAQ />
       </main>
     </div>

@@ -1,12 +1,10 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { Clock, Tag, ArrowLeft, Share2 } from "lucide-react";
+import { Clock, Tag, ArrowLeft } from "lucide-react";
 import { getBlogPost, blogPosts } from "@/data/blog-posts";
-import { Metadata } from "next";
 import Image from "next/image";
 import BlogShareButton from "@/components/blogShareButton";
 import BlogRenderer from "@/components/sections/BlogRenderer";
-import { BlogSection } from "@/types/blog";
 import { Card } from "@/components/ui/card";
 import {
   Accordion,
@@ -14,10 +12,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { generatePageMetadata } from "@/lib/seo-metadata";
-import { Breadcrumb } from "@/components/ui/breadcrumb";
 import BreadcrumbAuto from "@/components/BreadcrumbAuto";
-import path from "path";
 // import AdUnit from "@/components/ad-unit";
 
 export async function generateStaticParams() {
@@ -25,33 +20,38 @@ export async function generateStaticParams() {
     slug: post.slug,
   }));
 }
+
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const post = getBlogPost(params.slug);
+  const { slug } = await params;
+  const post = getBlogPost(slug);
 
   if (!post) {
-    return generatePageMetadata({
+    return {
       title: "Post Not Found",
       description: "The requested blog post does not exist.",
-      canonical: `https://cleanformatter.com/blog/${params.slug}`,
-      type: "article",
-    });
+    };
   }
 
-  return generatePageMetadata({
+  return {
     title: post.title,
     description: post.description,
-    keywords: [],
-    canonical: `https://cleanformatter.com/blog/${post.slug}`,
-    ogImage: post.image || "https://cleanformatter.com/og-image.png",
-    altOgImage: post.title,
-    twitterImage: post.image || "https://cleanformatter.com/twitter-card.png",
-    type: "article",
-  });
+    alternates: {
+      canonical: post.seo?.canonical,
+    },
+    openGraph: {
+      title: post.title,
+      description: post.description,
+      type: "article",
+      images: [{ url: post.image }],
+    },
+  };
 }
+
+
 
 export default async function BlogPostPage({
   params,
@@ -91,12 +91,13 @@ export default async function BlogPostPage({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Article",
-              headline: post.title,
-              description: post.description,
-              image: post.image,
-              author: {
+              "headline": post.title,
+              "description": post.description,
+              "image": post.image,
+              "author": {
                 "@type": "Person",
-                name: post.author?.name,
+                "name": post.author?.name,
+                "url": "https://cleanformatter.com/about" 
               },
               datePublished: post.publishedAt,
               dateModified: post.updatedAt || post.publishedAt,
@@ -104,6 +105,33 @@ export default async function BlogPostPage({
             }),
           }}
         />
+
+        <script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": post.title,
+      "image": post.image,
+      "author": {
+        "@type": "Person",
+        "name": post.author,
+        "url": "https://cleanformatter.com/about" 
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Clean Formatter",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://cleanformatter.com/logo.png"
+        }
+      },
+      "datePublished": post.publishedAt,
+      "description": post.description
+    })
+  }}
+/>
 
         {/* Layout: TOC + Content (stack on mobile, side-by-side on desktop) */}
         <div className="grid grid-cols-1 gap-10">

@@ -1,34 +1,61 @@
-// GeneralFAQData.ts
+// data/generalFAQData.ts
+
+export interface FAQItem {
+  question: string;
+  answerPlainText: string;
+  answerLinkRefs: { label: string; href: string }[];
+}
+
 export const generalFAQs = [
   {
     question: "What is Clean Formatter?",
     answerPlainText:
-      "Clean Formatter is a suite of free online tools to clean, format, convert, analyze, and generate text and code. You can explore all tools at https://cleanformatter.com/tools, including Remove Formatting, Case Converter, and Code Formatter.",
+      "Clean Formatter is a professional-grade suite of privacy-first online tools designed for developers, writers, and data analysts. Our platform allows you to clean, format, convert, and analyze text or code snippets instantly. Unlike other tools, we use a 'Smart Engine' that preserves technical context, such as keeping acronyms like NASA or HTML in the correct casing while transforming the surrounding text.",
     answerLinkRefs: [
-      {
-        label: "Remove Formatting Tool",
-        href: "/tools/clean-format/remove-formatting",
-      },
-      {
-        label: "Case Converter Tool",
-        href: "/tools/text-editing/case-converter",
-      },
-      {
-        label: "Code Formatter Tool",
-        href: "/tools/code-format/code-formatter",
-      },
-      { label: "Browse All Tools", href: "/tools" },
+      { label: "Explore All Tools", href: "/tools" },
+      { label: "About Our Privacy Mission", href: "/about" },
     ],
   },
 
   {
+    question: "Is my data safe with Clean Formatter?",
+    answerPlainText:
+      "Yes, your security is our priority. Clean Formatter operates on a 'Zero-Knowledge' architecture. All text and code processing is performed locally within your browser using JavaScript. This means your sensitive data is never uploaded to our servers, stored in a database, or shared with third parties. You can even use most of our tools while offline once the page has loaded.",
+    answerLinkRefs: [
+      { label: "Read Our Privacy Policy", href: "/privacy-policy" },
+    ],
+  },
+  {
     question: "How do I remove formatting from text?",
     answerPlainText:
-      "You can remove formatting using the Remove Formatting Tool, which cleans styles, HTML tags, spacing, and inconsistent formatting. Visit https://cleanformatter.com/tools/clean-format/remove-formatting.",
+      "You can strip away messy styles, hidden HTML tags, and inconsistent spacing using our 'Remove Formatting' tool. It is perfect for cleaning text copied from PDFs, emails, or web pages before pasting it into your CMS or document editor. Simply paste your text, and our tool will return clean, plain-text output instantly.",
     answerLinkRefs: [
       {
-        label: "Remove Formatting Tool",
+        label: "Open Remove Formatting Tool",
         href: "/tools/clean-format/remove-formatting",
+      },
+    ],
+  },
+
+  {
+    question: "How does the Smart Case Converter work?",
+    answerPlainText:
+      "Our Case Converter supports over 15 formats, including Title Case, camelCase, and PascalCase. What makes it 'Smart' is its ability to recognize and protect 'ignore-words' and technical acronyms. For example, it won't accidentally turn 'iPhone' into 'Iphone' or 'AWS' into 'Aws' during a transformation, ensuring your brand integrity and code variables remain valid.",
+    answerLinkRefs: [
+      {
+        label: "Try Smart Case Converter",
+        href: "/tools/text-editing/case-converter",
+      },
+    ],
+  },
+  {
+    question: "Can I format programming code automatically?",
+    answerPlainText:
+      "Absolutely. Our Code Formatter supports multiple languages including JavaScript, JSON, HTML, CSS, and Python. It fixes indentation, replaces messy spacing, and ensures your code follows standard style guides. This tool is essential for developers debugging minified code or cleaning up snippets for documentation.",
+    answerLinkRefs: [
+      {
+        label: "Format Your Code Now",
+        href: "/tools/code-format/code-formatter",
       },
     ],
   },
@@ -114,5 +141,45 @@ export const generalFAQs = [
     answerPlainText:
       "Yes, Clean Formatter is completely free to use with no login required. You can access all tools at https://cleanformatter.com/tools.",
     answerLinkRefs: [{ label: "Browse All Tools", href: "/tools" }],
+  },
+  {
+    question: "What is the difference between Sentence Case and Title Case?",
+    answerPlainText:
+      "Sentence case capitalizes only the first letter of a sentence and proper nouns, similar to how a standard paragraph is written. Title Case capitalizes the first letter of every major word while keeping small connecting words like 'and', 'with', or 'the' in lowercase. Our Smart Case Converter automatically handles these nuances, ensuring your headlines look professional for blogs and reports.",
+    answerLinkRefs: [
+      { label: "Use Smart Case Converter", href: "/tools/text-editing/case-converter" },
+    ],
+  },
+  {
+    question: "How does the 'Remove Formatting' tool handle HTML and hidden styles?",
+    answerPlainText:
+      "Our 'Remove Formatting' tool is designed to strip away invasive HTML tags, inline CSS styles, and non-standard character encodings often found when copying text from Word or web pages. It returns raw, clean text that is ready for your CMS or code editor without carrying over unwanted formatting artifacts.",
+    answerLinkRefs: [
+      { label: "Clean Your Text Now", href: "/tools/clean-format/remove-formatting" },
+    ],
+  },
+  {
+    question: "Can I use your Code Formatter for minified files?",
+    answerPlainText:
+      "Yes, the Code Formatter is highly effective for 'un-minifying' or 'beautifying' compressed JavaScript, CSS, or JSON files. It re-inserts proper line breaks and indentation, making it easier to debug code or review logic that was previously unreadable.",
+    answerLinkRefs: [
+      { label: "Format JavaScript & CSS", href: "/tools/code-format/code-formatter" },
+    ],
+  },
+  {
+    question: "Are the generated fonts and fancy text compatible with social media?",
+    answerPlainText:
+      "Our Fancy Font Generator uses mathematical alphanumeric Unicode symbols rather than actual font files. Because these are standard Unicode characters, they are natively supported by platforms like Instagram, Twitter (X), and Facebook, making them perfect for bio styling and captions without requiring the reader to install anything.",
+    answerLinkRefs: [
+      { label: "Generate Fancy Text", href: "/tools/font-generator/font-generators" },
+    ],
+  },
+  {
+    question: "Does the Text Counter provide more than just word counts?",
+    answerPlainText:
+      "The Text Counter tool provides a comprehensive analysis including character counts (with and without spaces), total words, number of sentences, and estimated reading time. This is an essential utility for content creators aiming for specific SEO length targets or social media character limits.",
+    answerLinkRefs: [
+      { label: "Analyze Text Length", href: "/tools/text-editing/text-counter" },
+    ],
   },
 ];

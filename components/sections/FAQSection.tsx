@@ -1,5 +1,3 @@
-"use client";
-
 import {
   Accordion,
   AccordionContent,
@@ -109,7 +107,7 @@ export function FAQSectionCompact({
     <div id="FAQSection" className={`w-full tool-title ${className}`}>
       <Card className="mt-8">
         <CardContent className="p-6">
-          <h3 className="text-xl font-bold mb-4">{title}</h3>
+          <h2 className="text-xl font-bold mb-4">{title}</h2>
           <Accordion type="single" collapsible className="w-full space-y-2">
             {faqs.map((faq, index) => (
               <AccordionItem

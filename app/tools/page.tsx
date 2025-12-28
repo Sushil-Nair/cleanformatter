@@ -1,11 +1,7 @@
 // app/tools/page.tsx
 
-import { motion } from "framer-motion";
 import { Metadata } from "next";
-import { Card, CardContent } from "@/components/ui/card";
 import { toolCategories } from "@/lib/tool-categories";
-import Link from "next/link";
-import ToolSearch from "@/components/toolSearch";
 import ToolsPageContent from "@/components/sections/ToolsPageContent";
 
 export async function generateMetadata(): Promise<Metadata> {
